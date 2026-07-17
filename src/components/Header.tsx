@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { SITE, LOCATIONS, MEGA_MENU } from '../data/site'
+import { SITE, LOCATIONS, MEGA_MENU, SOCIAL } from '../data/site'
 
 const TOP_NAV = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/#owner' },
-  { label: 'Just 4 Kids', to: '/just-4-kids' },
   { label: 'Reviews', to: '/#reviews' },
   { label: 'Locations', to: '/#locations' },
   { label: 'Contact', to: '/contact' },
@@ -15,8 +14,10 @@ export default function Header() {
   const [solid, setSolid] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
+  const [socialOpen, setSocialOpen] = useState(false)
   const location = useLocation()
-  const closeTimer = useRef<number | undefined>(undefined)
+  const megaCloseTimer = useRef<number | undefined>(undefined)
+  const socialCloseTimer = useRef<number | undefined>(undefined)
 
   const locationCount = LOCATIONS.length + (SITE.showGlenRock ? 1 : 0)
 
@@ -30,6 +31,7 @@ export default function Header() {
   useEffect(() => {
     setMenuOpen(false)
     setMegaOpen(false)
+    setSocialOpen(false)
   }, [location.pathname, location.hash])
 
   useEffect(() => {
@@ -40,11 +42,21 @@ export default function Header() {
   }, [menuOpen])
 
   const openMega = () => {
-    window.clearTimeout(closeTimer.current)
+    window.clearTimeout(megaCloseTimer.current)
+    setSocialOpen(false)
     setMegaOpen(true)
   }
-  const scheduleClose = () => {
-    closeTimer.current = window.setTimeout(() => setMegaOpen(false), 140)
+  const scheduleMegaClose = () => {
+    megaCloseTimer.current = window.setTimeout(() => setMegaOpen(false), 140)
+  }
+
+  const openSocial = () => {
+    window.clearTimeout(socialCloseTimer.current)
+    setMegaOpen(false)
+    setSocialOpen(true)
+  }
+  const scheduleSocialClose = () => {
+    socialCloseTimer.current = window.setTimeout(() => setSocialOpen(false), 140)
   }
 
   const isActive = (to: string) =>
@@ -81,19 +93,22 @@ export default function Header() {
           <div
             className={`nav__item ${megaOpen ? 'is-open' : ''}`}
             onMouseEnter={openMega}
-            onMouseLeave={scheduleClose}
+            onMouseLeave={scheduleMegaClose}
           >
             <button
               type="button"
-              className={`nav__link ${location.pathname.startsWith('/programs') ? 'is-active' : ''}`}
+              className={`nav__link ${location.pathname.startsWith('/programs') || location.pathname === '/just-4-kids' ? 'is-active' : ''}`}
               aria-expanded={megaOpen}
               aria-haspopup="true"
-              onClick={() => setMegaOpen((v) => !v)}
+              onClick={() => {
+                setSocialOpen(false)
+                setMegaOpen((v) => !v)
+              }}
             >
               Programs <span className="nav__caret">▼</span>
             </button>
             {megaOpen && (
-              <div className="mega" onMouseEnter={openMega} onMouseLeave={scheduleClose}>
+              <div className="mega" onMouseEnter={openMega} onMouseLeave={scheduleMegaClose}>
                 {MEGA_MENU.map((group) => (
                   <div key={group.heading}>
                     <div className="mega__heading">{group.heading}</div>
@@ -103,6 +118,81 @@ export default function Header() {
                         {link.meta && <span className="mega__meta">{link.meta}</span>}
                       </Link>
                     ))}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div
+            className={`nav__item ${socialOpen ? 'is-open' : ''}`}
+            onMouseEnter={openSocial}
+            onMouseLeave={scheduleSocialClose}
+          >
+            <button
+              type="button"
+              className="nav__link"
+              aria-expanded={socialOpen}
+              aria-haspopup="true"
+              onClick={() => {
+                setMegaOpen(false)
+                setSocialOpen((v) => !v)
+              }}
+            >
+              Follow Us <span className="nav__caret">▼</span>
+            </button>
+            {socialOpen && (
+              <div
+                className="mega mega--social"
+                onMouseEnter={openSocial}
+                onMouseLeave={scheduleSocialClose}
+              >
+                {SOCIAL.map((network) => (
+                  <div key={network.label} className="social-panel__col">
+                    <div className="mega__heading">{network.label}</div>
+                    <a
+                      href={network.href}
+                      className="social-panel__profile"
+                      title={
+                        network.placeholder
+                          ? `${network.label} profile (link pending)`
+                          : `${network.label} profile`
+                      }
+                    >
+                      <span className="social-panel__mark" aria-hidden="true">
+                        {network.label === 'Instagram' ? 'IG' : 'FB'}
+                      </span>
+                      <span>
+                        <strong>{network.handle}</strong>
+                        <span className="social-panel__hint">
+                          {network.placeholder ? 'Profile link pending' : 'Visit profile'}
+                        </span>
+                      </span>
+                    </a>
+                    <ul className="social-panel__posts">
+                      {network.recentPosts.map((post) => (
+                        <li key={post.id}>
+                          <a
+                            href={post.href}
+                            className="social-panel__post"
+                            title={
+                              post.placeholder
+                                ? `${network.label} post (placeholder)`
+                                : post.caption
+                            }
+                          >
+                            <span className="social-panel__thumb" aria-hidden="true" />
+                            <span className="social-panel__post-body">
+                              <span className="social-panel__caption">{post.caption}</span>
+                              <span className="social-panel__meta">
+                                {post.placeholder ? 'Placeholder · ' : ''}
+                                {post.dateLabel}
+                              </span>
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
@@ -159,6 +249,36 @@ export default function Header() {
             ))}
           </div>
         ))}
+        <div>
+          <div className="mn-group">Follow Us</div>
+          {SOCIAL.map((network) => (
+            <div key={network.label} className="mn-social">
+              <a
+                href={network.href}
+                className="mn-sub"
+                title={
+                  network.placeholder
+                    ? `${network.label} profile (link pending)`
+                    : `${network.label} profile`
+                }
+              >
+                {network.label}
+                {network.placeholder ? ' · link pending' : ''}
+              </a>
+              {network.recentPosts.map((post) => (
+                <a
+                  key={post.id}
+                  href={post.href}
+                  className="mn-sub mn-sub--post"
+                  title={post.placeholder ? `${network.label} post (placeholder)` : post.caption}
+                >
+                  {post.caption}
+                  {post.placeholder ? ' · placeholder' : ''}
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
         <Link to="/#reviews">Reviews</Link>
         <Link to="/#locations">Locations</Link>
         <Link to="/contact">Contact</Link>

@@ -32,7 +32,6 @@ export const NAV: NavLink[] = [
   { label: 'Home', to: '/' },
   { label: "Children's Programs", to: '/programs/children' },
   { label: 'Adult Programs', to: '/programs/adult' },
-  { label: 'Just 4 Kids', to: '/just-4-kids' },
   { label: 'Reviews', to: '/#reviews' },
   { label: 'Locations', to: '/#locations' },
   { label: 'Contact', to: '/contact' },
@@ -392,12 +391,69 @@ export const FAQS: Faq[] = [
   },
 ]
 
-// Social links are placeholders — replace with real profiles before launch.
-export type SocialLink = { label: string; href: string; placeholder?: boolean }
+// Social profiles + recent-post placeholders — replace with live embeds/API
+// before launch. YouTube is intentionally omitted (no channel yet).
+export type SocialPost = {
+  id: string
+  caption: string
+  dateLabel: string
+  href: string
+  placeholder?: boolean
+}
+
+export type SocialLink = {
+  label: 'Instagram' | 'Facebook'
+  href: string
+  handle: string
+  placeholder?: boolean
+  recentPosts: SocialPost[]
+}
+
 export const SOCIAL: SocialLink[] = [
-  { label: 'Instagram', href: '#', placeholder: true },
-  { label: 'Facebook', href: '#', placeholder: true },
-  { label: 'YouTube', href: '#', placeholder: true },
+  {
+    label: 'Instagram',
+    href: '#',
+    handle: '@unitedblackbelt',
+    placeholder: true,
+    recentPosts: [
+      {
+        id: 'ig-1',
+        caption: 'Evening class energy on the mat',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+      {
+        id: 'ig-2',
+        caption: 'Tiny Tigers belt promotion day',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+    ],
+  },
+  {
+    label: 'Facebook',
+    href: '#',
+    handle: 'United Black Belt Academy',
+    placeholder: true,
+    recentPosts: [
+      {
+        id: 'fb-1',
+        caption: "Parents' Night Out this Friday",
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+      {
+        id: 'fb-2',
+        caption: 'Summer camp registration is open',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+    ],
+  },
 ]
 
 export type MegaGroup = { heading: string; links: { label: string; to: string; meta?: string }[] }

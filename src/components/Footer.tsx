@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FOOTER_LINKS, LOCATIONS, SITE, SOCIAL } from '../data/site'
+import { FOOTER_LINKS, LOCATIONS, SITE } from '../data/site'
 import Taegeuk from './Taegeuk'
 
 export default function Footer() {
@@ -37,18 +37,6 @@ export default function Footer() {
               Confidence-building Taekwondo for kids, teens, and adults across
               Bergen County, NJ. Discipline, respect, and real growth on every mat.
             </p>
-            <div className="footer__social">
-              {SOCIAL.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  title={s.placeholder ? `${s.label} (link pending)` : s.label}
-                >
-                  {s.label.slice(0, 2).toUpperCase()}
-                </a>
-              ))}
-            </div>
           </div>
 
           <div>

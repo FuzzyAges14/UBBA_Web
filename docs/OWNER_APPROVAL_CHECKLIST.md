@@ -32,7 +32,8 @@ approved. Configuration lives in `src/data/site.ts`.
 
 ## Contact & legal
 - [ ] Email addresses
-- [ ] Social media links (`SOCIAL`)
+- [ ] Social media links + recent-post placeholders (`SOCIAL` — Instagram & Facebook
+      in the header Follow Us panel; YouTube omitted)
 - [ ] Privacy Policy final copy
 - [ ] Terms and Conditions final copy
 - [ ] Photography rights for all replaced images (see `IMAGE_SOURCES.md`)
