@@ -18,3 +18,23 @@ one service: the Vite dev server. Standard commands live in `README.md` and
 - **Tests use jsdom**, configured inline in `vite.config.ts` (`test` block) with
   `src/test/setup.ts` importing `@testing-library/jest-dom`. There is no separate
   `vitest.config.ts`.
+
+- **App structure:** client-side routing via `react-router-dom` (`BrowserRouter`
+  in `src/main.tsx`, routes in `src/App.tsx`). Editable site content is centralized
+  in `src/data/site.ts` — prefer changing copy/programs/locations there rather than
+  in JSX. Components that render tests-visible text (e.g. `Placeholder`) duplicate
+  labels, so use `getAllByText` in tests when a term appears in both a heading and a
+  placeholder.
+- **Forms are front-end only** (`src/components/LeadForm.tsx`): they validate and
+  show a success state but do not POST anywhere yet. `jsdom` has no
+  `IntersectionObserver`, so the `Reveal`/`StatCounter` components fall back to
+  their final state immediately in tests — that is expected. `jsdom` also lacks
+  `window.scrollTo`/`matchMedia`; those are guarded, do not "fix" them.
+- **Design system:** premium brand palette + Sora/Inter typography live in
+  `src/index.css`; motion uses `framer-motion` (hero) plus the CSS `Reveal`
+  wrapper. Signature motifs are components: `Taegeuk`, `Marquee`, plus the
+  `.dojang` grid and `.belt-bar` CSS utilities. Per-route `<title>`/meta is set by
+  `src/components/Seo.tsx` from `SEO` in `src/data/site.ts`.
+- **Launch-blocking placeholders** are tracked in `docs/` (image sources, owner
+  approval, placeholder checklist). Placeholders are intentionally labeled in the
+  UI — do not treat placeholder stats/testimonials/photos as real content.
