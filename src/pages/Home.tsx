@@ -13,6 +13,7 @@ import {
   LOCATIONS,
   GLEN_ROCK,
   SITE,
+  IMAGES,
   TESTIMONIALS,
   VALUES,
   STATS,
@@ -26,7 +27,7 @@ const fadeUp = {
   show: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.15 + i * 0.09, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: 0.12 + i * 0.09, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   }),
 }
 
@@ -42,83 +43,85 @@ export default function Home() {
 
   return (
     <>
-      {/* ---------- Hero ---------- */}
+      {/* ---------- Hero (cinematic video) ---------- */}
       <section className="hero">
-        <div className="hero__bg" aria-hidden="true" />
-        <div className="hero__photo" aria-hidden="true" />
+        <video
+          className="hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={IMAGES.heroPoster}
+          aria-hidden="true"
+        >
+          <source src={IMAGES.heroVideo} type="video/mp4" />
+        </video>
+        <div className="hero__overlay" aria-hidden="true" />
         <div className="dojang dojang--fade" aria-hidden="true" />
-        <div className="hero__scrim" aria-hidden="true" />
         <div className="container hero__inner">
-          <div>
-            <motion.span
-              className="hero__badge"
-              initial="hidden"
-              animate="show"
-              variants={fadeUp}
-            >
-              🥋 Authentic Taekwondo · Allendale &amp; Midland Park, NJ
-            </motion.span>
-            <motion.h1 initial="hidden" animate="show" custom={1} variants={fadeUp}>
-              Confidence Building Martial Arts Classes in{' '}
-              <span className="accent">Allendale &amp; Midland Park</span>
-            </motion.h1>
-            <motion.p
-              className="hero__sub"
-              initial="hidden"
-              animate="show"
-              custom={2}
-              variants={fadeUp}
-            >
-              We build confidence, discipline, focus, and real self-defense skills —
-              for kids, teens, and adults. Train with a team that believes in you.
-            </motion.p>
-            <motion.div
-              className="hero__actions"
-              initial="hidden"
-              animate="show"
-              custom={3}
-              variants={fadeUp}
-            >
-              <Link to="/contact" className="btn btn--lg">
-                {SITE.primaryCta} <span className="btn__arrow">→</span>
-              </Link>
-              <Link to="/programs/children" className="btn btn--ghost btn--lg">
-                Children's Programs
-              </Link>
-              <Link to="/programs/adult" className="btn btn--ghost btn--lg">
-                Adult Programs
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hero__meta"
-              initial="hidden"
-              animate="show"
-              custom={4}
-              variants={fadeUp}
-            >
-              <span>
-                <span className="dot">★★★★★</span> Loved by local families
-              </span>
-              <span>
-                <span className="dot">●</span> Ages 3 through adult
-              </span>
-              <span>
-                <span className="dot">●</span> Two convenient locations
-              </span>
-            </motion.div>
-          </div>
-
-          <motion.div
-            className="hero__media"
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          <motion.span
+            className="hero__badge"
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
           >
-            <Placeholder
-              label="Hero — Taekwondo flying kick / instructor with students"
-              icon="🥋"
-              variant="tall"
-            />
+            📍 Allendale &amp; Midland Park, NJ
+          </motion.span>
+          <motion.h1 initial="hidden" animate="show" custom={1} variants={fadeUp}>
+            United Black <span className="accent">Belt</span> Academy
+          </motion.h1>
+          <motion.h2
+            className="hero__tagline"
+            initial="hidden"
+            animate="show"
+            custom={2}
+            variants={fadeUp}
+          >
+            Confidence Building Martial Arts Classes in Allendale &amp; Midland Park
+          </motion.h2>
+          <motion.p
+            className="hero__sub"
+            initial="hidden"
+            animate="show"
+            custom={3}
+            variants={fadeUp}
+          >
+            We build confidence, discipline, focus, and real self-defense skills —
+            for kids, teens, and adults. Train with a team that believes in you.
+          </motion.p>
+          <motion.div
+            className="hero__actions"
+            initial="hidden"
+            animate="show"
+            custom={4}
+            variants={fadeUp}
+          >
+            <Link to="/contact" className="btn btn--lg">
+              {SITE.primaryCta} <span className="btn__arrow">→</span>
+            </Link>
+            <Link to="/programs/children" className="btn btn--ghost btn--lg">
+              Children's Programs
+            </Link>
+            <Link to="/programs/adult" className="btn btn--ghost btn--lg">
+              Adult Programs
+            </Link>
+          </motion.div>
+          <motion.div
+            className="hero__meta"
+            initial="hidden"
+            animate="show"
+            custom={5}
+            variants={fadeUp}
+          >
+            <span>
+              <span className="dot">★★★★★</span> Loved by local families
+            </span>
+            <span>
+              <span className="dot">●</span> Ages 3 through adult
+            </span>
+            <span>
+              <span className="dot">●</span> Two convenient locations
+            </span>
           </motion.div>
         </div>
         <div className="hero__scroll" aria-hidden="true">
@@ -154,14 +157,7 @@ export default function Home() {
                     {p.ages && <span className="pcard__age">{p.ages}</span>}
                     <h3 className="pcard__title">{p.title}</h3>
                     <p className="pcard__text">{p.blurb}</p>
-                    <Link
-                      to={
-                        p.id === 'adult-martial-arts'
-                          ? '/programs/adult'
-                          : '/programs/children'
-                      }
-                      className="pcard__cta"
-                    >
+                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>
                     </Link>
                   </div>
@@ -203,14 +199,13 @@ export default function Home() {
                 aria-hidden="true"
                 style={{
                   position: 'absolute',
-                  right: '-30px',
-                  top: '-30px',
+                  right: '-26px',
+                  top: '-26px',
                   color: '#fff',
-                  opacity: 0.9,
                   zIndex: 2,
                 }}
               >
-                <Taegeuk size={92} spin />
+                <Taegeuk size={88} spin />
               </div>
               <Placeholder
                 label="Instructor coaching a young student"
@@ -272,7 +267,7 @@ export default function Home() {
           <div className="owner__sticky">
             <Reveal>
               <Placeholder
-                label={`${OWNER.name} — owner portrait (replace with real photo)`}
+                label={`${OWNER.name}, Head Instructor`}
                 icon="🥋"
                 variant="tall"
               />
@@ -345,51 +340,47 @@ export default function Home() {
               experience required — just show up ready to grow.
             </p>
           </Reveal>
-          <div className="grid grid--3 mt" style={{ gridAutoRows: '1fr' }}>
-            <Reveal as="article">
-              <div className="feature feature--tall">
-                <div className="feature__bg" />
-                <div className="feature__body">
-                  <div style={{ fontSize: '2rem' }}>🧒</div>
-                  <h3>Children's Classes</h3>
-                  <p>
-                    Confidence, listening, discipline, respect, and friendships — the
-                    foundation for confident kids.
-                  </p>
-                  <Link to="/programs/children" className="card__link mt-sm" style={{ color: '#fff' }}>
-                    Explore Children's Programs →
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
-            <div className="stack-gap">
-              <Reveal as="article">
-                <div className="feature">
-                  <div className="feature__bg" />
-                  <div className="feature__body">
-                    <div style={{ fontSize: '1.6rem' }}>💪</div>
-                    <h3>Adult Classes</h3>
-                    <p>Fitness, self-defense, stress relief, and real community.</p>
-                    <Link to="/programs/adult" className="card__link mt-sm" style={{ color: '#fff' }}>
-                      Explore Adult Programs →
-                    </Link>
+          <div className="grid grid--3 mt">
+            {[
+              {
+                title: "Children's Classes",
+                text: 'Confidence, listening, discipline, respect, and friendships — the foundation for confident kids.',
+                to: '/programs/children',
+                icon: '🧒',
+                cta: "Explore Children's Programs",
+              },
+              {
+                title: 'Adult Classes',
+                text: 'Fitness, self-defense, stress relief, and real community for every level.',
+                to: '/programs/adult',
+                icon: '💪',
+                cta: 'Explore Adult Programs',
+              },
+              {
+                title: 'Workshops & Special Events',
+                text: 'Belt testing, tournaments, seminars, camps, and family events all year round.',
+                to: '/just-4-kids',
+                icon: '🎉',
+                cta: 'See Just 4 Kids',
+              },
+            ].map((f, i) => (
+              <Reveal as="article" key={f.title} delay={i * 80}>
+                <Link to={f.to} className="pcard" style={{ minHeight: 420 }}>
+                  <div className="pcard__art" />
+                  <div className="pcard__scrim" />
+                  <span className="pcard__glyph" aria-hidden="true">
+                    {f.icon}
+                  </span>
+                  <div className="pcard__body">
+                    <h3 className="pcard__title">{f.title}</h3>
+                    <p className="pcard__text">{f.text}</p>
+                    <span className="pcard__cta">
+                      {f.cta} <span className="btn__arrow">→</span>
+                    </span>
                   </div>
-                </div>
+                </Link>
               </Reveal>
-              <Reveal as="article">
-                <div className="feature">
-                  <div className="feature__bg" />
-                  <div className="feature__body">
-                    <div style={{ fontSize: '1.6rem' }}>🎉</div>
-                    <h3>Workshops &amp; Special Events</h3>
-                    <p>Belt testing, tournaments, seminars, camps, and family events.</p>
-                    <Link to="/just-4-kids" className="card__link mt-sm" style={{ color: '#fff' }}>
-                      See Just 4 Kids →
-                    </Link>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -399,14 +390,14 @@ export default function Home() {
         <div className="container">
           <Reveal>
             <span className="eyebrow">Reviews</span>
-            <p className="feature-quote">
-              "{TESTIMONIALS[0].quote}"
-            </p>
+            <p className="feature-quote">"{TESTIMONIALS[0].quote}"</p>
             <p className="quote__by mt">
               {TESTIMONIALS[0].name}{' '}
               <span className="quote__role">— {TESTIMONIALS[0].role}</span>
             </p>
-            <p className="ph-note mt-sm">Placeholder reviews · pending owner-approved testimonials</p>
+            <p className="ph-note mt-sm">
+              Placeholder reviews · pending owner-approved testimonials
+            </p>
           </Reveal>
           <div className="grid grid--2 mt-lg">
             {TESTIMONIALS.slice(1).map((t, i) => (
@@ -440,7 +431,7 @@ export default function Home() {
               community at each.
             </p>
           </Reveal>
-          <div className="grid grid--2 mt">
+          <div className={`grid ${locations.length >= 3 ? 'grid--3' : 'grid--2'} mt`}>
             {locations.map((loc, i) => (
               <Reveal key={loc.id} delay={i * 90}>
                 <LocationCard loc={loc} />

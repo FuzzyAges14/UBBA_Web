@@ -8,7 +8,7 @@ import { ADULT_PROGRAMS, FAQS, SITE } from '../data/site'
 
 const GLYPH: Record<string, string> = {
   'adult-program': '💪',
-  'family-programs': '👨‍👩‍👧',
+  'family-programs': '👪',
   'olympic-sparring': '🥇',
   'swat-team': '🎯',
   'self-defense': '🛡️',
@@ -29,7 +29,7 @@ export default function AdultPrograms() {
           <div className="grid grid--3">
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
-                <div className="pcard" style={{ minHeight: 360 }}>
+                <div className="pcard" style={{ minHeight: 380 }}>
                   <div className="pcard__art" />
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">
@@ -38,7 +38,7 @@ export default function AdultPrograms() {
                   <div className="pcard__body">
                     <h3 className="pcard__title">{p.title}</h3>
                     <p className="pcard__text">{p.blurb}</p>
-                    <Link to="/contact" className="pcard__cta">
+                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>
                     </Link>
                   </div>

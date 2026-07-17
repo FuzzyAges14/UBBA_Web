@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import ChildrenPrograms from './pages/ChildrenPrograms'
 import AdultPrograms from './pages/AdultPrograms'
+import ProgramDetail from './pages/ProgramDetail'
 import Just4Kids from './pages/Just4Kids'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/programs/children" element={<ChildrenPrograms />} />
         <Route path="/programs/adult" element={<AdultPrograms />} />
+        <Route path="/programs/:slug" element={<ProgramDetail />} />
         <Route path="/just-4-kids" element={<Just4Kids />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />

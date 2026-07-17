@@ -36,6 +36,21 @@ describe('App routing', () => {
     ).toBeInTheDocument()
   })
 
+  it('renders a unique program detail page', () => {
+    renderAt('/programs/tiny-tigers')
+    expect(
+      screen.getByRole('heading', { name: /tiny tigers/i, level: 1 }),
+    ).toBeInTheDocument()
+    expect(screen.getByText(/what you'll learn/i)).toBeInTheDocument()
+  })
+
+  it('shows a 404 for an unknown program slug', () => {
+    renderAt('/programs/not-a-real-program')
+    expect(
+      screen.getByRole('heading', { name: /page not found/i }),
+    ).toBeInTheDocument()
+  })
+
   it('shows a 404 for unknown routes', () => {
     renderAt('/does-not-exist')
     expect(

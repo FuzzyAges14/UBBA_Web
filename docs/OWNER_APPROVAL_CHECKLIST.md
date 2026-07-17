@@ -10,7 +10,9 @@ approved. Configuration lives in `src/data/site.ts`.
 - [ ] Years of experience / academy history
 - [ ] Midland Park phone number (`LOCATIONS[midland-park].phone`)
 - [ ] Midland Park hours (`LOCATIONS[midland-park].hours`)
-- [ ] Glen Rock status — enable via `SITE.showGlenRock` if kept
+- [ ] Glen Rock — now enabled (`SITE.showGlenRock = true`); confirm address
+      (201 Rock Rd, Suite 116, Glen Rock, NJ 07452) and phone (201-551-8557)
+- [ ] Glen Rock hours / class schedule (`GLEN_ROCK.hours` — currently "coming soon")
 - [ ] Class schedules per location
 
 ## Programs

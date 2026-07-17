@@ -18,7 +18,11 @@ export default function Placeholder({
   const variantClass =
     variant === 'tall' ? 'ph--tall' : variant === 'wide' ? 'ph--wide' : ''
   return (
-    <div className={`ph ${variantClass} ${className}`.trim()} role="img" aria-label={label}>
+    <div
+      className={`ph ${variantClass} ${className}`.trim()}
+      role="img"
+      aria-label={label}
+    >
       <span className="ph__icon" aria-hidden="true">
         {icon}
       </span>

@@ -35,7 +35,7 @@ export default function ChildrenPrograms() {
           <div className="grid grid--3">
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
-                <div className="pcard" style={{ minHeight: 400 }}>
+                <div className="pcard" style={{ minHeight: 420 }}>
                   <div className="pcard__art" />
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">
@@ -45,7 +45,7 @@ export default function ChildrenPrograms() {
                     {p.ages && <span className="pcard__age">{p.ages}</span>}
                     <h3 className="pcard__title">{p.title}</h3>
                     <p className="pcard__text">{p.blurb}</p>
-                    <Link to="/contact" className="pcard__cta">
+                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>
                     </Link>
                   </div>
@@ -78,7 +78,7 @@ export default function ChildrenPrograms() {
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <Placeholder label="Kids Taekwondo class in action" icon="🥋" variant="tall" />
+            <Placeholder label="Kids Taekwondo class" icon="🥋" variant="tall" />
           </Reveal>
         </div>
       </section>

@@ -1,29 +1,38 @@
-# Image Source Document
+# Image & Video Source Document
 
-The current site ships with **art-directed placeholders** (the `Placeholder`
-component) instead of licensed photography. Every placeholder is visibly labeled
-`PLACEHOLDER` in the UI. Replace each with authentic Taekwondo photography before
-launch and record the real source details in the table below.
+The site uses **free placeholder media** so the design can be evaluated with real
+Taekwondo imagery. Photos show a small `Placeholder photo` credit in the UI.
+Replace with the academy's own licensed photography before launch and update this
+file. All media is referenced centrally from `IMAGES` in `src/data/site.ts`.
 
-Prefer authentic Taekwondo (not generic karate/MMA). Suggested royalty-free
-sources: [Unsplash](https://unsplash.com), [Pexels](https://pexels.com). For
-editorial/Olympic imagery verify licensing (Getty, Shutterstock, Adobe Stock) or
-use official academy photography where available.
+## Current media
 
-| Location (page · section) | Suggested subject | Source URL | Photographer / Org | License | Attribution? | Temporary? | Alt text |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Home · Hero | Taekwondo flying kick / instructor with students | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Student performing a Taekwondo flying kick |
-| Home · Value story | Instructor coaching a young student | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Instructor coaching a child on the mat |
-| Home · Owner | Sanghyun Lee portrait (real photo required) | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Portrait of owner Sanghyun Lee |
-| Children's Programs · Story | Kids Taekwondo class in action | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Children practicing Taekwondo kicks |
-| Adult Programs · Story | Adult Taekwondo training session | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Adults training in a Taekwondo class |
-| Just 4 Kids · Birthday | Martial arts birthday party | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Kids at a martial arts birthday party |
-| Just 4 Kids · Summer Camp | Kids martial arts summer camp | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Children at a martial arts summer camp |
-| Just 4 Kids · Parents' Night | Kids games / pizza night | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Kids enjoying a supervised night out |
+All current stills are frames captured from Mixkit's free Taekwondo stock videos
+and are committed under `public/media/`. Mixkit's Free License permits commercial
+use with **no attribution required**.
+
+| Key | Page · section | File / URL | Source | License | Attribution? | Temporary? |
+| --- | --- | --- | --- | --- | --- | --- |
+| `heroVideo` | Home · hero background | https://assets.mixkit.co/videos/49706/49706-1080.mp4 | Mixkit (49706) | Mixkit Free License | No | Yes |
+| `heroPoster` | Home · hero poster | `/media/hero-poster.jpg` (frame of 49706) | Mixkit | Mixkit Free License | No | Yes |
+| `instructorPortrait` | Home · owner | `/media/instructor-portrait.jpg` (frame of 49705) | Mixkit | Mixkit Free License | No | Yes — replace with real owner photo |
+| `action` | Adult/story sections | `/media/adult-action.jpg` (frame of 49706) | Mixkit | Mixkit Free License | No | Yes |
+| `kidsKicks` | Tiny Tigers, camp | `/media/kids-stance.jpg` (frame of 48141) | Mixkit | Mixkit Free License | No | Yes |
+| `kidsGroup` | Junior/Family/features | `/media/kids-bow.jpg` (frame of 48140) | Mixkit | Mixkit Free License | No | Yes |
+| `teenSpar` | Teen/Olympic | `/media/kids-motion.jpg` (frame of 48139) | Mixkit | Mixkit Free License | No | Yes |
+| `beltTest` | Self Defense/Weapons/events | `/media/hero-poster.jpg` | Mixkit | Mixkit Free License | No | Yes |
+
+## Fonts
+
+| Font | Usage | Source | License |
+| --- | --- | --- | --- |
+| Ocean Rush (DEMO) | Home hero title only (`public/fonts/OceanRush.otf`) | The Branded Quotes (dafont) | **Free for personal use only — purchase a commercial license before launch** (https://sellfy.com/p/tbmhcl/) |
+| Teko / Anton / Inter | Headings & body | Google Fonts | Open Font License (free, commercial OK) |
 
 ## Rules
 
-- No low-resolution or watermarked images.
-- Do not use AI-generated people without disclosure.
-- Do not misrepresent Taekwondo with unrelated martial arts imagery.
-- Use a real owner portrait — do not substitute an unrelated instructor.
+- **Owner portrait:** `instructorPortrait` is a generic stand-in — replace with a
+  real photo of Sanghyun Lee.
+- For production, self-host the final hero video instead of hotlinking Mixkit.
+- No low-resolution or watermarked images; no AI-generated people without
+  disclosure; do not misrepresent Taekwondo with unrelated martial arts imagery.

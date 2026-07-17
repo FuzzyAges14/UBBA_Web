@@ -17,7 +17,10 @@ export default function LocationCard({ loc }: { loc: Location }) {
         />
       </div>
       <div className="loc-card__body">
-        <h3 className="loc-card__name">{loc.name}</h3>
+        <h3 className="loc-card__name">
+          {loc.name}
+          {loc.isNew && <span className="loc-badge">New</span>}
+        </h3>
         <p className="loc-card__meta">
           {loc.address}
           <br />
@@ -28,6 +31,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
             <a href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}>{loc.phone}</a>
           </p>
         )}
+        {loc.note && <p className="loc-card__meta"><em>{loc.note}</em></p>}
         {loc.placeholder && (
           <p className="loc-card__meta">
             <em>Placeholder location — enable in site settings if kept.</em>

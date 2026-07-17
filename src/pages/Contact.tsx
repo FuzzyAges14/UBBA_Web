@@ -25,14 +25,23 @@ function LocationBlock({ loc }: { loc: Location }) {
         </div>
       </div>
       <div>
-        <h2 className="section-title" style={{ fontSize: '1.9rem', marginTop: 0 }}>
+        <h2
+          className="section-title"
+          style={{ fontSize: '1.9rem', marginTop: 0, display: 'flex', alignItems: 'center', gap: '0.6rem' }}
+        >
           {loc.name}
+          {loc.isNew && <span className="loc-badge">New</span>}
         </h2>
         <p className="section-lead" style={{ marginTop: '0.6rem' }}>
           {loc.address}
           <br />
           {loc.city}
         </p>
+        {loc.note && (
+          <p className="ph-note" style={{ marginTop: '0.4rem' }}>
+            {loc.note}
+          </p>
+        )}
         {loc.phone ? (
           <p style={{ marginTop: '0.5rem' }}>
             <strong>Phone: </strong>

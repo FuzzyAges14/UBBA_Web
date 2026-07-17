@@ -1,3 +1,12 @@
+/* Home hero display font (demo — personal use; license for commercial launch) */
+@font-face {
+  font-family: 'Ocean Rush';
+  src: url('/fonts/OceanRush.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Brand palette */
   --black: #0a0a0a;
@@ -24,7 +33,8 @@
 
   /* Typography */
   --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-display: 'Sora', 'Inter', system-ui, sans-serif;
+  --font-display: 'Teko', 'Inter', system-ui, sans-serif;
+  --font-impact: 'Anton', 'Teko', 'Inter', system-ui, sans-serif;
 
   /* Layout */
   --maxw: 1240px;
@@ -81,10 +91,10 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  line-height: 1.04;
+  line-height: 1.02;
   margin: 0;
-  letter-spacing: -0.02em;
-  font-weight: 700;
+  letter-spacing: 0.005em;
+  font-weight: 600;
 }
 
 p {
@@ -167,10 +177,11 @@ button {
 }
 
 .section-title {
-  font-size: clamp(2rem, 4.8vw, 3.4rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  margin-top: 1.1rem;
+  font-size: clamp(2.4rem, 5.2vw, 3.9rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.02;
+  margin-top: 1rem;
 }
 
 .section-lead {
@@ -586,7 +597,7 @@ button {
   }
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (full-bleed cinematic video) ---------- */
 .hero {
   position: relative;
   color: #fff;
@@ -597,68 +608,78 @@ button {
   background: var(--black);
   overflow: hidden;
 }
-.hero__bg {
+.hero__video {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 74% 24%, rgba(196, 18, 48, 0.55), transparent 46%),
-    radial-gradient(ellipse at 16% 88%, rgba(201, 162, 39, 0.22), transparent 44%),
-    linear-gradient(160deg, #141416 0%, #0a0a0a 70%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
-.hero__photo {
+/* Functional legibility scrim (not a decorative gradient) */
+.hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, #1c1c20, #0d0d10 60%);
-  opacity: 0.7;
-  mix-blend-mode: screen;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 45%, rgba(10, 10, 10, 0.25) 100%),
+    linear-gradient(0deg, rgba(10, 10, 10, 0.9) 0%, transparent 42%);
 }
-.hero__scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(10, 10, 10, 0.7) 0%, transparent 60%),
-    linear-gradient(0deg, rgba(10, 10, 10, 0.85) 0%, transparent 45%);
+.hero .dojang {
+  z-index: 1;
 }
 .hero__inner {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
   width: 100%;
-  padding: clamp(2rem, 6vw, 4rem) 0;
+  max-width: 940px;
+  padding: clamp(2.5rem, 7vw, 5rem) 0;
 }
 .hero__badge {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--line-dark);
-  padding: 0.45rem 0.95rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
   color: var(--gold-soft);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
 .hero h1 {
-  font-size: clamp(2.6rem, 6.4vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-family: 'Ocean Rush', var(--font-impact);
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: 0.045em;
+  line-height: 1.28;
+  font-size: clamp(2.6rem, 6vw, 4.7rem);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
 }
 .hero h1 .accent {
-  color: transparent;
-  background: linear-gradient(100deg, var(--gold-soft), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: var(--gold-soft);
+}
+.hero__tagline {
+  margin-top: 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  color: #fff;
+  max-width: 38ch;
+  line-height: 1.1;
 }
 .hero__sub {
-  margin-top: 1.4rem;
-  font-size: 1.18rem;
+  margin-top: 1.1rem;
+  font-size: 1.14rem;
   color: rgba(255, 255, 255, 0.82);
-  max-width: 48ch;
+  max-width: 62ch;
 }
 .hero__actions {
-  margin-top: 2.1rem;
+  margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
@@ -666,10 +687,10 @@ button {
 .hero__meta {
   margin-top: 2.2rem;
   display: flex;
-  gap: 1.4rem 2rem;
+  gap: 1.2rem 2rem;
   flex-wrap: wrap;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.78);
 }
 .hero__meta span {
   display: inline-flex;
@@ -679,32 +700,60 @@ button {
 .hero__meta .dot {
   color: var(--gold);
 }
-.hero__media {
-  position: relative;
-}
 .hero__scroll {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 1.4rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
-@media (max-width: 900px) {
-  .hero__inner {
-    grid-template-columns: 1fr;
-  }
-  .hero__media {
-    display: none;
-  }
+/* ---------- Photos ---------- */
+.photo {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+  min-height: 240px;
+  background: var(--graphite);
+}
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.photo--tall {
+  min-height: 460px;
+}
+.photo--wide {
+  min-height: 300px;
+}
+.photo--zoom:hover img {
+  transform: scale(1.05);
+}
+.photo__credit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(10, 10, 10, 0.55);
+  padding: 0.25rem 0.5rem;
+  border-top-left-radius: 8px;
 }
 
 /* ---------- Marquee ---------- */
@@ -798,12 +847,16 @@ button {
   background: linear-gradient(160deg, var(--graphite-2), var(--black));
   transition: transform 0.6s var(--ease);
 }
-.pcard__art::after {
-  content: '';
+.pcard__img {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 70% 20%, rgba(196, 18, 48, 0.5), transparent 60%);
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
 }
+.pcard:hover .pcard__img,
 .pcard:hover .pcard__art {
   transform: scale(1.06);
 }
@@ -811,7 +864,12 @@ button {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(0deg, rgba(10, 10, 10, 0.92) 8%, rgba(10, 10, 10, 0.1) 60%);
+  background: linear-gradient(
+    0deg,
+    rgba(10, 10, 10, 0.95) 6%,
+    rgba(10, 10, 10, 0.15) 55%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
 }
 .pcard__glyph {
   position: absolute;
@@ -1382,6 +1440,20 @@ button {
 }
 .loc-card__name {
   font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.loc-badge {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #201800;
+  background: var(--gold);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
 }
 .loc-card__meta {
   color: var(--muted);
@@ -1438,11 +1510,20 @@ button {
   z-index: -1;
   background: linear-gradient(150deg, var(--graphite-2), var(--black));
 }
-.feature__bg::after {
-  content: '';
+.feature__img {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 70% 20%, rgba(196, 18, 48, 0.42), transparent 60%);
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.feature:hover .feature__img {
+  transform: scale(1.05);
+}
+.feature__body {
+  z-index: 1;
 }
 .feature--tall {
   min-height: 460px;

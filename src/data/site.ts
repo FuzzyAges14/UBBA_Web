@@ -4,9 +4,27 @@ export const SITE = {
   tagline: 'Confidence Building Martial Arts',
   primaryCta: 'Try A Class For Free!',
   owner: 'Sanghyun Lee',
-  // Toggle to true only if the owner wants the Glen Rock location visible.
-  showGlenRock: false,
+  // Glen Rock is a new location being added — visible by default.
+  showGlenRock: true,
 }
+
+/* ---------------------------------------------------------------------------
+ * Media (PLACEHOLDER assets sourced from free/CC libraries).
+ * Replace with the academy's own photography/video before launch.
+ * Licenses & attribution are tracked in docs/IMAGE_SOURCES.md.
+ * ------------------------------------------------------------------------- */
+export const IMAGES = {
+  // Hero background video (Mixkit free license) + local poster fallback.
+  heroVideo: 'https://assets.mixkit.co/videos/49706/49706-1080.mp4',
+  heroPoster: '/media/hero-poster.jpg',
+  instructorPortrait: '/media/instructor-portrait.jpg',
+  // Clean, consistent studio/dojang photography (self-hosted; Mixkit free license).
+  action: '/media/adult-action.jpg',
+  kidsKicks: '/media/kids-stance.jpg',
+  kidsGroup: '/media/kids-bow.jpg',
+  teenSpar: '/media/kids-motion.jpg',
+  beltTest: '/media/hero-poster.jpg',
+} as const
 
 export type NavLink = { label: string; to: string }
 
@@ -38,34 +56,45 @@ export type ProgramCard = {
   title: string
   ages?: string
   blurb: string
+  /** slug of the detail page this card links to */
+  slug: string
+  image?: string
 }
 
 export const HOME_PROGRAM_CARDS: ProgramCard[] = [
   {
     id: 'tiny-tigers',
+    slug: 'tiny-tigers',
     title: 'Tiny Tigers',
     ages: 'Ages 3-5',
+    image: IMAGES.kidsKicks,
     blurb:
       'A playful first step into martial arts that builds focus, listening skills, and confidence through age-appropriate games and drills.',
   },
   {
     id: 'junior-tigers',
+    slug: 'junior-tigers',
     title: 'Junior Tigers',
     ages: 'Ages 6-10',
+    image: IMAGES.kidsGroup,
     blurb:
       'Structured classes where kids sharpen coordination, discipline, and self-control while making new friends and earning belts.',
   },
   {
     id: 'teen-martial-arts',
+    slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
     ages: 'Ages 11-17',
+    image: IMAGES.teenSpar,
     blurb:
       'A positive outlet that channels energy into fitness, resilience, and leadership as teens build real self-defense skills.',
   },
   {
     id: 'adult-martial-arts',
+    slug: 'adult-program',
     title: 'Adult Martial Arts',
     ages: 'Ages 18+',
+    image: IMAGES.action,
     blurb:
       'Get in the best shape of your life while learning practical self-defense in a welcoming, no-ego training environment.',
   },
@@ -74,22 +103,28 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
 export const CHILDREN_PROGRAMS: ProgramCard[] = [
   {
     id: 'tiny-tigers',
+    slug: 'tiny-tigers',
     title: 'Tiny Tigers',
     ages: 'Ages 3-5',
+    image: IMAGES.kidsKicks,
     blurb:
       'Our youngest students develop focus, balance, and confidence through fun, high-energy drills designed for little movers.',
   },
   {
     id: 'junior-tigers',
+    slug: 'junior-tigers',
     title: 'Junior Tigers',
     ages: 'Ages 6-10',
+    image: IMAGES.kidsGroup,
     blurb:
       'Kids build discipline, respect, and coordination while progressing through a clear belt curriculum that rewards effort.',
   },
   {
     id: 'teen-martial-arts',
+    slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
     ages: 'Ages 11-17',
+    image: IMAGES.teenSpar,
     blurb:
       'Teens grow stronger and more confident, learning practical self-defense and leadership that carries into everyday life.',
   },
@@ -98,37 +133,49 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
 export const ADULT_PROGRAMS: ProgramCard[] = [
   {
     id: 'adult-program',
+    slug: 'adult-program',
     title: 'Adult Program',
+    image: IMAGES.action,
     blurb:
       'A full-body workout and practical martial arts training for every fitness level, with zero intimidation and plenty of support.',
   },
   {
     id: 'family-programs',
+    slug: 'family-programs',
     title: 'Family Programs',
+    image: IMAGES.kidsGroup,
     blurb:
       'Train together and grow together. Parents and kids share the mat, build healthy habits, and cheer each other on.',
   },
   {
     id: 'olympic-sparring',
+    slug: 'olympic-sparring',
     title: 'Olympic Sparring',
+    image: IMAGES.teenSpar,
     blurb:
       'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete and level up.',
   },
   {
     id: 'swat-team',
+    slug: 'swat-team',
     title: 'SWAT Team',
+    image: IMAGES.action,
     blurb:
       'Our elite training group for dedicated students ready to push their skills, conditioning, and technique to the next level.',
   },
   {
     id: 'self-defense',
+    slug: 'self-defense',
     title: 'Self Defense',
+    image: IMAGES.beltTest,
     blurb:
       'Real-world, practical techniques that help you stay aware, stay calm, and protect yourself and your loved ones.',
   },
   {
     id: 'weapons-class',
+    slug: 'weapons-class',
     title: 'Weapons Class',
+    image: IMAGES.beltTest,
     blurb:
       'Traditional weapons training that builds precision, discipline, and focus while adding an exciting new challenge.',
   },
@@ -204,6 +251,9 @@ export type Location = {
   mapQuery: string
   hours?: { day: string; time: string }[]
   placeholder?: boolean
+  /** Newly added / opening-soon location */
+  isNew?: boolean
+  note?: string
 }
 
 export const LOCATIONS: Location[] = [
@@ -236,10 +286,13 @@ export const LOCATIONS: Location[] = [
 export const GLEN_ROCK: Location = {
   id: 'glen-rock',
   name: 'Glen Rock',
-  address: 'Location details coming soon',
-  city: 'Glen Rock, NJ',
-  mapQuery: 'Glen Rock, NJ',
-  placeholder: true,
+  address: '201 Rock Rd, Suite 116',
+  city: 'Glen Rock, NJ 07452',
+  phone: '201-551-8557',
+  mapQuery: '201 Rock Rd Suite 116, Glen Rock, NJ 07452',
+  isNew: true,
+  // Class schedule for the new location is being finalized — confirm with owner.
+  note: 'Now enrolling — class schedule coming soon. Call us to reserve your spot.',
 }
 
 export const PROGRAM_OPTIONS = [
@@ -380,6 +433,185 @@ export const MEGA_MENU: MegaGroup[] = [
 ]
 
 export type SeoMeta = { title: string; description: string }
+
+/* ---------------------------------------------------------------------------
+ * Per-program detail pages. Keep copy short so it's easy to edit later.
+ * ------------------------------------------------------------------------- */
+export type ProgramDetail = {
+  slug: string
+  name: string
+  category: 'Children' | 'Adult & Family'
+  ages?: string
+  image: string
+  tagline: string
+  description: string
+  learn: string[]
+  classLooksLike: string
+}
+
+export const PROGRAM_DETAILS: ProgramDetail[] = [
+  {
+    slug: 'tiny-tigers',
+    name: 'Tiny Tigers',
+    category: 'Children',
+    ages: 'Ages 3-5',
+    image: IMAGES.kidsKicks,
+    tagline: 'A playful, confidence-first introduction to Taekwondo.',
+    description:
+      'Tiny Tigers gives our youngest students a joyful first taste of martial arts. Short, high-energy classes build focus, balance, and the confidence to try new things.',
+    learn: [
+      'Listening and following directions',
+      'Balance, coordination, and body control',
+      'Taking turns and showing respect',
+      'Confidence through small, achievable wins',
+    ],
+    classLooksLike:
+      'Fast-moving games and drills in short bursts to match young attention spans, always with lots of encouragement.',
+  },
+  {
+    slug: 'junior-tigers',
+    name: 'Junior Tigers',
+    category: 'Children',
+    ages: 'Ages 6-10',
+    image: IMAGES.kidsGroup,
+    tagline: 'Discipline, focus, and leadership through the belt journey.',
+    description:
+      'Junior Tigers helps kids channel their energy into discipline and focus. Students progress through a clear belt curriculum that rewards effort and consistency.',
+    learn: [
+      'Self-control and discipline',
+      'Goal setting through belt ranks',
+      'Coordination and Taekwondo fundamentals',
+      'Respect for instructors and teammates',
+    ],
+    classLooksLike:
+      'Structured warm-ups, technique work, and partner drills, finishing with a fun challenge that reinforces the day’s lesson.',
+  },
+  {
+    slug: 'teen-martial-arts',
+    name: 'Teen Martial Arts',
+    category: 'Children',
+    ages: 'Ages 11-17',
+    image: IMAGES.teenSpar,
+    tagline: 'Strength, resilience, and real self-defense for teens.',
+    description:
+      'A positive, high-energy outlet where teens build fitness, resilience, and leadership while learning practical self-defense in a supportive group.',
+    learn: [
+      'Practical self-defense skills',
+      'Athletic conditioning and flexibility',
+      'Confidence and stress management',
+      'Leadership and mentoring younger students',
+    ],
+    classLooksLike:
+      'Dynamic conditioning, sparring drills, and technique training that keep teens engaged and challenged.',
+  },
+  {
+    slug: 'adult-program',
+    name: 'Adult Program',
+    category: 'Adult & Family',
+    ages: 'Ages 18+',
+    image: IMAGES.action,
+    tagline: 'Get fit and learn to protect yourself — no experience needed.',
+    description:
+      'A full-body workout and practical martial arts training for every fitness level. Zero intimidation, plenty of support, and a welcoming community.',
+    learn: [
+      'Practical self-defense',
+      'Cardio, strength, and flexibility',
+      'Stress relief and mental focus',
+      'A supportive, no-ego community',
+    ],
+    classLooksLike:
+      'A warm-up, technique and pad work, and optional light sparring — scaled to your level.',
+  },
+  {
+    slug: 'family-programs',
+    name: 'Family Programs',
+    category: 'Adult & Family',
+    image: IMAGES.kidsGroup,
+    tagline: 'Train together, grow together.',
+    description:
+      'Parents and kids share the mat, build healthy habits, and cheer each other on. A meaningful activity the whole family can enjoy.',
+    learn: [
+      'Shared goals across all ages',
+      'Quality active time together',
+      'Mutual encouragement and accountability',
+      'Fundamental Taekwondo skills',
+    ],
+    classLooksLike:
+      'Mixed-age classes with drills that let families train side by side at their own pace.',
+  },
+  {
+    slug: 'olympic-sparring',
+    name: 'Olympic Sparring',
+    category: 'Adult & Family',
+    image: IMAGES.teenSpar,
+    tagline: 'Sport Taekwondo: speed, timing, and strategy.',
+    description:
+      'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete and level up their game.',
+    learn: [
+      'Footwork and distance control',
+      'Scoring techniques and strategy',
+      'Reaction speed and timing',
+      'Competition readiness',
+    ],
+    classLooksLike:
+      'Focused footwork drills, controlled sparring rounds, and strategy coaching with protective gear.',
+  },
+  {
+    slug: 'swat-team',
+    name: 'SWAT Team',
+    category: 'Adult & Family',
+    image: IMAGES.action,
+    tagline: 'Our elite training group for dedicated students.',
+    description:
+      'An advanced training group for committed students ready to push their skills, conditioning, and technique to the next level.',
+    learn: [
+      'Advanced technique refinement',
+      'Higher-intensity conditioning',
+      'Demonstration and performance skills',
+      'Leadership within the academy',
+    ],
+    classLooksLike:
+      'Invitation or instructor approval is typical — expect demanding, high-focus sessions.',
+  },
+  {
+    slug: 'self-defense',
+    name: 'Self Defense',
+    category: 'Adult & Family',
+    image: IMAGES.beltTest,
+    tagline: 'Stay aware, stay calm, stay safe.',
+    description:
+      'Real-world, practical techniques that help you stay aware, stay calm, and protect yourself and your loved ones with confidence.',
+    learn: [
+      'Situational awareness',
+      'Escapes and practical strikes',
+      'De-escalation and safety habits',
+      'Confidence under pressure',
+    ],
+    classLooksLike:
+      'Scenario-based drills and repetition of high-percentage techniques in a supportive setting.',
+  },
+  {
+    slug: 'weapons-class',
+    name: 'Weapons Class',
+    category: 'Adult & Family',
+    image: IMAGES.beltTest,
+    tagline: 'Precision, discipline, and focus through traditional weapons.',
+    description:
+      'Traditional weapons training that builds precision, discipline, and focus while adding an exciting new challenge to your practice.',
+    learn: [
+      'Weapon handling and safety',
+      'Precision and control',
+      'Forms and coordination',
+      'Focus and discipline',
+    ],
+    classLooksLike:
+      'Guided forms and controlled drills; equipment details are confirmed at enrollment.',
+  },
+]
+
+export function getProgram(slug: string): ProgramDetail | undefined {
+  return PROGRAM_DETAILS.find((p) => p.slug === slug)
+}
 
 export const SEO: Record<string, SeoMeta> = {
   '/': {

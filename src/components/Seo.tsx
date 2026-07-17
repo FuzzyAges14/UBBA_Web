@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { SEO } from '../data/site'
+import { SEO, getProgram } from '../data/site'
 
 const FALLBACK = SEO['/']
 
@@ -9,7 +9,17 @@ export default function Seo() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const meta = SEO[pathname] ?? FALLBACK
+    let meta = SEO[pathname]
+    if (!meta && pathname.startsWith('/programs/')) {
+      const program = getProgram(pathname.replace('/programs/', ''))
+      if (program) {
+        meta = {
+          title: `${program.name} | United Black Belt Academy`,
+          description: program.tagline,
+        }
+      }
+    }
+    meta = meta ?? FALLBACK
     document.title = meta.title
     let tag = document.querySelector('meta[name="description"]')
     if (!tag) {
