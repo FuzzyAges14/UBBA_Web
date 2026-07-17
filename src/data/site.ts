@@ -32,7 +32,6 @@ export const NAV: NavLink[] = [
   { label: 'Home', to: '/' },
   { label: "Children's Programs", to: '/programs/children' },
   { label: 'Adult Programs', to: '/programs/adult' },
-  { label: 'Just 4 Kids', to: '/just-4-kids' },
   { label: 'Reviews', to: '/#reviews' },
   { label: 'Locations', to: '/#locations' },
   { label: 'Contact', to: '/contact' },
@@ -392,13 +391,96 @@ export const FAQS: Faq[] = [
   },
 ]
 
-// Social links are placeholders — replace with real profiles before launch.
-export type SocialLink = { label: string; href: string; placeholder?: boolean }
+// Social profiles + recent-post placeholders — replace with live embeds/API
+// before launch. YouTube is intentionally omitted (no channel yet).
+export type SocialSlug = 'instagram' | 'facebook'
+
+export type SocialPost = {
+  id: string
+  caption: string
+  dateLabel: string
+  href: string
+  placeholder?: boolean
+}
+
+export type SocialLink = {
+  slug: SocialSlug
+  label: 'Instagram' | 'Facebook'
+  href: string
+  handle: string
+  blurb: string
+  placeholder?: boolean
+  recentPosts: SocialPost[]
+}
+
 export const SOCIAL: SocialLink[] = [
-  { label: 'Instagram', href: '#', placeholder: true },
-  { label: 'Facebook', href: '#', placeholder: true },
-  { label: 'YouTube', href: '#', placeholder: true },
+  {
+    slug: 'instagram',
+    label: 'Instagram',
+    href: '#',
+    handle: '@unitedblackbelt',
+    blurb: 'Class moments, belt promotions, and academy life — see what is happening on the mat.',
+    placeholder: true,
+    recentPosts: [
+      {
+        id: 'ig-1',
+        caption: 'Evening class energy on the mat',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+      {
+        id: 'ig-2',
+        caption: 'Tiny Tigers belt promotion day',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+      {
+        id: 'ig-3',
+        caption: 'Junior Tigers sparring drills',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+    ],
+  },
+  {
+    slug: 'facebook',
+    label: 'Facebook',
+    href: '#',
+    handle: 'United Black Belt Academy',
+    blurb: 'Events, camp updates, and community news for families across Bergen County.',
+    placeholder: true,
+    recentPosts: [
+      {
+        id: 'fb-1',
+        caption: "Parents' Night Out this Friday",
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+      {
+        id: 'fb-2',
+        caption: 'Summer camp registration is open',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+      {
+        id: 'fb-3',
+        caption: 'Birthday party booking spots filling up',
+        dateLabel: 'Recent',
+        href: '#',
+        placeholder: true,
+      },
+    ],
+  },
 ]
+
+export function getSocial(slug: string | undefined): SocialLink | undefined {
+  return SOCIAL.find((s) => s.slug === slug)
+}
 
 export type MegaGroup = { heading: string; links: { label: string; to: string; meta?: string }[] }
 
@@ -634,6 +716,21 @@ export const SEO: Record<string, SeoMeta> = {
     title: 'Just 4 Kids — Parties, Camp & Nights Out | United Black Belt Academy',
     description:
       'Martial arts birthday parties, summer camp, and Parents’ Night Out in Bergen County, NJ. The fun doesn’t stop at the mat.',
+  },
+  '/follow-us': {
+    title: 'Follow Us — Instagram & Facebook | United Black Belt Academy',
+    description:
+      'Follow United Black Belt Academy on Instagram and Facebook for class moments, events, and community updates.',
+  },
+  '/follow-us/instagram': {
+    title: 'Instagram | United Black Belt Academy',
+    description:
+      'Recent Instagram posts from United Black Belt Academy — class moments, promotions, and life on the mat.',
+  },
+  '/follow-us/facebook': {
+    title: 'Facebook | United Black Belt Academy',
+    description:
+      'Recent Facebook posts from United Black Belt Academy — events, camp updates, and family news.',
   },
   '/contact': {
     title: 'Contact & Locations | United Black Belt Academy',

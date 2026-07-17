@@ -12,7 +12,8 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Testimonials with real, owner-approved reviews (no fabricated names/quotes)
 - [ ] Stats: "Students Trained", "Years Serving", "Average Parent Rating"
 - [ ] Midland Park phone & hours
-- [ ] Social media profile URLs (`SOCIAL`)
+- [ ] Social media profile URLs + recent posts (`SOCIAL` — Instagram & Facebook only;
+      shown on `/follow-us` and `/follow-us/:network`; no YouTube channel)
 - [ ] Privacy Policy and Terms copy
 
 ## Forms (front-end only today)
