@@ -54,15 +54,15 @@ export default function Just4Kids() {
         <div className="container stack-gap" style={{ gap: '3rem', position: 'relative' }}>
           {JUST_4_KIDS.map((prog, i) => (
             <Reveal key={prog.id}>
-              <div className="split" style={i % 2 === 1 ? { direction: 'rtl' } : undefined}>
-                <div style={{ direction: 'ltr' }}>
+              <div className={`split ${i % 2 === 1 ? 'split--flip' : ''}`.trim()}>
+                <div>
                   <Placeholder
                     label={prog.title}
                     icon={ICONS[prog.id] ?? '🎉'}
                     variant="wide"
                   />
                 </div>
-                <div style={{ direction: 'ltr' }}>
+                <div>
                   <span className="card__ages">{prog.tag}</span>
                   <h3 className="section-title" style={{ fontSize: '1.9rem', marginTop: '0.6rem' }}>
                     {prog.title}

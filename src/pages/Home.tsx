@@ -195,16 +195,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120}>
             <div style={{ position: 'relative' }}>
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  right: '-26px',
-                  top: '-26px',
-                  color: '#fff',
-                  zIndex: 2,
-                }}
-              >
+              <div className="accent-orb" aria-hidden="true">
                 <Taegeuk size={88} spin />
               </div>
               <Placeholder
@@ -273,7 +264,7 @@ export default function Home() {
               />
             </Reveal>
           </div>
-          <Reveal delay={100}>
+          <Reveal delay={100} className="owner__copy">
             <span className="eyebrow">Meet The Owner</span>
             <h2 className="section-title">Hi, my name is {OWNER.name}</h2>
             <p className="section-lead">{OWNER.intro}</p>
