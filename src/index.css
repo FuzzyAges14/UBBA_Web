@@ -326,7 +326,7 @@ button {
   transform: rotate(-18deg);
 }
 
-/* Belt progression accent bar */
+/* Belt progression accent bar (utility for non-header uses) */
 .belt-bar {
   display: flex;
   height: 6px;
@@ -336,6 +336,8 @@ button {
 }
 .belt-bar span {
   flex: 1;
+  align-self: stretch;
+  min-height: 100%;
 }
 
 /* ---------- Header / Nav ---------- */
@@ -356,9 +358,18 @@ button {
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line-dark);
 }
+/* Single gradient avoids flex-span subpixel steps between belt colors */
 .header__accent {
   height: 3px;
   width: 100%;
+  border-radius: 0;
+  background: linear-gradient(
+    to right,
+    #f4f4f4 0 25%,
+    var(--blue) 25% 50%,
+    var(--red) 50% 75%,
+    #0a0a0a 75% 100%
+  );
 }
 .header__bar {
   height: var(--header-h);
