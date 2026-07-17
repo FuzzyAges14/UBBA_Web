@@ -1,34 +1,38 @@
 # Image & Video Source Document
 
-The site currently uses **free / Creative Commons placeholder media** so the design
-can be evaluated with real Taekwondo imagery. Every photo shows a small
-`Placeholder photo` credit in the UI. Replace these with the academy's own,
-licensed photography/video before launch and update this file.
-
-All media is referenced centrally from `IMAGES` in `src/data/site.ts`.
+The site uses **free placeholder media** so the design can be evaluated with real
+Taekwondo imagery. Photos show a small `Placeholder photo` credit in the UI.
+Replace with the academy's own licensed photography before launch and update this
+file. All media is referenced centrally from `IMAGES` in `src/data/site.ts`.
 
 ## Current media
 
-| Key | Page · section | Source URL | Source / Author | License | Attribution req.? | Temporary? |
+All current stills are frames captured from Mixkit's free Taekwondo stock videos
+and are committed under `public/media/`. Mixkit's Free License permits commercial
+use with **no attribution required**.
+
+| Key | Page · section | File / URL | Source | License | Attribution? | Temporary? |
 | --- | --- | --- | --- | --- | --- | --- |
-| `heroVideo` | Home · hero background | https://assets.mixkit.co/videos/49706/49706-1080.mp4 | Mixkit (item 49706) | Mixkit Free Stock Video License | No | Yes |
-| `heroPoster` | Home · hero poster (`/media/hero-poster.jpg`) | frame from Mixkit 49706 | Mixkit | Mixkit Free License | No | Yes |
-| `instructorPortrait` | Home · owner (`/media/instructor-portrait.jpg`) | frame from Mixkit 49705 | Mixkit | Mixkit Free License | No | Yes — replace with real owner photo |
-| `action` | Home/Children/Adult · story | https://upload.wikimedia.org/wikipedia/commons/0/09/Taekwondo_master_Lee_Jeong-hee_demonstrates_taekwondo_kicks_in_front_of_his_young_Indian_trainees.jpg | Wikimedia Commons | CC BY-SA | Yes | Yes |
-| `kidsKicks` | Tiny Tigers, Summer Camp | https://live.staticflickr.com/5059/5516890660_22d1220112_b.jpg | Flickr | CC BY | Yes | Yes |
-| `kidsGroup` | Junior Tigers, Family, feature | https://live.staticflickr.com/5172/5516911808_f34bcd539f_b.jpg | Flickr | CC BY | Yes | Yes |
-| `teenSpar` | Teen, Olympic Sparring | https://live.staticflickr.com/2871/8904949904_987d764022_b.jpg | Flickr | CC BY | Yes | Yes |
-| `beltTest` | Self Defense, Weapons, events | https://live.staticflickr.com/7515/27837815175_f5d455124f_b.jpg | Flickr | CC BY | Yes | Yes |
+| `heroVideo` | Home · hero background | https://assets.mixkit.co/videos/49706/49706-1080.mp4 | Mixkit (49706) | Mixkit Free License | No | Yes |
+| `heroPoster` | Home · hero poster | `/media/hero-poster.jpg` (frame of 49706) | Mixkit | Mixkit Free License | No | Yes |
+| `instructorPortrait` | Home · owner | `/media/instructor-portrait.jpg` (frame of 49705) | Mixkit | Mixkit Free License | No | Yes — replace with real owner photo |
+| `action` | Adult/story sections | `/media/adult-action.jpg` (frame of 49706) | Mixkit | Mixkit Free License | No | Yes |
+| `kidsKicks` | Tiny Tigers, camp | `/media/kids-stance.jpg` (frame of 48141) | Mixkit | Mixkit Free License | No | Yes |
+| `kidsGroup` | Junior/Family/features | `/media/kids-bow.jpg` (frame of 48140) | Mixkit | Mixkit Free License | No | Yes |
+| `teenSpar` | Teen/Olympic | `/media/kids-motion.jpg` (frame of 48139) | Mixkit | Mixkit Free License | No | Yes |
+| `beltTest` | Self Defense/Weapons/events | `/media/hero-poster.jpg` | Mixkit | Mixkit Free License | No | Yes |
 
-## Notes & rules
+## Fonts
 
-- **Attribution:** CC BY / CC BY-SA images require visible credit + a link to the
-  source and license if kept. Prefer replacing them with owned photography so no
-  attribution or share-alike obligations apply.
+| Font | Usage | Source | License |
+| --- | --- | --- | --- |
+| Ocean Rush (DEMO) | Home hero title only (`public/fonts/OceanRush.otf`) | The Branded Quotes (dafont) | **Free for personal use only — purchase a commercial license before launch** (https://sellfy.com/p/tbmhcl/) |
+| Teko / Anton / Inter | Headings & body | Google Fonts | Open Font License (free, commercial OK) |
+
+## Rules
+
 - **Owner portrait:** `instructorPortrait` is a generic stand-in — replace with a
-  real photo of Sanghyun Lee (do not imply the stand-in is the owner).
+  real photo of Sanghyun Lee.
+- For production, self-host the final hero video instead of hotlinking Mixkit.
 - No low-resolution or watermarked images; no AI-generated people without
   disclosure; do not misrepresent Taekwondo with unrelated martial arts imagery.
-- Hero video hotlinks Mixkit's CDN; the local poster (`/media/hero-poster.jpg`)
-  is the fallback if the CDN is unavailable. For production, self-host the final
-  video.

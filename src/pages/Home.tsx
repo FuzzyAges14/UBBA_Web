@@ -337,48 +337,44 @@ export default function Home() {
               experience required — just show up ready to grow.
             </p>
           </Reveal>
-          <div className="grid grid--3 mt" style={{ gridAutoRows: '1fr' }}>
-            <Reveal as="article">
-              <Link to="/programs/children" className="feature feature--tall">
-                <img className="feature__img" src={IMAGES.kidsGroup} alt="Children in Taekwondo uniforms" loading="lazy" />
-                <div className="feature__body">
-                  <h3>Children's Classes</h3>
-                  <p>
-                    Confidence, listening, discipline, respect, and friendships — the
-                    foundation for confident kids.
-                  </p>
-                  <span className="card__link mt-sm" style={{ color: '#fff' }}>
-                    Explore Children's Programs →
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-            <div className="stack-gap">
-              <Reveal as="article">
-                <Link to="/programs/adult" className="feature">
-                  <img className="feature__img" src={IMAGES.action} alt="Adult Taekwondo training" loading="lazy" />
-                  <div className="feature__body">
-                    <h3>Adult Classes</h3>
-                    <p>Fitness, self-defense, stress relief, and real community.</p>
-                    <span className="card__link mt-sm" style={{ color: '#fff' }}>
-                      Explore Adult Programs →
+          <div className="grid grid--3 mt">
+            {[
+              {
+                title: "Children's Classes",
+                text: 'Confidence, listening, discipline, respect, and friendships — the foundation for confident kids.',
+                to: '/programs/children',
+                img: IMAGES.kidsGroup,
+                cta: "Explore Children's Programs",
+              },
+              {
+                title: 'Adult Classes',
+                text: 'Fitness, self-defense, stress relief, and real community for every level.',
+                to: '/programs/adult',
+                img: IMAGES.action,
+                cta: 'Explore Adult Programs',
+              },
+              {
+                title: 'Workshops & Special Events',
+                text: 'Belt testing, tournaments, seminars, camps, and family events all year round.',
+                to: '/just-4-kids',
+                img: IMAGES.beltTest,
+                cta: 'See Just 4 Kids',
+              },
+            ].map((f, i) => (
+              <Reveal as="article" key={f.title} delay={i * 80}>
+                <Link to={f.to} className="pcard" style={{ minHeight: 420 }}>
+                  <img className="pcard__img" src={f.img} alt={f.title} loading="lazy" />
+                  <div className="pcard__scrim" />
+                  <div className="pcard__body">
+                    <h3 className="pcard__title">{f.title}</h3>
+                    <p className="pcard__text">{f.text}</p>
+                    <span className="pcard__cta">
+                      {f.cta} <span className="btn__arrow">→</span>
                     </span>
                   </div>
                 </Link>
               </Reveal>
-              <Reveal as="article">
-                <Link to="/just-4-kids" className="feature">
-                  <img className="feature__img" src={IMAGES.beltTest} alt="Taekwondo belt testing event" loading="lazy" />
-                  <div className="feature__body">
-                    <h3>Workshops &amp; Special Events</h3>
-                    <p>Belt testing, tournaments, seminars, camps, and family events.</p>
-                    <span className="card__link mt-sm" style={{ color: '#fff' }}>
-                      See Just 4 Kids →
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -429,7 +425,7 @@ export default function Home() {
               community at each.
             </p>
           </Reveal>
-          <div className="grid grid--2 mt">
+          <div className={`grid ${locations.length >= 3 ? 'grid--3' : 'grid--2'} mt`}>
             {locations.map((loc, i) => (
               <Reveal key={loc.id} delay={i * 90}>
                 <LocationCard loc={loc} />

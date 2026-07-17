@@ -4,8 +4,8 @@ export const SITE = {
   tagline: 'Confidence Building Martial Arts',
   primaryCta: 'Try A Class For Free!',
   owner: 'Sanghyun Lee',
-  // Toggle to true only if the owner wants the Glen Rock location visible.
-  showGlenRock: false,
+  // Glen Rock is a new location being added — visible by default.
+  showGlenRock: true,
 }
 
 /* ---------------------------------------------------------------------------
@@ -18,13 +18,12 @@ export const IMAGES = {
   heroVideo: 'https://assets.mixkit.co/videos/49706/49706-1080.mp4',
   heroPoster: '/media/hero-poster.jpg',
   instructorPortrait: '/media/instructor-portrait.jpg',
-  // Action / class photography (Flickr CC-BY / Wikimedia).
-  action:
-    'https://upload.wikimedia.org/wikipedia/commons/0/09/Taekwondo_master_Lee_Jeong-hee_demonstrates_taekwondo_kicks_in_front_of_his_young_Indian_trainees.jpg',
-  kidsKicks: 'https://live.staticflickr.com/5059/5516890660_22d1220112_b.jpg',
-  kidsGroup: 'https://live.staticflickr.com/5172/5516911808_f34bcd539f_b.jpg',
-  teenSpar: 'https://live.staticflickr.com/2871/8904949904_987d764022_b.jpg',
-  beltTest: 'https://live.staticflickr.com/7515/27837815175_f5d455124f_b.jpg',
+  // Clean, consistent studio/dojang photography (self-hosted; Mixkit free license).
+  action: '/media/adult-action.jpg',
+  kidsKicks: '/media/kids-stance.jpg',
+  kidsGroup: '/media/kids-bow.jpg',
+  teenSpar: '/media/kids-motion.jpg',
+  beltTest: '/media/hero-poster.jpg',
 } as const
 
 export type NavLink = { label: string; to: string }
@@ -252,6 +251,9 @@ export type Location = {
   mapQuery: string
   hours?: { day: string; time: string }[]
   placeholder?: boolean
+  /** Newly added / opening-soon location */
+  isNew?: boolean
+  note?: string
 }
 
 export const LOCATIONS: Location[] = [
@@ -284,10 +286,13 @@ export const LOCATIONS: Location[] = [
 export const GLEN_ROCK: Location = {
   id: 'glen-rock',
   name: 'Glen Rock',
-  address: 'Location details coming soon',
-  city: 'Glen Rock, NJ',
-  mapQuery: 'Glen Rock, NJ',
-  placeholder: true,
+  address: '201 Rock Rd, Suite 116',
+  city: 'Glen Rock, NJ 07452',
+  phone: '201-551-8557',
+  mapQuery: '201 Rock Rd Suite 116, Glen Rock, NJ 07452',
+  isNew: true,
+  // Class schedule for the new location is being finalized — confirm with owner.
+  note: 'Now enrolling — class schedule coming soon. Call us to reserve your spot.',
 }
 
 export const PROGRAM_OPTIONS = [

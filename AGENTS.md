@@ -47,5 +47,7 @@ one service: the Vite dev server. Standard commands live in `README.md` and
   routes `/programs/children` and `/programs/adult` are category overviews and take
   precedence over the dynamic slug route. Add a program by adding to
   `PROGRAM_DETAILS` + the relevant program array — no new page/route needed.
-- **Fonts:** display headings use `Teko` (impact) / `Anton` (hero title); body is
-  `Inter` (loaded in `index.html`).
+- **Fonts:** the home hero title uses `Ocean Rush` (self-hosted at
+  `public/fonts/OceanRush.otf`, `@font-face` in `src/index.css`) — this is a
+  personal-use DEMO font, license before commercial launch. Other headings use
+  `Teko`/`Anton`; body is `Inter` (Google Fonts, loaded in `index.html`).

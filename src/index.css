@@ -1,3 +1,12 @@
+/* Home hero display font (demo — personal use; license for commercial launch) */
+@font-face {
+  font-family: 'Ocean Rush';
+  src: url('/fonts/OceanRush.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Brand palette */
   --black: #0a0a0a;
@@ -641,19 +650,16 @@ button {
   margin-bottom: 1.4rem;
 }
 .hero h1 {
-  font-family: var(--font-impact);
-  text-transform: uppercase;
+  font-family: 'Ocean Rush', var(--font-impact);
+  text-transform: none;
   font-weight: 400;
-  letter-spacing: 0.005em;
-  line-height: 0.94;
-  font-size: clamp(3rem, 8.5vw, 6.4rem);
-  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0;
+  line-height: 0.92;
+  font-size: clamp(3.6rem, 10vw, 7.6rem);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
 }
 .hero h1 .accent {
-  color: transparent;
-  background: linear-gradient(100deg, var(--gold-soft), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: var(--gold-soft);
 }
 .hero__tagline {
   margin-top: 1.2rem;
@@ -1434,6 +1440,20 @@ button {
 }
 .loc-card__name {
   font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.loc-badge {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #201800;
+  background: var(--gold);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
 }
 .loc-card__meta {
   color: var(--muted);

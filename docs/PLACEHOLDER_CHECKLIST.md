@@ -21,7 +21,13 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
       and shows a success state but does not send anything yet.
 - [ ] Add spam prevention (honeypot/CAPTCHA) and privacy acknowledgement link
 
+## Fonts
+- [ ] The hero title uses the **Ocean Rush DEMO** font (free for personal use
+      only). Purchase a commercial license before launch, or swap the
+      `@font-face` in `src/index.css` for a licensed alternative.
+
 ## Optional
-- [ ] Enable Glen Rock (`SITE.showGlenRock = true`) if the owner keeps it
+- [ ] Glen Rock is enabled (`SITE.showGlenRock = true`) with confirmed address &
+      phone; add its hours when finalized (`GLEN_ROCK.hours`)
 - [ ] Add structured data (LocalBusiness / SportsActivityLocation / FAQPage) once
       corresponding verified content exists
