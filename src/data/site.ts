@@ -311,7 +311,7 @@ export const PROGRAM_OPTIONS = [
 export type Stat = { value: number; suffix?: string; label: string; placeholder?: boolean }
 
 export const STATS: Stat[] = [
-  { value: 2, label: 'NJ Locations' },
+  { value: LOCATIONS.length + (SITE.showGlenRock ? 1 : 0), label: 'NJ Locations' },
   { value: 500, suffix: '+', label: 'Students Trained', placeholder: true },
   { value: 15, suffix: '+', label: 'Years Serving Bergen County', placeholder: true },
   { value: 5, suffix: '★', label: 'Average Parent Rating', placeholder: true },
@@ -351,8 +351,8 @@ export const GETTING_STARTED: BeltStep[] = [
     text: 'Claim one of our exclusive online offers to lock in your free introductory class — no obligation.',
   },
   {
-    belt: 'Gold Belt',
-    color: '#C9A227',
+    belt: 'Blue Belt',
+    color: '#2563eb',
     title: 'Schedule Your First Lesson',
     text: 'We reach out to book a semi-private first lesson at a time that fits your family.',
   },
