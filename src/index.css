@@ -786,7 +786,7 @@ button {
 }
 .marquee__track span::after {
   content: '◆';
-  color: var(--blue-soft);
+  color: #0a0a0a;
   font-size: 0.7rem;
 }
 @keyframes marquee {
