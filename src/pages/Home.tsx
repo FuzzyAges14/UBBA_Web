@@ -120,7 +120,7 @@ export default function Home() {
               <span className="dot">●</span> Ages 3 through adult
             </span>
             <span>
-              <span className="dot">●</span> Two convenient locations
+              <span className="dot">●</span> {locations.length} convenient locations
             </span>
           </motion.div>
         </div>
@@ -427,8 +427,8 @@ export default function Home() {
             <span className="eyebrow">Our Schools</span>
             <h2 className="section-title">Visit a location near you</h2>
             <p className="section-lead">
-              Two convenient Bergen County locations, with the same welcoming
-              community at each.
+              {locations.length} convenient Bergen County locations, with the same
+              welcoming community at each.
             </p>
           </Reveal>
           <div className={`grid ${locations.length >= 3 ? 'grid--3' : 'grid--2'} mt`}>

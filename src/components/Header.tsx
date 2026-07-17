@@ -54,7 +54,7 @@ export default function Header() {
     <header className={`header ${solid ? 'header--solid' : ''}`}>
       <div className="belt-bar header__accent" aria-hidden="true">
         <span style={{ background: '#f4f4f4' }} />
-        <span style={{ background: 'var(--gold)' }} />
+        <span style={{ background: 'var(--blue)' }} />
         <span style={{ background: 'var(--red)' }} />
         <span style={{ background: '#0a0a0a' }} />
       </div>

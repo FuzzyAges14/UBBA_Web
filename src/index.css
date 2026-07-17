@@ -15,8 +15,9 @@
   --red: #c41230;
   --red-2: #e11836;
   --red-dark: #97102a;
-  --gold: #c9a227;
-  --gold-soft: #e4c14f;
+  /* Accent (belt progression: white -> blue -> red -> black) */
+  --blue: #2563eb;
+  --blue-soft: #7ca9ff;
   --white: #ffffff;
   --off-white: #f6f3ee;
   --soft-gray: #e7e7e7;
@@ -111,7 +112,7 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--blue);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -169,11 +170,11 @@ button {
 
 .section--dark .eyebrow,
 .section--graphite .eyebrow {
-  color: var(--gold);
+  color: var(--blue-soft);
 }
 .section--dark .eyebrow::before,
 .section--graphite .eyebrow::before {
-  background: var(--gold);
+  background: var(--blue);
 }
 
 .section-title {
@@ -243,12 +244,13 @@ button {
   transform: translateY(0) scale(0.98);
 }
 
+/* Secondary/accent CTA button. Named "gold" historically; now the blue accent. */
 .btn--gold {
-  --btn-bg: var(--gold);
-  --btn-fg: #201800;
+  --btn-bg: var(--blue);
+  --btn-fg: #ffffff;
 }
 .btn--gold:hover {
-  box-shadow: 0 16px 34px rgba(201, 162, 39, 0.36);
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.36);
 }
 
 .btn--dark {
@@ -390,7 +392,7 @@ button {
   font-size: 0.62rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--blue);
   margin-top: 4px;
 }
 
@@ -453,7 +455,7 @@ button {
   padding-right: 0.4rem;
 }
 .header__locations strong {
-  color: var(--gold);
+  color: var(--blue-soft);
   font-family: var(--font-display);
   font-size: 1rem;
 }
@@ -495,7 +497,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.72rem;
-  color: var(--gold);
+  color: var(--blue);
   margin-bottom: 0.9rem;
 }
 .mega__link {
@@ -584,7 +586,7 @@ button {
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: var(--gold);
+    color: var(--blue);
     margin-top: 1.4rem;
   }
   .mobile-nav .mn-sub {
@@ -646,7 +648,7 @@ button {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.82rem;
-  color: var(--gold-soft);
+  color: var(--blue-soft);
   margin-bottom: 1.4rem;
 }
 .hero h1 {
@@ -659,7 +661,7 @@ button {
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
 }
 .hero h1 .accent {
-  color: var(--gold-soft);
+  color: var(--blue-soft);
 }
 .hero__tagline {
   margin-top: 1.2rem;
@@ -698,7 +700,7 @@ button {
   gap: 0.5rem;
 }
 .hero__meta .dot {
-  color: var(--gold);
+  color: var(--blue);
 }
 .hero__scroll {
   position: absolute;
@@ -784,7 +786,7 @@ button {
 }
 .marquee__track span::after {
   content: '◆';
-  color: var(--gold-soft);
+  color: var(--blue-soft);
   font-size: 0.7rem;
 }
 @keyframes marquee {
@@ -891,8 +893,8 @@ button {
   letter-spacing: 0.1em;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--gold);
-  border: 1px solid rgba(201, 162, 39, 0.5);
+  color: var(--blue);
+  border: 1px solid rgba(37, 99, 235, 0.5);
   padding: 0.25rem 0.7rem;
   border-radius: 999px;
 }
@@ -1046,7 +1048,7 @@ button {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 28% 22%, rgba(196, 18, 48, 0.4), transparent 55%),
-    radial-gradient(circle at 82% 88%, rgba(201, 162, 39, 0.28), transparent 55%);
+    radial-gradient(circle at 82% 88%, rgba(37, 99, 235, 0.28), transparent 55%);
 }
 .ph::after {
   content: '';
@@ -1078,7 +1080,7 @@ button {
 }
 .ph__label::before {
   content: 'PLACEHOLDER · ';
-  color: var(--gold);
+  color: var(--blue);
   letter-spacing: 0.1em;
   font-size: 0.66rem;
 }
@@ -1110,7 +1112,7 @@ button {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 4vw, 3rem);
   font-weight: 800;
-  color: var(--gold);
+  color: var(--blue-soft);
   letter-spacing: -0.02em;
 }
 .stat__label {
@@ -1121,7 +1123,7 @@ button {
 .stat__ph {
   display: inline-block;
   font-size: 0.62rem;
-  color: var(--gold);
+  color: var(--blue);
   letter-spacing: 0.1em;
   margin-top: 0.4rem;
   opacity: 0.7;
@@ -1283,7 +1285,7 @@ button {
   font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--blue);
 }
 .jstep h3 {
   margin-top: 0.4rem;
@@ -1349,7 +1351,7 @@ button {
   font-size: clamp(1.4rem, 2.6vw, 2rem);
   font-weight: 600;
   line-height: 1.25;
-  border-left: 3px solid var(--gold);
+  border-left: 3px solid var(--blue);
   padding-left: 1.2rem;
   margin: 1.6rem 0;
 }
@@ -1357,7 +1359,7 @@ button {
   font-family: 'Sora', cursive;
   font-style: italic;
   font-size: 1.3rem;
-  color: var(--gold);
+  color: var(--blue-soft);
 }
 
 /* ---------- Testimonials ---------- */
@@ -1380,7 +1382,7 @@ button {
   height: 100%;
 }
 .quote__stars {
-  color: var(--gold);
+  color: var(--blue);
   letter-spacing: 0.15em;
 }
 .quote__text {
@@ -1398,7 +1400,7 @@ button {
 }
 .ph-note {
   font-size: 0.7rem;
-  color: var(--gold);
+  color: var(--blue);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1450,8 +1452,8 @@ button {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #201800;
-  background: var(--gold);
+  color: #ffffff;
+  background: var(--blue);
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
 }
@@ -1647,7 +1649,7 @@ button {
   width: fit-content;
 }
 .footer__links a:hover {
-  color: var(--gold);
+  color: var(--blue);
 }
 .footer h4 {
   color: #fff;
@@ -1686,7 +1688,7 @@ button {
   line-height: 1.9;
 }
 .footer__contact a:hover {
-  color: var(--gold);
+  color: var(--blue);
 }
 .footer__bottom {
   margin-top: 2.6rem;
@@ -1713,7 +1715,7 @@ button {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 82% 12%, rgba(196, 18, 48, 0.42), transparent 46%),
-    radial-gradient(ellipse at 8% 92%, rgba(201, 162, 39, 0.18), transparent 44%),
+    radial-gradient(ellipse at 8% 92%, rgba(37, 99, 235, 0.18), transparent 44%),
     linear-gradient(160deg, #141416, #0a0a0a 72%);
 }
 .page-hero__inner {
@@ -1742,7 +1744,7 @@ button {
   letter-spacing: 0.14em;
 }
 .breadcrumbs a:hover {
-  color: var(--gold);
+  color: var(--blue);
 }
 
 /* ---------- Mobile CTA bar ---------- */
@@ -1861,5 +1863,5 @@ button {
 }
 .section--dark .checklist li::before,
 .section--graphite .checklist li::before {
-  color: var(--gold);
+  color: var(--blue);
 }

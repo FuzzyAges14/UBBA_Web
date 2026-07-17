@@ -115,7 +115,7 @@ export default function Contact() {
             <p className="section-lead">
               Fill out the form and we'll be in touch to schedule your free class.
               Prefer to talk? Call our Allendale school at{' '}
-              <a href="tel:2019622922" style={{ color: 'var(--gold)', fontWeight: 600 }}>
+              <a href="tel:2019622922" style={{ color: 'var(--blue-soft)', fontWeight: 600 }}>
                 201-962-2922
               </a>
               .

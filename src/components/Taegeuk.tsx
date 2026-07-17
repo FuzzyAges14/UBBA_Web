@@ -35,7 +35,7 @@ export default function Taegeuk({
       />
       <path
         d="M50 98a48 48 0 0 1 0-96 24 24 0 0 0 0 48 24 24 0 0 1 0 48z"
-        fill="var(--gold)"
+        fill="var(--blue)"
         fillOpacity="0.9"
       />
     </svg>
