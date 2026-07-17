@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
-import Photo from '../components/Photo'
+import Placeholder from '../components/Placeholder'
 import LeadForm from '../components/LeadForm'
 import LocationCard from '../components/LocationCard'
 import Marquee from '../components/Marquee'
@@ -29,6 +29,13 @@ const fadeUp = {
     y: 0,
     transition: { delay: 0.12 + i * 0.09, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   }),
+}
+
+const PROGRAM_GLYPH: Record<string, string> = {
+  'tiny-tigers': '🐯',
+  'junior-tigers': '🥋',
+  'teen-martial-arts': '⚡',
+  'adult-martial-arts': '💪',
 }
 
 export default function Home() {
@@ -141,12 +148,11 @@ export default function Home() {
             {HOME_PROGRAM_CARDS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 80}>
                 <div className="pcard">
-                  {p.image ? (
-                    <img className="pcard__img" src={p.image} alt={p.title} loading="lazy" />
-                  ) : (
-                    <div className="pcard__art" />
-                  )}
+                  <div className="pcard__art" />
                   <div className="pcard__scrim" />
+                  <span className="pcard__glyph" aria-hidden="true">
+                    {PROGRAM_GLYPH[p.id]}
+                  </span>
                   <div className="pcard__body">
                     {p.ages && <span className="pcard__age">{p.ages}</span>}
                     <h3 className="pcard__title">{p.title}</h3>
@@ -201,12 +207,10 @@ export default function Home() {
               >
                 <Taegeuk size={88} spin />
               </div>
-              <Photo
-                src={IMAGES.action}
-                alt="Taekwondo instructor demonstrating a kick to a class of students"
+              <Placeholder
+                label="Instructor coaching a young student"
+                icon="🏆"
                 variant="tall"
-                zoom
-                credit="Placeholder photo"
               />
             </div>
           </Reveal>
@@ -262,11 +266,10 @@ export default function Home() {
         <div className="container owner">
           <div className="owner__sticky">
             <Reveal>
-              <Photo
-                src={IMAGES.instructorPortrait}
-                alt={`${OWNER.name}, head instructor (placeholder portrait)`}
+              <Placeholder
+                label={`${OWNER.name}, Head Instructor`}
+                icon="🥋"
                 variant="tall"
-                credit="Placeholder — replace with owner photo"
               />
             </Reveal>
           </div>
@@ -343,28 +346,31 @@ export default function Home() {
                 title: "Children's Classes",
                 text: 'Confidence, listening, discipline, respect, and friendships — the foundation for confident kids.',
                 to: '/programs/children',
-                img: IMAGES.kidsGroup,
+                icon: '🧒',
                 cta: "Explore Children's Programs",
               },
               {
                 title: 'Adult Classes',
                 text: 'Fitness, self-defense, stress relief, and real community for every level.',
                 to: '/programs/adult',
-                img: IMAGES.action,
+                icon: '💪',
                 cta: 'Explore Adult Programs',
               },
               {
                 title: 'Workshops & Special Events',
                 text: 'Belt testing, tournaments, seminars, camps, and family events all year round.',
                 to: '/just-4-kids',
-                img: IMAGES.beltTest,
+                icon: '🎉',
                 cta: 'See Just 4 Kids',
               },
             ].map((f, i) => (
               <Reveal as="article" key={f.title} delay={i * 80}>
                 <Link to={f.to} className="pcard" style={{ minHeight: 420 }}>
-                  <img className="pcard__img" src={f.img} alt={f.title} loading="lazy" />
+                  <div className="pcard__art" />
                   <div className="pcard__scrim" />
+                  <span className="pcard__glyph" aria-hidden="true">
+                    {f.icon}
+                  </span>
                   <div className="pcard__body">
                     <h3 className="pcard__title">{f.title}</h3>
                     <p className="pcard__text">{f.text}</p>

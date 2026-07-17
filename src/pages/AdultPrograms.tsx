@@ -1,10 +1,19 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Photo from '../components/Photo'
+import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
-import { ADULT_PROGRAMS, FAQS, IMAGES, SITE } from '../data/site'
+import { ADULT_PROGRAMS, FAQS, SITE } from '../data/site'
+
+const GLYPH: Record<string, string> = {
+  'adult-program': '💪',
+  'family-programs': '👪',
+  'olympic-sparring': '🥇',
+  'swat-team': '🎯',
+  'self-defense': '🛡️',
+  'weapons-class': '🥋',
+}
 
 export default function AdultPrograms() {
   return (
@@ -21,12 +30,11 @@ export default function AdultPrograms() {
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
                 <div className="pcard" style={{ minHeight: 380 }}>
-                  {p.image ? (
-                    <img className="pcard__img" src={p.image} alt={p.title} loading="lazy" />
-                  ) : (
-                    <div className="pcard__art" />
-                  )}
+                  <div className="pcard__art" />
                   <div className="pcard__scrim" />
+                  <span className="pcard__glyph" aria-hidden="true">
+                    {GLYPH[p.id]}
+                  </span>
                   <div className="pcard__body">
                     <h3 className="pcard__title">{p.title}</h3>
                     <p className="pcard__text">{p.blurb}</p>
@@ -51,13 +59,7 @@ export default function AdultPrograms() {
         <div className="dojang" aria-hidden="true" />
         <div className="container split" style={{ position: 'relative' }}>
           <Reveal delay={120}>
-            <Photo
-              src={IMAGES.action}
-              alt="Adult Taekwondo training session"
-              variant="tall"
-              zoom
-              credit="Placeholder photo"
-            />
+            <Placeholder label="Adult Taekwondo training session" icon="🥋" variant="tall" />
           </Reveal>
           <Reveal>
             <span className="eyebrow">Train Your Way</span>

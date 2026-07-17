@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Photo from '../components/Photo'
+import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
-import { CHILDREN_PROGRAMS, FAQS, IMAGES, SITE } from '../data/site'
+import { CHILDREN_PROGRAMS, FAQS, SITE } from '../data/site'
+
+const GLYPH: Record<string, string> = {
+  'tiny-tigers': '🐯',
+  'junior-tigers': '🥋',
+  'teen-martial-arts': '⚡',
+}
 
 const LEARN = [
   'Focus & listening skills that carry into the classroom',
@@ -30,12 +36,11 @@ export default function ChildrenPrograms() {
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
                 <div className="pcard" style={{ minHeight: 420 }}>
-                  {p.image ? (
-                    <img className="pcard__img" src={p.image} alt={p.title} loading="lazy" />
-                  ) : (
-                    <div className="pcard__art" />
-                  )}
+                  <div className="pcard__art" />
                   <div className="pcard__scrim" />
+                  <span className="pcard__glyph" aria-hidden="true">
+                    {GLYPH[p.id]}
+                  </span>
                   <div className="pcard__body">
                     {p.ages && <span className="pcard__age">{p.ages}</span>}
                     <h3 className="pcard__title">{p.title}</h3>
@@ -73,13 +78,7 @@ export default function ChildrenPrograms() {
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <Photo
-              src={IMAGES.action}
-              alt="Kids Taekwondo class with an instructor"
-              variant="tall"
-              zoom
-              credit="Placeholder photo"
-            />
+            <Placeholder label="Kids Taekwondo class" icon="🥋" variant="tall" />
           </Reveal>
         </div>
       </section>

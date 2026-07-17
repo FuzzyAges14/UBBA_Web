@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Photo from '../components/Photo'
+import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
-import { JUST_4_KIDS, IMAGES } from '../data/site'
+import { JUST_4_KIDS } from '../data/site'
 
 const STEPS = [
   { t: 'Select Program', d: 'Pick the experience that fits — a party, camp, or a fun night out.' },
@@ -11,10 +11,10 @@ const STEPS = [
   { t: 'Let The Fun Begin!', d: 'Drop off and relax while our team delivers a safe, exciting time.' },
 ]
 
-const PROG_IMAGE: Record<string, string> = {
-  'birthday-parties': IMAGES.kidsGroup,
-  'summer-camp': IMAGES.kidsKicks,
-  'parents-night-out': IMAGES.kidsGroup,
+const ICONS: Record<string, string> = {
+  'birthday-parties': '🎂',
+  'summer-camp': '☀️',
+  'parents-night-out': '🍕',
 }
 
 export default function Just4Kids() {
@@ -56,12 +56,10 @@ export default function Just4Kids() {
             <Reveal key={prog.id}>
               <div className="split" style={i % 2 === 1 ? { direction: 'rtl' } : undefined}>
                 <div style={{ direction: 'ltr' }}>
-                  <Photo
-                    src={PROG_IMAGE[prog.id] ?? IMAGES.kidsGroup}
-                    alt={prog.title}
+                  <Placeholder
+                    label={prog.title}
+                    icon={ICONS[prog.id] ?? '🎉'}
                     variant="wide"
-                    zoom
-                    credit="Placeholder photo"
                   />
                 </div>
                 <div style={{ direction: 'ltr' }}>

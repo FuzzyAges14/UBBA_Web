@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import PageHero from '../components/PageHero'
-import Photo from '../components/Photo'
+import Placeholder from '../components/Placeholder'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import CtaBanner from '../components/CtaBanner'
@@ -33,13 +33,7 @@ export default function ProgramDetail() {
       <section className="section">
         <div className="container split">
           <Reveal>
-            <Photo
-              src={program.image}
-              alt={`${program.name} class`}
-              variant="tall"
-              zoom
-              credit="Placeholder photo"
-            />
+            <Placeholder label={`${program.name} class`} icon="🥋" variant="tall" />
           </Reveal>
           <Reveal delay={100}>
             {program.ages && <span className="card__ages">{program.ages}</span>}
