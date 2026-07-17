@@ -15,6 +15,7 @@ export default function Header() {
   const [solid, setSolid] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
+  const [programsOpen, setProgramsOpen] = useState(false)
   const location = useLocation()
   const closeTimer = useRef<number | undefined>(undefined)
 
@@ -30,10 +31,12 @@ export default function Header() {
   useEffect(() => {
     setMenuOpen(false)
     setMegaOpen(false)
+    setProgramsOpen(false)
   }, [location.pathname, location.hash])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
+    if (!menuOpen) setProgramsOpen(false)
     return () => {
       document.body.style.overflow = ''
     }
@@ -161,18 +164,42 @@ export default function Header() {
           <nav className="mobile-nav__links" aria-label="Mobile">
             <Link to="/">Home</Link>
             <Link to="/#owner">About</Link>
-            <Link to="/just-4-kids">Just 4 Kids</Link>
-            {MEGA_MENU.map((group) => (
-              <div key={group.heading} className="mobile-nav__group">
-                <div className="mn-group">{group.heading}</div>
-                {group.links.map((link) => (
-                  <Link key={link.label} to={link.to} className="mn-sub">
-                    <span className="mn-sub__label">{link.label}</span>
-                    {link.meta ? <span className="mn-sub__meta">{link.meta}</span> : null}
-                  </Link>
+
+            <div className={`mobile-nav__accordion ${programsOpen ? 'is-open' : ''}`}>
+              <button
+                type="button"
+                className="mobile-nav__accordion-trigger"
+                aria-expanded={programsOpen}
+                aria-controls="mobile-programs"
+                onClick={() => setProgramsOpen((v) => !v)}
+              >
+                <span>Programs</span>
+                <span className="nav__caret" aria-hidden="true">
+                  ▼
+                </span>
+              </button>
+              <div
+                id="mobile-programs"
+                className="mobile-nav__accordion-panel"
+                hidden={!programsOpen}
+              >
+                {MEGA_MENU.map((group) => (
+                  <div key={group.heading} className="mobile-nav__group">
+                    <div className="mn-group">{group.heading}</div>
+                    {group.links.map((link) => (
+                      <Link key={link.label} to={link.to} className="mn-sub">
+                        <span className="mn-sub__label">{link.label}</span>
+                        {link.meta ? (
+                          <span className="mn-sub__meta">{link.meta}</span>
+                        ) : null}
+                      </Link>
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
+            </div>
+
+            <Link to="/just-4-kids">Just 4 Kids</Link>
             <Link to="/#reviews">Reviews</Link>
             <Link to="/#locations">Locations</Link>
             <Link to="/contact">Contact</Link>

@@ -590,27 +590,47 @@ button {
     display: flex;
     flex-direction: column;
   }
-  .mobile-nav__links > a {
-    display: block;
+  .mobile-nav__links > a,
+  .mobile-nav__accordion-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     color: #fff;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: clamp(1.2rem, 4.2vw, 1.45rem);
     line-height: 1.25;
     padding: 1rem 0;
+    border: none;
+    border-bottom: 1px solid var(--line-dark);
+    background: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  .mobile-nav__accordion-trigger .nav__caret {
+    font-size: 0.7rem;
+    transition: transform 0.22s var(--ease);
+  }
+  .mobile-nav__accordion.is-open .mobile-nav__accordion-trigger .nav__caret {
+    transform: rotate(180deg);
+  }
+  .mobile-nav__accordion-panel {
+    padding: 0.35rem 0 0.85rem;
     border-bottom: 1px solid var(--line-dark);
   }
-  .mobile-nav__group {
-    border-bottom: 1px solid var(--line-dark);
-    padding-bottom: 0.35rem;
+  .mobile-nav__accordion-panel[hidden] {
+    display: none;
+  }
+  .mobile-nav__group + .mobile-nav__group {
+    margin-top: 0.85rem;
   }
   .mobile-nav .mn-group {
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: var(--gold);
-    margin-top: 1.35rem;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
   }
   .mobile-nav .mn-sub {
     display: flex;
@@ -621,9 +641,12 @@ button {
     font-size: 1.05rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.88);
-    padding: 0.85rem 0;
-    border-bottom: none;
+    padding: 0.75rem 0 0.75rem 0.15rem;
     line-height: 1.35;
+  }
+  .mobile-nav .mn-sub:active,
+  .mobile-nav .mn-sub:hover {
+    color: #fff;
   }
   .mobile-nav .mn-sub__meta {
     font-size: 0.85rem;
