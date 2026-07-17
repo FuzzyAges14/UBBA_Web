@@ -6,7 +6,12 @@ arts classes for kids, teens, and adults in Allendale &amp; Midland Park, NJ.
 Built with [Vite](https://vitejs.dev/), [React](https://react.dev/),
 [React Router](https://reactrouter.com/), [Framer Motion](https://www.framer.com/motion/),
 and TypeScript. Premium, cinematic Taekwondo brand design with a custom design
-system (Sora/Inter type, black/red/gold palette, Taegeuk + dojang-grid motifs).
+system (Ocean Rush hero title, Teko/Anton headings, Inter body; black/red/gold
+palette; Taegeuk + dojang-grid motifs).
+
+> **New here?** Jump to [Launching your website](#-launching-your-website) to put
+> the site online, or [Making quick text changes](#-making-quick-text-changes) to
+> edit wording, hours, or phone numbers — no coding experience needed.
 
 ## Prerequisites
 
@@ -19,6 +24,75 @@ system (Sora/Inter type, black/red/gold palette, Taegeuk + dojang-grid motifs).
 pnpm install      # install dependencies
 pnpm dev          # start the dev server at http://localhost:5173
 ```
+
+## 🚀 Launching your website
+
+The site is a static website (plain HTML/CSS/JS after building), so it can be
+hosted almost anywhere. There are two steps: **build**, then **publish**.
+
+### 1. Build the site
+
+```bash
+pnpm install     # first time only
+pnpm build       # creates a ready-to-publish "dist/" folder
+```
+
+This produces a `dist/` folder containing everything the website needs.
+
+Want to preview exactly what visitors will see before publishing?
+
+```bash
+pnpm preview     # serves the built site locally so you can check it
+```
+
+### 2. Publish it (pick ONE option)
+
+**Option A — Netlify (easiest, drag & drop):**
+1. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
+2. Drag the whole `dist/` folder onto the page.
+3. It gives you a live URL. Done.
+
+**Option B — Netlify or Vercel connected to GitHub (auto-publishes on every change):**
+1. Create a free account at [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
+2. "Add new site" → import this GitHub repo.
+3. Use these settings when asked:
+   - **Build command:** `pnpm build`
+   - **Publish/output directory:** `dist`
+4. After that, every time changes are merged into `main`, the live site updates
+   automatically.
+
+**Option C — any other web host:** upload the contents of the `dist/` folder to
+your host's public web directory.
+
+### ⚠️ One important setting for hosting
+
+This site uses multiple pages handled in the browser (e.g. `/contact`,
+`/programs/tiny-tigers`). Most hosts need a small "redirect everything to
+`index.html`" rule so those pages load correctly when someone visits them directly
+or refreshes:
+
+- **Netlify:** add a file named `public/_redirects` containing:
+  `/*    /index.html   200`
+- **Vercel:** it usually handles this automatically for Vite/React apps.
+- **Other hosts:** enable "SPA fallback" / "rewrite all routes to index.html".
+
+Without this, the home page works but refreshing a sub-page may show a "404 Not
+Found". (Ask me and I can add the redirect file for whichever host you choose.)
+
+### Custom domain (e.g. unitedbba.com)
+
+Netlify and Vercel both let you connect a custom domain for free in their
+dashboard under **Domain settings** — just follow their step-by-step prompts.
+
+### Before a real public launch
+
+Check the [`docs/`](docs/) checklists — a few things still use placeholders:
+- Replace placeholder photos and the personal-use **Ocean Rush** font with
+  licensed versions.
+- Add Glen Rock's real class hours.
+- Connect the contact / free-class forms to an email service or CRM (they
+  currently show a confirmation but don't send anything yet).
+- Confirm testimonials, stats, and owner details with the owner.
 
 ## Available scripts
 
@@ -40,12 +114,40 @@ src/
   pages/              # Routed pages (Home, Programs, Just 4 Kids, Contact, ...)
 ```
 
-### Editing content
+## ✍️ Making quick text changes
 
-Most copy — program names/descriptions, location details and hours, testimonials,
-and navigation — lives in [`src/data/site.ts`](src/data/site.ts). Update text there
-without touching layout. To show the Glen Rock location, set `SITE.showGlenRock` to
-`true`.
+Almost all wording lives in **one file**:
+[`src/data/site.ts`](src/data/site.ts). You can edit the text between the quotes
+without touching any layout or design. After saving, the site updates instantly
+while `pnpm dev` is running.
+
+**How to make an edit:**
+
+1. Open `src/data/site.ts`.
+2. Find the text you want to change (it's grouped by section — see below).
+3. Change only the words **inside the quotes** (`'...'` or `"..."`). Don't remove
+   the quotes, commas, or brackets.
+4. Save the file.
+
+**Where common things live in `src/data/site.ts`:**
+
+| I want to change... | Look for |
+| --- | --- |
+| Phone number, address, or hours | `LOCATIONS` (Allendale / Midland Park) and `GLEN_ROCK` |
+| Whether Glen Rock shows on the site | `SITE.showGlenRock` — set to `true` (show) or `false` (hide) |
+| Program names & descriptions | `HOME_PROGRAM_CARDS`, `CHILDREN_PROGRAMS`, `ADULT_PROGRAMS`, `PROGRAM_DETAILS` |
+| Owner bio / quote | `OWNER` |
+| Reviews / testimonials | `TESTIMONIALS` |
+| The "Try A Class For Free!" button text | `SITE.primaryCta` |
+| Page titles for Google (SEO) | `SEO` |
+| Menu links | `NAV`, `FOOTER_LINKS`, `MEGA_MENU` |
+
+**Tip:** change one thing at a time and check the site in your browser. If
+something looks broken after an edit, you probably removed a quote, comma, or
+bracket by accident — undo your last change (Ctrl/Cmd + Z) and try again.
+
+Photos are intentional placeholders (labeled `PLACEHOLDER` on screen). To use real
+photos later, see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md).
 
 ### Deliverable docs
 
