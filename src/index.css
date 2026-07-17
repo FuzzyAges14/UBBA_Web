@@ -631,8 +631,8 @@ button {
   }
   .mobile-nav__cta {
     flex: 0 0 auto;
-    padding: 1rem clamp(1.25rem, 5vw, 2.4rem)
-      calc(1.1rem + env(safe-area-inset-bottom, 0px));
+    padding: 1.1rem clamp(1.25rem, 5vw, 2.4rem)
+      calc(1.35rem + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid var(--line-dark);
     background: rgba(10, 10, 10, 0.98);
   }
