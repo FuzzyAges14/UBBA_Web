@@ -36,31 +36,46 @@ describe('App routing', () => {
     ).toBeInTheDocument()
   })
 
-  it('keeps Just 4 Kids in Programs and shows Follow Us social placeholders', () => {
+  it('keeps Just 4 Kids in Programs and links Follow Us to its own page', () => {
     renderAt('/')
 
     const primaryNav = screen.getByRole('navigation', { name: /primary/i })
     expect(
       within(primaryNav).queryByRole('link', { name: /just 4 kids/i }),
     ).not.toBeInTheDocument()
+    expect(
+      within(primaryNav).getByRole('link', { name: /follow us/i }),
+    ).toHaveAttribute('href', '/follow-us')
 
     fireEvent.click(screen.getByRole('button', { name: /programs/i }))
-    const programsPanel = primaryNav.querySelector('.mega:not(.mega--social)')
+    const programsPanel = primaryNav.querySelector('.mega')
     expect(programsPanel).toBeTruthy()
     expect(within(programsPanel as HTMLElement).getByText(/birthday parties/i)).toBeInTheDocument()
     expect(within(programsPanel as HTMLElement).getByText(/summer \/ day camp/i)).toBeInTheDocument()
+  })
 
-    fireEvent.click(screen.getByRole('button', { name: /follow us/i }))
-    const socialPanel = primaryNav.querySelector('.mega--social')
-    expect(socialPanel).toBeTruthy()
-    expect(within(socialPanel as HTMLElement).getByText(/@unitedblackbelt/i)).toBeInTheDocument()
+  it('renders the Follow Us hub with Instagram and Facebook options', () => {
+    renderAt('/follow-us')
+    expect(screen.getByRole('heading', { name: /follow us/i, level: 1 })).toBeInTheDocument()
+    const postLinks = screen.getAllByRole('link', { name: /see recent posts/i })
+    expect(postLinks).toHaveLength(2)
+    expect(postLinks[0]).toHaveAttribute('href', '/follow-us/instagram')
+    expect(postLinks[1]).toHaveAttribute('href', '/follow-us/facebook')
+    expect(screen.queryByText(/youtube/i)).not.toBeInTheDocument()
+  })
+
+  it('renders an Instagram feed page with post links', () => {
+    renderAt('/follow-us/instagram')
+    expect(screen.getByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
+    expect(screen.getByText(/evening class energy on the mat/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /visit instagram profile/i })).toBeInTheDocument()
+  })
+
+  it('shows a 404 for an unknown social network', () => {
+    renderAt('/follow-us/youtube')
     expect(
-      within(socialPanel as HTMLElement).getByText(/evening class energy on the mat/i),
+      screen.getByRole('heading', { name: /page not found/i }),
     ).toBeInTheDocument()
-    expect(
-      within(socialPanel as HTMLElement).getByText(/parents' night out this friday/i),
-    ).toBeInTheDocument()
-    expect(within(socialPanel as HTMLElement).queryByText(/youtube/i)).not.toBeInTheDocument()
   })
 
   it('renders a unique program detail page', () => {
