@@ -521,33 +521,40 @@ button {
 .hamburger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 12px;
+  min-width: 48px;
+  min-height: 48px;
+  margin-right: -4px;
 }
 .hamburger span {
-  width: 26px;
-  height: 2px;
+  display: block;
+  width: 28px;
+  height: 2.5px;
   background: #fff;
+  border-radius: 2px;
   transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
 }
 .hamburger.is-open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(8.5px) rotate(45deg);
 }
 .hamburger.is-open span:nth-child(2) {
   opacity: 0;
 }
 .hamburger.is-open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-8.5px) rotate(-45deg);
 }
 
 .mobile-nav {
   display: none;
 }
 
-@media (max-width: 1000px) {
+/* Switch to burger before the desktop nav + CTA get crushed */
+@media (max-width: 1120px) {
   .nav,
   .header__locations,
   .header__right .btn {
@@ -562,38 +569,92 @@ button {
     position: fixed;
     inset: var(--header-h) 0 0 0;
     background: var(--black);
-    padding: 1.6rem clamp(1.1rem, 4vw, 2.4rem) 6rem;
+    padding: 0;
     transform: translateX(100%);
     transition: transform 0.35s var(--ease);
-    z-index: 75;
-    overflow-y: auto;
+    /* Above page content; below/at header stack so the bar stays tappable */
+    z-index: 79;
+    overflow: hidden;
   }
   .mobile-nav.is-open {
     transform: translateX(0);
   }
-  .mobile-nav a {
+  .mobile-nav__scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.25rem clamp(1.25rem, 5vw, 2.4rem) 1.25rem;
+    padding-bottom: 0.5rem;
+  }
+  .mobile-nav__links {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-nav__links > a {
     display: block;
     color: #fff;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.2rem;
-    padding: 0.9rem 0;
+    font-size: clamp(1.2rem, 4.2vw, 1.45rem);
+    line-height: 1.25;
+    padding: 1rem 0;
     border-bottom: 1px solid var(--line-dark);
   }
+  .mobile-nav__group {
+    border-bottom: 1px solid var(--line-dark);
+    padding-bottom: 0.35rem;
+  }
   .mobile-nav .mn-group {
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: var(--gold);
-    margin-top: 1.4rem;
+    margin-top: 1.35rem;
+    margin-bottom: 0.35rem;
   }
   .mobile-nav .mn-sub {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 0.6rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.65rem;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 0.85rem 0;
+    border-bottom: none;
+    line-height: 1.35;
   }
-  .mobile-nav .btn {
-    margin-top: 1.6rem;
+  .mobile-nav .mn-sub__meta {
+    font-size: 0.85rem;
+    color: var(--muted-light);
+    white-space: normal;
+  }
+  .mobile-nav__cta {
+    flex: 0 0 auto;
+    padding: 1.1rem clamp(1.25rem, 5vw, 2.4rem)
+      calc(1.35rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line-dark);
+    background: rgba(10, 10, 10, 0.98);
+  }
+  .mobile-nav__cta-btn {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-wrap: balance;
+    line-height: 1.3;
+    font-size: clamp(0.95rem, 3.6vw, 1.05rem);
+    padding: 1rem 1.15rem;
+    min-height: 52px;
+    border-radius: 16px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  /* Keep the bottom quick-actions bar from covering the open menu CTA */
+  body:has(.mobile-nav.is-open) .mobile-cta {
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
@@ -1749,7 +1810,7 @@ button {
 .mobile-cta {
   display: none;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1120px) {
   .mobile-cta {
     display: grid;
     grid-template-columns: 1fr 1fr 1.4fr;
@@ -1761,29 +1822,35 @@ button {
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--line-dark);
-    padding: 0.5rem;
-    gap: 0.4rem;
+    padding: 0.55rem;
+    gap: 0.45rem;
   }
   .mobile-cta a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.2rem;
-    padding: 0.5rem;
+    gap: 0.25rem;
+    padding: 0.55rem 0.4rem;
     border-radius: 12px;
     color: #fff;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    min-width: 0;
   }
   .mobile-cta a.primary {
     background: var(--red);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
   .mobile-cta a .ic {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
   body {
-    padding-bottom: 66px;
+    padding-bottom: 72px;
   }
 }
 
