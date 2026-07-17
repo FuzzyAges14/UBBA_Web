@@ -1464,6 +1464,78 @@ button {
   text-transform: uppercase;
 }
 
+/* ---------- Social feed pages ---------- */
+.social-card__mark {
+  font-family: var(--font-display);
+  font-size: 1.6rem !important;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+.social-feed {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.social-feed__post {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--ink);
+  transition: border-color 0.16s var(--ease), transform 0.16s var(--ease);
+}
+.social-feed__post:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+}
+.social-feed__thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  border: 1px solid var(--line-2);
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(196, 18, 48, 0.35), transparent 58%),
+    radial-gradient(circle at 78% 78%, rgba(201, 162, 39, 0.28), transparent 55%),
+    linear-gradient(155deg, #1a1a1c, #0a0a0a);
+}
+.social-feed__mark {
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.social-feed__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.social-feed__caption {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.social-feed__meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.social-feed__link {
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--red);
+}
+
 /* ---------- Locations ---------- */
 .loc-card {
   background: #fff;
@@ -1721,26 +1793,6 @@ button {
   margin-top: 1rem;
   max-width: 34ch;
   font-size: 0.94rem;
-}
-.footer__social {
-  display: flex;
-  gap: 0.6rem;
-  margin-top: 1.2rem;
-}
-.footer__social a {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--line-dark);
-  display: grid;
-  place-items: center;
-  font-size: 0.72rem;
-  transition: background 0.16s var(--ease), border-color 0.16s var(--ease);
-}
-.footer__social a:hover {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
 }
 .footer__contact {
   font-size: 0.94rem;

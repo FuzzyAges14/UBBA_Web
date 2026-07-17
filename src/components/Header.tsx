@@ -5,7 +5,7 @@ import { SITE, LOCATIONS, MEGA_MENU } from '../data/site'
 const TOP_NAV = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/#owner' },
-  { label: 'Just 4 Kids', to: '/just-4-kids' },
+  { label: 'Follow Us', to: '/follow-us' },
   { label: 'Reviews', to: '/#reviews' },
   { label: 'Locations', to: '/#locations' },
   { label: 'Contact', to: '/contact' },
@@ -47,8 +47,14 @@ export default function Header() {
     closeTimer.current = window.setTimeout(() => setMegaOpen(false), 140)
   }
 
-  const isActive = (to: string) =>
-    to === '/' ? location.pathname === '/' && !location.hash : location.pathname === to
+  const isActive = (to: string) => {
+    if (to === '/') return location.pathname === '/' && !location.hash
+    if (to === '/follow-us') return location.pathname.startsWith('/follow-us')
+    return location.pathname === to
+  }
+
+  const programsActive =
+    location.pathname.startsWith('/programs') || location.pathname === '/just-4-kids'
 
   return (
     <>
@@ -86,7 +92,7 @@ export default function Header() {
             >
               <button
                 type="button"
-                className={`nav__link ${location.pathname.startsWith('/programs') ? 'is-active' : ''}`}
+                className={`nav__link ${programsActive ? 'is-active' : ''}`}
                 aria-expanded={megaOpen}
                 aria-haspopup="true"
                 onClick={() => setMegaOpen((v) => !v)}
@@ -161,7 +167,7 @@ export default function Header() {
           <nav className="mobile-nav__links" aria-label="Mobile">
             <Link to="/">Home</Link>
             <Link to="/#owner">About</Link>
-            <Link to="/just-4-kids">Just 4 Kids</Link>
+            <Link to="/follow-us">Follow Us</Link>
             {MEGA_MENU.map((group) => (
               <div key={group.heading} className="mobile-nav__group">
                 <div className="mn-group">{group.heading}</div>
