@@ -572,7 +572,8 @@ button {
     padding: 0;
     transform: translateX(100%);
     transition: transform 0.35s var(--ease);
-    z-index: 75;
+    /* Above page content; below/at header stack so the bar stays tappable */
+    z-index: 79;
     overflow: hidden;
   }
   .mobile-nav.is-open {

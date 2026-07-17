@@ -51,101 +51,107 @@ export default function Header() {
     to === '/' ? location.pathname === '/' && !location.hash : location.pathname === to
 
   return (
-    <header className={`header ${solid ? 'header--solid' : ''}`}>
-      <div className="belt-bar header__accent" aria-hidden="true">
-        <span style={{ background: '#f4f4f4' }} />
-        <span style={{ background: 'var(--gold)' }} />
-        <span style={{ background: 'var(--red)' }} />
-        <span style={{ background: '#0a0a0a' }} />
-      </div>
-      <div className="container header__bar">
-        <Link to="/" className="brand" aria-label={`${SITE.name} home`}>
-          <img src="/logo.svg" alt="" className="brand__logo" />
-          <span className="brand__text">
-            <span className="brand__name">United Black Belt</span>
-            <span className="brand__sub">Academy</span>
-          </span>
-        </Link>
+    <>
+      <header className={`header ${solid ? 'header--solid' : ''}`}>
+        <div className="belt-bar header__accent" aria-hidden="true">
+          <span style={{ background: '#f4f4f4' }} />
+          <span style={{ background: 'var(--gold)' }} />
+          <span style={{ background: 'var(--red)' }} />
+          <span style={{ background: '#0a0a0a' }} />
+        </div>
+        <div className="container header__bar">
+          <Link to="/" className="brand" aria-label={`${SITE.name} home`}>
+            <img src="/logo.svg" alt="" className="brand__logo" />
+            <span className="brand__text">
+              <span className="brand__name">United Black Belt</span>
+              <span className="brand__sub">Academy</span>
+            </span>
+          </Link>
 
-        <nav className="nav" aria-label="Primary">
-          {TOP_NAV.slice(0, 2).map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`nav__link ${isActive(item.to) ? 'is-active' : ''}`}
+          <nav className="nav" aria-label="Primary">
+            {TOP_NAV.slice(0, 2).map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`nav__link ${isActive(item.to) ? 'is-active' : ''}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <div
+              className={`nav__item ${megaOpen ? 'is-open' : ''}`}
+              onMouseEnter={openMega}
+              onMouseLeave={scheduleClose}
             >
-              {item.label}
-            </Link>
-          ))}
+              <button
+                type="button"
+                className={`nav__link ${location.pathname.startsWith('/programs') ? 'is-active' : ''}`}
+                aria-expanded={megaOpen}
+                aria-haspopup="true"
+                onClick={() => setMegaOpen((v) => !v)}
+              >
+                Programs <span className="nav__caret">▼</span>
+              </button>
+              {megaOpen && (
+                <div className="mega" onMouseEnter={openMega} onMouseLeave={scheduleClose}>
+                  {MEGA_MENU.map((group) => (
+                    <div key={group.heading}>
+                      <div className="mega__heading">{group.heading}</div>
+                      {group.links.map((link) => (
+                        <Link key={link.label} to={link.to} className="mega__link">
+                          <span>{link.label}</span>
+                          {link.meta && <span className="mega__meta">{link.meta}</span>}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
-          <div
-            className={`nav__item ${megaOpen ? 'is-open' : ''}`}
-            onMouseEnter={openMega}
-            onMouseLeave={scheduleClose}
-          >
+            {TOP_NAV.slice(2).map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`nav__link ${isActive(item.to) ? 'is-active' : ''}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="header__right">
+            <span className="header__locations" aria-label={`${locationCount} locations`}>
+              <span aria-hidden="true">📍</span>
+              <span>
+                <strong>{locationCount}</strong> Locations
+              </span>
+            </span>
+            <Link to="/contact" className="btn btn--gold">
+              {SITE.primaryCta}
+            </Link>
             <button
               type="button"
-              className={`nav__link ${location.pathname.startsWith('/programs') ? 'is-active' : ''}`}
-              aria-expanded={megaOpen}
-              aria-haspopup="true"
-              onClick={() => setMegaOpen((v) => !v)}
+              className={`hamburger ${menuOpen ? 'is-open' : ''}`}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMenuOpen((v) => !v)}
             >
-              Programs <span className="nav__caret">▼</span>
+              <span />
+              <span />
+              <span />
             </button>
-            {megaOpen && (
-              <div className="mega" onMouseEnter={openMega} onMouseLeave={scheduleClose}>
-                {MEGA_MENU.map((group) => (
-                  <div key={group.heading}>
-                    <div className="mega__heading">{group.heading}</div>
-                    {group.links.map((link) => (
-                      <Link key={link.label} to={link.to} className="mega__link">
-                        <span>{link.label}</span>
-                        {link.meta && <span className="mega__meta">{link.meta}</span>}
-                      </Link>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
-
-          {TOP_NAV.slice(2).map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`nav__link ${isActive(item.to) ? 'is-active' : ''}`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="header__right">
-          <span className="header__locations" aria-label={`${locationCount} locations`}>
-            <span aria-hidden="true">📍</span>
-            <span>
-              <strong>{locationCount}</strong> Locations
-            </span>
-          </span>
-          <Link to="/contact" className="btn btn--gold">
-            {SITE.primaryCta}
-          </Link>
-          <button
-            type="button"
-            className={`hamburger ${menuOpen ? 'is-open' : ''}`}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            onClick={() => setMenuOpen((v) => !v)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile menu */}
+      {/*
+        Keep the mobile drawer outside <header>. The solid header uses
+        backdrop-filter, which makes position:fixed descendants size to the
+        header box (~78px) and the menu appears empty after scroll.
+      */}
       <div
         className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
         id="mobile-nav"
@@ -178,6 +184,6 @@ export default function Header() {
           </Link>
         </div>
       </div>
-    </header>
+    </>
   )
 }
