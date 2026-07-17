@@ -133,8 +133,9 @@ export default function Header() {
           <button
             type="button"
             className={`hamburger ${menuOpen ? 'is-open' : ''}`}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
             onClick={() => setMenuOpen((v) => !v)}
           >
             <span />
@@ -145,26 +146,37 @@ export default function Header() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}>
-        <Link to="/">Home</Link>
-        <Link to="/#owner">About</Link>
-        {MEGA_MENU.map((group) => (
-          <div key={group.heading}>
-            <div className="mn-group">{group.heading}</div>
-            {group.links.map((link) => (
-              <Link key={link.label} to={link.to} className="mn-sub">
-                {link.label}
-                {link.meta ? ` · ${link.meta}` : ''}
-              </Link>
+      <div
+        className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
+        id="mobile-nav"
+        aria-hidden={!menuOpen}
+      >
+        <div className="mobile-nav__scroll">
+          <nav className="mobile-nav__links" aria-label="Mobile">
+            <Link to="/">Home</Link>
+            <Link to="/#owner">About</Link>
+            <Link to="/just-4-kids">Just 4 Kids</Link>
+            {MEGA_MENU.map((group) => (
+              <div key={group.heading} className="mobile-nav__group">
+                <div className="mn-group">{group.heading}</div>
+                {group.links.map((link) => (
+                  <Link key={link.label} to={link.to} className="mn-sub">
+                    <span className="mn-sub__label">{link.label}</span>
+                    {link.meta ? <span className="mn-sub__meta">{link.meta}</span> : null}
+                  </Link>
+                ))}
+              </div>
             ))}
-          </div>
-        ))}
-        <Link to="/#reviews">Reviews</Link>
-        <Link to="/#locations">Locations</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/contact" className="btn btn--gold btn--block">
-          {SITE.primaryCta}
-        </Link>
+            <Link to="/#reviews">Reviews</Link>
+            <Link to="/#locations">Locations</Link>
+            <Link to="/contact">Contact</Link>
+          </nav>
+        </div>
+        <div className="mobile-nav__cta">
+          <Link to="/contact" className="btn btn--gold btn--block mobile-nav__cta-btn">
+            {SITE.primaryCta}
+          </Link>
+        </div>
       </div>
     </header>
   )
