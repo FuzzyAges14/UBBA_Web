@@ -58,7 +58,7 @@ export default function SocialFeed() {
               >
                 Visit {network.label} Profile <span className="btn__arrow">→</span>
               </a>
-              <Link to="/follow-us" className="btn btn--ghost">
+              <Link to="/follow-us" className="btn btn--outline">
                 Back to Follow Us
               </Link>
             </div>
