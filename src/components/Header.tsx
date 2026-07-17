@@ -62,12 +62,7 @@ export default function Header() {
   return (
     <>
       <header className={`header ${solid ? 'header--solid' : ''}`}>
-        <div className="belt-bar header__accent" aria-hidden="true">
-          <span style={{ background: '#f4f4f4' }} />
-          <span style={{ background: 'var(--blue)' }} />
-          <span style={{ background: 'var(--red)' }} />
-          <span style={{ background: '#0a0a0a' }} />
-        </div>
+        <div className="header__accent" aria-hidden="true" />
         <div className="container header__bar">
           <Link to="/" className="brand" aria-label={`${SITE.name} home`}>
             <img src="/logo.svg" alt="" className="brand__logo" />
