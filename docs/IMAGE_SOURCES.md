@@ -1,29 +1,34 @@
-# Image Source Document
+# Image & Video Source Document
 
-The current site ships with **art-directed placeholders** (the `Placeholder`
-component) instead of licensed photography. Every placeholder is visibly labeled
-`PLACEHOLDER` in the UI. Replace each with authentic Taekwondo photography before
-launch and record the real source details in the table below.
+The site currently uses **free / Creative Commons placeholder media** so the design
+can be evaluated with real Taekwondo imagery. Every photo shows a small
+`Placeholder photo` credit in the UI. Replace these with the academy's own,
+licensed photography/video before launch and update this file.
 
-Prefer authentic Taekwondo (not generic karate/MMA). Suggested royalty-free
-sources: [Unsplash](https://unsplash.com), [Pexels](https://pexels.com). For
-editorial/Olympic imagery verify licensing (Getty, Shutterstock, Adobe Stock) or
-use official academy photography where available.
+All media is referenced centrally from `IMAGES` in `src/data/site.ts`.
 
-| Location (page · section) | Suggested subject | Source URL | Photographer / Org | License | Attribution? | Temporary? | Alt text |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Home · Hero | Taekwondo flying kick / instructor with students | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Student performing a Taekwondo flying kick |
-| Home · Value story | Instructor coaching a young student | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Instructor coaching a child on the mat |
-| Home · Owner | Sanghyun Lee portrait (real photo required) | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Portrait of owner Sanghyun Lee |
-| Children's Programs · Story | Kids Taekwondo class in action | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Children practicing Taekwondo kicks |
-| Adult Programs · Story | Adult Taekwondo training session | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Adults training in a Taekwondo class |
-| Just 4 Kids · Birthday | Martial arts birthday party | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Kids at a martial arts birthday party |
-| Just 4 Kids · Summer Camp | Kids martial arts summer camp | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Children at a martial arts summer camp |
-| Just 4 Kids · Parents' Night | Kids games / pizza night | _TBD_ | _TBD_ | _TBD_ | _TBD_ | Yes | Kids enjoying a supervised night out |
+## Current media
 
-## Rules
+| Key | Page · section | Source URL | Source / Author | License | Attribution req.? | Temporary? |
+| --- | --- | --- | --- | --- | --- | --- |
+| `heroVideo` | Home · hero background | https://assets.mixkit.co/videos/49706/49706-1080.mp4 | Mixkit (item 49706) | Mixkit Free Stock Video License | No | Yes |
+| `heroPoster` | Home · hero poster (`/media/hero-poster.jpg`) | frame from Mixkit 49706 | Mixkit | Mixkit Free License | No | Yes |
+| `instructorPortrait` | Home · owner (`/media/instructor-portrait.jpg`) | frame from Mixkit 49705 | Mixkit | Mixkit Free License | No | Yes — replace with real owner photo |
+| `action` | Home/Children/Adult · story | https://upload.wikimedia.org/wikipedia/commons/0/09/Taekwondo_master_Lee_Jeong-hee_demonstrates_taekwondo_kicks_in_front_of_his_young_Indian_trainees.jpg | Wikimedia Commons | CC BY-SA | Yes | Yes |
+| `kidsKicks` | Tiny Tigers, Summer Camp | https://live.staticflickr.com/5059/5516890660_22d1220112_b.jpg | Flickr | CC BY | Yes | Yes |
+| `kidsGroup` | Junior Tigers, Family, feature | https://live.staticflickr.com/5172/5516911808_f34bcd539f_b.jpg | Flickr | CC BY | Yes | Yes |
+| `teenSpar` | Teen, Olympic Sparring | https://live.staticflickr.com/2871/8904949904_987d764022_b.jpg | Flickr | CC BY | Yes | Yes |
+| `beltTest` | Self Defense, Weapons, events | https://live.staticflickr.com/7515/27837815175_f5d455124f_b.jpg | Flickr | CC BY | Yes | Yes |
 
-- No low-resolution or watermarked images.
-- Do not use AI-generated people without disclosure.
-- Do not misrepresent Taekwondo with unrelated martial arts imagery.
-- Use a real owner portrait — do not substitute an unrelated instructor.
+## Notes & rules
+
+- **Attribution:** CC BY / CC BY-SA images require visible credit + a link to the
+  source and license if kept. Prefer replacing them with owned photography so no
+  attribution or share-alike obligations apply.
+- **Owner portrait:** `instructorPortrait` is a generic stand-in — replace with a
+  real photo of Sanghyun Lee (do not imply the stand-in is the owner).
+- No low-resolution or watermarked images; no AI-generated people without
+  disclosure; do not misrepresent Taekwondo with unrelated martial arts imagery.
+- Hero video hotlinks Mixkit's CDN; the local poster (`/media/hero-poster.jpg`)
+  is the fallback if the CDN is unavailable. For production, self-host the final
+  video.

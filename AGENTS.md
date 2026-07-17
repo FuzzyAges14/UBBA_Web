@@ -38,3 +38,14 @@ one service: the Vite dev server. Standard commands live in `README.md` and
 - **Launch-blocking placeholders** are tracked in `docs/` (image sources, owner
   approval, placeholder checklist). Placeholders are intentionally labeled in the
   UI — do not treat placeholder stats/testimonials/photos as real content.
+- **Media:** all photos/video are referenced from `IMAGES` in `src/data/site.ts`.
+  Photos hotlink free/CC assets (Flickr/Wikimedia); the hero uses a Mixkit CDN
+  video with a committed local poster fallback at `public/media/`. These are
+  placeholders — see `docs/IMAGE_SOURCES.md` for licenses/attribution.
+- **Programs are data-driven:** each program has a `slug` and a `PROGRAM_DETAILS`
+  entry rendered by `src/pages/ProgramDetail.tsx` at `/programs/:slug`. The static
+  routes `/programs/children` and `/programs/adult` are category overviews and take
+  precedence over the dynamic slug route. Add a program by adding to
+  `PROGRAM_DETAILS` + the relevant program array — no new page/route needed.
+- **Fonts:** display headings use `Teko` (impact) / `Anton` (hero title); body is
+  `Inter` (loaded in `index.html`).

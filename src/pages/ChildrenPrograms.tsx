@@ -1,16 +1,10 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Placeholder from '../components/Placeholder'
+import Photo from '../components/Photo'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
-import { CHILDREN_PROGRAMS, FAQS, SITE } from '../data/site'
-
-const GLYPH: Record<string, string> = {
-  'tiny-tigers': '🐯',
-  'junior-tigers': '🥋',
-  'teen-martial-arts': '⚡',
-}
+import { CHILDREN_PROGRAMS, FAQS, IMAGES, SITE } from '../data/site'
 
 const LEARN = [
   'Focus & listening skills that carry into the classroom',
@@ -35,17 +29,18 @@ export default function ChildrenPrograms() {
           <div className="grid grid--3">
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
-                <div className="pcard" style={{ minHeight: 400 }}>
-                  <div className="pcard__art" />
+                <div className="pcard" style={{ minHeight: 420 }}>
+                  {p.image ? (
+                    <img className="pcard__img" src={p.image} alt={p.title} loading="lazy" />
+                  ) : (
+                    <div className="pcard__art" />
+                  )}
                   <div className="pcard__scrim" />
-                  <span className="pcard__glyph" aria-hidden="true">
-                    {GLYPH[p.id]}
-                  </span>
                   <div className="pcard__body">
                     {p.ages && <span className="pcard__age">{p.ages}</span>}
                     <h3 className="pcard__title">{p.title}</h3>
                     <p className="pcard__text">{p.blurb}</p>
-                    <Link to="/contact" className="pcard__cta">
+                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>
                     </Link>
                   </div>
@@ -78,7 +73,13 @@ export default function ChildrenPrograms() {
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <Placeholder label="Kids Taekwondo class in action" icon="🥋" variant="tall" />
+            <Photo
+              src={IMAGES.action}
+              alt="Kids Taekwondo class with an instructor"
+              variant="tall"
+              zoom
+              credit="Placeholder photo"
+            />
           </Reveal>
         </div>
       </section>

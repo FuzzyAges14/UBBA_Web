@@ -1,19 +1,10 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Placeholder from '../components/Placeholder'
+import Photo from '../components/Photo'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
-import { ADULT_PROGRAMS, FAQS, SITE } from '../data/site'
-
-const GLYPH: Record<string, string> = {
-  'adult-program': '💪',
-  'family-programs': '👨‍👩‍👧',
-  'olympic-sparring': '🥇',
-  'swat-team': '🎯',
-  'self-defense': '🛡️',
-  'weapons-class': '🥋',
-}
+import { ADULT_PROGRAMS, FAQS, IMAGES, SITE } from '../data/site'
 
 export default function AdultPrograms() {
   return (
@@ -29,16 +20,17 @@ export default function AdultPrograms() {
           <div className="grid grid--3">
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
-                <div className="pcard" style={{ minHeight: 360 }}>
-                  <div className="pcard__art" />
+                <div className="pcard" style={{ minHeight: 380 }}>
+                  {p.image ? (
+                    <img className="pcard__img" src={p.image} alt={p.title} loading="lazy" />
+                  ) : (
+                    <div className="pcard__art" />
+                  )}
                   <div className="pcard__scrim" />
-                  <span className="pcard__glyph" aria-hidden="true">
-                    {GLYPH[p.id]}
-                  </span>
                   <div className="pcard__body">
                     <h3 className="pcard__title">{p.title}</h3>
                     <p className="pcard__text">{p.blurb}</p>
-                    <Link to="/contact" className="pcard__cta">
+                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>
                     </Link>
                   </div>
@@ -59,7 +51,13 @@ export default function AdultPrograms() {
         <div className="dojang" aria-hidden="true" />
         <div className="container split" style={{ position: 'relative' }}>
           <Reveal delay={120}>
-            <Placeholder label="Adult Taekwondo training session" icon="🥋" variant="tall" />
+            <Photo
+              src={IMAGES.action}
+              alt="Adult Taekwondo training session"
+              variant="tall"
+              zoom
+              credit="Placeholder photo"
+            />
           </Reveal>
           <Reveal>
             <span className="eyebrow">Train Your Way</span>

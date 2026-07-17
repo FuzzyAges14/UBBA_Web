@@ -4,8 +4,11 @@ All placeholder content is intentionally labeled in the UI (`PLACEHOLDER` tags o
 images, "pending confirmation" notes on stats/programs). Track replacements here.
 
 ## Must replace before launch
-- [ ] All photography (see `IMAGE_SOURCES.md`) — currently art-directed placeholders
-- [ ] Owner portrait with a real photo of Sanghyun Lee
+- [ ] All photography & the hero video (see `IMAGE_SOURCES.md`) — currently free/CC
+      placeholder media hotlinked from Mixkit/Flickr/Wikimedia
+- [ ] Provide attribution for any CC BY / CC BY-SA images kept, or swap for owned media
+- [ ] Self-host the final hero video instead of hotlinking the Mixkit CDN
+- [ ] Owner portrait with a real photo of Sanghyun Lee (currently a stand-in)
 - [ ] Testimonials with real, owner-approved reviews (no fabricated names/quotes)
 - [ ] Stats: "Students Trained", "Years Serving", "Average Parent Rating"
 - [ ] Midland Park phone & hours
