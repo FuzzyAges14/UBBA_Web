@@ -1,25 +1,45 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import App from './App'
 
-describe('App', () => {
-  it('renders the UBBA hero title', () => {
-    render(<App />)
-    expect(screen.getByRole('heading', { name: /ubba/i })).toBeInTheDocument()
+function renderAt(path: string) {
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <App />
+    </MemoryRouter>,
+  )
+}
+
+describe('App routing', () => {
+  it('renders the home hero headline', () => {
+    renderAt('/')
+    expect(
+      screen.getByRole('heading', {
+        name: /confidence building martial arts/i,
+      }),
+    ).toBeInTheDocument()
   })
 
-  it('unwraps the present when the gift is clicked', async () => {
-    const user = userEvent.setup()
-    render(<App />)
-
-    expect(screen.getByText(/tap the gift to unwrap it/i)).toBeInTheDocument()
-
-    await user.click(screen.getByRole('button', { name: /open the present/i }))
-
-    expect(screen.getByText(/surprise/i)).toBeInTheDocument()
+  it('renders the Children\'s Programs page', () => {
+    renderAt('/programs/children')
     expect(
-      screen.getByRole('button', { name: /close the present/i }),
+      screen.getByRole('heading', { name: /children's programs/i, level: 1 }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText(/tiny tigers/i).length).toBeGreaterThan(0)
+  })
+
+  it('renders the Just 4 Kids page headline', () => {
+    renderAt('/just-4-kids')
+    expect(
+      screen.getByRole('heading', { name: /the fun doesn't stop at the mat/i }),
+    ).toBeInTheDocument()
+  })
+
+  it('shows a 404 for unknown routes', () => {
+    renderAt('/does-not-exist')
+    expect(
+      screen.getByRole('heading', { name: /page not found/i }),
     ).toBeInTheDocument()
   })
 })

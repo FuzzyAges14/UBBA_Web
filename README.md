@@ -1,8 +1,10 @@
 # UBBA_Web
 
-A website meant for UBBA (*A present*) 🎁
+Marketing website for **United Black Belt Academy** — confidence-building martial
+arts classes for kids, teens, and adults in Allendale &amp; Midland Park, NJ.
 
-Built with [Vite](https://vitejs.dev/), [React](https://react.dev/), and TypeScript.
+Built with [Vite](https://vitejs.dev/), [React](https://react.dev/),
+[React Router](https://reactrouter.com/), and TypeScript.
 
 ## Prerequisites
 
@@ -26,3 +28,27 @@ pnpm dev          # start the dev server at http://localhost:5173
 | `pnpm lint` | Run ESLint over the project |
 | `pnpm test` | Run the Vitest test suite once |
 | `pnpm test:watch` | Run Vitest in watch mode |
+
+## Project structure
+
+```
+src/
+  data/site.ts        # All editable content: programs, locations, testimonials, nav
+  components/          # Reusable UI (Header, Footer, LeadForm, LocationCard, ...)
+  pages/              # Routed pages (Home, Programs, Just 4 Kids, Contact, ...)
+```
+
+### Editing content
+
+Most copy — program names/descriptions, location details and hours, testimonials,
+and navigation — lives in [`src/data/site.ts`](src/data/site.ts). Update text there
+without touching layout. To show the Glen Rock location, set `SITE.showGlenRock` to
+`true`.
+
+### Notes
+
+- The site is a single-page app (client-side routing). The lead/contact forms are
+  currently front-end only (they validate and show a confirmation); wire them to a
+  form service or CRM before launch.
+- Photos are styled placeholders — swap the `Placeholder` components for real
+  `<img>` assets when available.

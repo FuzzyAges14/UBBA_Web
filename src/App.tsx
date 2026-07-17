@@ -1,45 +1,27 @@
-import { useState } from 'react'
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import ChildrenPrograms from './pages/ChildrenPrograms'
+import AdultPrograms from './pages/AdultPrograms'
+import Just4Kids from './pages/Just4Kids'
+import Contact from './pages/Contact'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
+import NotFound from './pages/NotFound'
 
-function App() {
-  const [opened, setOpened] = useState(false)
-
+export default function App() {
   return (
-    <main className="page">
-      <div className="glow" aria-hidden="true" />
-
-      <section className="hero">
-        <p className="eyebrow">A little something for</p>
-        <h1 className="title">UBBA</h1>
-        <p className="subtitle">
-          A present, wrapped in code and sent with care.
-        </p>
-
-        <div className="gift-stage">
-          <button
-            className={`gift ${opened ? 'gift--open' : ''}`}
-            onClick={() => setOpened((v) => !v)}
-            aria-pressed={opened}
-            aria-label={opened ? 'Close the present' : 'Open the present'}
-          >
-            <span className="gift__lid" aria-hidden="true" />
-            <span className="gift__box" aria-hidden="true" />
-            <span className="gift__ribbon" aria-hidden="true" />
-          </button>
-
-          <p className="gift-caption" role="status">
-            {opened
-              ? '🎉 Surprise! Thanks for being you.'
-              : 'Tap the gift to unwrap it.'}
-          </p>
-        </div>
-      </section>
-
-      <footer className="footer">
-        <span>Made with React + Vite</span>
-      </footer>
-    </main>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/programs/children" element={<ChildrenPrograms />} />
+        <Route path="/programs/adult" element={<AdultPrograms />} />
+        <Route path="/just-4-kids" element={<Just4Kids />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }
-
-export default App
