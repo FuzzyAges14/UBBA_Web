@@ -62,6 +62,14 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
 
   return (
     <form className="leadform" onSubmit={handleSubmit} noValidate>
+      <div className="leadform__head">
+        <span className="eyebrow">Free Class Request</span>
+      </div>
+      <div className="leadform__steps" aria-hidden="true">
+        <i className="on" />
+        <i className="on" />
+        <i className="on" />
+      </div>
       <div className="form-grid">
         <div className="field field--full">
           <label htmlFor="name">Full Name</label>
@@ -141,8 +149,12 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
 
         <div className="field field--full">
           <button type="submit" className="btn btn--lg btn--block">
-            {SITE.primaryCta}
+            {SITE.primaryCta} <span className="btn__arrow">→</span>
           </button>
+          <p className="form-reassure">
+            No experience required · Beginners welcome · No obligation — we'll
+            contact you to schedule your first class.
+          </p>
         </div>
       </div>
     </form>

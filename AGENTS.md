@@ -27,5 +27,14 @@ one service: the Vite dev server. Standard commands live in `README.md` and
   placeholder.
 - **Forms are front-end only** (`src/components/LeadForm.tsx`): they validate and
   show a success state but do not POST anywhere yet. `jsdom` has no
-  `IntersectionObserver`, so the `Reveal` animation component falls back to visible
-  immediately in tests — that is expected.
+  `IntersectionObserver`, so the `Reveal`/`StatCounter` components fall back to
+  their final state immediately in tests — that is expected. `jsdom` also lacks
+  `window.scrollTo`/`matchMedia`; those are guarded, do not "fix" them.
+- **Design system:** premium brand palette + Sora/Inter typography live in
+  `src/index.css`; motion uses `framer-motion` (hero) plus the CSS `Reveal`
+  wrapper. Signature motifs are components: `Taegeuk`, `Marquee`, plus the
+  `.dojang` grid and `.belt-bar` CSS utilities. Per-route `<title>`/meta is set by
+  `src/components/Seo.tsx` from `SEO` in `src/data/site.ts`.
+- **Launch-blocking placeholders** are tracked in `docs/` (image sources, owner
+  approval, placeholder checklist). Placeholders are intentionally labeled in the
+  UI — do not treat placeholder stats/testimonials/photos as real content.

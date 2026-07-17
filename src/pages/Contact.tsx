@@ -1,17 +1,20 @@
-import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import LeadForm from '../components/LeadForm'
+import PageHero from '../components/PageHero'
 import { LOCATIONS, GLEN_ROCK, SITE } from '../data/site'
 import type { Location } from '../data/site'
 
 function mapSrc(query: string) {
   return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`
 }
+function directionsHref(query: string) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`
+}
 
 function LocationBlock({ loc }: { loc: Location }) {
   return (
     <div className="split" style={{ alignItems: 'stretch' }}>
-      <div className="loc-card" style={{ boxShadow: 'none' }}>
+      <div className="loc-card">
         <div className="map-embed">
           <iframe
             title={`Map of ${loc.name}`}
@@ -22,20 +25,27 @@ function LocationBlock({ loc }: { loc: Location }) {
         </div>
       </div>
       <div>
-        <h3 className="section-title" style={{ fontSize: '1.8rem' }}>
+        <h2 className="section-title" style={{ fontSize: '1.9rem', marginTop: 0 }}>
           {loc.name}
-        </h3>
+        </h2>
         <p className="section-lead" style={{ marginTop: '0.6rem' }}>
           {loc.address}
           <br />
           {loc.city}
         </p>
-        {loc.phone && (
+        {loc.phone ? (
           <p style={{ marginTop: '0.5rem' }}>
             <strong>Phone: </strong>
-            <a href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`} style={{ color: 'var(--red-dark)', fontWeight: 600 }}>
+            <a
+              href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
+              style={{ color: 'var(--red-dark)', fontWeight: 600 }}
+            >
               {loc.phone}
             </a>
+          </p>
+        ) : (
+          <p className="ph-note" style={{ marginTop: '0.5rem' }}>
+            Phone &amp; hours — pending owner confirmation.
           </p>
         )}
         {loc.hours && (
@@ -50,6 +60,16 @@ function LocationBlock({ loc }: { loc: Location }) {
             </tbody>
           </table>
         )}
+        <div className="flex-actions mt">
+          <a href={directionsHref(loc.mapQuery)} target="_blank" rel="noreferrer" className="btn btn--outline">
+            Get Directions
+          </a>
+          {loc.phone && (
+            <a href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`} className="btn btn--dark">
+              Call {loc.name}
+            </a>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -60,22 +80,15 @@ export default function Contact() {
 
   return (
     <>
-      <section className="page-hero">
-        <div className="container">
-          <div className="breadcrumbs">
-            <Link to="/">Home</Link> / Contact
-          </div>
-          <h1>Try A Class For Free!</h1>
-          <p>
-            Ready to get started or have a question? Reach out and our team will
-            help you find the perfect program at the location nearest you.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        center
+        crumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
+        title="Try A Class For Free!"
+        intro="Ready to get started or have a question? Reach out and our team will help you find the perfect program at the location nearest you."
+      />
 
-      {/* Locations */}
       <section className="section">
-        <div className="container stack-gap" style={{ gap: '3rem' }}>
+        <div className="container stack-gap" style={{ gap: '3.5rem' }}>
           {locations.map((loc) => (
             <Reveal key={loc.id}>
               <LocationBlock loc={loc} />
@@ -84,15 +97,15 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact form */}
       <section className="section section--dark">
-        <div className="container split">
+        <div className="dojang" aria-hidden="true" />
+        <div className="container split" style={{ position: 'relative' }}>
           <Reveal>
             <span className="eyebrow">Send A Message</span>
-            <h2 className="section-title">Let's Get You On The Mat</h2>
+            <h2 className="section-title">Let's get you on the mat</h2>
             <p className="section-lead">
               Fill out the form and we'll be in touch to schedule your free class.
-              Prefer to talk? Give our Allendale school a call at{' '}
+              Prefer to talk? Call our Allendale school at{' '}
               <a href="tel:2019622922" style={{ color: 'var(--gold)', fontWeight: 600 }}>
                 201-962-2922
               </a>

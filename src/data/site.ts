@@ -250,3 +250,170 @@ export const PROGRAM_OPTIONS = [
   'Family Programs',
   'Not sure yet',
 ]
+
+/* ---------------------------------------------------------------------------
+ * Trust signals & stats.
+ * NOTE: Every number below is a PLACEHOLDER awaiting owner confirmation.
+ * Do not present as fact until Sanghyun Lee verifies. See docs/OWNER_APPROVAL_CHECKLIST.md
+ * ------------------------------------------------------------------------- */
+export type Stat = { value: number; suffix?: string; label: string; placeholder?: boolean }
+
+export const STATS: Stat[] = [
+  { value: 2, label: 'NJ Locations' },
+  { value: 500, suffix: '+', label: 'Students Trained', placeholder: true },
+  { value: 15, suffix: '+', label: 'Years Serving Bergen County', placeholder: true },
+  { value: 5, suffix: '★', label: 'Average Parent Rating', placeholder: true },
+]
+
+export const OWNER = {
+  name: 'Sanghyun Lee',
+  title: 'Head Instructor & Owner',
+  // Placeholder biography — confirm details with the owner before launch.
+  intro:
+    'Martial arts changed the course of my life, and I have spent my career sharing that same growth with our community.',
+  story: [
+    'I opened United Black Belt Academy to build more than a training floor — I wanted a place where kids find their voice, teens discover their strength, and adults rediscover what their bodies can do.',
+    'Every class is designed to be challenging, welcoming, and genuinely fun. Progress is personal here. We celebrate the quiet wins as loudly as the black belts.',
+    'When you step onto our mat, you are not a membership number. You are part of a family that shows up for one another, on the good days and the hard ones.',
+  ],
+  quote: 'Confidence is a skill. We teach it one class at a time.',
+  // Do not fabricate ranks/awards — leave as placeholders for owner confirmation.
+  credentials: [
+    'Rank & certifications — pending owner confirmation',
+    'Years of experience — pending owner confirmation',
+  ],
+}
+
+export type BeltStep = {
+  belt: string
+  color: string
+  title: string
+  text: string
+}
+
+export const GETTING_STARTED: BeltStep[] = [
+  {
+    belt: 'White Belt',
+    color: '#f4f4f4',
+    title: 'Redeem A Web Offer',
+    text: 'Claim one of our exclusive online offers to lock in your free introductory class — no obligation.',
+  },
+  {
+    belt: 'Gold Belt',
+    color: '#C9A227',
+    title: 'Schedule Your First Lesson',
+    text: 'We reach out to book a semi-private first lesson at a time that fits your family.',
+  },
+  {
+    belt: 'Red Belt',
+    color: '#C41230',
+    title: 'Begin The Journey',
+    text: 'Step onto the mat and start building confidence, discipline, and lifelong skills.',
+  },
+  {
+    belt: 'Black Belt',
+    color: '#0A0A0A',
+    title: 'Grow For Life',
+    text: 'Progress through the ranks with a team that believes in you every step of the way.',
+  },
+]
+
+export type Faq = { q: string; a: string }
+
+export const FAQS: Faq[] = [
+  {
+    q: 'Do we need any experience to start?',
+    a: 'Not at all. Every program is built for complete beginners, and our instructors meet each student exactly where they are.',
+  },
+  {
+    q: 'What ages do you teach?',
+    a: 'We welcome students from age 3 through adult, with age-specific programs so everyone trains at the right level.',
+  },
+  {
+    q: 'What should we wear to the first class?',
+    a: 'Comfortable athletic clothing is perfect for your free class. We will take care of the uniform details once you enroll.',
+  },
+  {
+    q: 'How does the free class work?',
+    a: 'Reach out through any form on this site and our team will contact you to schedule your complimentary introductory class.',
+  },
+]
+
+// Social links are placeholders — replace with real profiles before launch.
+export type SocialLink = { label: string; href: string; placeholder?: boolean }
+export const SOCIAL: SocialLink[] = [
+  { label: 'Instagram', href: '#', placeholder: true },
+  { label: 'Facebook', href: '#', placeholder: true },
+  { label: 'YouTube', href: '#', placeholder: true },
+]
+
+export type MegaGroup = { heading: string; links: { label: string; to: string; meta?: string }[] }
+
+export const MEGA_MENU: MegaGroup[] = [
+  {
+    heading: "Children's Programs",
+    links: [
+      { label: 'Tiny Tigers', to: '/programs/children', meta: 'Ages 3-5' },
+      { label: 'Junior Tigers', to: '/programs/children', meta: 'Ages 6-10' },
+      { label: 'Teen Martial Arts', to: '/programs/children', meta: 'Ages 11-17' },
+    ],
+  },
+  {
+    heading: 'Adult & Family',
+    links: [
+      { label: 'Adult Program', to: '/programs/adult', meta: 'Ages 18+' },
+      { label: 'Family Programs', to: '/programs/adult' },
+      { label: 'Olympic Sparring', to: '/programs/adult' },
+      { label: 'SWAT Team', to: '/programs/adult' },
+      { label: 'Self Defense', to: '/programs/adult' },
+      { label: 'Weapons Class', to: '/programs/adult' },
+    ],
+  },
+  {
+    heading: 'Just 4 Kids',
+    links: [
+      { label: 'Birthday Parties', to: '/just-4-kids' },
+      { label: 'Summer / Day Camp', to: '/just-4-kids' },
+      { label: "Parents' Night Out", to: '/just-4-kids' },
+    ],
+  },
+]
+
+export type SeoMeta = { title: string; description: string }
+
+export const SEO: Record<string, SeoMeta> = {
+  '/': {
+    title:
+      'United Black Belt Academy | Taekwondo & Martial Arts in Allendale & Midland Park, NJ',
+    description:
+      'Confidence-building Taekwondo classes for kids, teens, and adults in Allendale & Midland Park, NJ. Try a class for free at United Black Belt Academy.',
+  },
+  '/programs/children': {
+    title: "Children's Martial Arts Programs | United Black Belt Academy",
+    description:
+      'Kids Taekwondo in Bergen County — Tiny Tigers, Junior Tigers, and Teen Martial Arts build confidence, focus, and respect. Try a class for free.',
+  },
+  '/programs/adult': {
+    title: 'Adult & Family Martial Arts | United Black Belt Academy',
+    description:
+      'Adult Taekwondo, family programs, Olympic sparring, and self-defense in Allendale & Midland Park, NJ. Fitness, confidence, and community.',
+  },
+  '/just-4-kids': {
+    title: 'Just 4 Kids — Parties, Camp & Nights Out | United Black Belt Academy',
+    description:
+      'Martial arts birthday parties, summer camp, and Parents’ Night Out in Bergen County, NJ. The fun doesn’t stop at the mat.',
+  },
+  '/contact': {
+    title: 'Contact & Locations | United Black Belt Academy',
+    description:
+      'Visit United Black Belt Academy in Allendale or Midland Park, NJ. Hours, directions, phone, and a free-class request form.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | United Black Belt Academy',
+    description: 'Privacy policy for United Black Belt Academy.',
+  },
+  '/terms': {
+    title: 'Terms and Conditions | United Black Belt Academy',
+    description: 'Terms and conditions for United Black Belt Academy.',
+  },
+}

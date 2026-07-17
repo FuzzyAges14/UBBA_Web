@@ -4,7 +4,9 @@ Marketing website for **United Black Belt Academy** — confidence-building mart
 arts classes for kids, teens, and adults in Allendale &amp; Midland Park, NJ.
 
 Built with [Vite](https://vitejs.dev/), [React](https://react.dev/),
-[React Router](https://reactrouter.com/), and TypeScript.
+[React Router](https://reactrouter.com/), [Framer Motion](https://www.framer.com/motion/),
+and TypeScript. Premium, cinematic Taekwondo brand design with a custom design
+system (Sora/Inter type, black/red/gold palette, Taegeuk + dojang-grid motifs).
 
 ## Prerequisites
 
@@ -45,10 +47,20 @@ and navigation — lives in [`src/data/site.ts`](src/data/site.ts). Update text 
 without touching layout. To show the Glen Rock location, set `SITE.showGlenRock` to
 `true`.
 
+### Deliverable docs
+
+Launch-readiness documents live in [`docs/`](docs/):
+
+- [`IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) — photo replacement + licensing log
+- [`OWNER_APPROVAL_CHECKLIST.md`](docs/OWNER_APPROVAL_CHECKLIST.md) — facts to confirm
+- [`PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md) — placeholders to replace
+
 ### Notes
 
 - The site is a single-page app (client-side routing). The lead/contact forms are
   currently front-end only (they validate and show a confirmation); wire them to a
   form service or CRM before launch.
-- Photos are styled placeholders — swap the `Placeholder` components for real
-  `<img>` assets when available.
+- Photos are art-directed placeholders (labeled `PLACEHOLDER` in the UI) — swap the
+  `Placeholder` components for real `<img>` assets when available.
+- Stats and testimonials are placeholders pending owner confirmation; do not
+  present them as verified facts.

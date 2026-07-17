@@ -2,37 +2,51 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
-import { CHILDREN_PROGRAMS, SITE } from '../data/site'
+import PageHero from '../components/PageHero'
+import Faq from '../components/Faq'
+import { CHILDREN_PROGRAMS, FAQS, SITE } from '../data/site'
+
+const GLYPH: Record<string, string> = {
+  'tiny-tigers': '🐯',
+  'junior-tigers': '🥋',
+  'teen-martial-arts': '⚡',
+}
+
+const LEARN = [
+  'Focus & listening skills that carry into the classroom',
+  'Confidence to try, fail, and try again',
+  'Respect for instructors, teammates, and family',
+  'Coordination, balance, and healthy movement',
+  'Goal setting through the belt curriculum',
+  'Practical, age-appropriate self-defense',
+]
 
 export default function ChildrenPrograms() {
   return (
     <>
-      <section className="page-hero">
-        <div className="container">
-          <div className="breadcrumbs">
-            <Link to="/">Home</Link> / Children's Programs
-          </div>
-          <h1>Children's Programs</h1>
-          <p>
-            Confidence, focus, and respect — built one class at a time. Our
-            age-specific children's classes help kids thrive on and off the mat.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Home', to: '/' }, { label: "Children's Programs" }]}
+        title="Children's Programs"
+        intro="Confidence, focus, and respect — built one class at a time. Our age-specific children's classes help kids thrive on and off the mat."
+      />
 
       <section className="section">
         <div className="container">
           <div className="grid grid--3">
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
-                <div className="card">
-                  <Placeholder className="card__top" label={p.title} icon="🧒" />
-                  <div className="card__body">
-                    {p.ages && <span className="card__ages">{p.ages}</span>}
-                    <h3 className="card__title">{p.title}</h3>
-                    <p className="card__text">{p.blurb}</p>
-                    <Link to="/contact" className="card__link">
-                      Learn How It Works →
+                <div className="pcard" style={{ minHeight: 400 }}>
+                  <div className="pcard__art" />
+                  <div className="pcard__scrim" />
+                  <span className="pcard__glyph" aria-hidden="true">
+                    {GLYPH[p.id]}
+                  </span>
+                  <div className="pcard__body">
+                    {p.ages && <span className="pcard__age">{p.ages}</span>}
+                    <h3 className="pcard__title">{p.title}</h3>
+                    <p className="pcard__text">{p.blurb}</p>
+                    <Link to="/contact" className="pcard__cta">
+                      Learn How It Works <span className="btn__arrow">→</span>
                     </Link>
                   </div>
                 </div>
@@ -43,28 +57,48 @@ export default function ChildrenPrograms() {
       </section>
 
       <section className="section section--dark">
-        <div className="container split">
+        <div className="dojang" aria-hidden="true" />
+        <div className="container split" style={{ position: 'relative' }}>
           <Reveal>
-            <span className="eyebrow">The UBBA Difference</span>
-            <h2 className="section-title">More Than Kicks &amp; Punches</h2>
+            <span className="eyebrow">What Students Learn</span>
+            <h2 className="section-title">More than kicks &amp; punches</h2>
             <p className="section-lead">
-              Every children's class blends high-energy fun with real life skills.
-              Kids learn to set goals, listen closely, and treat others with
-              respect — habits that make them better students, friends, and family
-              members.
+              Every children's class blends high-energy fun with real life skills
+              that help kids become better students, friends, and family members.
             </p>
+            <ul className="checklist mt">
+              {LEARN.map((l) => (
+                <li key={l} style={{ color: 'var(--muted-light)' }}>
+                  {l}
+                </li>
+              ))}
+            </ul>
             <Link to="/contact" className="btn btn--gold mt">
-              {SITE.primaryCta}
+              {SITE.primaryCta} <span className="btn__arrow">→</span>
             </Link>
           </Reveal>
           <Reveal delay={120}>
-            <Placeholder label="Kids martial arts class" icon="🥋" variant="tall" />
+            <Placeholder label="Kids Taekwondo class in action" icon="🥋" variant="tall" />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--offwhite">
+        <div className="container" style={{ maxWidth: '820px' }}>
+          <Reveal>
+            <span className="eyebrow">Parent FAQs</span>
+            <h2 className="section-title">What parents ask us most</h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="mt">
+              <Faq items={FAQS} />
+            </div>
           </Reveal>
         </div>
       </section>
 
       <CtaBanner
-        title="Give Your Child A Head Start"
+        title="Give your child a head start"
         text="Book a free introductory class and watch your child's confidence grow."
       />
     </>
