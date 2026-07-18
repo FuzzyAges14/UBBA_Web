@@ -49,6 +49,27 @@ function resolveTransport(): MailTransport {
   return { kind: 'log' }
 }
 
+function parsePositiveInt(value: string | undefined, fallback: number): number {
+  const n = Number(value)
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : fallback
+}
+
+function parseCorsOrigins(): string[] {
+  return (process.env.CORS_ORIGINS || '')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean)
+}
+
+function parseTrustProxy(): boolean | number {
+  const raw = process.env.TRUST_PROXY?.trim().toLowerCase()
+  if (!raw) return false
+  if (raw === 'true' || raw === '1') return 1
+  if (raw === 'false' || raw === '0') return false
+  const n = Number(raw)
+  return Number.isFinite(n) && n >= 0 ? n : false
+}
+
 const defaultNotifyEmails = parseDefaultNotifyEmails()
 
 /** Resolve notify inboxes for a given form intent (type override → default). */
@@ -65,8 +86,11 @@ export function notifyEmailsForIntent(intent: InquiryIntent | undefined): string
   return defaultNotifyEmails
 }
 
+export const isProduction = process.env.NODE_ENV === 'production'
+
 export const serverConfig = {
   port: Number(process.env.API_PORT || 3001),
+  isProduction,
   notifyEmails: defaultNotifyEmails,
   publicEmail: process.env.PUBLIC_EMAIL?.trim() || CONTACT.publicEmail,
   fromName: process.env.MAIL_FROM_NAME?.trim() || CONTACT.fromName,
@@ -82,9 +106,59 @@ export const serverConfig = {
   transport: resolveTransport(),
   socialProfiles: SOCIAL_PROFILES,
   inquiryTypes: INQUIRY_TYPES,
-  /** Comma-separated origins allowed to call the API (empty = allow any in dev). */
-  corsOrigins: (process.env.CORS_ORIGINS || '')
-    .split(',')
-    .map((o) => o.trim())
-    .filter(Boolean),
+  /**
+   * Explicit origins allowed to call the API from a browser.
+   * Empty in development = allow any origin (with a startup warning).
+   * Empty in production = reject browser Origins (must set CORS_ORIGINS).
+   */
+  corsOrigins: parseCorsOrigins(),
+  /**
+   * Set TRUST_PROXY=1 (or true) when the API sits behind a reverse proxy
+   * (Render, Railway, Fly, nginx) so rate limits use the real client IP.
+   */
+  trustProxy: parseTrustProxy(),
+  /** Per-IP lead submission limits (defaults are family/shared-network friendly). */
+  rateLimit: {
+    windowMs: parsePositiveInt(process.env.RATE_LIMIT_WINDOW_MS, 15 * 60 * 1000),
+    max: parsePositiveInt(process.env.RATE_LIMIT_MAX, 30),
+  },
+  /** Minimum time (ms) between form open and submit — bots that POST instantly are dropped. */
+  minFormMs: parsePositiveInt(process.env.MIN_FORM_MS, 2000),
+  /**
+   * Optional CAPTCHA (e.g. Cloudflare Turnstile). When unset, verification is skipped.
+   * Frontend must send `captchaToken` only after you wire a widget.
+   */
+  captcha: {
+    secret: process.env.CAPTCHA_SECRET?.trim() || process.env.TURNSTILE_SECRET_KEY?.trim() || '',
+    verifyUrl:
+      process.env.CAPTCHA_VERIFY_URL?.trim() ||
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+  },
+}
+
+/** Log operational warnings once at process start (never prints secrets). */
+export function logSecurityConfigWarnings(config = serverConfig): void {
+  if (config.corsOrigins.length === 0) {
+    if (config.isProduction) {
+      console.warn(
+        '[security] CORS_ORIGINS is empty in production. Browser requests with an Origin header will be rejected. Set CORS_ORIGINS to your site origin(s).',
+      )
+    } else {
+      console.warn(
+        '[security] CORS_ORIGINS is unset — allowing any Origin (development only). Set CORS_ORIGINS before production deploy.',
+      )
+    }
+  }
+
+  if (config.isProduction && !config.trustProxy) {
+    console.warn(
+      '[security] TRUST_PROXY is unset. If this API is behind a reverse proxy, set TRUST_PROXY=1 so rate limits use the client IP.',
+    )
+  }
+
+  if (config.transport.kind === 'log' && config.isProduction) {
+    console.warn(
+      '[security] No mail transport configured (RESEND_API_KEY or SMTP_*). Leads will be logged only.',
+    )
+  }
 }

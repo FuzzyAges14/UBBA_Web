@@ -25,6 +25,10 @@ export type LeadPayload = {
   source?: string
   /** Honeypot — must be empty */
   website?: string
+  /** Client timestamp (ms) when the form was opened — used for timing spam checks */
+  formStartedAt?: number
+  /** Optional CAPTCHA token when CAPTCHA_SECRET is configured */
+  captchaToken?: string
 }
 
 export type LeadResult =

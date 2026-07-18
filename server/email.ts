@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
 import { getInquiryType, type SocialProfile } from '../src/data/contact.ts'
 import { notifyEmailsForIntent, serverConfig } from './config.ts'
+import { sanitizeHeaderValue } from './sanitize.ts'
 import type { LeadPayload } from './types.ts'
 
 function escapeHtml(value: string): string {
@@ -84,9 +85,14 @@ export function buildLeadEmail(lead: LeadPayload) {
   const requestLabel = requestLabelForLead(lead)
   const rows = detailRows(lead)
 
-  const subject = `${requestLabel} — ${lead.name}${
-    lead.location?.trim() ? ` (${lead.location.trim()})` : ''
-  }`
+  // Sanitize subject pieces so visitor input cannot inject extra headers.
+  const safeName = sanitizeHeaderValue(lead.name).slice(0, 100)
+  const safeLocation = lead.location?.trim()
+    ? sanitizeHeaderValue(lead.location).slice(0, 80)
+    : ''
+  const subject = sanitizeHeaderValue(
+    `${requestLabel} — ${safeName}${safeLocation ? ` (${safeLocation})` : ''}`,
+  ).slice(0, 200)
 
   const pad = (label: string) => `${label}:`.padEnd(18, ' ')
   const textLines = [
@@ -233,8 +239,12 @@ async function sendViaSmtp(opts: {
 
 export async function deliverLeadEmail(lead: LeadPayload): Promise<{ mode: 'email' | 'log' }> {
   const { subject, text, html } = buildLeadEmail(lead)
-  const from = `"${serverConfig.fromName}" <${serverConfig.fromEmail}>`
-  const replyTo = serverConfig.replyToVisitor ? lead.email : undefined
+  const fromName = sanitizeHeaderValue(serverConfig.fromName).slice(0, 80)
+  const fromEmail = sanitizeHeaderValue(serverConfig.fromEmail)
+  const from = `"${fromName}" <${fromEmail}>`
+  // Reply-To is always the validated visitor email — never a free-form header.
+  const replyTo = serverConfig.replyToVisitor ? sanitizeHeaderValue(lead.email) : undefined
+  // Recipients come only from server config / contact.ts — never from the request body.
   const to = notifyEmailsForIntent(lead.intent)
   const label = requestLabelForLead(lead)
 
