@@ -123,11 +123,10 @@
 }
 .section-seam__belt {
   display: flex;
-  width: min(280px, 42vw);
+  width: 100%;
   height: 5px;
-  border-radius: 999px;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent);
 }
 .section-seam__belt-seg {
   flex: 1;
