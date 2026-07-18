@@ -90,7 +90,7 @@ Covered after merging with main: `/locations/*` pages, rate-limit `429`, Open Gr
 
 - [ ] Slow 3G / Fast 3G: hero poster shows; forms remain usable
 - [ ] Offline API: free-class form shows reachable error (stop local API)
-- [ ] `prefers-reduced-motion: reduce` — no jarring loops (verify after A11y agent lands full support)
+- [ ] `prefers-reduced-motion: reduce` — hero video stays paused; no jarring loops
 
 ### Keyboard-only
 
