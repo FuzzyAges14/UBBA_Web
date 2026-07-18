@@ -1,0 +1,43 @@
+/* utilities.css — extracted from former src/index.css (lines 2211-2252) */
+/* Utilities */
+.mt-sm {
+  margin-top: 1rem;
+}
+.mt {
+  margin-top: 2rem;
+}
+.mt-lg {
+  margin-top: 3rem;
+}
+.stack-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.flex-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.checklist li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+.checklist li::before {
+  content: '✓';
+  color: var(--red);
+  font-weight: 700;
+}
+.section--dark .checklist li::before,
+.section--graphite .checklist li::before {
+  color: var(--blue);
+}
