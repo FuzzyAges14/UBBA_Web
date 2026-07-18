@@ -46,9 +46,10 @@ and `package.json` scripts; refer to those rather than duplicating them.
   labeled in the UI — do not treat placeholder stats/testimonials/photos as real
   content.
 - **Media:** all photos/video are referenced from `IMAGES` in `src/data/site.ts`.
-  Photos hotlink free/CC assets (Flickr/Wikimedia); the hero uses a Mixkit CDN
-  video with a committed local poster fallback at `public/media/`. These are
-  placeholders — see `docs/IMAGE_SOURCES.md` for licenses/attribution.
+  Production stills and the Ken Burns hero loop are self-hosted under
+  `public/media/`, sourced from the live unitedbba.com site — see
+  `docs/IMAGE_SOURCES.md` for provenance. Location exteriors may still use
+  `OwnerMediaSlot` placeholders.
 - **Programs are data-driven:** each program has a `slug` and a `PROGRAM_DETAILS`
   entry rendered by `src/pages/ProgramDetail.tsx` at `/programs/:slug`. The static
   routes `/programs/children` and `/programs/adult` are category overviews and take

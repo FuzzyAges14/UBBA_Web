@@ -93,15 +93,12 @@ export default function ChildrenPrograms() {
               <div className="interior-media__veil" aria-hidden="true" />
               <OptimizedImage
                 src={IMAGES.kidsGroup}
-                alt="Young martial arts students bowing together in class (temporary stock photography)"
+                alt="Young martial arts students practicing punches together in class"
                 width={IMAGE_DIMENSIONS.kidsGroup.width}
                 height={IMAGE_DIMENSIONS.kidsGroup.height}
                 loading="lazy"
                 sizes="(max-width: 900px) 100vw, 42vw"
               />
-              <figcaption className="interior-media__credit">
-                Temporary stock — not UBBA students
-              </figcaption>
             </figure>
           </Reveal>
         </div>

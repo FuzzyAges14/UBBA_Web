@@ -5,7 +5,7 @@ import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
 import EventInquiryForm from '../components/EventInquiryForm'
 import SectionSeam from '../components/SectionSeam'
-import { getJust4KidsDetail } from '../data/site'
+import { getJust4KidsDetail, IMAGES } from '../data/site'
 
 export default function SummerCamp() {
   const detail = getJust4KidsDetail('summer-camp')!
@@ -63,9 +63,10 @@ export default function SummerCamp() {
         <div className="container split">
           <Reveal>
             <MediaFrame
-              label="Summer camp photo — coming soon"
+              label="Summer camp at United Black Belt Academy"
               icon={detail.mediaIcon}
-              ownerRequired
+              src={IMAGES.summerCamp}
+              alt="Kids at United Black Belt Academy summer camp"
               stickers={[
                 { kind: 'wave', spot: 'tr', rotate: 3, delay: 0 },
                 { kind: 'palm', spot: 'bl', rotate: -8, delay: 0.25 },

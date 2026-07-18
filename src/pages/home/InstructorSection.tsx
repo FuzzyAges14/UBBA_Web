@@ -1,26 +1,25 @@
 import Reveal from '../../components/Reveal'
-import Placeholder from '../../components/Placeholder'
+import OptimizedImage from '../../components/OptimizedImage'
 import SectionHeading from '../../components/SectionHeading'
-import { OWNER } from '../../data/site'
+import { IMAGE_DIMENSIONS, IMAGES, OWNER } from '../../data/site'
 
-/**
- * Owner portrait must remain an authentic UBBA photo.
- * Do not substitute stock — see docs/IMAGE_SOURCES.md.
- */
+/** Owner portrait from the live unitedbba.com site (Master Lee / Sanghyun Lee). */
 export default function InstructorSection() {
   return (
     <section className="section section--dark home-owner" id="owner">
       <div className="container owner">
         <div className="owner__sticky">
           <Reveal>
-            <Placeholder
-              label={`OWNER PHOTO REQUIRED — ${OWNER.name}, Head Instructor`}
-              icon="🥋"
-              variant="tall"
-            />
-            <p className="ph-note mt-sm">
-              Authentic owner portrait required — do not substitute with misleading stock
-            </p>
+            <figure className="owner__photo">
+              <OptimizedImage
+                src={IMAGES.instructorPortrait}
+                alt={`${OWNER.name}, Head Instructor and owner of United Black Belt Academy`}
+                width={IMAGE_DIMENSIONS.instructorPortrait.width}
+                height={IMAGE_DIMENSIONS.instructorPortrait.height}
+                loading="lazy"
+                sizes="(max-width: 900px) 70vw, 320px"
+              />
+            </figure>
           </Reveal>
         </div>
         <Reveal delay={100} className="owner__copy">

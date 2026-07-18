@@ -64,7 +64,6 @@ export default function ProgramDetail() {
                 loading="lazy"
                 sizes="(max-width: 900px) 100vw, 42vw"
               />
-              <span className="photo__credit">Temporary stock photo</span>
             </div>
           </Reveal>
           <Reveal delay={100}>

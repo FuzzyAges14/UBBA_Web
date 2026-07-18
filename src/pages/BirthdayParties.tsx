@@ -5,7 +5,7 @@ import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
 import EventInquiryForm from '../components/EventInquiryForm'
 import SectionSeam from '../components/SectionSeam'
-import { getJust4KidsDetail } from '../data/site'
+import { getJust4KidsDetail, IMAGES } from '../data/site'
 
 export default function BirthdayParties() {
   const detail = getJust4KidsDetail('birthday-parties')!
@@ -63,9 +63,10 @@ export default function BirthdayParties() {
         <div className="container split">
           <Reveal>
             <MediaFrame
-              label="Birthday party photo — coming soon"
+              label="Birthday party at United Black Belt Academy"
               icon={detail.mediaIcon}
-              ownerRequired
+              src={IMAGES.birthday}
+              alt="Kids celebrating a birthday party at United Black Belt Academy"
               stickers={[
                 { kind: 'cake', spot: 'tr', rotate: -14, delay: 0 },
                 { kind: 'shades', spot: 'bl', rotate: 10, delay: 0.35 },
