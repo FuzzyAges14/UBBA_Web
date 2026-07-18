@@ -13,6 +13,7 @@ export default function SummerCamp() {
   return (
     <>
       <PageHero
+        variant="playful"
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'Just 4 Kids', to: '/just-4-kids' },
@@ -21,7 +22,7 @@ export default function SummerCamp() {
         title={detail.heroTitle}
         intro={detail.heroIntro}
       >
-        <div className="flex-actions mt" style={{ justifyContent: 'flex-start' }}>
+        <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
           <a href={`#${formId}`} className="btn btn--gold btn--lg">
             {detail.ctaLabel} <span className="btn__arrow">→</span>
           </a>
@@ -121,33 +122,7 @@ export default function SummerCamp() {
         </div>
       </section>
 
-      <section className="section" id={formId}>
-        <div className="container j4k-form-layout">
-          <Reveal>
-            <span className="eyebrow">Getting Started Is Easy</span>
-            <h2 className="section-title">Reserve your child’s spot</h2>
-            <ol className="j4k-easy mt">
-              <li>
-                <strong>Enter your info</strong>
-                <span>Tell us who you’re signing up.</span>
-              </li>
-              <li>
-                <strong>Enroll your child</strong>
-                <span>We’ll confirm dates and details.</span>
-              </li>
-              <li>
-                <strong>Begin summer camp</strong>
-                <span>Drop off and let the fun begin!</span>
-              </li>
-            </ol>
-          </Reveal>
-          <Reveal delay={100}>
-            <EventInquiryForm intent="summer-camp" />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--offwhite">
+      <section className="section">
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
             <span className="eyebrow">FAQs</span>
@@ -156,6 +131,36 @@ export default function SummerCamp() {
           <Reveal delay={80}>
             <div className="mt">
               <Faq items={detail.faqs} />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--offwhite" id={formId}>
+        <div className="container j4k-signup">
+          <Reveal>
+            <div className="j4k-signup__intro">
+              <span className="eyebrow">Getting Started Is Easy</span>
+              <h2 className="section-title">Reserve your child’s spot</h2>
+              <ol className="j4k-easy">
+                <li>
+                  <strong>Enter your info</strong>
+                  <span>Tell us who you’re signing up.</span>
+                </li>
+                <li>
+                  <strong>Enroll your child</strong>
+                  <span>We’ll confirm dates and details.</span>
+                </li>
+                <li>
+                  <strong>Begin summer camp</strong>
+                  <span>Drop off and let the fun begin!</span>
+                </li>
+              </ol>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="j4k-signup__form">
+              <EventInquiryForm intent="summer-camp" />
             </div>
           </Reveal>
         </div>

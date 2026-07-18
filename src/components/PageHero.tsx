@@ -8,19 +8,35 @@ export default function PageHero({
   intro,
   crumbs = [],
   center = false,
+  variant = 'default',
   children,
 }: {
   title: ReactNode
   intro?: ReactNode
   crumbs?: Crumb[]
   center?: boolean
+  /** Playful Just 4 Kids hero — light gradient matching the hub */
+  variant?: 'default' | 'playful'
   children?: ReactNode
 }) {
+  const playful = variant === 'playful'
+
   return (
-    <section className={`page-hero ${center ? 'text-center' : ''}`}>
-      <div className="page-hero__bg" aria-hidden="true" />
-      <div className="dojang dojang--fade" aria-hidden="true" />
-      <div className="container page-hero__inner">
+    <section
+      className={`${playful ? 'j4k-hero' : 'page-hero'} ${center ? 'text-center' : ''}`.trim()}
+    >
+      {playful ? (
+        <>
+          <div className="j4k-hero__bg" aria-hidden="true" />
+          <div className="j4k-confetti j4k-confetti--hero" aria-hidden="true" />
+        </>
+      ) : (
+        <>
+          <div className="page-hero__bg" aria-hidden="true" />
+          <div className="dojang dojang--fade" aria-hidden="true" />
+        </>
+      )}
+      <div className={`container ${playful ? 'j4k-hero__inner' : 'page-hero__inner'}`}>
         {crumbs.length > 0 && (
           <div className="breadcrumbs">
             {crumbs.map((c, i) => (
@@ -32,7 +48,11 @@ export default function PageHero({
           </div>
         )}
         <h1>{title}</h1>
-        {intro && <p className={center ? 'center-block' : ''}>{intro}</p>}
+        {intro && (
+          <p className={`${playful ? 'j4k-hero__lead' : ''} ${center ? 'center-block' : ''}`.trim()}>
+            {intro}
+          </p>
+        )}
         {children}
       </div>
     </section>

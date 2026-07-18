@@ -41,7 +41,7 @@ const fadeUp = {
 export default function Just4Kids() {
   return (
     <>
-      <section className="j4k-hero">
+      <section className="j4k-hero j4k-hero--splash">
         <div className="j4k-hero__bg" aria-hidden="true" />
         <div className="j4k-confetti j4k-confetti--hero" aria-hidden="true" />
         <div className="container j4k-hero__inner">

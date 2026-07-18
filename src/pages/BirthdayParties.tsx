@@ -13,6 +13,7 @@ export default function BirthdayParties() {
   return (
     <>
       <PageHero
+        variant="playful"
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'Just 4 Kids', to: '/just-4-kids' },
@@ -21,7 +22,7 @@ export default function BirthdayParties() {
         title={detail.heroTitle}
         intro={detail.heroIntro}
       >
-        <div className="flex-actions mt" style={{ justifyContent: 'flex-start' }}>
+        <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
           <a href={`#${formId}`} className="btn btn--gold btn--lg">
             {detail.ctaLabel} <span className="btn__arrow">→</span>
           </a>
@@ -121,33 +122,7 @@ export default function BirthdayParties() {
         </div>
       </section>
 
-      <section className="section" id={formId}>
-        <div className="container j4k-form-layout">
-          <Reveal>
-            <span className="eyebrow">Getting Started Is Easy</span>
-            <h2 className="section-title">Tell us the date — we do the rest</h2>
-            <ol className="j4k-easy mt">
-              <li>
-                <strong>The date</strong>
-                <span>When’s the big day?</span>
-              </li>
-              <li>
-                <strong>How many guests</strong>
-                <span>We’ll size the party just right.</span>
-              </li>
-              <li>
-                <strong>How to contact you</strong>
-                <span>We’ll call to lock it in.</span>
-              </li>
-            </ol>
-          </Reveal>
-          <Reveal delay={100}>
-            <EventInquiryForm intent="birthday" />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--offwhite">
+      <section className="section">
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
             <span className="eyebrow">FAQs</span>
@@ -156,6 +131,36 @@ export default function BirthdayParties() {
           <Reveal delay={80}>
             <div className="mt">
               <Faq items={detail.faqs} />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--offwhite" id={formId}>
+        <div className="container j4k-signup">
+          <Reveal>
+            <div className="j4k-signup__intro">
+              <span className="eyebrow">Getting Started Is Easy</span>
+              <h2 className="section-title">Tell us the date — we do the rest</h2>
+              <ol className="j4k-easy">
+                <li>
+                  <strong>The date</strong>
+                  <span>When’s the big day?</span>
+                </li>
+                <li>
+                  <strong>How many guests</strong>
+                  <span>We’ll size the party just right.</span>
+                </li>
+                <li>
+                  <strong>How to contact you</strong>
+                  <span>We’ll call to lock it in.</span>
+                </li>
+              </ol>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="j4k-signup__form">
+              <EventInquiryForm intent="birthday" />
             </div>
           </Reveal>
         </div>

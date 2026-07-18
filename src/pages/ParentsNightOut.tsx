@@ -13,6 +13,7 @@ export default function ParentsNightOut() {
   return (
     <>
       <PageHero
+        variant="playful"
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'Just 4 Kids', to: '/just-4-kids' },
@@ -21,7 +22,7 @@ export default function ParentsNightOut() {
         title={detail.heroTitle}
         intro={detail.heroIntro}
       >
-        <div className="flex-actions mt" style={{ justifyContent: 'flex-start' }}>
+        <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
           <a href={`#${formId}`} className="btn btn--gold btn--lg">
             {detail.ctaLabel} <span className="btn__arrow">→</span>
           </a>
@@ -103,33 +104,7 @@ export default function ParentsNightOut() {
         </div>
       </section>
 
-      <section className="section" id={formId}>
-        <div className="container j4k-form-layout">
-          <Reveal>
-            <span className="eyebrow">Reserve Early</span>
-            <h2 className="section-title">Spots fill fast</h2>
-            <ol className="j4k-easy mt">
-              <li>
-                <strong>Tell us who&apos;s coming</strong>
-                <span>How many kids — and which location.</span>
-              </li>
-              <li>
-                <strong>We confirm the Friday</strong>
-                <span>You’ll get the next date and details.</span>
-              </li>
-              <li>
-                <strong>Drop off &amp; unwind</strong>
-                <span>Pizza, games, and supervised fun await.</span>
-              </li>
-            </ol>
-          </Reveal>
-          <Reveal delay={100}>
-            <EventInquiryForm intent="parents-night-out" />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--offwhite">
+      <section className="section">
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
             <span className="eyebrow">FAQs</span>
@@ -138,6 +113,36 @@ export default function ParentsNightOut() {
           <Reveal delay={80}>
             <div className="mt">
               <Faq items={detail.faqs} />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--offwhite" id={formId}>
+        <div className="container j4k-signup">
+          <Reveal>
+            <div className="j4k-signup__intro">
+              <span className="eyebrow">Reserve Early</span>
+              <h2 className="section-title">Spots fill fast</h2>
+              <ol className="j4k-easy">
+                <li>
+                  <strong>Tell us who&apos;s coming</strong>
+                  <span>How many kids — and which location.</span>
+                </li>
+                <li>
+                  <strong>We confirm the Friday</strong>
+                  <span>You’ll get the next date and details.</span>
+                </li>
+                <li>
+                  <strong>Drop off &amp; unwind</strong>
+                  <span>Pizza, games, and supervised fun await.</span>
+                </li>
+              </ol>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="j4k-signup__form">
+              <EventInquiryForm intent="parents-night-out" />
             </div>
           </Reveal>
         </div>
