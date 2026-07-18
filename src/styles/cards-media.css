@@ -15,7 +15,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.84s var(--ease);
 }
 .photo--tall {
   min-height: 460px;
@@ -131,7 +131,7 @@
   inset: 0;
   z-index: -2;
   background: linear-gradient(160deg, var(--graphite-2), var(--black));
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.84s var(--ease);
 }
 .pcard__img {
   position: absolute;
@@ -141,7 +141,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 38%;
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.84s var(--ease);
 }
 .pcard:hover .pcard__img,
 .pcard:hover .pcard__art {
@@ -172,7 +172,7 @@
     rgba(255, 255, 255, 0.06) 100%
   );
   opacity: 0;
-  transition: opacity 0.35s var(--ease);
+  transition: opacity 0.5s var(--ease);
 }
 .pcard__glyph {
   position: absolute;
@@ -214,7 +214,7 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.4s var(--ease), opacity 0.3s var(--ease);
+    transition: max-height 0.55s var(--ease), opacity 0.4s var(--ease);
   }
   .pcard:hover .pcard__text,
   .pcard:focus-within .pcard__text {
@@ -263,11 +263,11 @@
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.28s var(--ease);
+  transition: transform 0.4s var(--ease);
   opacity: 0.9;
 }
 .pcard__cta .btn__arrow {
-  transition: transform 0.22s var(--ease);
+  transition: transform 0.31s var(--ease);
 }
 @media (hover: hover) and (pointer: fine) {
   .pcard:hover .pcard__cta::after,
@@ -377,7 +377,7 @@
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   display: flex;
   flex-direction: column;
 }
@@ -420,7 +420,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  transition: gap 0.18s var(--ease);
+  transition: gap 0.25s var(--ease);
 }
 .card__link:hover {
   gap: 0.75rem;

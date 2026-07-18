@@ -88,7 +88,7 @@
   background: var(--red-2);
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.28s var(--ease);
+  transition: transform 0.39s var(--ease);
 }
 .nav__link:hover,
 .nav__link.is-active,
@@ -102,7 +102,7 @@
 }
 .nav__caret {
   font-size: 0.6rem;
-  transition: transform 0.2s var(--ease);
+  transition: transform 0.28s var(--ease);
 }
 .nav__item.is-open .nav__caret {
   transform: rotate(180deg);
@@ -176,7 +176,7 @@
   padding: 0.5rem 0.6rem;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.85);
-  transition: background 0.16s var(--ease), color 0.16s var(--ease);
+  transition: background 0.22s var(--ease), color 0.22s var(--ease);
 }
 .mega__link:hover {
   background: rgba(255, 255, 255, 0.06);
@@ -207,7 +207,7 @@
   height: 2.5px;
   background: #fff;
   border-radius: 2px;
-  transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+  transition: transform 0.35s var(--ease), opacity 0.28s var(--ease);
 }
 .hamburger.is-open span:nth-child(1) {
   transform: translateY(8.5px) rotate(45deg);
@@ -240,7 +240,7 @@
     background: var(--black);
     padding: 0;
     transform: translateX(100%);
-    transition: transform 0.35s var(--ease);
+    transition: transform 0.49s var(--ease);
     /* Above page content; below/at header stack so the bar stays tappable */
     z-index: 79;
     overflow: hidden;
@@ -279,7 +279,7 @@
   }
   .mobile-nav__accordion-trigger .nav__caret {
     font-size: 0.7rem;
-    transition: transform 0.22s var(--ease);
+    transition: transform 0.31s var(--ease);
   }
   .mobile-nav__accordion.is-open .mobile-nav__accordion-trigger .nav__caret {
     transform: rotate(180deg);

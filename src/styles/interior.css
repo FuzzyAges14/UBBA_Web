@@ -120,7 +120,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
-  transition: transform 0.7s var(--ease);
+  transition: transform 1s var(--ease);
 }
 
 .interior-media--focus-top img {

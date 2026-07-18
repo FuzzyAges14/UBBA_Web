@@ -133,7 +133,7 @@
     radial-gradient(circle, #f0b429 0 2px, transparent 3px);
   background-size: 120px 90px, 160px 110px, 90px 140px;
   background-position: 10% 20%, 70% 40%, 40% 80%;
-  animation: j4k-drift 18s linear infinite;
+  animation: j4k-drift 25s linear infinite;
 }
 .j4k-confetti--hero {
   opacity: 0.35;
@@ -342,7 +342,7 @@
   transform: rotate(var(--sticker-rotate));
   filter: drop-shadow(0 8px 12px rgba(10, 10, 10, 0.18));
   pointer-events: none;
-  animation: fun-sticker-peel 3.6s ease-in-out infinite;
+  animation: fun-sticker-peel 5s ease-in-out infinite;
   animation-delay: var(--sticker-delay);
 }
 .fun-sticker--wave {
@@ -398,7 +398,7 @@
   clip-path: polygon(0 0, 100% 0, 100% 100%);
   border-top-right-radius: 0.85rem;
   transform-origin: 100% 0;
-  animation: fun-sticker-corner 3.6s ease-in-out infinite;
+  animation: fun-sticker-corner 5s ease-in-out infinite;
   animation-delay: var(--sticker-delay);
 }
 
@@ -425,13 +425,13 @@
 
 .fun-sticker__sun-bob {
   transform-origin: center;
-  animation: fun-sun-bob 4s ease-in-out infinite;
+  animation: fun-sun-bob 5.5s ease-in-out infinite;
 }
 .fun-sticker__wave-line {
-  animation: fun-wave-drift 3.2s ease-in-out infinite;
+  animation: fun-wave-drift 4.5s ease-in-out infinite;
 }
 .fun-sticker__wave-line--2 {
-  animation-duration: 4s;
+  animation-duration: 5.5s;
   animation-direction: reverse;
 }
 
