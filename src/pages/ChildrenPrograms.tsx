@@ -4,6 +4,7 @@ import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
+import SectionSeam from '../components/SectionSeam'
 import { CHILDREN_PROGRAMS, FAQS, SITE } from '../data/site'
 
 const GLYPH: Record<string, string> = {
@@ -29,6 +30,8 @@ export default function ChildrenPrograms() {
         title="Children's Programs"
         intro="Confidence, focus, and respect — built one class at a time. Our age-specific children's classes help kids thrive on and off the mat."
       />
+
+      <SectionSeam from="dark" to="off-white" />
 
       <section className="section">
         <div className="container">
@@ -56,6 +59,8 @@ export default function ChildrenPrograms() {
         </div>
       </section>
 
+      <SectionSeam from="off-white" to="dark" />
+
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
         <div className="container split" style={{ position: 'relative' }}>
@@ -82,6 +87,8 @@ export default function ChildrenPrograms() {
           </Reveal>
         </div>
       </section>
+
+      <SectionSeam from="dark" to="off-white" />
 
       <section className="section section--offwhite">
         <div className="container" style={{ maxWidth: '820px' }}>

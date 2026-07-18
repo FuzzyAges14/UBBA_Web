@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import MediaFrame from '../components/MediaFrame'
+import SectionSeam from '../components/SectionSeam'
 import { JUST_4_KIDS, SITE } from '../data/site'
 import type { FunStickerKind } from '../components/FunSticker'
 
@@ -89,6 +90,8 @@ export default function Just4Kids() {
         </div>
       </section>
 
+      <SectionSeam from="j4k-hero" to="off-white" />
+
       <section className="section">
         <div className="container">
           <Reveal>
@@ -108,6 +111,8 @@ export default function Just4Kids() {
           </div>
         </div>
       </section>
+
+      <SectionSeam from="off-white" to="j4k" />
 
       <section className="section j4k-surface">
         <div className="j4k-confetti" aria-hidden="true" />

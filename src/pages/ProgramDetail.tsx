@@ -4,6 +4,7 @@ import Placeholder from '../components/Placeholder'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import CtaBanner from '../components/CtaBanner'
+import SectionSeam from '../components/SectionSeam'
 import NotFound from './NotFound'
 import { getProgram, FAQS, SITE } from '../data/site'
 
@@ -28,6 +29,8 @@ export default function ProgramDetail() {
         title={program.name}
         intro={program.tagline}
       />
+
+      <SectionSeam from="dark" to="off-white" />
 
       {/* Overview */}
       <section className="section">
@@ -56,6 +59,8 @@ export default function ProgramDetail() {
         </div>
       </section>
 
+      <SectionSeam from="off-white" to="dark" />
+
       {/* What a class looks like */}
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
@@ -67,6 +72,8 @@ export default function ProgramDetail() {
           </Reveal>
         </div>
       </section>
+
+      <SectionSeam from="dark" to="off-white" />
 
       {/* FAQ */}
       <section className="section section--offwhite">

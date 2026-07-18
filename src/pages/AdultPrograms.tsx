@@ -4,6 +4,7 @@ import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
+import SectionSeam from '../components/SectionSeam'
 import { ADULT_PROGRAMS, FAQS, SITE } from '../data/site'
 
 const GLYPH: Record<string, string> = {
@@ -23,6 +24,8 @@ export default function AdultPrograms() {
         title="Adult & Family Programs"
         intro="Get in the best shape of your life while learning practical self-defense. From total beginners to seasoned athletes, there's a program for you."
       />
+
+      <SectionSeam from="dark" to="off-white" />
 
       <section className="section">
         <div className="container">
@@ -55,6 +58,8 @@ export default function AdultPrograms() {
         </div>
       </section>
 
+      <SectionSeam from="off-white" to="dark" />
+
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
         <div className="container split" style={{ position: 'relative' }}>
@@ -75,6 +80,8 @@ export default function AdultPrograms() {
           </Reveal>
         </div>
       </section>
+
+      <SectionSeam from="dark" to="off-white" />
 
       <section className="section section--offwhite">
         <div className="container" style={{ maxWidth: '820px' }}>
