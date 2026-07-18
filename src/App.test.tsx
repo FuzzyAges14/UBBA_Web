@@ -74,21 +74,29 @@ describe('App routing', () => {
     expect(screen.getByRole('heading', { name: /^spots fill fast$/i })).toBeInTheDocument()
   })
 
-  it('keeps Just 4 Kids in Programs and links Follow Us to its own page', () => {
+  it('keeps Just 4 Kids as its own nav item separate from Programs', () => {
     renderAt('/')
 
     const primaryNav = screen.getByRole('navigation', { name: /primary/i })
-    expect(
-      within(primaryNav).queryByRole('link', { name: /just 4 kids/i }),
-    ).not.toBeInTheDocument()
     expect(
       within(primaryNav).getByRole('link', { name: /follow us/i }),
     ).toHaveAttribute('href', '/follow-us')
 
     fireEvent.click(screen.getByRole('button', { name: /programs/i }))
-    const programsPanel = primaryNav.querySelector('.mega')
+    const programsPanel = primaryNav.querySelector('.mega:not(.mega--j4k)')
     expect(programsPanel).toBeTruthy()
-    const panel = programsPanel as HTMLElement
+    const programs = programsPanel as HTMLElement
+    expect(within(programs).queryByRole('link', { name: /birthday parties/i })).toBeNull()
+    expect(within(programs).queryByText(/just 4 kids/i)).toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: /just 4 kids/i }))
+    const j4kPanel = primaryNav.querySelector('.mega--j4k')
+    expect(j4kPanel).toBeTruthy()
+    const panel = j4kPanel as HTMLElement
+    expect(within(panel).getByRole('link', { name: /overview/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids',
+    )
     expect(within(panel).getByRole('link', { name: /birthday parties/i })).toHaveAttribute(
       'href',
       '/just-4-kids/birthday-parties',

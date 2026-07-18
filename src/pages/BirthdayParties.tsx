@@ -4,6 +4,7 @@ import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
 import EventInquiryForm from '../components/EventInquiryForm'
+import SectionSeam from '../components/SectionSeam'
 import { getJust4KidsDetail } from '../data/site'
 
 export default function BirthdayParties() {
@@ -32,6 +33,8 @@ export default function BirthdayParties() {
         </div>
       </PageHero>
 
+      <SectionSeam from="j4k-hero" to="j4k" />
+
       <section className="section j4k-surface">
         <div className="j4k-confetti" aria-hidden="true" />
         <div className="container">
@@ -53,6 +56,8 @@ export default function BirthdayParties() {
           </div>
         </div>
       </section>
+
+      <SectionSeam from="j4k" to="off-white" />
 
       <section className="section">
         <div className="container split">

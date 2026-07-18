@@ -148,6 +148,78 @@ button {
   background: var(--off-white);
 }
 
+/* Soft bridges between sections with different backgrounds */
+.section-seam {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 0;
+  overflow: hidden;
+}
+.section-seam--wave {
+  height: 64px;
+  background: linear-gradient(
+    to bottom,
+    var(--seam-from) 0%,
+    color-mix(in srgb, var(--seam-from) 55%, var(--seam-to)) 46%,
+    var(--seam-to) 100%
+  );
+}
+.section-seam__fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--seam-from) 80%, transparent) 0%,
+    transparent 50%,
+    color-mix(in srgb, var(--seam-to) 55%, transparent) 100%
+  );
+}
+.section-seam__svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.section-seam__accent {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 50%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--blue) 55%, transparent) 22%,
+    color-mix(in srgb, var(--red) 65%, transparent) 50%,
+    color-mix(in srgb, var(--blue) 55%, transparent) 78%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  transform: translateY(-50%);
+}
+.section-seam--fade {
+  height: 72px;
+  background: linear-gradient(
+    to bottom,
+    var(--seam-from) 0%,
+    color-mix(in srgb, var(--seam-from) 55%, var(--seam-to)) 42%,
+    var(--seam-to) 100%
+  );
+}
+@media (max-width: 640px) {
+  .section-seam--wave {
+    height: 48px;
+  }
+  .section-seam--fade {
+    height: 56px;
+  }
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -469,16 +541,22 @@ button {
   top: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%);
-  width: min(760px, 90vw);
+  width: min(560px, 90vw);
   background: rgba(16, 16, 18, 0.98);
   backdrop-filter: blur(16px);
   border: 1px solid var(--line-dark);
   border-radius: var(--radius);
   padding: 1.6rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
   box-shadow: var(--shadow-lg);
+}
+.mega--j4k {
+  width: min(260px, 90vw);
+  grid-template-columns: 1fr;
+  left: 0;
+  transform: none;
 }
 .mega::before {
   content: '';

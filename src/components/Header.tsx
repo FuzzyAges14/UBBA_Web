@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { SITE, LOCATIONS, MEGA_MENU } from '../data/site'
+import { SITE, LOCATIONS, MEGA_MENU, JUST_4_KIDS_MENU } from '../data/site'
 
 const TOP_NAV = [
   { label: 'Home', to: '/' },
@@ -15,9 +15,12 @@ export default function Header() {
   const [solid, setSolid] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
+  const [j4kOpen, setJ4kOpen] = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
+  const [j4kMobileOpen, setJ4kMobileOpen] = useState(false)
   const location = useLocation()
   const closeTimer = useRef<number | undefined>(undefined)
+  const j4kCloseTimer = useRef<number | undefined>(undefined)
 
   const locationCount = LOCATIONS.length + (SITE.showGlenRock ? 1 : 0)
 
@@ -31,12 +34,17 @@ export default function Header() {
   useEffect(() => {
     setMenuOpen(false)
     setMegaOpen(false)
+    setJ4kOpen(false)
     setProgramsOpen(false)
+    setJ4kMobileOpen(false)
   }, [location.pathname, location.hash])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-    if (!menuOpen) setProgramsOpen(false)
+    if (!menuOpen) {
+      setProgramsOpen(false)
+      setJ4kMobileOpen(false)
+    }
     return () => {
       document.body.style.overflow = ''
     }
@@ -44,10 +52,20 @@ export default function Header() {
 
   const openMega = () => {
     window.clearTimeout(closeTimer.current)
+    setJ4kOpen(false)
     setMegaOpen(true)
   }
   const scheduleClose = () => {
     closeTimer.current = window.setTimeout(() => setMegaOpen(false), 140)
+  }
+
+  const openJ4k = () => {
+    window.clearTimeout(j4kCloseTimer.current)
+    setMegaOpen(false)
+    setJ4kOpen(true)
+  }
+  const scheduleJ4kClose = () => {
+    j4kCloseTimer.current = window.setTimeout(() => setJ4kOpen(false), 140)
   }
 
   const isActive = (to: string) => {
@@ -56,9 +74,8 @@ export default function Header() {
     return location.pathname === to
   }
 
-  const programsActive =
-    location.pathname.startsWith('/programs') ||
-    location.pathname.startsWith('/just-4-kids')
+  const programsActive = location.pathname.startsWith('/programs')
+  const just4KidsActive = location.pathname.startsWith('/just-4-kids')
 
   return (
     <>
@@ -99,7 +116,10 @@ export default function Header() {
                 className={`nav__link ${programsActive ? 'is-active' : ''}`}
                 aria-expanded={megaOpen}
                 aria-haspopup="true"
-                onClick={() => setMegaOpen((v) => !v)}
+                onClick={() => {
+                  setJ4kOpen(false)
+                  setMegaOpen((v) => !v)
+                }}
               >
                 Programs <span className="nav__caret">▼</span>
               </button>
@@ -116,6 +136,41 @@ export default function Header() {
                       ))}
                     </div>
                   ))}
+                </div>
+              )}
+            </div>
+
+            <div
+              className={`nav__item ${j4kOpen ? 'is-open' : ''}`}
+              onMouseEnter={openJ4k}
+              onMouseLeave={scheduleJ4kClose}
+            >
+              <button
+                type="button"
+                className={`nav__link ${just4KidsActive ? 'is-active' : ''}`}
+                aria-expanded={j4kOpen}
+                aria-haspopup="true"
+                onClick={() => {
+                  setMegaOpen(false)
+                  setJ4kOpen((v) => !v)
+                }}
+              >
+                Just 4 Kids <span className="nav__caret">▼</span>
+              </button>
+              {j4kOpen && (
+                <div
+                  className="mega mega--j4k"
+                  onMouseEnter={openJ4k}
+                  onMouseLeave={scheduleJ4kClose}
+                >
+                  <div>
+                    <div className="mega__heading">{JUST_4_KIDS_MENU.heading}</div>
+                    {JUST_4_KIDS_MENU.links.map((link) => (
+                      <Link key={link.label} to={link.to} className="mega__link">
+                        <span>{link.label}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -203,6 +258,34 @@ export default function Header() {
                     ))}
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className={`mobile-nav__accordion ${j4kMobileOpen ? 'is-open' : ''}`}>
+              <button
+                type="button"
+                className="mobile-nav__accordion-trigger"
+                aria-expanded={j4kMobileOpen}
+                aria-controls="mobile-just-4-kids"
+                onClick={() => setJ4kMobileOpen((v) => !v)}
+              >
+                <span>Just 4 Kids</span>
+                <span className="nav__caret" aria-hidden="true">
+                  ▼
+                </span>
+              </button>
+              <div
+                id="mobile-just-4-kids"
+                className="mobile-nav__accordion-panel"
+                hidden={!j4kMobileOpen}
+              >
+                <div className="mobile-nav__group">
+                  {JUST_4_KIDS_MENU.links.map((link) => (
+                    <Link key={link.label} to={link.to} className="mn-sub">
+                      <span className="mn-sub__label">{link.label}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 

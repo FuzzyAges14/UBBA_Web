@@ -706,15 +706,18 @@ export const MEGA_MENU: MegaGroup[] = [
       { label: 'Weapons Class', to: '/programs/adult' },
     ],
   },
-  {
-    heading: 'Just 4 Kids',
-    links: [
-      { label: 'Birthday Parties', to: '/just-4-kids/birthday-parties' },
-      { label: 'Summer / Day Camp', to: '/just-4-kids/summer-camp' },
-      { label: "Parents' Night Out", to: '/just-4-kids/parents-night-out' },
-    ],
-  },
 ]
+
+/** Top-level Just 4 Kids nav dropdown (separate from Programs). */
+export const JUST_4_KIDS_MENU: MegaGroup = {
+  heading: 'Just 4 Kids',
+  links: [
+    { label: 'Overview', to: '/just-4-kids' },
+    { label: 'Birthday Parties', to: '/just-4-kids/birthday-parties' },
+    { label: 'Summer / Day Camp', to: '/just-4-kids/summer-camp' },
+    { label: "Parents' Night Out", to: '/just-4-kids/parents-night-out' },
+  ],
+}
 
 export type SeoMeta = { title: string; description: string }
 
