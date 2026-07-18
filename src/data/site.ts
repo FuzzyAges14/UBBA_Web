@@ -41,7 +41,8 @@ export const NAV: NavLink[] = [
 
 export const FOOTER_LINKS: NavLink[] = [
   { label: 'About Us', to: '/#owner' },
-  { label: 'Our Schools', to: '/#locations' },
+  { label: 'Allendale Location', to: '/locations/allendale' },
+  { label: 'Midland Park Location', to: '/locations/midland-park' },
   { label: 'Reviews', to: '/#reviews' },
   { label: 'Trial Offer', to: '/contact' },
   { label: "Children's Programs", to: '/programs/children' },
@@ -203,7 +204,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     title: 'Birthday Parties',
     tag: 'All ages',
     blurb:
-      'Jam-packed martial arts parties with games, board breaks, and cool moves — fully supervised so the birthday kid is the star.',
+      'Instructor-led martial arts birthday parties with games, board breaks, and cool moves — inquire for dates, capacity, and current package details.',
     to: '/just-4-kids/birthday-parties',
     icon: '🎂',
     ctaLabel: 'Plan a Party',
@@ -213,7 +214,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     title: 'Summer / Day Camp',
     tag: 'Ages 3-12',
     blurb:
-      'Themes, crafts, games, and martial arts all summer long — the action-packed camp kids beg to come back to.',
+      'Themes, crafts, games, and martial arts for ages 3–12 — ask about this season’s dates and openings at your preferred school.',
     to: '/just-4-kids/summer-camp',
     icon: '☀️',
     ctaLabel: 'Reserve a Spot',
@@ -223,7 +224,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     title: "Parents' Night Out",
     tag: 'Monthly Friday',
     blurb:
-      'Games, laughter, and pizza once a month on a Friday. Open to non-students — bring a friend and enjoy a night off.',
+      'Supervised games, laughter, and pizza on a monthly Friday. Open to non-students — inquire for the next date at your school.',
     to: '/just-4-kids/parents-night-out',
     icon: '🍕',
     ctaLabel: 'Save a Spot',
@@ -255,7 +256,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     tag: 'All ages',
     heroTitle: 'The most exciting birthday party ever',
     heroIntro:
-      'Have a birthday jam-packed with FUN activities, fully organized and supervised by qualified staff — that will make it a HIT!',
+      'Host a martial arts birthday party at United Black Belt Academy — instructor-led games, cool moves, and board-breaking fun while parents relax. Available for kids of all ages; no experience required.',
     kidsWill: [
       { label: 'Break boards', icon: '💥' },
       { label: 'Learn cool martial arts moves', icon: '🥋' },
@@ -269,11 +270,11 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
       'Opening of gifts & group photo',
     ],
     includes: [
-      'Exclusive use of our facility for ~1.5 hours',
-      'Up to 20 participants in the party package',
-      'Taekwondo lesson, self-defense intro, board breaking & games',
-      'Qualified staff who run the whole party flow',
-      'Option to customize activities to fit your child',
+      'Instructor-led martial arts games and activities',
+      'Supervised party flow so parents can relax',
+      'Board-breaking experience for guests',
+      'Option to customize activities for your child',
+      'Help choosing Allendale, Midland Park, or Glen Rock when you inquire',
     ],
     parentsSupply: [
       'Table covers, plates & utensils',
@@ -282,8 +283,8 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     ],
     faqs: [
       {
-        q: 'What age groups are available for birthday parties?',
-        a: 'All ages! We tailor games and the mini lesson so every guest can join in.',
+        q: 'Who are birthday parties for?',
+        a: 'Families celebrating a child’s birthday who want an active, supervised party with martial arts games. Guests do not need to be UBBA students.',
       },
       {
         q: 'Do my child or guests need martial arts experience?',
@@ -291,11 +292,15 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
       },
       {
         q: 'Will kids be fighting each other?',
-        a: 'No way! Everything is instructor-led, safe, and focused on fun games, pads, and boards — not sparring each other.',
+        a: 'No. Everything is instructor-led and focused on fun games, pads, and boards — not sparring each other.',
       },
       {
-        q: 'What happens after I send an inquiry?',
-        a: 'One of our instructors will call you to discuss your event, confirm details, and secure your date. You can also call the school directly.',
+        q: 'What is the inquiry form for?',
+        a: 'The form tells us your preferred date, guest count range, location interest, and how to reach you. It is not a final booking — our team follows up to confirm availability, package details, and pricing.',
+      },
+      {
+        q: 'What still needs to be confirmed?',
+        a: 'Party length, guest capacity, exact inclusions, upgrades, and pricing vary and require owner confirmation. We share current details when we call you back.',
       },
       {
         q: 'Do guests need a waiver?',
@@ -312,7 +317,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     tag: 'Ages 3-12',
     heroTitle: "Make this your child's most exciting summer ever",
     heroIntro:
-      'Themes, arts & crafts, games, outings, and martial arts taught by Black Belt instructors — plus plenty of time to make friends.',
+      'A day-camp experience for ages 3–12 that mixes martial arts, themes, crafts, games, and friendship — taught in a supervised, beginner-friendly setting. Perfect when you want an active summer plan with purpose.',
     kidsWill: [
       { label: 'Break boards', icon: '💥' },
       { label: 'Learn martial arts moves', icon: '🥋' },
@@ -328,7 +333,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     includes: [
       'Action-packed days built around fun first',
       'Character & life-skills lessons woven into themes',
-      'A safe, supervised environment for ages 3–12',
+      'A supervised environment designed for ages 3–12',
       'No martial arts experience required',
     ],
     whatToBring: [
@@ -344,12 +349,16 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     ],
     faqs: [
       {
-        q: 'When are the camps and how much do they cost?',
-        a: 'Dates, weekly themes, and pricing vary by season. Send an inquiry below (or call us) and our team will share the current schedule and rates.',
+        q: 'Who is summer camp for?',
+        a: 'Kids ages 3–12 who enjoy active play, crafts, and trying martial arts in a friendly group. Students and non-students are welcome.',
       },
       {
-        q: 'Will my kid actually have fun?',
-        a: 'That’s the whole point. Our primary goal is a playful, safe environment — kids have a blast, and our instructors do too.',
+        q: 'When are the camps and how much do they cost?',
+        a: 'Dates, weekly themes, and pricing vary by season. Send an inquiry (or call us) and our team will share the current schedule and rates — we do not publish unverified prices here.',
+      },
+      {
+        q: 'What is the inquiry form for?',
+        a: 'Use the form to share your child’s age, preferred weeks or location, and contact info. It starts the conversation; we confirm camp dates, openings, and pricing before enrollment.',
       },
       {
         q: 'Does my child need previous martial arts experience?',
@@ -357,7 +366,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
       },
       {
         q: 'Will my child be learning how to “fight”?',
-        a: 'We practice self-defense and movement skills in a controlled way. Kids are not fighting each other — instructors keep everything age-appropriate and safe.',
+        a: 'We practice self-defense and movement skills in a controlled, age-appropriate way. Kids are not fighting each other.',
       },
     ],
     formIntent: 'summer-camp',
@@ -370,7 +379,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     tag: 'Monthly Friday · All ages',
     heroTitle: 'Fun for kids. Relaxation for you.',
     heroIntro:
-      'Need a break? Drop the kids for an evening packed with games, laughter, and delicious pizza while you enjoy a well-deserved night off.',
+      'A monthly Friday evening drop-off event where kids enjoy supervised games, laughter, and pizza while parents get a real night off. Open to students and non-students — bring a friend.',
     kidsWill: [
       { label: 'Play games all night', icon: '🎮' },
       { label: 'Share pizza & laughs', icon: '🍕' },
@@ -380,26 +389,34 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
       'Supervised games and free play',
       'Pizza dinner with the group',
       'Laughs with friends — students and non-students welcome',
-      'A calm, structured evening so parents can actually go out',
+      'A structured evening so parents can actually go out',
     ],
     includes: [
       'Held once a month on a Friday',
       'Open to non-students — bring friends!',
       'Games, laughter, and pizza',
-      'Spots fill fast — reserve early',
+      'Staff supervision for the evening',
     ],
     faqs: [
       {
         q: 'Who can attend Parents’ Night Out?',
-        a: 'It’s open to students and non-students. Friends are welcome — just reserve a spot so we can plan pizza and activities.',
+        a: 'It’s open to students and non-students. Friends are welcome — reserve a spot so we can plan pizza and activities.',
+      },
+      {
+        q: 'Why would a parent choose this?',
+        a: 'You get a planned, supervised Friday night for the kids — games and pizza included in the event concept — while you enjoy dinner, errands, or downtime. Exact timing and fees are confirmed when you inquire.',
+      },
+      {
+        q: 'What is the inquiry form for?',
+        a: 'Tell us how many kids are coming, which school you prefer, and how to reach you. We reply with the next available Friday, capacity, and current details — the form itself is not a final reservation until confirmed.',
       },
       {
         q: 'When is the next Parents’ Night Out?',
-        a: 'We host it monthly on a Friday. Send an inquiry (or call) and we’ll share the next date and details for your preferred location.',
+        a: 'We host it monthly on a Friday. Dates, drop-off times, and pricing need seasonal confirmation — send an inquiry or call and we’ll share what’s next for your preferred location.',
       },
       {
         q: 'What should kids bring?',
-        a: 'Just comfortable clothes and a good appetite. We’ll confirm anything location-specific when we lock in your spot.',
+        a: 'Comfortable clothes and a good appetite. We’ll confirm anything location-specific when we lock in your spot.',
       },
     ],
     formIntent: 'parents-night-out',
@@ -449,6 +466,17 @@ export const TESTIMONIALS: Testimonial[] = [
   },
 ]
 
+export type LocationPageContent = {
+  /** Location-specific H1 support line (paired with school name) */
+  headline: string
+  intro: string
+  /** Nearby towns referenced for local discovery — not a claim of exclusive coverage */
+  communitiesServed: string[]
+  /** High-level programs available; class-by-class schedules need owner confirmation */
+  programsBlurb: string
+  imageLabel: string
+}
+
 export type Location = {
   id: string
   name: string
@@ -461,6 +489,10 @@ export type Location = {
   /** Newly added / opening-soon location */
   isNew?: boolean
   note?: string
+  /** When true, phone/hours should be treated as unverified placeholders in UI */
+  detailsPending?: boolean
+  /** Dedicated landing-page copy under /locations/:id */
+  page?: LocationPageContent
 }
 
 export const LOCATIONS: Location[] = [
@@ -480,6 +512,22 @@ export const LOCATIONS: Location[] = [
       { day: 'Saturday', time: '9:00am - 1:30pm' },
       { day: 'Sunday', time: 'Closed' },
     ],
+    page: {
+      headline: 'Taekwondo & martial arts classes in Allendale, NJ',
+      intro:
+        'United Black Belt Academy’s Allendale school welcomes children, teens, and adults who want confidence, discipline, focus, fitness, and practical self-defense in a family-friendly dojang. Stop by for a free introductory class and meet our instructors on the mat.',
+      communitiesServed: [
+        'Allendale',
+        'Waldwick',
+        'Saddle River',
+        'Upper Saddle River',
+        'Ramsey',
+        'Ho-Ho-Kus',
+      ],
+      programsBlurb:
+        'Age-specific children’s Taekwondo, teen training, adult martial arts, family options, and Just 4 Kids events (birthday parties, summer camp, and Parents’ Night Out) are offered through our Bergen County schools. Ask which sessions run at Allendale when you book your free class.',
+      imageLabel: 'Allendale dojang photo — replace with school photography',
+    },
   },
   {
     id: 'midland-park',
@@ -487,8 +535,35 @@ export const LOCATIONS: Location[] = [
     address: '644 Godwin Ave',
     city: 'Midland Park, NJ 07432',
     mapQuery: '644 Godwin Ave, Midland Park, NJ 07432',
+    detailsPending: true,
+    note: 'Phone number and weekly hours — pending owner confirmation.',
+    page: {
+      headline: 'Family martial arts training in Midland Park, NJ',
+      intro:
+        'Our Midland Park location gives nearby families another convenient place to train with United Black Belt Academy. Classes support kids building confidence and focus, teens developing fitness and self-defense skills, and adults looking for a welcoming workout with purpose.',
+      communitiesServed: [
+        'Midland Park',
+        'Wyckoff',
+        'Ridgewood',
+        'Glen Rock',
+        'Franklin Lakes',
+        'Fair Lawn',
+      ],
+      programsBlurb:
+        'Students can explore Tiny Tigers, Junior Tigers, teen and adult martial arts, plus family-friendly training and Just 4 Kids offerings. Availability can vary by school — tell us your preferred Midland Park schedule when you request a free trial.',
+      imageLabel: 'Midland Park dojang photo — replace with school photography',
+    },
   },
 ]
+
+/** Locations that have a dedicated /locations/:id landing page. */
+export function getLocation(id: string): Location | undefined {
+  return LOCATIONS.find((loc) => loc.id === id && loc.page)
+}
+
+export function getLocationPageIds(): string[] {
+  return LOCATIONS.filter((loc) => loc.page).map((loc) => loc.id)
+}
 
 export const GLEN_ROCK: Location = {
   id: 'glen-rock',
@@ -585,20 +660,28 @@ export const GETTING_STARTED: BeltStep[] = [
 
 export const FAQS: Faq[] = [
   {
-    q: 'Do we need any experience to start?',
-    a: 'Not at all. Every program is built for complete beginners, and our instructors meet each student exactly where they are.',
+    q: 'What age can children start martial arts?',
+    a: 'Children can start as early as age 3 in our Tiny Tigers program. We also offer Junior Tigers for ages 6–10, teen classes for ages 11–17, and adult training for ages 18+.',
   },
   {
-    q: 'What ages do you teach?',
-    a: 'We welcome students from age 3 through adult, with age-specific programs so everyone trains at the right level.',
+    q: 'What should students wear to their first class?',
+    a: 'Comfortable athletic clothing is perfect for your free class. Uniform details are handled after you enroll — no special gear is required for the trial.',
   },
   {
-    q: 'What should we wear to the first class?',
-    a: 'Comfortable athletic clothing is perfect for your free class. We will take care of the uniform details once you enroll.',
+    q: 'Do beginners need previous experience?',
+    a: 'No. Every program is built for complete beginners, and instructors meet each student where they are. You do not need prior martial arts training to feel welcome on day one.',
   },
   {
-    q: 'How does the free class work?',
-    a: 'Reach out through any form on this site and our team will contact you to schedule your complimentary introductory class.',
+    q: 'Can adults begin with no martial arts background?',
+    a: 'Absolutely. Our adult classes welcome first-timers looking for fitness, focus, and practical self-defense in a supportive, no-ego environment.',
+  },
+  {
+    q: 'How does the free trial work?',
+    a: 'Submit a free-class request on this site (or call the school). Our team will follow up to learn your goals, suggest a program, and schedule a complimentary introductory class — with no obligation to enroll.',
+  },
+  {
+    q: 'Which UBBA location should I choose?',
+    a: 'Choose the school that is easiest for your family: Allendale or Midland Park (and Glen Rock when you prefer that campus). Program options are similar across our Bergen County schools; we can help match class times when you inquire.',
   },
 ]
 
@@ -690,20 +773,22 @@ export const MEGA_MENU: MegaGroup[] = [
   {
     heading: "Children's Programs",
     links: [
-      { label: 'Tiny Tigers', to: '/programs/children', meta: 'Ages 3-5' },
-      { label: 'Junior Tigers', to: '/programs/children', meta: 'Ages 6-10' },
-      { label: 'Teen Martial Arts', to: '/programs/children', meta: 'Ages 11-17' },
+      { label: 'Overview', to: '/programs/children' },
+      { label: 'Tiny Tigers', to: '/programs/tiny-tigers', meta: 'Ages 3-5' },
+      { label: 'Junior Tigers', to: '/programs/junior-tigers', meta: 'Ages 6-10' },
+      { label: 'Teen Martial Arts', to: '/programs/teen-martial-arts', meta: 'Ages 11-17' },
     ],
   },
   {
     heading: 'Adult & Family',
     links: [
-      { label: 'Adult Program', to: '/programs/adult', meta: 'Ages 18+' },
-      { label: 'Family Programs', to: '/programs/adult' },
-      { label: 'Olympic Sparring', to: '/programs/adult' },
-      { label: 'SWAT Team', to: '/programs/adult' },
-      { label: 'Self Defense', to: '/programs/adult' },
-      { label: 'Weapons Class', to: '/programs/adult' },
+      { label: 'Overview', to: '/programs/adult' },
+      { label: 'Adult Program', to: '/programs/adult-program', meta: 'Ages 18+' },
+      { label: 'Family Programs', to: '/programs/family-programs' },
+      { label: 'Olympic Sparring', to: '/programs/olympic-sparring' },
+      { label: 'SWAT Team', to: '/programs/swat-team' },
+      { label: 'Self Defense', to: '/programs/self-defense' },
+      { label: 'Weapons Class', to: '/programs/weapons-class' },
     ],
   },
 ]
@@ -729,11 +814,17 @@ export type ProgramDetail = {
   name: string
   category: 'Children' | 'Adult & Family'
   ages?: string
+  /** Who the program is designed for */
+  audience: string
   image: string
   tagline: string
   description: string
+  /** Core benefits students work toward (not outcome guarantees) */
   learn: string[]
+  /** What a typical class experience feels like */
   classLooksLike: string
+  /** Related program slugs for internal linking */
+  relatedSlugs: string[]
 }
 
 export const PROGRAM_DETAILS: ProgramDetail[] = [
@@ -742,10 +833,12 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     name: 'Tiny Tigers',
     category: 'Children',
     ages: 'Ages 3-5',
+    audience:
+      'Preschoolers and early elementary kids who are ready for a playful, structured first class — perfect for families in Allendale, Midland Park, and nearby Bergen County towns.',
     image: IMAGES.kidsKicks,
     tagline: 'A playful, confidence-first introduction to Taekwondo.',
     description:
-      'Tiny Tigers gives our youngest students a joyful first taste of martial arts. Short, high-energy classes build focus, balance, and the confidence to try new things.',
+      'Tiny Tigers gives our youngest students a joyful first taste of martial arts. Short, high-energy classes build listening skills, balance, and the confidence to try new things — without pressure or intimidation.',
     learn: [
       'Listening and following directions',
       'Balance, coordination, and body control',
@@ -753,17 +846,20 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
       'Confidence through small, achievable wins',
     ],
     classLooksLike:
-      'Fast-moving games and drills in short bursts to match young attention spans, always with lots of encouragement.',
+      'Fast-moving games and drills in short bursts to match young attention spans, always with lots of encouragement from instructors.',
+    relatedSlugs: ['junior-tigers', 'family-programs'],
   },
   {
     slug: 'junior-tigers',
     name: 'Junior Tigers',
     category: 'Children',
     ages: 'Ages 6-10',
+    audience:
+      'School-age kids who thrive with clear goals, active friends, and a positive place to grow focus and self-control.',
     image: IMAGES.kidsGroup,
     tagline: 'Discipline, focus, and leadership through the belt journey.',
     description:
-      'Junior Tigers helps kids channel their energy into discipline and focus. Students progress through a clear belt curriculum that rewards effort and consistency.',
+      'Junior Tigers helps kids channel energy into discipline and focus. Students progress through a clear belt curriculum that rewards effort and consistency while building friendships on the mat.',
     learn: [
       'Self-control and discipline',
       'Goal setting through belt ranks',
@@ -772,34 +868,40 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ],
     classLooksLike:
       'Structured warm-ups, technique work, and partner drills, finishing with a fun challenge that reinforces the day’s lesson.',
+    relatedSlugs: ['tiny-tigers', 'teen-martial-arts', 'family-programs'],
   },
   {
     slug: 'teen-martial-arts',
     name: 'Teen Martial Arts',
     category: 'Children',
     ages: 'Ages 11-17',
+    audience:
+      'Tweens and teens who want fitness, resilience, and practical self-defense in a supportive peer group — beginners welcome.',
     image: IMAGES.teenSpar,
     tagline: 'Strength, resilience, and real self-defense for teens.',
     description:
-      'A positive, high-energy outlet where teens build fitness, resilience, and leadership while learning practical self-defense in a supportive group.',
+      'A positive, high-energy outlet where teens build fitness, resilience, and leadership while learning practical self-defense. Classes challenge students without ego or judgment.',
     learn: [
       'Practical self-defense skills',
       'Athletic conditioning and flexibility',
-      'Confidence and stress management',
+      'Confidence and healthy stress outlets',
       'Leadership and mentoring younger students',
     ],
     classLooksLike:
-      'Dynamic conditioning, sparring drills, and technique training that keep teens engaged and challenged.',
+      'Dynamic conditioning, technique training, and age-appropriate drills that keep teens engaged and challenged.',
+    relatedSlugs: ['junior-tigers', 'adult-program', 'olympic-sparring'],
   },
   {
     slug: 'adult-program',
     name: 'Adult Program',
     category: 'Adult & Family',
     ages: 'Ages 18+',
+    audience:
+      'Adults of any fitness level — from complete beginners to returning athletes — who want a purposeful workout and practical martial arts skills.',
     image: IMAGES.action,
     tagline: 'Get fit and learn to protect yourself — no experience needed.',
     description:
-      'A full-body workout and practical martial arts training for every fitness level. Zero intimidation, plenty of support, and a welcoming community.',
+      'A full-body workout and practical martial arts training for every fitness level. Zero intimidation, plenty of support, and a welcoming community at our New Jersey schools.',
     learn: [
       'Practical self-defense',
       'Cardio, strength, and flexibility',
@@ -807,16 +909,19 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
       'A supportive, no-ego community',
     ],
     classLooksLike:
-      'A warm-up, technique and pad work, and optional light sparring — scaled to your level.',
+      'A warm-up, technique and pad work, and optional light sparring — scaled to your level so you can progress at a comfortable pace.',
+    relatedSlugs: ['family-programs', 'self-defense', 'olympic-sparring'],
   },
   {
     slug: 'family-programs',
     name: 'Family Programs',
     category: 'Adult & Family',
+    audience:
+      'Parents and kids who want to train together and share a healthy habit as a family.',
     image: IMAGES.kidsGroup,
     tagline: 'Train together, grow together.',
     description:
-      'Parents and kids share the mat, build healthy habits, and cheer each other on. A meaningful activity the whole family can enjoy.',
+      'Parents and kids share the mat, build healthy habits, and cheer each other on. A meaningful activity the whole family can enjoy at United Black Belt Academy.',
     learn: [
       'Shared goals across all ages',
       'Quality active time together',
@@ -825,32 +930,38 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ],
     classLooksLike:
       'Mixed-age classes with drills that let families train side by side at their own pace.',
+    relatedSlugs: ['tiny-tigers', 'junior-tigers', 'adult-program'],
   },
   {
     slug: 'olympic-sparring',
     name: 'Olympic Sparring',
     category: 'Adult & Family',
+    audience:
+      'Students ready for sport-focused Taekwondo who want to sharpen speed, timing, and strategy. Availability and requirements — confirm with the school.',
     image: IMAGES.teenSpar,
     tagline: 'Sport Taekwondo: speed, timing, and strategy.',
     description:
-      'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete and level up their game.',
+      'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete or level up their game in a coached setting.',
     learn: [
       'Footwork and distance control',
       'Scoring techniques and strategy',
       'Reaction speed and timing',
-      'Competition readiness',
+      'Competition-minded training habits',
     ],
     classLooksLike:
-      'Focused footwork drills, controlled sparring rounds, and strategy coaching with protective gear.',
+      'Focused footwork drills, controlled sparring rounds, and strategy coaching with protective gear when appropriate.',
+    relatedSlugs: ['teen-martial-arts', 'adult-program', 'swat-team'],
   },
   {
     slug: 'swat-team',
     name: 'SWAT Team',
     category: 'Adult & Family',
+    audience:
+      'Dedicated students invited or approved by instructors for higher-intensity, advanced training. Ask the school about readiness and openings.',
     image: IMAGES.action,
     tagline: 'Our elite training group for dedicated students.',
     description:
-      'An advanced training group for committed students ready to push their skills, conditioning, and technique to the next level.',
+      'An advanced training group for committed students ready to push their skills, conditioning, and technique. This is a step up from regular class — not a beginner track.',
     learn: [
       'Advanced technique refinement',
       'Higher-intensity conditioning',
@@ -859,32 +970,38 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ],
     classLooksLike:
       'Invitation or instructor approval is typical — expect demanding, high-focus sessions.',
+    relatedSlugs: ['olympic-sparring', 'adult-program', 'weapons-class'],
   },
   {
     slug: 'self-defense',
     name: 'Self Defense',
     category: 'Adult & Family',
+    audience:
+      'Teens and adults who want practical awareness and defense skills without a sport-competition focus.',
     image: IMAGES.beltTest,
-    tagline: 'Stay aware, stay calm, stay safe.',
+    tagline: 'Practical skills for awareness and personal safety.',
     description:
-      'Real-world, practical techniques that help you stay aware, stay calm, and protect yourself and your loved ones with confidence.',
+      'Practical techniques that help you stay aware, stay calm, and respond thoughtfully under pressure. Training emphasizes habits and skills — not guarantees about real-world outcomes.',
     learn: [
       'Situational awareness',
       'Escapes and practical strikes',
       'De-escalation and safety habits',
-      'Confidence under pressure',
+      'Composure under pressure',
     ],
     classLooksLike:
       'Scenario-based drills and repetition of high-percentage techniques in a supportive setting.',
+    relatedSlugs: ['adult-program', 'teen-martial-arts', 'family-programs'],
   },
   {
     slug: 'weapons-class',
     name: 'Weapons Class',
     category: 'Adult & Family',
+    audience:
+      'Students looking for an advanced traditional challenge. Equipment needs and eligibility are confirmed at enrollment.',
     image: IMAGES.beltTest,
     tagline: 'Precision, discipline, and focus through traditional weapons.',
     description:
-      'Traditional weapons training that builds precision, discipline, and focus while adding an exciting new challenge to your practice.',
+      'Traditional weapons training that builds precision, discipline, and focus while adding a new challenge to your practice. Safety and proper handling come first.',
     learn: [
       'Weapon handling and safety',
       'Precision and control',
@@ -893,6 +1010,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ],
     classLooksLike:
       'Guided forms and controlled drills; equipment details are confirmed at enrollment.',
+    relatedSlugs: ['adult-program', 'swat-team', 'olympic-sparring'],
   },
 ]
 
@@ -956,6 +1074,16 @@ export const SEO: Record<string, SeoMeta> = {
     title: 'Contact & Locations | United Black Belt Academy',
     description:
       'Visit United Black Belt Academy in Allendale or Midland Park, NJ. Hours, directions, phone, and a free-class request form.',
+  },
+  '/locations/allendale': {
+    title: 'Allendale, NJ Martial Arts School | United Black Belt Academy',
+    description:
+      'Taekwondo and martial arts classes for kids, teens, and adults at United Black Belt Academy in Allendale, NJ. Address, map, and free-class requests.',
+  },
+  '/locations/midland-park': {
+    title: 'Midland Park, NJ Martial Arts School | United Black Belt Academy',
+    description:
+      'Family martial arts training at United Black Belt Academy in Midland Park, NJ. Programs for children and adults — request a free introductory class.',
   },
   '/privacy': {
     title: 'Privacy Policy | United Black Belt Academy',

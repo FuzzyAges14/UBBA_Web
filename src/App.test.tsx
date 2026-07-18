@@ -1,7 +1,11 @@
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import App from './App'
+
+afterEach(() => {
+  cleanup()
+})
 
 function renderAt(path: string) {
   return render(
@@ -24,7 +28,10 @@ describe('App routing', () => {
   it('renders the Children\'s Programs page', () => {
     renderAt('/programs/children')
     expect(
-      screen.getByRole('heading', { name: /children's programs/i, level: 1 }),
+      screen.getByRole('heading', {
+        name: /children's martial arts programs/i,
+        level: 1,
+      }),
     ).toBeInTheDocument()
     expect(screen.getAllByText(/tiny tigers/i).length).toBeGreaterThan(0)
   })
@@ -140,7 +147,38 @@ describe('App routing', () => {
     expect(
       screen.getByRole('heading', { name: /tiny tigers/i, level: 1 }),
     ).toBeInTheDocument()
-    expect(screen.getByText(/what you'll learn/i)).toBeInTheDocument()
+    expect(screen.getByText(/who it's for/i)).toBeInTheDocument()
+    expect(screen.getByText(/what you'll work on/i)).toBeInTheDocument()
+  })
+
+  it('renders the Allendale location landing page', () => {
+    renderAt('/locations/allendale')
+    expect(
+      screen.getByRole('heading', { name: /allendale martial arts classes/i, level: 1 }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText(/240 W Crescent Ave/i).length).toBeGreaterThan(0)
+    expect(
+      screen.getByRole('link', { name: /also see midland park/i }),
+    ).toHaveAttribute('href', '/locations/midland-park')
+  })
+
+  it('renders the Midland Park location landing page with placeholders', () => {
+    renderAt('/locations/midland-park')
+    expect(
+      screen.getByRole('heading', {
+        name: /midland park martial arts classes/i,
+        level: 1,
+      }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText(/644 Godwin Ave/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/pending owner confirmation/i).length).toBeGreaterThan(0)
+  })
+
+  it('shows a 404 for an unknown location slug', () => {
+    renderAt('/locations/not-a-school')
+    expect(
+      screen.getByRole('heading', { name: /page not found/i }),
+    ).toBeInTheDocument()
   })
 
   it('shows a 404 for an unknown program slug', () => {

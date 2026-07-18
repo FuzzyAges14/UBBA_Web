@@ -11,6 +11,7 @@ import ParentsNightOut from './pages/ParentsNightOut'
 import FollowUs from './pages/FollowUs'
 import SocialFeed from './pages/SocialFeed'
 import Contact from './pages/Contact'
+import LocationDetail from './pages/LocationDetail'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 import NotFound from './pages/NotFound'
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/just-4-kids/parents-night-out" element={<ParentsNightOut />} />
         <Route path="/follow-us" element={<FollowUs />} />
         <Route path="/follow-us/:network" element={<SocialFeed />} />
+        <Route path="/locations/:slug" element={<LocationDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />

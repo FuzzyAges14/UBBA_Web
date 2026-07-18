@@ -6,7 +6,7 @@ import Faq from '../components/Faq'
 import CtaBanner from '../components/CtaBanner'
 import SectionSeam from '../components/SectionSeam'
 import NotFound from './NotFound'
-import { getProgram, FAQS, SITE } from '../data/site'
+import { getProgram, FAQS, SITE, LOCATIONS } from '../data/site'
 
 export default function ProgramDetail() {
   const { slug } = useParams()
@@ -17,6 +17,10 @@ export default function ProgramDetail() {
   const isChildren = program.category === 'Children'
   const categoryLabel = isChildren ? "Children's Programs" : 'Adult & Family Programs'
   const categoryTo = isChildren ? '/programs/children' : '/programs/adult'
+  const related = program.relatedSlugs
+    .map((s) => getProgram(s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+  const locationPages = LOCATIONS.filter((loc) => loc.page)
 
   return (
     <>
@@ -27,12 +31,16 @@ export default function ProgramDetail() {
           { label: program.name },
         ]}
         title={program.name}
-        intro={program.tagline}
+        intro={
+          <>
+            {program.tagline}
+            {program.ages ? ` ${program.ages}.` : ''}
+          </>
+        }
       />
 
       <SectionSeam from="dark" to="off-white" />
 
-      {/* Overview */}
       <section className="section">
         <div className="container split">
           <Reveal>
@@ -44,8 +52,12 @@ export default function ProgramDetail() {
               About {program.name}
             </h2>
             <p className="section-lead">{program.description}</p>
+            <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>Who it&apos;s for</h3>
+            <p className="section-lead" style={{ marginTop: '0.5rem' }}>
+              {program.audience}
+            </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>
-              What you'll learn
+              What you&apos;ll work on
             </h3>
             <ul className="checklist mt-sm">
               {program.learn.map((l) => (
@@ -61,21 +73,81 @@ export default function ProgramDetail() {
 
       <SectionSeam from="off-white" to="dark" />
 
-      {/* What a class looks like */}
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
         <div className="container" style={{ maxWidth: '820px', position: 'relative' }}>
           <Reveal>
-            <span className="eyebrow">What A Class Looks Like</span>
+            <span className="eyebrow">What Students Can Expect</span>
             <h2 className="section-title">Inside the dojang</h2>
             <p className="section-lead">{program.classLooksLike}</p>
+            <p className="section-lead" style={{ marginTop: '1rem' }}>
+              Ready to try it? Request a free introductory class and we&apos;ll help you
+              choose a time at{' '}
+              {locationPages.map((loc, i) => (
+                <span key={loc.id}>
+                  {i > 0 && (i === locationPages.length - 1 ? ', or ' : ', ')}
+                  <Link
+                    to={`/locations/${loc.id}`}
+                    style={{ color: 'var(--blue-soft)', fontWeight: 600 }}
+                  >
+                    {loc.name}
+                  </Link>
+                </span>
+              ))}
+              .
+            </p>
           </Reveal>
         </div>
       </section>
 
-      <SectionSeam from="dark" to="off-white" />
+      {related.length > 0 && (
+        <>
+          <SectionSeam from="dark" to="off-white" />
+          <section className="section">
+            <div className="container">
+              <Reveal>
+                <span className="eyebrow">Keep Exploring</span>
+                <h2 className="section-title">Related programs</h2>
+                <p className="section-lead">
+                  Looking for a different age group or training focus? These paths are a
+                  natural next step.
+                </p>
+              </Reveal>
+              <div className="grid grid--3 mt">
+                {related.map((p, i) => (
+                  <Reveal as="article" key={p.slug} delay={i * 70}>
+                    <Link to={`/programs/${p.slug}`} className="pcard">
+                      <div className="pcard__art" />
+                      <div className="pcard__scrim" />
+                      <div className="pcard__body">
+                        {p.ages && <span className="pcard__age">{p.ages}</span>}
+                        <h3 className="pcard__title">{p.name}</h3>
+                        <p className="pcard__text">{p.tagline}</p>
+                        <span className="pcard__cta">
+                          Learn more <span className="btn__arrow">→</span>
+                        </span>
+                      </div>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+              <Reveal>
+                <div className="flex-actions mt">
+                  <Link to={categoryTo} className="btn btn--outline">
+                    All {categoryLabel}
+                  </Link>
+                  <Link to="/contact" className="btn btn--ghost">
+                    Contact &amp; free class
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+          </section>
+        </>
+      )}
 
-      {/* FAQ */}
+      {!related.length && <SectionSeam from="dark" to="off-white" />}
+
       <section className="section section--offwhite">
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>

@@ -8,11 +8,16 @@ approved. Configuration lives in `src/data/site.ts`.
 - [ ] Owner biography copy (`OWNER.story`, `OWNER.intro`, `OWNER.quote`)
 - [ ] Owner rank & certifications (`OWNER.credentials`)
 - [ ] Years of experience / academy history
+- [ ] Allendale hours still accurate (`LOCATIONS[allendale].hours`)
 - [ ] Midland Park phone number (`LOCATIONS[midland-park].phone`)
 - [ ] Midland Park hours (`LOCATIONS[midland-park].hours`)
+- [ ] Location landing-page photography for `/locations/allendale` and
+      `/locations/midland-park` (currently labeled placeholders)
+- [ ] Nearby-communities lists on each location page (orientation only — edit if needed)
 - [ ] Glen Rock — now enabled (`SITE.showGlenRock = true`); confirm address
       (201 Rock Rd, Suite 116, Glen Rock, NJ 07452) and phone (201-551-8557)
 - [ ] Glen Rock hours / class schedule (`GLEN_ROCK.hours` — currently "coming soon")
+- [ ] Optional dedicated Glen Rock landing page (not created yet)
 - [ ] Class schedules per location
 
 ## Programs

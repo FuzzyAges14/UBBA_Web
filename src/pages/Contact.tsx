@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import LeadForm from '../components/LeadForm'
 import PageHero from '../components/PageHero'
@@ -78,6 +79,11 @@ function LocationBlock({ loc }: { loc: Location }) {
               Call {loc.name}
             </a>
           )}
+          {loc.page && (
+            <Link to={`/locations/${loc.id}`} className="btn btn--ghost">
+              {loc.name} school page
+            </Link>
+          )}
         </div>
       </div>
     </div>
@@ -93,7 +99,7 @@ export default function Contact() {
         center
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
         title="Try A Class For Free!"
-        intro="Ready to get started or have a question? Reach out and our team will help you find the perfect program at the location nearest you."
+        intro="Ready to start Taekwondo or martial arts in Allendale or Midland Park? Tell us about your family and we’ll help you pick a program — then schedule your complimentary introductory class."
       />
 
       <section className="section">

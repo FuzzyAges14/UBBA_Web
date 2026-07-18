@@ -87,8 +87,9 @@ export default function Home() {
             custom={3}
             variants={fadeUp}
           >
-            We build confidence, discipline, focus, and real self-defense skills —
-            for kids, teens, and adults. Train with a team that believes in you.
+            Taekwondo and martial arts for kids, teens, and adults — building
+            confidence, discipline, focus, fitness, and practical self-defense at our
+            Bergen County schools.
           </motion.p>
           <motion.div
             className="hero__actions"
@@ -141,8 +142,8 @@ export default function Home() {
             <span className="eyebrow">Find Your Path</span>
             <h2 className="section-title">Programs for every age &amp; stage</h2>
             <p className="section-lead">
-              Age-specific training that meets each student exactly where they are —
-              hover a program to see how it works.
+              From Tiny Tigers to adult martial arts, choose an age-specific path —
+              then try a free class in Allendale or Midland Park.
             </p>
           </Reveal>
           <div className="rail mt">
@@ -237,14 +238,14 @@ export default function Home() {
               Crush your fitness goals while learning how to protect yourself
             </h2>
             <p className="section-lead">
-              Tell us a little about yourself and we'll help you choose the perfect
-              program. Your first class is completely free — no pressure, just a
-              great workout.
+              Tell us a little about your goals and preferred school. We&apos;ll help
+              you choose a program and schedule a free introductory class — no
+              pressure, just a welcoming first step onto the mat.
             </p>
             <ul className="checklist mt">
-              <li>Friendly, certified instructors</li>
-              <li>Clean, welcoming, family-first facilities</li>
-              <li>Flexible schedules for busy families</li>
+              <li>Kids, teens, and adult programs</li>
+              <li>Allendale &amp; Midland Park locations</li>
+              <li>Beginners welcome — no experience required</li>
             </ul>
           </Reveal>
           <Reveal delay={100}>
@@ -417,10 +418,10 @@ export default function Home() {
         <div className="container">
           <Reveal>
             <span className="eyebrow">Our Schools</span>
-            <h2 className="section-title">Visit a location near you</h2>
+            <h2 className="section-title">Train in Allendale &amp; Midland Park</h2>
             <p className="section-lead">
-              {locations.length} convenient Bergen County locations, with the same
-              welcoming community at each.
+              {locations.length} Bergen County schools — pick the campus that fits your
+              commute, then request a free class at the location you prefer.
             </p>
           </Reveal>
           <div className={`grid ${locations.length >= 3 ? 'grid--3' : 'grid--2'} mt`}>
@@ -456,18 +457,18 @@ export default function Home() {
               <div className="dojang" aria-hidden="true" />
               <h2>Confidence starts with one class</h2>
               <p>
-                Beginners are welcome, no experience is required, and children and
-                adults can both start today. The first step is simple.
+                Beginners are welcome — kids, teens, and adults can start with a free
+                class in Allendale or Midland Park. The first step is simple.
               </p>
               <div className="flex-actions" style={{ justifyContent: 'center' }}>
                 <Link to="/contact" className="btn btn--gold btn--lg">
                   {SITE.primaryCta} <span className="btn__arrow">→</span>
                 </Link>
-                <a href="tel:2019622922" className="btn btn--ghost btn--lg">
-                  Call Allendale
-                </a>
-                <Link to="/programs/children" className="btn btn--ghost btn--lg">
-                  Explore Programs
+                <Link to="/locations/allendale" className="btn btn--ghost btn--lg">
+                  Allendale
+                </Link>
+                <Link to="/locations/midland-park" className="btn btn--ghost btn--lg">
+                  Midland Park
                 </Link>
               </div>
             </div>

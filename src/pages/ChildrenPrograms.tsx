@@ -27,8 +27,8 @@ export default function ChildrenPrograms() {
     <>
       <PageHero
         crumbs={[{ label: 'Home', to: '/' }, { label: "Children's Programs" }]}
-        title="Children's Programs"
-        intro="Confidence, focus, and respect — built one class at a time. Our age-specific children's classes help kids thrive on and off the mat."
+        title="Children's Martial Arts Programs"
+        intro="Confidence, focus, discipline, and respect — built one class at a time. Age-specific Taekwondo for kids and teens at our Allendale and Midland Park schools."
       />
 
       <SectionSeam from="dark" to="off-white" />
@@ -68,8 +68,10 @@ export default function ChildrenPrograms() {
             <span className="eyebrow">What Students Learn</span>
             <h2 className="section-title">More than kicks &amp; punches</h2>
             <p className="section-lead">
-              Every children's class blends high-energy fun with real life skills
-              that help kids become better students, friends, and family members.
+              Every children&apos;s class blends high-energy fun with skills that support
+              school, friendships, and family life — without promising specific grades or
+              outcomes. Students practice focus, respect, and healthy movement in a
+              welcoming dojang.
             </p>
             <ul className="checklist mt">
               {LEARN.map((l) => (
@@ -78,9 +80,17 @@ export default function ChildrenPrograms() {
                 </li>
               ))}
             </ul>
-            <Link to="/contact" className="btn btn--gold mt">
-              {SITE.primaryCta} <span className="btn__arrow">→</span>
-            </Link>
+            <div className="flex-actions mt">
+              <Link to="/contact" className="btn btn--gold">
+                {SITE.primaryCta} <span className="btn__arrow">→</span>
+              </Link>
+              <Link to="/locations/allendale" className="btn btn--outline">
+                Allendale
+              </Link>
+              <Link to="/locations/midland-park" className="btn btn--outline">
+                Midland Park
+              </Link>
+            </div>
           </Reveal>
           <Reveal delay={120}>
             <Placeholder label="Kids Taekwondo class" icon="🥋" variant="tall" />
@@ -105,8 +115,8 @@ export default function ChildrenPrograms() {
       </section>
 
       <CtaBanner
-        title="Give your child a head start"
-        text="Book a free introductory class and watch your child's confidence grow."
+        title="Try a free children's class"
+        text="Book a complimentary introductory class for Tiny Tigers, Junior Tigers, or Teen Martial Arts — beginners welcome."
       />
     </>
   )
