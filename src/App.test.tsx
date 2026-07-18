@@ -16,12 +16,12 @@ function renderAt(path: string) {
 }
 
 describe('App routing', () => {
-  it('renders the home hero headline', async () => {
+  it('renders the home hero brand H1 and tagline', async () => {
     renderAt('/')
     expect(
-await screen.findByRole('heading', {
+      await screen.findByRole('heading', {
         level: 1,
-        name: /united black belt academy/i,
+        name: /united\s+black\s+belt\s+academy/i,
       }),
     ).toBeInTheDocument()
     expect(
@@ -31,7 +31,7 @@ await screen.findByRole('heading', {
     ).toBeInTheDocument()
   })
 
-  it('renders the Children\'s Programs page', async () => {
+  it("renders the Children's Programs page", async () => {
     renderAt('/programs/children')
     expect(
       await screen.findByRole('heading', {

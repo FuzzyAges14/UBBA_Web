@@ -101,4 +101,69 @@ describe('LeadForm', () => {
     })
     expect(screen.queryByText(/you're all set/i)).not.toBeInTheDocument()
   })
+
+  it('shows a loading state and prevents duplicate submits while sending', async () => {
+    let resolveFetch: ((value: unknown) => void) | undefined
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(
+        () =>
+          new Promise((resolve) => {
+            resolveFetch = resolve
+          }),
+      ),
+    )
+    const user = userEvent.setup()
+    renderForm()
+
+    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
+    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
+    await user.type(screen.getByLabelText(/phone/i), '2015550123')
+    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
+
+    const sendingButton = screen.getByRole('button', { name: /sending/i })
+    expect(sendingButton).toBeDisabled()
+    expect(fetch).toHaveBeenCalledTimes(1)
+
+    await user.click(sendingButton)
+    expect(fetch).toHaveBeenCalledTimes(1)
+
+    resolveFetch?.({
+      ok: true,
+      json: async () => ({ ok: true, delivered: true, mode: 'email' }),
+    })
+
+    await waitFor(() => {
+      expect(screen.getByText(/you're all set/i)).toBeInTheDocument()
+    })
+  })
+
+  it('submits via keyboard Enter from a text field', async () => {
+    const user = userEvent.setup()
+    renderForm()
+
+    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
+    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
+    await user.type(screen.getByLabelText(/phone/i), '2015550123{Enter}')
+
+    await waitFor(() => {
+      expect(screen.getByText(/you're all set/i)).toBeInTheDocument()
+    })
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('shows a network error when fetch throws', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network down')))
+    const user = userEvent.setup()
+    renderForm()
+
+    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
+    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
+    await user.type(screen.getByLabelText(/phone/i), '2015550123')
+    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toHaveTextContent(/could not reach the server/i)
+    })
+  })
 })
