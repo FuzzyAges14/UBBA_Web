@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   EVENT_GUEST_OPTIONS,
   GLEN_ROCK,
@@ -6,8 +7,9 @@ import {
   SITE,
   type EventInquiryIntent,
 } from '../data/site'
+import { submitLead } from '../lib/submitLead'
 
-type Errors = Partial<Record<'name' | 'email' | 'phone', string>>
+type Errors = Partial<Record<'name' | 'email' | 'phone' | 'form', string>>
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -56,6 +58,19 @@ const COPY: Record<
   },
 }
 
+function buildEventMessage(intent: EventInquiryIntent, data: FormData): string {
+  const parts: string[] = []
+  if (intent === 'birthday') {
+    const date = String(data.get('party_date') ?? '').trim()
+    const guests = String(data.get('guests') ?? '').trim()
+    if (date) parts.push(`Preferred date: ${date}`)
+    if (guests) parts.push(`Guests: ${guests}`)
+  }
+  const message = String(data.get('message') ?? '').trim()
+  if (message) parts.push(message)
+  return parts.join('\n')
+}
+
 export default function EventInquiryForm({
   intent,
   defaultLocation,
@@ -63,7 +78,9 @@ export default function EventInquiryForm({
   intent: EventInquiryIntent
   defaultLocation?: string
 }) {
+  const route = useLocation()
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
   const copy = COPY[intent]
   const showPartyFields = intent === 'birthday'
@@ -80,14 +97,38 @@ export default function EventInquiryForm({
     return next
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const data = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const data = new FormData(form)
     const found = validate(data)
     setErrors(found)
-    if (Object.keys(found).length === 0) {
-      // No backend yet — same pattern as LeadForm.
+    if (Object.keys(found).length > 0) return
+
+    setSending(true)
+    try {
+      const result = await submitLead({
+        name: String(data.get('name') ?? '').trim(),
+        email: String(data.get('email') ?? '').trim(),
+        phone: String(data.get('phone') ?? '').trim(),
+        location: String(data.get('location') ?? '').trim() || undefined,
+        program: copy.programValue,
+        message: buildEventMessage(intent, data) || undefined,
+        website: String(data.get('website') ?? '').trim() || undefined,
+        source: route.pathname || '/just-4-kids',
+      })
+      if (!result.ok) {
+        setErrors({ form: result.error || 'Could not send your request.' })
+        return
+      }
       setSubmitted(true)
+      form.reset()
+    } catch {
+      setErrors({
+        form: 'Could not reach the server. Please try again or call us.',
+      })
+    } finally {
+      setSending(false)
     }
   }
 
@@ -95,7 +136,9 @@ export default function EventInquiryForm({
     return (
       <div className="leadform leadform--event">
         <div className="form-success" role="status">
-          <div className="form-success__icon">{intent === 'birthday' ? '🎂' : intent === 'summer-camp' ? '☀️' : '🍕'}</div>
+          <div className="form-success__icon">
+            {intent === 'birthday' ? '🎂' : intent === 'summer-camp' ? '☀️' : '🍕'}
+          </div>
           <h3>{copy.successTitle}</h3>
           <p>{copy.successBody}</p>
           <button
@@ -120,9 +163,22 @@ export default function EventInquiryForm({
         <i className="on" />
         <i className="on" />
       </div>
-      <input type="hidden" name="program" value={copy.programValue} />
-      <input type="hidden" name="intent" value={intent} />
       <div className="form-grid">
+        <div
+          className="field field--full"
+          aria-hidden="true"
+          style={{ position: 'absolute', left: '-9999px', height: 0, overflow: 'hidden' }}
+        >
+          <label htmlFor={`event-website-${intent}`}>Website</label>
+          <input
+            id={`event-website-${intent}`}
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="field field--full">
           <label htmlFor={`event-name-${intent}`}>Full Name</label>
           <input
@@ -132,6 +188,7 @@ export default function EventInquiryForm({
             autoComplete="name"
             aria-invalid={errors.name ? 'true' : undefined}
             placeholder="Your name"
+            disabled={sending}
           />
           {errors.name && <span className="error">{errors.name}</span>}
         </div>
@@ -145,6 +202,7 @@ export default function EventInquiryForm({
             autoComplete="email"
             aria-invalid={errors.email ? 'true' : undefined}
             placeholder="you@example.com"
+            disabled={sending}
           />
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
@@ -158,6 +216,7 @@ export default function EventInquiryForm({
             autoComplete="tel"
             aria-invalid={errors.phone ? 'true' : undefined}
             placeholder="(201) 555-0123"
+            disabled={sending}
           />
           {errors.phone && <span className="error">{errors.phone}</span>}
         </div>
@@ -168,6 +227,7 @@ export default function EventInquiryForm({
             id={`event-location-${intent}`}
             name="location"
             defaultValue={defaultLocation ?? ''}
+            disabled={sending}
           >
             <option value="" disabled>
               Choose a location
@@ -189,11 +249,17 @@ export default function EventInquiryForm({
                 name="party_date"
                 type="text"
                 placeholder="Date & time"
+                disabled={sending}
               />
             </div>
             <div className="field">
               <label htmlFor={`event-guests-${intent}`}>Guests</label>
-              <select id={`event-guests-${intent}`} name="guests" defaultValue="">
+              <select
+                id={`event-guests-${intent}`}
+                name="guests"
+                defaultValue=""
+                disabled={sending}
+              >
                 <option value="" disabled>
                   How many guests?
                 </option>
@@ -219,12 +285,19 @@ export default function EventInquiryForm({
                   ? 'Child’s age, preferred weeks, or questions…'
                   : 'How many kids, preferred Friday, or questions…'
             }
+            disabled={sending}
           />
         </div>
 
         <div className="field field--full">
-          <button type="submit" className="btn btn--lg btn--block btn--gold">
-            {copy.submit} <span className="btn__arrow">→</span>
+          {errors.form && (
+            <span className="error" role="alert" style={{ display: 'block', marginBottom: '0.75rem' }}>
+              {errors.form}
+            </span>
+          )}
+          <button type="submit" className="btn btn--lg btn--block btn--gold" disabled={sending}>
+            {sending ? 'Sending…' : copy.submit}{' '}
+            {!sending && <span className="btn__arrow">→</span>}
           </button>
           <p className="form-reassure">{copy.reassure}</p>
         </div>

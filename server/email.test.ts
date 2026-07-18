@@ -43,4 +43,22 @@ describe('buildLeadEmail', () => {
     expect(html).toContain('&lt;script&gt;')
     expect(html).toContain('&lt;b&gt;bold&lt;/b&gt;')
   })
+
+  it('labels Just 4 Kids birthday inquiries distinctly', () => {
+    const { subject, text, html } = buildLeadEmail({
+      name: 'Sam Parent',
+      email: 'sam@example.com',
+      phone: '2015559999',
+      location: 'Midland Park',
+      program: 'Birthday Parties',
+      message: 'Preferred date: Sat 2pm\nGuests: 6-10',
+      source: '/just-4-kids/birthday-parties',
+    })
+
+    expect(subject).toContain('Birthday Party Inquiry')
+    expect(subject).not.toContain('Free Class Request')
+    expect(text).toContain('BIRTHDAY PARTY INQUIRY')
+    expect(html).toContain('Birthday Party Inquiry')
+    expect(html).toContain('Preferred date: Sat 2pm')
+  })
 })
