@@ -22,6 +22,12 @@ use with **no attribution required**.
 | `teenSpar` | Teen/Olympic | `/media/kids-motion.jpg` (frame of 48139) | Mixkit | Mixkit Free License | No | Yes |
 | `beltTest` | Self Defense/Weapons/events | `/media/hero-poster.jpg` | Mixkit | Mixkit Free License | No | Yes |
 
+## Brand logo
+
+| Asset | Usage | File / URL | Source | Temporary? |
+| --- | --- | --- | --- | --- |
+| Site logo / favicon | Header, footer, browser tab | `/logo.png` | Official United Black Belt Academy logo from [unitedbba.com/upload/logo.png](https://unitedbba.com/upload/logo.png) | No — current academy logo |
+
 ## Fonts
 
 | Font | Usage | Source | License |

@@ -28,7 +28,13 @@ export default function Footer() {
         <div className="footer__grid">
           <div className="footer__brand">
             <Link to="/" className="brand" aria-label={`${SITE.name} home`}>
-              <img src="/logo.svg" alt="" className="brand__logo" />
+              <img
+                src="/logo.png"
+                alt=""
+                className="brand__logo"
+                width={52}
+                height={49}
+              />
               <span className="brand__text">
                 <span className="brand__name">United Black Belt</span>
                 <span className="brand__sub">Academy</span>
