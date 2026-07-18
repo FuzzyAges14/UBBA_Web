@@ -45,6 +45,21 @@ describe('buildLeadEmail', () => {
     expect(html).toContain('&lt;b&gt;bold&lt;/b&gt;')
   })
 
+  it('strips CR/LF from subject to prevent header injection', () => {
+    const { subject } = buildLeadEmail({
+      name: 'Jane\r\nBcc: evil@example.com',
+      email: 'safe@example.com',
+      phone: '2015550000',
+      location: 'Allendale\nX-Injected: 1',
+    })
+    // Newlines would let an attacker append SMTP/MIME headers; subject text may
+    // still mention those words, but they cannot form additional headers.
+    expect(subject.includes('\r')).toBe(false)
+    expect(subject.includes('\n')).toBe(false)
+    expect(subject.split('\n')).toHaveLength(1)
+    expect(subject).toContain('Jane')
+  })
+
   it('formats birthday inquiries with structured party fields', () => {
     const { subject, text, html } = buildLeadEmail({
       intent: 'birthday',

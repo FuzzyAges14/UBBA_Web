@@ -318,6 +318,14 @@ keep posting to `/api/leads` with no frontend code change.
 
 ```bash
 CORS_ORIGINS=https://unitedbba.com,https://www.unitedbba.com
+
+# Behind a reverse proxy (Render / Railway / Fly / nginx):
+TRUST_PROXY=1
+
+# Optional tuning (defaults are fine for most academies):
+# RATE_LIMIT_MAX=30
+# RATE_LIMIT_WINDOW_MS=900000
+# MIN_FORM_MS=2000
 ```
 
 on the API host (comma-separated live site origins).

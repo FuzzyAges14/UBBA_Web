@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
   EVENT_GUEST_OPTIONS,
@@ -66,6 +66,7 @@ export default function EventInquiryForm({
   defaultLocation?: string
 }) {
   const route = useLocation()
+  const formStartedAt = useRef(Date.now())
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
@@ -111,6 +112,7 @@ export default function EventInquiryForm({
         message: String(data.get('message') ?? '').trim() || undefined,
         website: String(data.get('website') ?? '').trim() || undefined,
         source: route.pathname || '/just-4-kids',
+        formStartedAt: formStartedAt.current,
       })
       if (!result.ok) {
         setErrors({ form: result.error || 'Could not send your request.' })
@@ -118,6 +120,7 @@ export default function EventInquiryForm({
       }
       setSubmitted(true)
       form.reset()
+      formStartedAt.current = Date.now()
     } catch {
       setErrors({
         form: 'Could not reach the server. Please try again or call us.',
@@ -139,7 +142,10 @@ export default function EventInquiryForm({
           <button
             type="button"
             className="btn btn--outline mt"
-            onClick={() => setSubmitted(false)}
+            onClick={() => {
+              formStartedAt.current = Date.now()
+              setSubmitted(false)
+            }}
           >
             Send another request
           </button>
