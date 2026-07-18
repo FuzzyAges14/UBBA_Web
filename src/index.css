@@ -874,6 +874,48 @@ button {
   gap: 0.4rem;
 }
 
+/* Phone / narrow windows: give display titles more air so wraps don't feel cramped */
+@media (max-width: 720px) {
+  .hero h1 {
+    font-size: clamp(2.15rem, 8vw, 3.25rem);
+    letter-spacing: 0.06em;
+    line-height: 1.42;
+  }
+  .hero__tagline {
+    margin-top: 1.4rem;
+    letter-spacing: 0.03em;
+    line-height: 1.28;
+  }
+  .section-title {
+    font-size: clamp(2rem, 7.2vw, 2.75rem);
+    letter-spacing: 0.02em;
+    line-height: 1.16;
+  }
+  .page-hero h1 {
+    letter-spacing: 0.02em;
+    line-height: 1.16;
+  }
+  .j4k-hero__brand {
+    letter-spacing: 0.04em;
+    line-height: 1.28;
+  }
+  .j4k-hero h1 {
+    letter-spacing: 0.02em;
+    line-height: 1.18;
+  }
+  .j4k-hero--splash h1 {
+    font-size: clamp(2.1rem, 8vw, 3.2rem);
+    letter-spacing: 0.05em;
+    line-height: 1.38;
+  }
+  .brand__name {
+    letter-spacing: 0.02em;
+  }
+  .brand__text {
+    line-height: 1.15;
+  }
+}
+
 /* ---------- Photos ---------- */
 .photo {
   position: relative;
