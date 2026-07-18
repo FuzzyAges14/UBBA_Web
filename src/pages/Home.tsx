@@ -356,7 +356,7 @@ export default function Home() {
               },
             ].map((f, i) => (
               <Reveal as="article" key={f.title} delay={i * 80}>
-                <Link to={f.to} className="pcard" style={{ minHeight: 420 }}>
+                <Link to={f.to} className="pcard">
                   <div className="pcard__art" />
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">

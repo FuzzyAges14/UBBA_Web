@@ -29,7 +29,7 @@ export default function AdultPrograms() {
           <div className="grid grid--3">
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
-                <div className="pcard" style={{ minHeight: 380 }}>
+                <div className="pcard">
                   <div className="pcard__art" />
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">
