@@ -175,7 +175,7 @@ export default function SummerCamp() {
                 <Link to="/locations/midland-park" className="btn btn--outline">
                   Midland Park
                 </Link>
-                <Link to="/contact" className="btn btn--ghost">
+                <Link to="/contact" className="btn btn--outline">
                   Contact
                 </Link>
               </div>

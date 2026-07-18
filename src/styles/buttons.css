@@ -58,7 +58,7 @@
 .btn--ghost {
   --btn-bg: transparent;
   --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.45);
 }
 .btn--ghost:hover {
   --btn-bg: rgba(255, 255, 255, 0.08);
@@ -67,14 +67,36 @@
 }
 
 .btn--outline {
-  --btn-bg: transparent;
+  /* Solid fill keeps the control from dissolving into cream/off-white pages */
+  --btn-bg: #fff;
   --btn-fg: var(--ink);
-  border-color: rgba(10, 10, 10, 0.2);
+  border-color: rgba(10, 10, 10, 0.42);
 }
 .btn--outline:hover {
   --btn-bg: var(--black);
   --btn-fg: #fff;
   border-color: var(--black);
+  box-shadow: none;
+}
+
+/* Outline is ink-on-light by default; invert on dark surfaces so it doesn't vanish. */
+.page-hero .btn--outline,
+.hero .btn--outline,
+.section--dark .btn--outline,
+.section--graphite .btn--outline,
+.cta-banner .btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.page-hero .btn--outline:hover,
+.hero .btn--outline:hover,
+.section--dark .btn--outline:hover,
+.section--graphite .btn--outline:hover,
+.cta-banner .btn--outline:hover {
+  --btn-bg: rgba(255, 255, 255, 0.12);
+  --btn-fg: #fff;
+  border-color: #fff;
   box-shadow: none;
 }
 

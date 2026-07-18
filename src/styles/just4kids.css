@@ -119,8 +119,8 @@
   gap: 1.2rem;
 }
 .j4k-will__item {
-  background: rgba(255, 255, 255, 0.78);
-  border: 2px solid rgba(10, 10, 10, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(10, 10, 10, 0.12);
   border-radius: var(--radius);
   padding: 1.4rem 1.2rem;
   text-align: center;

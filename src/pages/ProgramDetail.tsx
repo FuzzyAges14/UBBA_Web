@@ -145,7 +145,7 @@ export default function ProgramDetail() {
                   <Link to={categoryTo} className="btn btn--outline">
                     All {categoryLabel}
                   </Link>
-                  <Link to="/contact" className="btn btn--ghost">
+                  <Link to="/contact" className="btn btn--outline">
                     Contact &amp; free class
                   </Link>
                 </div>
