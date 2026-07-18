@@ -9,9 +9,9 @@ Encoding targets: [`docs/PERFORMANCE.md`](../../docs/PERFORMANCE.md).
 
 | Path | Required? | Notes |
 | --- | --- | --- |
-| `hero-poster.jpg` / `.webp` | Yes | LCP poster from adult kick still; `-960` / `-1280` siblings |
+| `hero-poster.jpg` / `.webp` | Yes | LCP poster from hero loop frame; `-960` / `-1280` siblings |
 | `hero-poster-mobile.jpg` / `.webp` | Yes | Tighter crop for ≤720px via `<picture>` |
-| `hero.mp4` | Yes | Ken Burns loop of unitedbba.com stills, H.264 `+faststart` |
+| `hero.mp4` | Yes | Same Vimeo BG as live unitedbba.com (WebsiteDojo stock), H.264 `+faststart` |
 | `hero.webm` | Yes | VP9 companion |
 | `og-default.jpg` | Yes | 1200×630 social share |
 | `owner-portrait.jpg` | Yes | Master Lee / Sanghyun Lee from unitedbba.com |
