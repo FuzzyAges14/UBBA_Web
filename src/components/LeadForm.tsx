@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from 'react'
+import { useLocation } from 'react-router-dom'
 import { LOCATIONS, PROGRAM_OPTIONS, GLEN_ROCK, SITE } from '../data/site'
+import { submitLead } from '../lib/submitLead'
 
-type Errors = Partial<Record<'name' | 'email' | 'phone', string>>
+type Errors = Partial<Record<'name' | 'email' | 'phone' | 'form', string>>
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -11,7 +13,9 @@ const locationChoices = [
 ]
 
 export default function LeadForm({ defaultLocation }: { defaultLocation?: string }) {
+  const location = useLocation()
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
 
   function validate(data: FormData): Errors {
@@ -26,15 +30,38 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
     return next
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const data = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const data = new FormData(form)
     const found = validate(data)
     setErrors(found)
-    if (Object.keys(found).length === 0) {
-      // No backend yet: capture intent client-side and show confirmation.
-      // Wire this up to a form service (e.g. Formspree) or CRM when ready.
+    if (Object.keys(found).length > 0) return
+
+    setSending(true)
+    try {
+      const result = await submitLead({
+        name: String(data.get('name') ?? '').trim(),
+        email: String(data.get('email') ?? '').trim(),
+        phone: String(data.get('phone') ?? '').trim(),
+        location: String(data.get('location') ?? '').trim() || undefined,
+        program: String(data.get('program') ?? '').trim() || undefined,
+        message: String(data.get('message') ?? '').trim() || undefined,
+        website: String(data.get('website') ?? '').trim() || undefined,
+        source: location.pathname || '/',
+      })
+      if (!result.ok) {
+        setErrors({ form: result.error || 'Could not send your request.' })
+        return
+      }
       setSubmitted(true)
+      form.reset()
+    } catch {
+      setErrors({
+        form: 'Could not reach the server. Please try again or call us.',
+      })
+    } finally {
+      setSending(false)
     }
   }
 
@@ -71,6 +98,12 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
         <i className="on" />
       </div>
       <div className="form-grid">
+        {/* Honeypot — hidden from people, filled by many bots */}
+        <div className="field field--full" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', height: 0, overflow: 'hidden' }}>
+          <label htmlFor="website">Website</label>
+          <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
+
         <div className="field field--full">
           <label htmlFor="name">Full Name</label>
           <input
@@ -80,6 +113,7 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
             autoComplete="name"
             aria-invalid={errors.name ? 'true' : undefined}
             placeholder="Your name"
+            disabled={sending}
           />
           {errors.name && <span className="error">{errors.name}</span>}
         </div>
@@ -93,6 +127,7 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
             autoComplete="email"
             aria-invalid={errors.email ? 'true' : undefined}
             placeholder="you@example.com"
+            disabled={sending}
           />
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
@@ -106,13 +141,19 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
             autoComplete="tel"
             aria-invalid={errors.phone ? 'true' : undefined}
             placeholder="(201) 555-0123"
+            disabled={sending}
           />
           {errors.phone && <span className="error">{errors.phone}</span>}
         </div>
 
         <div className="field">
           <label htmlFor="location">Location</label>
-          <select id="location" name="location" defaultValue={defaultLocation ?? ''}>
+          <select
+            id="location"
+            name="location"
+            defaultValue={defaultLocation ?? ''}
+            disabled={sending}
+          >
             <option value="" disabled>
               Choose a location
             </option>
@@ -126,7 +167,7 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
 
         <div className="field">
           <label htmlFor="program">Program</label>
-          <select id="program" name="program" defaultValue="">
+          <select id="program" name="program" defaultValue="" disabled={sending}>
             <option value="" disabled>
               Choose a program
             </option>
@@ -144,12 +185,19 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
             id="message"
             name="message"
             placeholder="Tell us a bit about what you're looking for..."
+            disabled={sending}
           />
         </div>
 
         <div className="field field--full">
-          <button type="submit" className="btn btn--lg btn--block">
-            {SITE.primaryCta} <span className="btn__arrow">→</span>
+          {errors.form && (
+            <span className="error" role="alert" style={{ display: 'block', marginBottom: '0.75rem' }}>
+              {errors.form}
+            </span>
+          )}
+          <button type="submit" className="btn btn--lg btn--block" disabled={sending}>
+            {sending ? 'Sending…' : SITE.primaryCta}{' '}
+            {!sending && <span className="btn__arrow">→</span>}
           </button>
           <p className="form-reassure">
             No experience required · Beginners welcome · No obligation — we'll

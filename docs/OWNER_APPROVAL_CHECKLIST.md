@@ -31,8 +31,9 @@ approved. Configuration lives in `src/data/site.ts`.
 - [ ] Trial offer details
 
 ## Contact & legal
-- [ ] Email addresses
-- [ ] Social media links + recent-post placeholders (`SOCIAL` — Instagram & Facebook
+- [ ] Email addresses (`CONTACT` in `src/data/contact.ts` — notify + public)
+- [ ] Social media links + recent-post placeholders (`SOCIAL_PROFILES` in
+      `src/data/contact.ts` — Instagram & Facebook
       pages under `/follow-us`; YouTube omitted)
 - [ ] Privacy Policy final copy
 - [ ] Terms and Conditions final copy

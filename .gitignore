@@ -26,3 +26,8 @@ dist-ssr
 
 # Vite cache
 .vite
+
+# Local secrets (SMTP / Resend keys)
+.env
+.env.*
+!.env.example
