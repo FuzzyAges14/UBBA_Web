@@ -14,8 +14,8 @@ export default function AdultPrograms() {
     <>
       <PageHero
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Adult & Family Programs' }]}
-        title="Adult & Family Programs"
-        intro="Get in the best shape of your life while learning practical self-defense. From total beginners to seasoned athletes, there's a program for you."
+        title="Adult & Family Martial Arts"
+        intro="Fitness, focus, and practical self-defense for adults — plus family training options. Beginners are welcome at our Allendale and Midland Park schools."
       />
 
       <SectionSeam from="dark" to="off-white" />
@@ -56,11 +56,19 @@ export default function AdultPrograms() {
             <SectionHeading
               eyebrow="Train Your Way"
               title={<>Fitness, focus &amp; real self-defense</>}
-              lead="Whether you want to lose weight, relieve stress, or learn to protect yourself and your family, our adult classes deliver a full-body workout in a supportive, no-ego environment."
+              lead="Whether you want a motivating alternative to the gym, a place to relieve stress, or practical self-defense skills, adult classes deliver a full-body workout in a supportive, no-ego environment — no prior martial arts background required."
             />
-            <Link to="/contact" className="btn btn--gold mt">
-              {SITE.primaryCta} <span className="btn__arrow">→</span>
-            </Link>
+            <div className="flex-actions mt">
+              <Link to="/contact" className="btn btn--gold">
+                {SITE.primaryCta} <span className="btn__arrow">→</span>
+              </Link>
+              <Link to="/locations/allendale" className="btn btn--outline">
+                Allendale
+              </Link>
+              <Link to="/locations/midland-park" className="btn btn--outline">
+                Midland Park
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>

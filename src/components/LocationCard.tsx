@@ -6,6 +6,8 @@ function mapSrc(query: string) {
 }
 
 export default function LocationCard({ loc }: { loc: Location }) {
+  const detailTo = loc.page ? `/locations/${loc.id}` : '/contact'
+
   return (
     <div className="loc-card">
       <div className="map-embed">
@@ -31,15 +33,22 @@ export default function LocationCard({ loc }: { loc: Location }) {
             <a href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}>{loc.phone}</a>
           </p>
         )}
-        {loc.note && <p className="loc-card__meta"><em>{loc.note}</em></p>}
+        {loc.note && (
+          <p className="loc-card__meta">
+            <em>{loc.note}</em>
+          </p>
+        )}
         {loc.placeholder && (
           <p className="loc-card__meta">
             <em>Placeholder location — enable in site settings if kept.</em>
           </p>
         )}
         <div className="loc-card__actions">
-          <Link to="/contact" className="btn btn--outline">
-            View Contact Page
+          <Link to={detailTo} className="btn btn--outline">
+            {loc.page ? `Visit ${loc.name} Page` : 'View Contact Page'}
+          </Link>
+          <Link to="/contact" className="btn btn--dark">
+            Free Class
           </Link>
         </div>
       </div>

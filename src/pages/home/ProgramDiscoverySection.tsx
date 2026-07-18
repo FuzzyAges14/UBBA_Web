@@ -11,7 +11,7 @@ export default function ProgramDiscoverySection() {
           <SectionHeading
             eyebrow="Find Your Path"
             title={<>Programs for every age &amp; stage</>}
-            lead="Age-specific training that meets each student exactly where they are — hover a program to see how it works."
+            lead="From Tiny Tigers to adult martial arts, choose an age-specific path — then try a free class in Allendale or Midland Park."
           />
         </Reveal>
         <div className="rail mt">

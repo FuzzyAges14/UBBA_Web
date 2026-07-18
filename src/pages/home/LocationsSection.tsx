@@ -12,8 +12,8 @@ export default function LocationsSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Our Schools"
-            title="Visit a location near you"
-            lead={`${locations.length} convenient Bergen County locations, with the same welcoming community at each.`}
+            title="Train in Allendale & Midland Park"
+            lead={`${locations.length} Bergen County schools — pick the campus that fits your commute, then request a free class at the location you prefer.`}
           />
         </Reveal>
         <div className={`grid ${locations.length >= 3 ? 'grid--3' : 'grid--2'} mt`}>

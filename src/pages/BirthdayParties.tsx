@@ -78,9 +78,10 @@ export default function BirthdayParties() {
               Fun &amp; awesome — we handle the stress
             </h2>
             <p className="section-lead">
-              Mom &amp; Dad get to relax while the school does the work. Guests enjoy games that
-              teach courtesy and respect while having a kicking good time — no martial arts
-              experience necessary.
+              Parents get to relax while instructors run the party. Guests enjoy games that
+              practice courtesy and respect while having a kicking good time — no martial arts
+              experience necessary. Ideal for birthday celebrations when you want an active,
+              supervised option instead of planning every detail yourself.
             </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>So many fun activities</h3>
             <ul className="checklist mt-sm">
@@ -104,8 +105,9 @@ export default function BirthdayParties() {
                 ))}
               </ul>
               <p className="ph-note mt-sm">
-                Exact pricing &amp; upgrade options — pending owner confirmation. Inquire to get
-                the current package details.
+                Party length, guest capacity, pricing, and upgrade options — pending owner
+                confirmation. The inquiry form starts the conversation; we confirm current
+                package details before booking.
               </p>
             </div>
           </Reveal>
@@ -147,6 +149,11 @@ export default function BirthdayParties() {
             <div className="j4k-signup__intro">
               <span className="eyebrow">Getting Started Is Easy</span>
               <h2 className="section-title">Tell us the date — we do the rest</h2>
+              <p className="section-lead" style={{ marginTop: '0.75rem' }}>
+                Use the form to share your preferred date, guest range, and school interest.
+                It is an inquiry — not a final reservation — until our team confirms
+                availability and details.
+              </p>
               <ol className="j4k-easy">
                 <li>
                   <strong>The date</strong>
@@ -158,9 +165,20 @@ export default function BirthdayParties() {
                 </li>
                 <li>
                   <strong>How to contact you</strong>
-                  <span>We’ll call to lock it in.</span>
+                  <span>We’ll call to confirm details.</span>
                 </li>
               </ol>
+              <div className="flex-actions mt">
+                <Link to="/locations/allendale" className="btn btn--outline">
+                  Allendale
+                </Link>
+                <Link to="/locations/midland-park" className="btn btn--outline">
+                  Midland Park
+                </Link>
+                <Link to="/contact" className="btn btn--ghost">
+                  Contact
+                </Link>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={100}>

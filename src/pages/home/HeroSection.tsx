@@ -50,8 +50,9 @@ export default function HeroSection() {
           custom={3}
           variants={fadeUp}
         >
-          We build confidence, discipline, focus, and real self-defense skills —
-          for kids, teens, and adults. Train with a team that believes in you.
+          Taekwondo and martial arts for kids, teens, and adults — building
+          confidence, discipline, focus, fitness, and practical self-defense at our
+          Bergen County schools.
         </motion.p>
         <motion.div
           className="hero__actions"

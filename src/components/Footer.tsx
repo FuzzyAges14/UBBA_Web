@@ -96,7 +96,15 @@ export default function Footer() {
             <div className="footer__contact">
               {LOCATIONS.map((loc) => (
                 <div key={loc.id} style={{ marginBottom: '0.9rem' }}>
-                  <strong style={{ color: '#fff' }}>{loc.name}</strong>
+                  <strong style={{ color: '#fff' }}>
+                    {loc.page ? (
+                      <Link to={`/locations/${loc.id}`} style={{ color: '#fff' }}>
+                        {loc.name}
+                      </Link>
+                    ) : (
+                      loc.name
+                    )}
+                  </strong>
                   <br />
                   {loc.address}, {loc.city}
                   {loc.phone && (

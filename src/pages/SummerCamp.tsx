@@ -78,8 +78,10 @@ export default function SummerCamp() {
               Summertime is fun time — and learning time
             </h2>
             <p className="section-lead">
-              Kids enjoy games, projects, and outings plus life-enriching skills: self-confidence,
-              respect, self-control, and friendship. No martial arts experience necessary.
+              Campers ages 3–12 enjoy games, projects, and martial arts practice while building
+              confidence, respect, self-control, and friendship. No martial arts experience
+              necessary — parents choose camp when they want an active, supervised summer plan
+              with structure and play.
             </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>What’s in a camp day</h3>
             <ul className="checklist mt-sm">
@@ -146,21 +148,37 @@ export default function SummerCamp() {
           <Reveal>
             <div className="j4k-signup__intro">
               <span className="eyebrow">Getting Started Is Easy</span>
-              <h2 className="section-title">Reserve your child’s spot</h2>
+              <h2 className="section-title">Ask about this summer’s camp</h2>
+              <p className="section-lead" style={{ marginTop: '0.75rem' }}>
+                The form is an inquiry for dates, location preference, and openings. We
+                confirm the seasonal schedule and pricing before enrollment — those details
+                are not finalized on this page.
+              </p>
               <ol className="j4k-easy">
                 <li>
                   <strong>Enter your info</strong>
                   <span>Tell us who you’re signing up.</span>
                 </li>
                 <li>
-                  <strong>Enroll your child</strong>
-                  <span>We’ll confirm dates and details.</span>
+                  <strong>Share preferences</strong>
+                  <span>We’ll confirm dates, school, and details.</span>
                 </li>
                 <li>
                   <strong>Begin summer camp</strong>
-                  <span>Drop off and let the fun begin!</span>
+                  <span>Drop off once your spot is confirmed!</span>
                 </li>
               </ol>
+              <div className="flex-actions mt">
+                <Link to="/locations/allendale" className="btn btn--outline">
+                  Allendale
+                </Link>
+                <Link to="/locations/midland-park" className="btn btn--outline">
+                  Midland Park
+                </Link>
+                <Link to="/contact" className="btn btn--ghost">
+                  Contact
+                </Link>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={100}>
