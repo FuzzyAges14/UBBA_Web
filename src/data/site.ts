@@ -889,13 +889,6 @@ export const JUST_4_KIDS_MENU: MegaGroup = {
   ],
 }
 
-/** Per-route SEO record. Open Graph / Twitter fields are reserved for the SEO agent. */
-export type SeoMeta = {
-  title: string
-  description: string
-  robots?: string
-}
-
 /* ---------------------------------------------------------------------------
  * Per-program detail pages. Keep copy short so it's easy to edit later.
  * ------------------------------------------------------------------------- */
@@ -1106,81 +1099,4 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
 
 export function getProgram(slug: string): ProgramDetail | undefined {
   return PROGRAM_DETAILS.find((p) => p.slug === slug)
-}
-
-export const SEO: Record<string, SeoMeta> = {
-  '/': {
-    title:
-      'United Black Belt Academy | Taekwondo & Martial Arts in Allendale & Midland Park, NJ',
-    description:
-      'Confidence-building Taekwondo classes for kids, teens, and adults in Allendale & Midland Park, NJ. Try a class for free at United Black Belt Academy.',
-  },
-  '/programs/children': {
-    title: "Children's Martial Arts Programs | United Black Belt Academy",
-    description:
-      'Kids Taekwondo in Bergen County — Tiny Tigers, Junior Tigers, and Teen Martial Arts build confidence, focus, and respect. Try a class for free.',
-  },
-  '/programs/adult': {
-    title: 'Adult & Family Martial Arts | United Black Belt Academy',
-    description:
-      'Adult Taekwondo, family programs, Olympic sparring, and self-defense in Allendale & Midland Park, NJ. Fitness, confidence, and community.',
-  },
-  '/just-4-kids': {
-    title: 'Just 4 Kids — Parties, Camp & Nights Out | United Black Belt Academy',
-    description:
-      'Martial arts birthday parties, summer camp, and Parents’ Night Out in Bergen County, NJ. The fun doesn’t stop at the mat.',
-  },
-  '/just-4-kids/birthday-parties': {
-    title: 'Martial Arts Birthday Parties | United Black Belt Academy',
-    description:
-      'Book a martial arts birthday party in Allendale, Midland Park, or Glen Rock, NJ — board breaking, games, and stress-free fun for all ages.',
-  },
-  '/just-4-kids/summer-camp': {
-    title: 'Summer Camp | United Black Belt Academy',
-    description:
-      'Action-packed martial arts summer camp for ages 3–12 in Bergen County, NJ — themes, crafts, games, and confidence-building fun.',
-  },
-  '/just-4-kids/parents-night-out': {
-    title: "Parents' Night Out | United Black Belt Academy",
-    description:
-      'Monthly Friday Parents’ Night Out in Bergen County, NJ — games, pizza, and supervised fun while parents enjoy a night off.',
-  },
-  '/follow-us': {
-    title: 'Follow Us — Instagram & Facebook | United Black Belt Academy',
-    description:
-      'Follow United Black Belt Academy on Instagram and Facebook for class moments, events, and community updates.',
-  },
-  '/follow-us/instagram': {
-    title: 'Instagram | United Black Belt Academy',
-    description:
-      'Recent Instagram posts from United Black Belt Academy — class moments, promotions, and life on the mat.',
-  },
-  '/follow-us/facebook': {
-    title: 'Facebook | United Black Belt Academy',
-    description:
-      'Recent Facebook posts from United Black Belt Academy — events, camp updates, and family news.',
-  },
-  '/contact': {
-    title: 'Contact & Locations | United Black Belt Academy',
-    description:
-      'Visit United Black Belt Academy in Allendale or Midland Park, NJ. Hours, directions, phone, and a free-class request form.',
-  },
-  '/locations/allendale': {
-    title: 'Allendale, NJ Martial Arts School | United Black Belt Academy',
-    description:
-      'Taekwondo and martial arts classes for kids, teens, and adults at United Black Belt Academy in Allendale, NJ. Address, map, and free-class requests.',
-  },
-  '/locations/midland-park': {
-    title: 'Midland Park, NJ Martial Arts School | United Black Belt Academy',
-    description:
-      'Family martial arts training at United Black Belt Academy in Midland Park, NJ. Programs for children and adults — request a free introductory class.',
-  },
-  '/privacy': {
-    title: 'Privacy Policy | United Black Belt Academy',
-    description: 'Privacy policy for United Black Belt Academy.',
-  },
-  '/terms': {
-    title: 'Terms and Conditions | United Black Belt Academy',
-    description: 'Terms and conditions for United Black Belt Academy.',
-  },
 }
