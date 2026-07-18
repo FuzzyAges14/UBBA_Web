@@ -7,7 +7,14 @@ import CtaBanner from '../components/CtaBanner'
 import ProgramCard from '../components/ProgramCard'
 import SectionSeam from '../components/SectionSeam'
 import NotFound from './NotFound'
-import { getProgram, FAQS, SITE, LOCATIONS, imageDimensionsFor } from '../data/site'
+import {
+  getProgram,
+  FAQS,
+  SITE,
+  LOCATIONS,
+  imageDimensionsFor,
+  imageSrcSetFor,
+} from '../data/site'
 
 export default function ProgramDetail() {
   const { slug } = useParams()
@@ -27,6 +34,7 @@ export default function ProgramDetail() {
   return (
     <>
       <PageHero
+        family="program"
         crumbs={[
           { label: 'Home', to: '/' },
           { label: categoryLabel, to: categoryTo },
@@ -46,39 +54,40 @@ export default function ProgramDetail() {
       <section className="section">
         <div className="container split">
           <Reveal>
-            <div className="photo photo--tall">
+            <div className="photo photo--tall program-detail__photo">
               <OptimizedImage
                 src={program.image}
                 alt=""
                 width={dims.width}
                 height={dims.height}
+                srcSet={imageSrcSetFor(program.image)}
                 loading="lazy"
                 sizes="(max-width: 900px) 100vw, 42vw"
               />
-              <span className="photo__credit">Placeholder photo</span>
+              <span className="photo__credit">Temporary stock photo</span>
             </div>
           </Reveal>
           <Reveal delay={100}>
-            {program.ages && <span className="card__ages">{program.ages}</span>}
-            <h2 className="section-title" style={{ marginTop: '0.6rem' }}>
-              About {program.name}
-            </h2>
-            <p className="section-lead">{program.description}</p>
-            <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>Who it&apos;s for</h3>
-            <p className="section-lead" style={{ marginTop: '0.5rem' }}>
-              {program.audience}
-            </p>
-            <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>
-              What you&apos;ll work on
-            </h3>
-            <ul className="checklist mt-sm">
-              {program.learn.map((l) => (
-                <li key={l}>{l}</li>
-              ))}
-            </ul>
-            <Link to="/contact" className="btn btn--gold mt">
-              {SITE.primaryCta} <span className="btn__arrow">→</span>
-            </Link>
+            <div className="program-detail__copy">
+              {program.ages && <span className="card__ages">{program.ages}</span>}
+              <h2 className="section-title" style={{ marginTop: '0.6rem' }}>
+                About {program.name}
+              </h2>
+              <p className="section-lead">{program.description}</p>
+              <h3>Who it&apos;s for</h3>
+              <p className="section-lead" style={{ marginTop: '0.5rem' }}>
+                {program.audience}
+              </p>
+              <h3>What you&apos;ll work on</h3>
+              <ul className="checklist mt-sm">
+                {program.learn.map((l) => (
+                  <li key={l}>{l}</li>
+                ))}
+              </ul>
+              <Link to="/contact" className="btn btn--blue mt">
+                {SITE.primaryCta} <span className="btn__arrow">→</span>
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -87,8 +96,11 @@ export default function ProgramDetail() {
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container" style={{ maxWidth: '820px', position: 'relative' }}>
+        <div className="container interior-faq program-expect">
           <Reveal>
+            <span className="program-expect__index" aria-hidden="true">
+              02 — Expectation
+            </span>
             <span className="eyebrow">What Students Can Expect</span>
             <h2 className="section-title">Inside the dojang</h2>
             <p className="section-lead">{program.classLooksLike}</p>
@@ -158,7 +170,7 @@ export default function ProgramDetail() {
       {!related.length && <SectionSeam from="dark" to="off-white" />}
 
       <section className="section section--offwhite">
-        <div className="container" style={{ maxWidth: '820px' }}>
+        <div className="container interior-faq">
           <Reveal>
             <span className="eyebrow">FAQs</span>
             <h2 className="section-title">Common questions</h2>

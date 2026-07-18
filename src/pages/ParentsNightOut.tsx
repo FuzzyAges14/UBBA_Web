@@ -24,7 +24,7 @@ export default function ParentsNightOut() {
         intro={detail.heroIntro}
       >
         <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
-          <a href={`#${formId}`} className="btn btn--gold btn--lg">
+          <a href={`#${formId}`} className="btn btn--blue btn--lg">
             {detail.ctaLabel} <span className="btn__arrow">→</span>
           </a>
           <Link to="/just-4-kids" className="btn btn--outline btn--lg">
@@ -65,6 +65,7 @@ export default function ParentsNightOut() {
             <MediaFrame
               label="Parents' Night Out photo — coming soon"
               icon={detail.mediaIcon}
+              ownerRequired
               stickers={[
                 { kind: 'pizza', spot: 'tr', rotate: -10, delay: 0 },
                 { kind: 'glasses', spot: 'bl', rotate: 8, delay: 0.3 },

@@ -11,7 +11,7 @@ loading strategy and deployment-time measurement.
 | Route splitting | Homepage is eager; other pages use `React.lazy` + `Suspense` (`src/App.tsx`) |
 | Vendor chunks | `react` / `react-dom` / `react-router` and `framer-motion` are split in `vite.config.ts` |
 | Hero media | Eager poster (`fetchpriority=high`); video loads only when conditions allow |
-| Images | `OptimizedImage` sets width/height, lazy-loads below-the-fold photos |
+| Images | `OptimizedImage` sets width/height, lazy-loads below-the-fold photos; `srcSet` from `IMAGE_SRCSETS` |
 | Fonts | Ocean Rush preloaded + `font-display: swap`; Google Fonts use `display=swap` |
 
 ## Hero video loading rules
@@ -21,22 +21,25 @@ loading strategy and deployment-time measurement.
 - `prefers-reduced-motion: reduce`
 - Network `Save-Data`
 - Effective connection `2g` / `slow-2g`
-- Viewport width ≤ 720px (poster-only on phones)
+- Viewport width ≤ 720px (poster-only on phones — mobile poster crop via `<picture>`)
 
-Video uses `preload="none"`, `muted`, `playsInline`, and `loop`. Prefer
-self-hosted WebM + MP4 for production instead of hotlinking Mixkit.
+Video uses `preload="none"`, `muted`, `playsInline`, and `loop`. Production
+defaults are self-hosted `/media/hero.mp4` + `/media/hero.webm` (no CDN hotlink).
 
 ### Production media files
 
-Commit or deploy these under `public/media/` (see `public/media/README.md`):
+Committed under `public/media/` (see `public/media/README.md`):
 
-| File | Role | Target |
-| --- | --- | --- |
-| `hero-poster.jpg` | LCP / fallback | ≤ 150 KB, ~1920×1080, quality ~70–80 |
-| `hero.mp4` | H.264 fallback | ≤ 2–3 MB, 720p–1080p, ~2–4 Mbps |
-| `hero.webm` | Modern browsers | Same resolution, VP9/AV1, usually smaller |
+| File | Role | Target | Current (2026-07-18) |
+| --- | --- | --- | --- |
+| `hero-poster.jpg` | LCP / fallback | ≤ 150 KB, ~1920×1080 | **97 KB** |
+| `hero-poster.webp` | Modern LCP candidate | Smaller than JPEG | **71 KB** |
+| `hero-poster-mobile.jpg` | ≤720px art-directed crop | ≤ 100 KB | **76 KB** |
+| `hero.mp4` | H.264 fallback | ≤ 2–3 MB, 720p–1080p | **2.5 MB** (1920×1080, CRF 28) |
+| `hero.webm` | Modern browsers | Same duration, VP9 | **2.1 MB** (1280×720, CRF 34) |
+| `og-default.jpg` | Social share | 1200×630 | **67 KB** |
 
-Env overrides (Vite):
+Env overrides (Vite) — optional now that defaults are local:
 
 ```bash
 VITE_HERO_VIDEO_MP4=/media/hero.mp4
@@ -47,33 +50,51 @@ Example ffmpeg encode (adjust CRF to taste):
 
 ```bash
 # Poster frame
-ffmpeg -y -ss 00:00:01 -i source.mov -frames:v 1 -q:v 4 public/media/hero-poster.jpg
+ffmpeg -y -ss 00:00:05 -i source.mp4 -frames:v 1 -q:v 4 public/media/hero-poster.jpg
 
 # MP4 (H.264)
-ffmpeg -y -i source.mov -vf "scale=-2:1080" -c:v libx264 -pix_fmt yuv420p \
+ffmpeg -y -i source.mp4 -vf "scale=-2:1080" -c:v libx264 -pix_fmt yuv420p \
   -profile:v high -movflags +faststart -an -crf 28 public/media/hero.mp4
 
 # WebM (VP9)
-ffmpeg -y -i source.mov -vf "scale=-2:1080" -c:v libvpx-vp9 -b:v 0 -crf 34 \
-  -an public/media/hero.webm
+ffmpeg -y -i source.mp4 -vf "scale=-2:720" -c:v libvpx-vp9 -b:v 0 -crf 34 \
+  -an -row-mt 1 public/media/hero.webm
 ```
 
-Do not ship copyrighted footage without authorization. Replace Mixkit
-placeholders with academy-owned media before launch.
+Do not ship copyrighted footage without authorization. Replace temporary
+Pexels/Wikimedia/Mixkit assets with academy-owned media before launch
+(see `docs/IMAGE_SOURCES.md`).
 
 ## Still photography
 
 | Guideline | Recommendation |
 | --- | --- |
 | Dimensions | Match layout: landscape cards ~1280×720; portraits ~1080×1920 |
-| Format | Prefer WebP/AVIF for production; JPEG is fine for placeholders |
+| Format | JPEG fallback + WebP sibling committed for each primary still |
+| Responsive | Widths 640 / 960 / 1280 (and 1920 for large heroes) via `IMAGE_SRCSETS` |
 | Weight | Aim ≤ 120 KB per above-the-fold still; ≤ 200 KB for large heroes |
 | Markup | Always set `width` / `height`; `loading="lazy"` below the fold |
 | LCP | Only the hero poster (and header logo) should use `fetchpriority="high"` |
-| Srcset | When exporting multiple widths, pass `srcSet` + `sizes` to `OptimizedImage` |
+| Srcset | `ProgramCard` / `ProgramDetail` / `HeroMedia` pass `srcSet` + `sizes` |
 
-All paths are centralized in `IMAGES` / `HERO_MEDIA` / `IMAGE_DIMENSIONS` in
-`src/data/site.ts`.
+All paths are centralized in `IMAGES` / `HERO_MEDIA` / `IMAGE_DIMENSIONS` /
+`IMAGE_SRCSETS` in `src/data/site.ts`.
+
+## Before / after media weights (Agent 3 — 2026-07-18)
+
+| Class | Before | After |
+| --- | --- | --- |
+| Committed stills (JPEG only) | **200 KB** total (6 soft Mixkit frames, incl. Restricted kids) | **~1.2 MB** primary JPEGs + responsive/WebP siblings (**~4.0 MB** all still derivatives) |
+| Hero video | Mixkit CDN hotlink (~3.7 MB listed; not self-hosted) | **2.5 MB** MP4 + **2.1 MB** WebM self-hosted |
+| Third-party production media requests | Mixkit CDN on video load | **None** (local `/media/*` only) |
+| Largest LCP still | Soft 34 KB 1920×1080 karate poster | **97 KB** class-scene poster (sharper, intentional) |
+
+Notes:
+
+- Still weight increased deliberately: previous files were over-compressed video
+  frames unsuitable for a premium site. Responsive `srcSet` keeps mobile
+  downloads near the 640w variants (~40–60 KB for many slots).
+- Restricted Mixkit kids frames were removed (license risk), not merely re-encoded.
 
 ## Fonts
 
@@ -99,12 +120,6 @@ dependency:
 pnpm dlx vite-bundle-visualizer
 ```
 
-Or with the build already configured:
-
-```bash
-pnpm build && pnpm dlx rollup-plugin-visualizer --help
-```
-
 Expect: a `react-vendor` chunk, a `motion` chunk, the homepage entry, and
 per-route chunks for Privacy, Terms, events, programs, etc.
 
@@ -118,7 +133,7 @@ per-route chunks for Privacy, Terms, events, programs, etc.
 5. Re-test with “Reduce motion” enabled and on a mid-tier Android profile.
 
 Do not treat local `pnpm preview` scores as final — CDN, TLS, and cache headers
-change results.
+change results. Do not claim a Lighthouse score without running Lighthouse.
 
 ## Asset size limits (practical)
 
@@ -128,12 +143,13 @@ change results.
 | CSS (gzipped) | ~10–15 KB is healthy for this site |
 | Hero poster | ≤ 150 KB |
 | Hero video | ≤ 3 MB (prefer shorter loops) |
-| Content stills | ≤ 200 KB each |
+| Content stills (primary) | ≤ 220 KB each @1280w |
+| Mobile srcset candidate | Prefer ≤ 80 KB @640w |
 
 ## Remaining deployment-dependent work
 
-- Encode and upload final academy hero WebM/MP4
-- Replace Mixkit stills with licensed academy photography (WebP recommended)
+- Replace temporary stock with licensed academy photography (prefer WebP + JPEG)
+- Encode authentic UBBA hero WebM/MP4 when footage exists
 - Enable CDN caching + Brotli/gzip at the host
 - Confirm HTTP/2 or HTTP/3 and long-cache hashed assets (`dist/assets/*`)
 - Optional: self-host Google Fonts after license/ops review

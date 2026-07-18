@@ -8,7 +8,7 @@ export default function NotFound() {
         The page you're looking for has moved or no longer exists.
       </p>
       <div className="flex-actions mt" style={{ justifyContent: 'center' }}>
-        <Link to="/" className="btn btn--gold btn--lg">
+        <Link to="/" className="btn btn--blue btn--lg">
           Back To Home
         </Link>
       </div>

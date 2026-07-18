@@ -19,4 +19,5 @@
 /* Utilities */
 @import './styles/utilities.css';
 /* Page-specific */
+@import './styles/interior.css';
 @import './styles/just4kids.css';

@@ -28,7 +28,39 @@
   .pill:hover,
   .loc-card:hover,
   .pcard:hover .pcard__art,
-  .pcard:hover .pcard__img {
+  .pcard:hover .pcard__img,
+  .home-program-row:hover,
+  .home-feature:hover .feature__img {
+    transform: none;
+  }
+  .home-feature:hover .home-feature__cta .btn__arrow,
+  .home-program-row:hover .home-program-row__arrow {
+    transform: none;
+  }
+  /* Buttons/links: keep hover color/fill states, drop motion. */
+  .btn,
+  .btn__arrow,
+  .text-link,
+  .text-link::after,
+  .footer__links a,
+  .footer__links a::after,
+  .footer__social a,
+  .footer__contact a,
+  .pcard__cta,
+  .pcard__cta::after,
+  .nav__link,
+  .nav__link::after,
+  .hero__media-toggle {
+    transition: none !important;
+  }
+  .btn:hover:not(:disabled):not([aria-disabled='true']),
+  .btn:active:not(:disabled):not([aria-disabled='true']) {
+    transform: none;
+    box-shadow: none;
+  }
+  .btn:hover:not(:disabled):not([aria-disabled='true']) .btn__arrow,
+  .text-link:hover .btn__arrow,
+  .pcard:hover .pcard__cta .btn__arrow {
     transform: none;
   }
   .hamburger span,

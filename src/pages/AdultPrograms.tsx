@@ -1,18 +1,26 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Placeholder from '../components/Placeholder'
+import OptimizedImage from '../components/OptimizedImage'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
 import ProgramCard from '../components/ProgramCard'
 import SectionHeading from '../components/SectionHeading'
 import SectionSeam from '../components/SectionSeam'
-import { ADULT_PROGRAMS, FAQS, PROGRAM_GLYPHS, SITE } from '../data/site'
+import {
+  ADULT_PROGRAMS,
+  FAQS,
+  IMAGE_DIMENSIONS,
+  IMAGES,
+  PROGRAM_GLYPHS,
+  SITE,
+} from '../data/site'
 
 export default function AdultPrograms() {
   return (
     <>
       <PageHero
+        family="program"
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Adult & Family Programs' }]}
         title="Adult & Family Martial Arts"
         intro="Fitness, focus, and practical self-defense for adults — plus family training options. Beginners are welcome at our Allendale and Midland Park schools."
@@ -21,7 +29,7 @@ export default function AdultPrograms() {
       <SectionSeam from="dark" to="off-white" />
 
       <section className="section">
-        <div className="container">
+        <div className="container program-overview__grid">
           <div className="grid grid--3">
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
@@ -50,9 +58,22 @@ export default function AdultPrograms() {
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container split" style={{ position: 'relative' }}>
+        <div className="container split interior-split">
           <Reveal delay={120}>
-            <Placeholder label="Adult Taekwondo training session" icon="🥋" variant="tall" />
+            <figure className="interior-media interior-media--tall interior-media--focus-center">
+              <div className="interior-media__veil" aria-hidden="true" />
+              <OptimizedImage
+                src={IMAGES.action}
+                alt="Adult martial artist practicing a high kick (temporary stock photography)"
+                width={IMAGE_DIMENSIONS.action.width}
+                height={IMAGE_DIMENSIONS.action.height}
+                loading="lazy"
+                sizes="(max-width: 900px) 100vw, 42vw"
+              />
+              <figcaption className="interior-media__credit">
+                Temporary stock — not UBBA instructors or students
+              </figcaption>
+            </figure>
           </Reveal>
           <Reveal>
             <SectionHeading
@@ -61,7 +82,7 @@ export default function AdultPrograms() {
               lead="Whether you want a motivating alternative to the gym, a place to relieve stress, or practical self-defense skills, adult classes deliver a full-body workout in a supportive, no-ego environment — no prior martial arts background required."
             />
             <div className="flex-actions mt">
-              <Link to="/contact" className="btn btn--gold">
+              <Link to="/contact" className="btn btn--blue">
                 {SITE.primaryCta} <span className="btn__arrow">→</span>
               </Link>
               <Link to="/locations/allendale" className="btn btn--outline">
@@ -78,7 +99,7 @@ export default function AdultPrograms() {
       <SectionSeam from="dark" to="off-white" />
 
       <section className="section section--offwhite">
-        <div className="container" style={{ maxWidth: '820px' }}>
+        <div className="container interior-faq">
           <Reveal>
             <SectionHeading eyebrow="FAQs" title="Getting started as an adult" />
           </Reveal>

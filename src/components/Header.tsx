@@ -21,6 +21,8 @@ export default function Header() {
   const closeTimer = useRef<number | undefined>(undefined)
   const j4kCloseTimer = useRef<number | undefined>(undefined)
   const menuBtnRef = useRef<HTMLButtonElement | null>(null)
+  const programsBtnRef = useRef<HTMLButtonElement | null>(null)
+  const j4kBtnRef = useRef<HTMLButtonElement | null>(null)
   const mobileNavRef = useRef<HTMLDivElement | null>(null)
   const megaId = useId()
   const j4kId = useId()
@@ -98,8 +100,14 @@ export default function Header() {
     if (!megaOpen && !j4kOpen) return
     function onKeyDown(e: KeyboardEvent) {
       if (e.key !== 'Escape') return
+      const restorePrograms = megaOpen
+      const restoreJ4k = j4kOpen
       setMegaOpen(false)
       setJ4kOpen(false)
+      queueMicrotask(() => {
+        if (restorePrograms) programsBtnRef.current?.focus()
+        else if (restoreJ4k) j4kBtnRef.current?.focus()
+      })
     }
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
@@ -185,6 +193,7 @@ export default function Header() {
               onMouseLeave={scheduleClose}
             >
               <button
+                ref={programsBtnRef}
                 type="button"
                 className={`nav__link ${programsActive ? 'is-active' : ''}`}
                 aria-expanded={megaOpen}
@@ -227,6 +236,7 @@ export default function Header() {
               onMouseLeave={scheduleJ4kClose}
             >
               <button
+                ref={j4kBtnRef}
                 type="button"
                 className={`nav__link ${just4KidsActive ? 'is-active' : ''}`}
                 aria-expanded={j4kOpen}
@@ -278,7 +288,7 @@ export default function Header() {
                 <strong>{locationCount}</strong> Locations
               </span>
             </span>
-            <Link to="/contact" className="btn btn--gold">
+            <Link to="/contact" className="btn btn--blue">
               {SITE.primaryCta}
             </Link>
             <button
@@ -386,7 +396,7 @@ export default function Header() {
           </nav>
         </div>
         <div className="mobile-nav__cta">
-          <Link to="/contact" className="btn btn--gold btn--block mobile-nav__cta-btn">
+          <Link to="/contact" className="btn btn--blue btn--block mobile-nav__cta-btn">
             {SITE.primaryCta}
           </Link>
         </div>

@@ -72,7 +72,10 @@ reused or edited often lives in `src/data/site.ts`.
 | `chrome.css` | Footer, inner page hero, mobile CTA bar |
 | `motion.css` | Reveal animations + `prefers-reduced-motion` |
 | `utilities.css` | Spacing, checklist, flex helpers |
+| `interior.css` | Interior page families (program/location/contact/legal) |
 | `just4kids.css` | Just 4 Kids playful layer |
+
+See also `docs/PAGE_FAMILIES.md` for interior visual systems.
 
 Add new shared rules to the file that matches the concern. Prefer editing an
 existing section file over growing `index.css` again.

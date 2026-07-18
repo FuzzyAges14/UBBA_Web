@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import PageHero from '../components/PageHero'
-import Placeholder from '../components/Placeholder'
+import OwnerMediaSlot from '../components/OwnerMediaSlot'
 import Reveal from '../components/Reveal'
 import CtaBanner from '../components/CtaBanner'
 import ProgramCard from '../components/ProgramCard'
@@ -35,6 +35,7 @@ export default function LocationDetail() {
   return (
     <>
       <PageHero
+        family="location"
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'Locations', to: '/#locations' },
@@ -44,7 +45,7 @@ export default function LocationDetail() {
         intro={page.headline}
       >
         <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
-          <Link to="/contact" className="btn btn--gold btn--lg">
+          <Link to="/contact" className="btn btn--blue btn--lg">
             {SITE.primaryCta} <span className="btn__arrow">→</span>
           </Link>
           {loc.phone && (
@@ -63,7 +64,7 @@ export default function LocationDetail() {
       <section className="section">
         <div className="container split">
           <Reveal>
-            <Placeholder label={page.imageLabel} icon="🏫" variant="tall" />
+            <OwnerMediaSlot label={page.imageLabel} icon="🏫" />
           </Reveal>
           <Reveal delay={100}>
             <span className="eyebrow">United Black Belt Academy</span>
@@ -90,7 +91,7 @@ export default function LocationDetail() {
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container split" style={{ position: 'relative' }}>
+        <div className="container split interior-split">
           <Reveal>
             <div className="loc-card" style={{ margin: 0 }}>
               <div className="map-embed">
@@ -106,20 +107,15 @@ export default function LocationDetail() {
           <Reveal delay={100}>
             <span className="eyebrow">Visit Us</span>
             <h2 className="section-title">Address, hours &amp; directions</h2>
-            <p className="section-lead" style={{ marginTop: '0.6rem' }}>
+            <p className="section-lead location-visit__meta">
               {loc.address}
               <br />
               {loc.city}
             </p>
             {loc.phone ? (
-              <p style={{ marginTop: '0.5rem' }}>
+              <p className="location-visit__phone">
                 <strong>Phone: </strong>
-                <a
-                  href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
-                  style={{ color: 'var(--blue-soft)', fontWeight: 600 }}
-                >
-                  {loc.phone}
-                </a>
+                <a href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}>{loc.phone}</a>
               </p>
             ) : (
               <p className="ph-note" style={{ marginTop: '0.5rem' }}>
@@ -162,7 +158,7 @@ export default function LocationDetail() {
               >
                 Get Directions
               </a>
-              <Link to="/contact" className="btn btn--gold">
+              <Link to="/contact" className="btn btn--blue">
                 Request a Free Class
               </Link>
             </div>
@@ -182,13 +178,11 @@ export default function LocationDetail() {
               your commute. This list is for local orientation, not a claim of exclusive
               service territory.
             </p>
-            <div className="pill-row mt">
+            <ul className="community-list">
               {page.communitiesServed.map((town) => (
-                <span className="pill" key={town}>
-                  {town}
-                </span>
+                <li key={town}>{town}</li>
               ))}
-            </div>
+            </ul>
           </Reveal>
         </div>
       </section>

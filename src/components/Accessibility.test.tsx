@@ -120,6 +120,23 @@ describe('Accessibility: mobile menu', () => {
     fireEvent.keyDown(document, { key: 'Escape' })
     expect(programs).toHaveAttribute('aria-expanded', 'false')
   })
+
+  it('restores focus to the Programs trigger after Escape closes the mega menu', () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    )
+    const primary = screen.getByRole('navigation', { name: /primary/i })
+    const programs = within(primary).getByRole('button', { name: /programs/i })
+    // Desktop nav is CSS-hidden in jsdom; fireEvent still exercises the handler.
+    fireEvent.click(programs)
+    expect(programs).toHaveAttribute('aria-expanded', 'true')
+    programs.focus()
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(programs).toHaveAttribute('aria-expanded', 'false')
+    expect(programs).toHaveFocus()
+  })
 })
 
 describe('Accessibility: lead form', () => {
