@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
@@ -6,7 +7,7 @@ import Faq from '../components/Faq'
 import ProgramCard from '../components/ProgramCard'
 import SectionHeading from '../components/SectionHeading'
 import SectionSeam from '../components/SectionSeam'
-import { CHILDREN_PROGRAMS, FAQS, PROGRAM_GLYPHS } from '../data/site'
+import { CHILDREN_PROGRAMS, FAQS, PROGRAM_GLYPHS, SITE } from '../data/site'
 
 const LEARN = [
   'Focus & listening skills that carry into the classroom',
