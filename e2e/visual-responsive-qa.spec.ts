@@ -82,6 +82,7 @@ test.describe('Visual / responsive matrix — viewport screenshots', () => {
 
 test.describe('Visual / responsive matrix — priority routes', () => {
   const sampleViewports = [
+    VIEWPORTS.find((v) => v.name === '320x568')!,
     VIEWPORTS.find((v) => v.name === '390x844')!,
     VIEWPORTS.find((v) => v.name === '768x1024')!,
     VIEWPORTS.find((v) => v.name === '1440x900')!,
