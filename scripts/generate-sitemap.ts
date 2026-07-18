@@ -12,8 +12,7 @@
  *    program detail generation via `PROGRAM_DETAILS`
  * 3. Re-run `pnpm sitemap` (or `pnpm build`)
  *
- * Location landing pages: merge `LOCATION_SEO` into the live resolver/sitemap
- * only after those routes exist (see Agent 2 / docs/SEO.md).
+ * Location landing pages (`/locations/*`) are included via the `SEO` map.
  */
 import { writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
