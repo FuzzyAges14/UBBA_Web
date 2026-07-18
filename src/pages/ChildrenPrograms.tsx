@@ -46,7 +46,7 @@ export default function ChildrenPrograms() {
                   </span>
                   <div className="pcard__body">
                     {p.ages && <span className="pcard__age">{p.ages}</span>}
-                    <h3 className="pcard__title">{p.title}</h3>
+                    <h2 className="pcard__title">{p.title}</h2>
                     <p className="pcard__text">{p.blurb}</p>
                     <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>

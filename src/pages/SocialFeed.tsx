@@ -34,7 +34,7 @@ export default function SocialFeed() {
           <Reveal delay={100}>
             <span className="card__ages">{network.handle}</span>
             <h2 className="section-title" style={{ marginTop: '0.6rem' }}>
-              {network.label}
+              Profile overview
             </h2>
             <p className="section-lead">{network.blurb}</p>
             {network.placeholder && (

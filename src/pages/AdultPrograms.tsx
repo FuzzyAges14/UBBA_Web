@@ -39,7 +39,7 @@ export default function AdultPrograms() {
                     {GLYPH[p.id]}
                   </span>
                   <div className="pcard__body">
-                    <h3 className="pcard__title">{p.title}</h3>
+                    <h2 className="pcard__title">{p.title}</h2>
                     <p className="pcard__text">{p.blurb}</p>
                     <Link to={`/programs/${p.slug}`} className="pcard__cta">
                       Learn How It Works <span className="btn__arrow">→</span>

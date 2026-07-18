@@ -104,6 +104,8 @@ Check the [`docs/`](docs/) checklists — a few things still use placeholders:
   [`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md)
   (technical reference: [`docs/BACKEND.md`](docs/BACKEND.md)).
 - Confirm testimonials, stats, and owner details with the owner.
+- Set `VITE_SITE_URL` to the live canonical domain and review
+  [`docs/SEO.md`](docs/SEO.md) (metadata, sitemap, social share image).
 
 ## Available scripts
 
@@ -113,7 +115,8 @@ Check the [`docs/`](docs/) checklists — a few things still use placeholders:
 | `pnpm dev:api` | Start the free-class email API on port 3001 |
 | `pnpm dev:all` | Run website + API together |
 | `pnpm start:api` | Run the API (same as `dev:api`; use in production) |
-| `pnpm build` | Type-check and build for production into `dist/` |
+| `pnpm sitemap` | Regenerate `public/sitemap.xml` and `public/robots.txt` |
+| `pnpm build` | Generate sitemap, type-check, and build for production into `dist/` |
 | `pnpm preview` | Preview the production build locally |
 | `pnpm lint` | Run ESLint over the project |
 | `pnpm test` | Run the Vitest test suite once |
@@ -125,7 +128,9 @@ Check the [`docs/`](docs/) checklists — a few things still use placeholders:
 src/
   data/contact.ts     # Easy edits: notify emails + Instagram / Facebook profile URLs
   data/site.ts        # All other editable content: programs, locations, testimonials, nav
-  components/         # Reusable UI (Header, Footer, LeadForm, LocationCard, ...)
+  data/seo.ts         # Per-route titles, descriptions, and social metadata
+  config/siteUrl.ts   # Canonical site origin helpers (VITE_SITE_URL)
+  components/         # Reusable UI (Header, Footer, LeadForm, LocationCard, Seo, ...)
   pages/              # Routed pages (Home, Programs, Just 4 Kids, Contact, ...)
 server/               # Free-class request API (emails staff a detailed message)
 ```
