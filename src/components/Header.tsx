@@ -1,9 +1,9 @@
 import { useEffect, useId, useRef, useState, type ImgHTMLAttributes } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { SITE, LOCATIONS, MEGA_MENU, JUST_4_KIDS_MENU } from '../data/site'
+import { SITE, MEGA_MENU, JUST_4_KIDS_MENU } from '../data/site'
 
+/** Primary desktop links (logo covers Home; CTA covers the loud Contact path). */
 const TOP_NAV = [
-  { label: 'Home', to: '/' },
   { label: 'About', to: '/#owner' },
   { label: 'Follow Us', to: '/follow-us' },
   { label: 'Reviews', to: '/#reviews' },
@@ -26,8 +26,6 @@ export default function Header() {
   const mobileNavRef = useRef<HTMLDivElement | null>(null)
   const megaId = useId()
   const j4kId = useId()
-
-  const locationCount = LOCATIONS.length + (SITE.showGlenRock ? 1 : 0)
 
   useEffect(() => {
     setMenuOpen(false)
@@ -165,8 +163,8 @@ export default function Header() {
               src="/logo.png"
               alt=""
               className="brand__logo"
-              width={52}
-              height={49}
+              width={46}
+              height={43}
               decoding="async"
               {...({ fetchpriority: 'high' } as ImgHTMLAttributes<HTMLImageElement>)}
             />
@@ -177,7 +175,7 @@ export default function Header() {
           </Link>
 
           <nav className="nav" aria-label="Primary">
-            {TOP_NAV.slice(0, 2).map((item) => (
+            {TOP_NAV.slice(0, 1).map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -270,7 +268,7 @@ export default function Header() {
               )}
             </div>
 
-            {TOP_NAV.slice(2).map((item) => (
+            {TOP_NAV.slice(1).map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -282,13 +280,7 @@ export default function Header() {
           </nav>
 
           <div className="header__right">
-            <span className="header__locations" aria-label={`${locationCount} locations`}>
-              <span aria-hidden="true">📍</span>
-              <span>
-                <strong>{locationCount}</strong> Locations
-              </span>
-            </span>
-            <Link to="/contact" className="btn btn--blue">
+            <Link to="/contact" className="btn btn--blue btn--header">
               {SITE.primaryCta}
             </Link>
             <button
