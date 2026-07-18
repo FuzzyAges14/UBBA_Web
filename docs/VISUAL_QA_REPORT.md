@@ -22,7 +22,7 @@ Screenshots: `/opt/cursor/artifacts/visual-qa/` (also produced under `test-resul
 | Hero pause/play (when video loads) | Pass |
 | Horizontal overflow ≤360px and 1024px | Pass after CSS fixes (was Fail) |
 | Contrast (manual sample) | Mostly pass; residual notes below |
-| Production media hotlink | Open issue (Mixkit CDN hero MP4) — owned by media pipeline |
+| Production media hotlink | **Resolved in Agent 8 integration** — self-hosted hero WebM/MP4 (VQA-05) |
 | Lighthouse | Not run (no claim) |
 
 **Commands run**
