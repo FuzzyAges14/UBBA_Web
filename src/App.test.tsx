@@ -12,8 +12,14 @@ function renderAt(path: string) {
 }
 
 describe('App routing', () => {
-  it('renders the home hero headline', () => {
+  it('renders the home hero brand H1 and tagline', () => {
     renderAt('/')
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /united\s+black\s+belt\s+academy/i,
+      }),
+    ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
         name: /confidence building martial arts/i,

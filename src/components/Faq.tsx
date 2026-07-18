@@ -7,12 +7,16 @@ export default function Faq({ items }: { items: FaqType[] }) {
     <div className="faq">
       {items.map((item, i) => {
         const isOpen = open === i
+        const panelId = `faq-panel-${i}`
+        const buttonId = `faq-button-${i}`
         return (
           <div key={item.q} className={`faq__item ${isOpen ? 'open' : ''}`}>
             <button
+              id={buttonId}
               type="button"
               className="faq__q"
               aria-expanded={isOpen}
+              aria-controls={panelId}
               onClick={() => setOpen(isOpen ? null : i)}
             >
               {item.q}
@@ -20,7 +24,12 @@ export default function Faq({ items }: { items: FaqType[] }) {
                 +
               </span>
             </button>
-            <div className="faq__a" role="region">
+            <div
+              id={panelId}
+              className="faq__a"
+              role="region"
+              aria-labelledby={buttonId}
+            >
               {item.a}
             </div>
           </div>

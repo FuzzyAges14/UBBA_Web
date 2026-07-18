@@ -20,6 +20,8 @@ export default function Header() {
   const location = useLocation()
   const closeTimer = useRef<number | undefined>(undefined)
   const j4kCloseTimer = useRef<number | undefined>(undefined)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const mobileNavRef = useRef<HTMLDivElement>(null)
 
   const locationCount = LOCATIONS.length + (SITE.showGlenRock ? 1 : 0)
 
@@ -40,6 +42,24 @@ export default function Header() {
     return () => {
       document.body.style.overflow = ''
     }
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const firstLink = mobileNavRef.current?.querySelector<HTMLElement>(
+      'a, button:not([disabled])',
+    )
+    firstLink?.focus()
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
   const openMega = () => {
@@ -195,6 +215,7 @@ export default function Header() {
               {SITE.primaryCta}
             </Link>
             <button
+              ref={menuButtonRef}
               type="button"
               className={`hamburger ${menuOpen ? 'is-open' : ''}`}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -216,6 +237,7 @@ export default function Header() {
         header box (~78px) and the menu appears empty.
       */}
       <div
+        ref={mobileNavRef}
         className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
         id="mobile-nav"
         aria-hidden={!menuOpen}
