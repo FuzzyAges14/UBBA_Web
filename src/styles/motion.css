@@ -1,4 +1,3 @@
-/* motion.css — extracted from former src/index.css (lines 2177-2209) */
 /* ---------- Reveal / motion ---------- */
 .reveal {
   opacity: 0;
@@ -31,5 +30,21 @@
   .pcard:hover .pcard__art,
   .pcard:hover .pcard__img {
     transform: none;
+  }
+  .hamburger span,
+  .mobile-nav,
+  .faq__icon,
+  .hero__scroll {
+    transition: none !important;
+  }
+  .hero__scroll {
+    display: none;
+  }
+  .j4k-confetti,
+  .fun-sticker,
+  .fun-sticker__peel,
+  .fun-sticker__sun-bob,
+  .fun-sticker__wave-line {
+    animation: none !important;
   }
 }

@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import HeroMedia from '../../components/HeroMedia'
-import { fadeUp } from '../../lib/motion'
+import { fadeUp, staticFade } from '../../lib/motion'
 import { SITE, getVisibleLocations } from '../../data/site'
 
 export default function HeroSection() {
   const locationCount = getVisibleLocations().length
+  const reduceMotion = useReducedMotion()
+  const heroMotion = reduceMotion ? staticFade : fadeUp
 
   return (
-    <section className="hero">
+    <section className="hero" aria-labelledby="home-hero-title">
       <HeroMedia />
       <div className="hero__overlay" aria-hidden="true" />
       <div className="dojang dojang--fade" aria-hidden="true" />
@@ -17,11 +19,17 @@ export default function HeroSection() {
           className="hero__badge"
           initial="hidden"
           animate="show"
-          variants={fadeUp}
+          variants={heroMotion}
         >
-          📍 Allendale &amp; Midland Park, NJ
+          <span aria-hidden="true">📍</span> Allendale &amp; Midland Park, NJ
         </motion.span>
-        <motion.h1 initial="hidden" animate="show" custom={1} variants={fadeUp}>
+        <motion.h1
+          id="home-hero-title"
+          initial="hidden"
+          animate="show"
+          custom={1}
+          variants={heroMotion}
+        >
           United <span className="accent accent--red">Black</span>{' '}
           <span className="accent">Belt</span> Academy
         </motion.h1>
@@ -30,7 +38,7 @@ export default function HeroSection() {
           initial="hidden"
           animate="show"
           custom={2}
-          variants={fadeUp}
+          variants={heroMotion}
         >
           Confidence Building Martial Arts Classes in Allendale &amp; Midland Park
         </motion.h2>
@@ -39,7 +47,7 @@ export default function HeroSection() {
           initial="hidden"
           animate="show"
           custom={3}
-          variants={fadeUp}
+          variants={heroMotion}
         >
           Taekwondo and martial arts for kids, teens, and adults — building
           confidence, discipline, focus, fitness, and practical self-defense at our
@@ -50,13 +58,16 @@ export default function HeroSection() {
           initial="hidden"
           animate="show"
           custom={4}
-          variants={fadeUp}
+          variants={heroMotion}
         >
           <Link to="/contact" className="btn btn--lg">
-            {SITE.primaryCta} <span className="btn__arrow">→</span>
+            {SITE.primaryCta}{' '}
+            <span className="btn__arrow" aria-hidden="true">
+              →
+            </span>
           </Link>
           <Link to="/programs/children" className="btn btn--ghost btn--lg">
-            Children's Programs
+            Children&apos;s Programs
           </Link>
           <Link to="/programs/adult" className="btn btn--ghost btn--lg">
             Adult Programs
@@ -67,16 +78,25 @@ export default function HeroSection() {
           initial="hidden"
           animate="show"
           custom={5}
-          variants={fadeUp}
+          variants={heroMotion}
         >
           <span>
-            <span className="dot">★★★★★</span> Loved by local families
+            <span className="dot" aria-hidden="true">
+              ★★★★★
+            </span>{' '}
+            Loved by local families
           </span>
           <span>
-            <span className="dot">●</span> Ages 3 through adult
+            <span className="dot" aria-hidden="true">
+              ●
+            </span>{' '}
+            Ages 3 through adult
           </span>
           <span>
-            <span className="dot">●</span> {locationCount} convenient locations
+            <span className="dot" aria-hidden="true">
+              ●
+            </span>{' '}
+            {locationCount} convenient locations
           </span>
         </motion.div>
       </div>

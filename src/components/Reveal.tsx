@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 type RevealProps = {
   children: ReactNode
@@ -9,7 +10,8 @@ type RevealProps = {
 
 /**
  * Wraps content and fades/slides it in when it scrolls into view.
- * Falls back to visible immediately when IntersectionObserver is unavailable.
+ * Falls back to visible immediately when IntersectionObserver is unavailable
+ * or the user prefers reduced motion.
  */
 export default function Reveal({
   children,
@@ -18,9 +20,15 @@ export default function Reveal({
   as = 'div',
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null)
-  const [visible, setVisible] = useState(false)
+  const reduceMotion = usePrefersReducedMotion()
+  const [visible, setVisible] = useState(reduceMotion)
 
   useEffect(() => {
+    if (reduceMotion) {
+      setVisible(true)
+      return
+    }
+
     const el = ref.current
     if (!el) return
     if (typeof IntersectionObserver === 'undefined') {
@@ -42,7 +50,7 @@ export default function Reveal({
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [reduceMotion])
 
   const Tag = as as 'div'
 
@@ -50,7 +58,7 @@ export default function Reveal({
     <Tag
       ref={ref as React.RefObject<HTMLDivElement>}
       className={`reveal ${visible ? 'is-visible' : ''} ${className}`.trim()}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={delay && !reduceMotion ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>

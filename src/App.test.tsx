@@ -19,7 +19,13 @@ describe('App routing', () => {
   it('renders the home hero headline', async () => {
     renderAt('/')
     expect(
-      await screen.findByRole('heading', {
+await screen.findByRole('heading', {
+        level: 1,
+        name: /united black belt academy/i,
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', {
         name: /confidence building martial arts/i,
       }),
     ).toBeInTheDocument()

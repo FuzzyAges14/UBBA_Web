@@ -1,3 +1,5 @@
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
+
 /**
  * Abstract Taegeuk-inspired mark (opposing curved forms).
  * Used as a subtle decorative device — kept minimal and abstract per brand rules.
@@ -11,6 +13,9 @@ export default function Taegeuk({
   className?: string
   spin?: boolean
 }) {
+  const reduceMotion = usePrefersReducedMotion()
+  const shouldSpin = spin && !reduceMotion
+
   return (
     <svg
       width={size}
@@ -19,14 +24,16 @@ export default function Taegeuk({
       className={className}
       aria-hidden="true"
       style={
-        spin
+        shouldSpin
           ? { animation: 'tg-spin 24s linear infinite' }
           : undefined
       }
     >
-      <defs>
-        <style>{`@keyframes tg-spin{to{transform:rotate(360deg);transform-origin:50% 50%}}`}</style>
-      </defs>
+      {shouldSpin ? (
+        <defs>
+          <style>{`@keyframes tg-spin{to{transform:rotate(360deg);transform-origin:50% 50%}}`}</style>
+        </defs>
+      ) : null}
       <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1" />
       <path
         d="M50 2a48 48 0 0 1 0 96 24 24 0 0 0 0-48 24 24 0 0 1 0-48z"
