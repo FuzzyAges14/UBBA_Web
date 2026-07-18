@@ -39,7 +39,7 @@ export default function InstructorSection() {
               </li>
             ))}
           </ul>
-          <Link to="/contact" className="btn btn--gold mt">
+          <Link to="/contact" className="btn btn--blue mt">
             {SITE.primaryCta} <span className="btn__arrow">→</span>
           </Link>
         </Reveal>

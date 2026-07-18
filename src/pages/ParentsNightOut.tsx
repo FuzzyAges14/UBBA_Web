@@ -24,7 +24,7 @@ export default function ParentsNightOut() {
         intro={detail.heroIntro}
       >
         <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
-          <a href={`#${formId}`} className="btn btn--gold btn--lg">
+          <a href={`#${formId}`} className="btn btn--blue btn--lg">
             {detail.ctaLabel} <span className="btn__arrow">→</span>
           </a>
           <Link to="/just-4-kids" className="btn btn--outline btn--lg">

@@ -456,7 +456,7 @@ export default function EventInquiryForm({
         </div>
 
         <div className="field field--full">
-          <button type="submit" className="btn btn--lg btn--block btn--gold" disabled={sending}>
+          <button type="submit" className="btn btn--lg btn--block btn--blue" disabled={sending}>
             {sending ? 'Sending…' : copy.submit}{' '}
             {!sending && <span className="btn__arrow" aria-hidden="true">→</span>}
           </button>

@@ -69,7 +69,7 @@ export default function ChildrenPrograms() {
               ))}
             </ul>
             <div className="flex-actions mt">
-              <Link to="/contact" className="btn btn--gold">
+              <Link to="/contact" className="btn btn--blue">
                 {SITE.primaryCta} <span className="btn__arrow">→</span>
               </Link>
               <Link to="/locations/allendale" className="btn btn--outline">

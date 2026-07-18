@@ -48,6 +48,9 @@
   --shadow-lg: 0 40px 90px rgba(10, 10, 10, 0.3);
   --header-h: 78px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Button interaction timing (shared by buttons.css + reduced-motion) */
+  --btn-duration: 0.38s;
+  --btn-lift-duration: 0.22s;
 
   color-scheme: light;
   font-family: var(--font-body);
