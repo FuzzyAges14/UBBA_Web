@@ -4,13 +4,24 @@
  *
  * VITE_HERO_VIDEO_MP4=/media/hero.mp4
  * VITE_HERO_VIDEO_WEBM=/media/hero.webm
+ *
+ * Safe outside Vite (e.g. `tsx scripts/generate-sitemap.ts`) where
+ * `import.meta.env` may be undefined.
  */
+function readViteEnv(key: 'VITE_HERO_VIDEO_MP4' | 'VITE_HERO_VIDEO_WEBM'): string | undefined {
+  try {
+    const env = import.meta.env as Record<string, string | undefined> | undefined
+    const value = env?.[key]
+    return typeof value === 'string' && value.length > 0 ? value : undefined
+  } catch {
+    return undefined
+  }
+}
+
 export function heroVideoMp4(fallback: string): string {
-  const fromEnv = import.meta.env.VITE_HERO_VIDEO_MP4
-  return typeof fromEnv === 'string' && fromEnv.length > 0 ? fromEnv : fallback
+  return readViteEnv('VITE_HERO_VIDEO_MP4') ?? fallback
 }
 
 export function heroVideoWebm(): string | undefined {
-  const fromEnv = import.meta.env.VITE_HERO_VIDEO_WEBM
-  return typeof fromEnv === 'string' && fromEnv.length > 0 ? fromEnv : undefined
+  return readViteEnv('VITE_HERO_VIDEO_WEBM')
 }
