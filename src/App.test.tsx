@@ -20,8 +20,12 @@ describe('App routing', () => {
     renderAt('/')
     expect(
       await screen.findByRole('heading', {
-        name: /confidence building martial arts/i,
+        level: 1,
+        name: /united black belt academy/i,
       }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(/confidence building martial arts classes/i),
     ).toBeInTheDocument()
   })
 

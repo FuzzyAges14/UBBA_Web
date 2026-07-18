@@ -28,6 +28,34 @@
   /* Poster is the LCP image; video layers on top when enabled. */
   background: var(--black);
 }
+/* Modest media control — keyboard-accessible, not a promo sticker */
+.hero__media-toggle {
+  position: absolute;
+  right: clamp(0.85rem, 3vw, 1.5rem);
+  bottom: clamp(0.85rem, 3vw, 1.5rem);
+  z-index: 3;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(10, 10, 10, 0.7);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+.hero__media-toggle:hover {
+  background: rgba(10, 10, 10, 0.88);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.hero__media-toggle:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 3px;
+}
 /* Functional legibility scrim (not a decorative gradient) */
 .hero__overlay {
   position: absolute;

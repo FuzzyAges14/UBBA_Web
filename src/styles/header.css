@@ -345,3 +345,15 @@
     pointer-events: none;
   }
 }
+
+/* Closed mobile drawer: hide from pointer hit-testing even before JS inert */
+.mobile-nav:not(.is-open) {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (max-width: 1120px) {
+  .mobile-nav.is-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+}

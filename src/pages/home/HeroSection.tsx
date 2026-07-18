@@ -8,7 +8,7 @@ export default function HeroSection() {
   const locationCount = getVisibleLocations().length
 
   return (
-    <section className="hero">
+    <section className="hero" aria-labelledby="home-hero-title">
       <HeroMedia />
       <div className="hero__overlay" aria-hidden="true" />
       <div className="dojang dojang--fade" aria-hidden="true" />
@@ -19,13 +19,19 @@ export default function HeroSection() {
           animate="show"
           variants={fadeUp}
         >
-          📍 Allendale &amp; Midland Park, NJ
+          <span aria-hidden="true">📍</span> Allendale &amp; Midland Park, NJ
         </motion.span>
-        <motion.h1 initial="hidden" animate="show" custom={1} variants={fadeUp}>
+        <motion.h1
+          id="home-hero-title"
+          initial="hidden"
+          animate="show"
+          custom={1}
+          variants={fadeUp}
+        >
           United <span className="accent accent--red">Black</span>{' '}
           <span className="accent">Belt</span> Academy
         </motion.h1>
-        <motion.h2
+        <motion.p
           className="hero__tagline"
           initial="hidden"
           animate="show"
@@ -33,7 +39,7 @@ export default function HeroSection() {
           variants={fadeUp}
         >
           Confidence Building Martial Arts Classes in Allendale &amp; Midland Park
-        </motion.h2>
+        </motion.p>
         <motion.p
           className="hero__sub"
           initial="hidden"
@@ -53,10 +59,13 @@ export default function HeroSection() {
           variants={fadeUp}
         >
           <Link to="/contact" className="btn btn--lg">
-            {SITE.primaryCta} <span className="btn__arrow">→</span>
+            {SITE.primaryCta}{' '}
+            <span className="btn__arrow" aria-hidden="true">
+              →
+            </span>
           </Link>
           <Link to="/programs/children" className="btn btn--ghost btn--lg">
-            Children's Programs
+            Children&apos;s Programs
           </Link>
           <Link to="/programs/adult" className="btn btn--ghost btn--lg">
             Adult Programs
@@ -70,13 +79,22 @@ export default function HeroSection() {
           variants={fadeUp}
         >
           <span>
-            <span className="dot">★★★★★</span> Loved by local families
+            <span className="dot" aria-hidden="true">
+              ★★★★★
+            </span>{' '}
+            Loved by local families
           </span>
           <span>
-            <span className="dot">●</span> Ages 3 through adult
+            <span className="dot" aria-hidden="true">
+              ●
+            </span>{' '}
+            Ages 3 through adult
           </span>
           <span>
-            <span className="dot">●</span> {locationCount} convenient locations
+            <span className="dot" aria-hidden="true">
+              ●
+            </span>{' '}
+            {locationCount} convenient locations
           </span>
         </motion.div>
       </div>

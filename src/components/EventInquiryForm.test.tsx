@@ -32,8 +32,8 @@ describe('EventInquiryForm', () => {
     renderForm('birthday')
 
     await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
-    await user.type(screen.getByLabelText(/^email$/i), 'sam@example.com')
-    await user.type(screen.getByLabelText(/^phone$/i), '2015559999')
+    await user.type(screen.getByLabelText(/email/i), 'sam@example.com')
+    await user.type(screen.getByLabelText(/phone/i), '2015559999')
     await user.type(screen.getByLabelText(/birthday child’s name/i), 'Alex')
     await user.type(screen.getByLabelText(/child’s age/i), '7')
     await user.type(screen.getByLabelText(/preferred date/i), 'Sat 2pm')
@@ -68,8 +68,8 @@ describe('EventInquiryForm', () => {
     renderForm('summer-camp')
 
     await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Jordan Lee')
-    await user.type(screen.getByLabelText(/^email$/i), 'jordan@example.com')
-    await user.type(screen.getByLabelText(/^phone$/i), '2015551111')
+    await user.type(screen.getByLabelText(/email/i), 'jordan@example.com')
+    await user.type(screen.getByLabelText(/phone/i), '2015551111')
     await user.type(screen.getByLabelText(/child’s name/i), 'Mia')
     await user.type(screen.getByLabelText(/child’s age/i), '8')
     await user.type(screen.getByLabelText(/preferred weeks/i), 'Week of July 7')

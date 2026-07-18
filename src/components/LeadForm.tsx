@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LOCATIONS, PROGRAM_OPTIONS, GLEN_ROCK, SITE } from '../data/site'
 import { submitLead } from '../lib/submitLead'
@@ -12,12 +12,25 @@ const locationChoices = [
   ...(SITE.showGlenRock ? [GLEN_ROCK.name] : []),
 ]
 
+const FIELD_ORDER = ['name', 'email', 'phone'] as const
+
 export default function LeadForm({ defaultLocation }: { defaultLocation?: string }) {
   const location = useLocation()
   const formStartedAt = useRef(Date.now())
+  const formId = useId()
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
+  const successRef = useRef<HTMLHeadingElement | null>(null)
+  const summaryRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (submitted) successRef.current?.focus()
+  }, [submitted])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) summaryRef.current?.focus()
+  }, [errors])
 
   function validate(data: FormData): Errors {
     const next: Errors = {}
@@ -69,12 +82,30 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
     }
   }
 
+  const ids = {
+    name: `${formId}-name`,
+    email: `${formId}-email`,
+    phone: `${formId}-phone`,
+    location: `${formId}-location`,
+    program: `${formId}-program`,
+    message: `${formId}-message`,
+    website: `${formId}-website`,
+    summary: `${formId}-summary`,
+  }
+
+  const fieldErrors = FIELD_ORDER.filter((key) => errors[key])
+  const fieldLabels = { name: 'Full Name', email: 'Email', phone: 'Phone' } as const
+
   if (submitted) {
     return (
       <div className="leadform">
-        <div className="form-success" role="status">
-          <div className="form-success__icon">🥋</div>
-          <h3>You're all set!</h3>
+        <div className="form-success" role="status" aria-live="polite">
+          <div className="form-success__icon" aria-hidden="true">
+            🥋
+          </div>
+          <h3 ref={successRef} tabIndex={-1}>
+            You&apos;re all set!
+          </h3>
           <p>
             Thanks for reaching out. A member of our team will contact you shortly
             to schedule your free class.
@@ -95,71 +126,143 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
   }
 
   return (
-    <form className="leadform" onSubmit={handleSubmit} noValidate>
+    <form
+      className="leadform"
+      onSubmit={handleSubmit}
+      noValidate
+      aria-busy={sending || undefined}
+    >
       <div className="leadform__head">
         <span className="eyebrow">Free Class Request</span>
       </div>
+      <p className="form-instructions" id={`${formId}-instructions`}>
+        Fields marked with an asterisk (*) are required. We&apos;ll use your contact
+        details only to schedule your free class.
+      </p>
       <div className="leadform__steps" aria-hidden="true">
         <i className="on" />
         <i className="on" />
         <i className="on" />
       </div>
+
+      {(fieldErrors.length > 0 || errors.form) && (
+        <div
+          ref={summaryRef}
+          id={ids.summary}
+          className="form-error-summary"
+          role="alert"
+          tabIndex={-1}
+        >
+          <p className="form-error-summary__title">
+            {errors.form
+              ? errors.form
+              : 'Please fix the following before sending your request:'}
+          </p>
+          {fieldErrors.length > 0 && (
+            <ul>
+              {fieldErrors.map((key) => (
+                <li key={key}>
+                  <a href={`#${ids[key]}`}>{fieldLabels[key]}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
       <div className="form-grid">
         {/* Honeypot — hidden from people, filled by many bots */}
-        <div className="field field--full" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', height: 0, overflow: 'hidden' }}>
-          <label htmlFor="website">Website</label>
-          <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <div
+          className="field field--full hp-field"
+          aria-hidden="true"
+        >
+          <label htmlFor={ids.website}>Website</label>
+          <input
+            id={ids.website}
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </div>
 
         <div className="field field--full">
-          <label htmlFor="name">Full Name</label>
+          <label htmlFor={ids.name}>
+            Full Name <span className="req" aria-hidden="true">*</span>
+          </label>
           <input
-            id="name"
+            id={ids.name}
             name="name"
             type="text"
             autoComplete="name"
+            required
+            aria-required="true"
             aria-invalid={errors.name ? 'true' : undefined}
+            aria-describedby={errors.name ? `${ids.name}-error` : undefined}
             placeholder="Your name"
             disabled={sending}
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {errors.name && (
+            <span className="error" id={`${ids.name}-error`}>
+              {errors.name}
+            </span>
+          )}
         </div>
 
         <div className="field">
-          <label htmlFor="email">Email</label>
+          <label htmlFor={ids.email}>
+            Email <span className="req" aria-hidden="true">*</span>
+          </label>
           <input
-            id="email"
+            id={ids.email}
             name="email"
             type="email"
             autoComplete="email"
+            required
+            aria-required="true"
             aria-invalid={errors.email ? 'true' : undefined}
+            aria-describedby={errors.email ? `${ids.email}-error` : undefined}
             placeholder="you@example.com"
             disabled={sending}
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {errors.email && (
+            <span className="error" id={`${ids.email}-error`}>
+              {errors.email}
+            </span>
+          )}
         </div>
 
         <div className="field">
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor={ids.phone}>
+            Phone <span className="req" aria-hidden="true">*</span>
+          </label>
           <input
-            id="phone"
+            id={ids.phone}
             name="phone"
             type="tel"
             autoComplete="tel"
+            required
+            aria-required="true"
             aria-invalid={errors.phone ? 'true' : undefined}
+            aria-describedby={errors.phone ? `${ids.phone}-error` : undefined}
             placeholder="(201) 555-0123"
             disabled={sending}
           />
-          {errors.phone && <span className="error">{errors.phone}</span>}
+          {errors.phone && (
+            <span className="error" id={`${ids.phone}-error`}>
+              {errors.phone}
+            </span>
+          )}
         </div>
 
         <div className="field">
-          <label htmlFor="location">Location</label>
+          <label htmlFor={ids.location}>Location</label>
           <select
-            id="location"
+            id={ids.location}
             name="location"
             defaultValue={defaultLocation ?? ''}
             disabled={sending}
+            autoComplete="address-level2"
           >
             <option value="" disabled>
               Choose a location
@@ -173,8 +276,8 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
         </div>
 
         <div className="field">
-          <label htmlFor="program">Program</label>
-          <select id="program" name="program" defaultValue="" disabled={sending}>
+          <label htmlFor={ids.program}>Program</label>
+          <select id={ids.program} name="program" defaultValue="" disabled={sending}>
             <option value="" disabled>
               Choose a program
             </option>
@@ -187,27 +290,23 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
         </div>
 
         <div className="field field--full">
-          <label htmlFor="message">Message</label>
+          <label htmlFor={ids.message}>Message</label>
           <textarea
-            id="message"
+            id={ids.message}
             name="message"
             placeholder="Tell us a bit about what you're looking for..."
             disabled={sending}
+            autoComplete="off"
           />
         </div>
 
         <div className="field field--full">
-          {errors.form && (
-            <span className="error" role="alert" style={{ display: 'block', marginBottom: '0.75rem' }}>
-              {errors.form}
-            </span>
-          )}
           <button type="submit" className="btn btn--lg btn--block" disabled={sending}>
             {sending ? 'Sending…' : SITE.primaryCta}{' '}
-            {!sending && <span className="btn__arrow">→</span>}
+            {!sending && <span className="btn__arrow" aria-hidden="true">→</span>}
           </button>
           <p className="form-reassure">
-            No experience required · Beginners welcome · No obligation — we'll
+            No experience required · Beginners welcome · No obligation — we&apos;ll
             contact you to schedule your first class.
           </p>
         </div>

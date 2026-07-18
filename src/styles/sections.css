@@ -162,6 +162,62 @@
   color: var(--muted);
 }
 
+/* Form a11y helpers */
+.req {
+  color: var(--red);
+  font-weight: 700;
+  margin-left: 0.15rem;
+}
+.form-instructions {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.form-error-summary {
+  margin: 0 0 1.1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  background: rgba(200, 16, 46, 0.08);
+}
+.form-error-summary__title {
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  color: var(--red-dark, var(--red));
+  font-size: 0.95rem;
+}
+.form-error-summary ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.form-error-summary a {
+  color: var(--red-dark, var(--red));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-success h3:focus {
+  outline: none;
+}
+.form-success h3:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.form-error-summary:focus {
+  outline: none;
+}
+.form-error-summary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  width: 1px !important;
+}
+
 /* ---------- Belt journey / steps ---------- */
 .journey {
   position: relative;

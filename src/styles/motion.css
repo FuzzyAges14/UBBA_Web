@@ -31,4 +31,20 @@
   .pcard:hover .pcard__art {
     transform: none;
   }
+  .hamburger span,
+  .mobile-nav,
+  .faq__icon,
+  .hero__scroll {
+    transition: none !important;
+  }
+  .hero__scroll {
+    display: none;
+  }
+  .j4k-confetti,
+  .fun-sticker,
+  .fun-sticker__peel,
+  .fun-sticker__sun-bob,
+  .fun-sticker__wave-line {
+    animation: none !important;
+  }
 }
