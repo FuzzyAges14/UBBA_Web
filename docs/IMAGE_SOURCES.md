@@ -40,5 +40,7 @@ use with **no attribution required**.
 - **Owner portrait:** `instructorPortrait` is a generic stand-in — replace with a
   real photo of Sanghyun Lee.
 - For production, self-host the final hero video instead of hotlinking Mixkit.
+  Use `VITE_HERO_VIDEO_MP4` / `VITE_HERO_VIDEO_WEBM` and the encode guidance in
+  [`docs/PERFORMANCE.md`](PERFORMANCE.md).
 - No low-resolution or watermarked images; no AI-generated people without
   disclosure; do not misrepresent Taekwondo with unrelated martial arts imagery.

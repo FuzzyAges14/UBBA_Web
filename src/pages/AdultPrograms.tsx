@@ -29,6 +29,7 @@ export default function AdultPrograms() {
                   title={p.title}
                   text={p.blurb}
                   glyph={PROGRAM_GLYPHS[p.id]}
+                  image={p.image}
                   to={`/programs/${p.slug}`}
                   ctaLabel="Learn How It Works"
                 />

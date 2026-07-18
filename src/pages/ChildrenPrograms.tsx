@@ -39,6 +39,7 @@ export default function ChildrenPrograms() {
                   text={p.blurb}
                   ages={p.ages}
                   glyph={PROGRAM_GLYPHS[p.id]}
+                  image={p.image}
                   to={`/programs/${p.slug}`}
                   ctaLabel="Learn How It Works"
                 />

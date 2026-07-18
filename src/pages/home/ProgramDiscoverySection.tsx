@@ -22,6 +22,8 @@ export default function ProgramDiscoverySection() {
                 text={p.blurb}
                 ages={p.ages}
                 glyph={PROGRAM_GLYPHS[p.id]}
+                image={p.image}
+                imageSizes="(max-width: 720px) 100vw, 25vw"
                 to={`/programs/${p.slug}`}
                 ctaLabel="Learn How It Works"
               />

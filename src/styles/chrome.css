@@ -175,3 +175,20 @@
     padding-bottom: 72px;
   }
 }
+
+/* Route-level Suspense fallback (code-split pages) */
+.page-fallback {
+  min-height: calc(100svh - var(--header-h));
+  display: grid;
+  place-items: center;
+  background: var(--black);
+  color: var(--muted-light);
+  padding: 3rem 1.25rem;
+}
+.page-fallback__label {
+  font-family: var(--font-display);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}

@@ -34,6 +34,8 @@ export default function Footer() {
                 className="brand__logo"
                 width={52}
                 height={49}
+                loading="lazy"
+                decoding="async"
               />
               <span className="brand__text">
                 <span className="brand__name">United Black Belt</span>

@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import OptimizedImage from './OptimizedImage'
+import { imageDimensionsFor } from '../data/site'
 
 export type ProgramCardProps = {
   title: string
@@ -7,6 +9,8 @@ export type ProgramCardProps = {
   ctaLabel: string
   ages?: string
   glyph?: string
+  /** Optional photo; falls back to the gradient art panel when omitted. */
+  image?: string
   /** Extra class on the glyph span (e.g. social marks). */
   glyphClassName?: string
   /**
@@ -14,6 +18,8 @@ export type ProgramCardProps = {
    * When false (default), only the CTA is a link.
    */
   wrapLink?: boolean
+  /** Responsive `sizes` for the card image. */
+  imageSizes?: string
 }
 
 function CardBody({
@@ -25,6 +31,8 @@ function CardBody({
   glyph,
   glyphClassName,
   wrapLink,
+  image,
+  imageSizes = '(max-width: 720px) 100vw, 33vw',
 }: ProgramCardProps) {
   const cta = wrapLink ? (
     <span className="pcard__cta">
@@ -38,7 +46,18 @@ function CardBody({
 
   return (
     <>
-      <div className="pcard__art" />
+      {image ? (
+        <OptimizedImage
+          className="pcard__img"
+          src={image}
+          alt=""
+          {...imageDimensionsFor(image)}
+          loading="lazy"
+          sizes={imageSizes}
+        />
+      ) : (
+        <div className="pcard__art" />
+      )}
       <div className="pcard__scrim" />
       {glyph != null && (
         <span

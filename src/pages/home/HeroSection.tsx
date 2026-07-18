@@ -1,24 +1,15 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import HeroMedia from '../../components/HeroMedia'
 import { fadeUp } from '../../lib/motion'
-import { IMAGES, SITE, getVisibleLocations } from '../../data/site'
+import { SITE, getVisibleLocations } from '../../data/site'
 
 export default function HeroSection() {
   const locationCount = getVisibleLocations().length
 
   return (
     <section className="hero">
-      <video
-        className="hero__video"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={IMAGES.heroPoster}
-        aria-hidden="true"
-      >
-        <source src={IMAGES.heroVideo} type="video/mp4" />
-      </video>
+      <HeroMedia />
       <div className="hero__overlay" aria-hidden="true" />
       <div className="dojang dojang--fade" aria-hidden="true" />
       <div className="container hero__inner">
