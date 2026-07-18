@@ -12,16 +12,18 @@ export default function TestimonialsSection() {
             <span className="home-section-num" aria-hidden="true">
               07
             </span>
-            <span className="eyebrow">Reviews</span>
+            <div className="home-section-head__body">
+              <span className="eyebrow">Reviews</span>
+              <p className="feature-quote">"{featured.quote}"</p>
+              <p className="quote__by mt">
+                {featured.name}{' '}
+                <span className="quote__role">— {featured.role}</span>
+              </p>
+              <p className="ph-note mt-sm">
+                Placeholder reviews · pending owner-approved testimonials
+              </p>
+            </div>
           </div>
-          <p className="feature-quote">"{featured.quote}"</p>
-          <p className="quote__by mt">
-            {featured.name}{' '}
-            <span className="quote__role">— {featured.role}</span>
-          </p>
-          <p className="ph-note mt-sm">
-            Placeholder reviews · pending owner-approved testimonials
-          </p>
         </Reveal>
 
         <div className="home-reviews__list mt-lg">

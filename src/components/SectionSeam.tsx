@@ -118,7 +118,6 @@ export default function SectionSeam({ from, to, variant = 'fade' }: SectionSeamP
           fill="var(--seam-to)"
         />
       </svg>
-      <div className="section-seam__accent" />
     </div>
   )
 }

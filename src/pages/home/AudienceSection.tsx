@@ -20,11 +20,13 @@ export default function AudienceSection() {
             <span className="home-section-num" aria-hidden="true">
               06
             </span>
-            <SectionHeading
-              eyebrow="You Belong Here"
-              title={<>Martial arts for every age &amp; ability</>}
-              lead="Whether you want an exciting activity for your child or a motivating alternative to the gym, there's a place for you on our mat. No experience required — just show up ready to grow."
-            />
+            <div className="home-section-head__body">
+              <SectionHeading
+                eyebrow="You Belong Here"
+                title={<>Martial arts for every age &amp; ability</>}
+                lead="Whether you want an exciting activity for your child or a motivating alternative to the gym, there's a place for you on our mat. No experience required — just show up ready to grow."
+              />
+            </div>
           </div>
         </Reveal>
 

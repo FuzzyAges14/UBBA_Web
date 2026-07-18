@@ -12,10 +12,12 @@ export default function FaqSection() {
             <span className="home-section-num" aria-hidden="true">
               09
             </span>
-            <SectionHeading
-              eyebrow="Good To Know"
-              title={<>Questions parents &amp; new students ask</>}
-            />
+            <div className="home-section-head__body">
+              <SectionHeading
+                eyebrow="Good To Know"
+                title={<>Questions parents &amp; new students ask</>}
+              />
+            </div>
           </div>
         </Reveal>
         <Reveal delay={80}>

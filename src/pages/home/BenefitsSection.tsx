@@ -25,24 +25,26 @@ export default function BenefitsSection() {
             <span className="home-section-num" aria-hidden="true">
               02
             </span>
-            <SectionHeading
-              eyebrow="Why It Matters"
-              title={
-                <>
-                  We help parents raise confident leaders &amp; adults reach their full
-                  potential
-                </>
-              }
-              lead="Martial arts is about far more than kicks and punches. Every class is built to strengthen the skills that carry into school, work, and life."
-            />
+            <div className="home-section-head__body">
+              <SectionHeading
+                eyebrow="Why It Matters"
+                title={
+                  <>
+                    We help parents raise confident leaders &amp; adults reach their full
+                    potential
+                  </>
+                }
+                lead="Martial arts is about far more than kicks and punches. Every class is built to strengthen the skills that carry into school, work, and life."
+              />
+              <ul className="checklist mt">
+                {BENEFIT_POINTS.map((item) => (
+                  <li key={item} style={{ color: 'var(--muted-light)' }}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <ul className="checklist mt">
-            {BENEFIT_POINTS.map((item) => (
-              <li key={item} style={{ color: 'var(--muted-light)' }}>
-                {item}
-              </li>
-            ))}
-          </ul>
         </Reveal>
         <Reveal delay={120}>
           <div className="home-benefits__media">

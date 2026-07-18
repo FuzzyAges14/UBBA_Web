@@ -27,28 +27,30 @@ export default function InstructorSection() {
             <span className="home-section-num" aria-hidden="true">
               04
             </span>
-            <SectionHeading
-              eyebrow="Meet The Owner"
-              title={`Hi, my name is ${OWNER.name}`}
-              lead={OWNER.intro}
-            />
+            <div className="home-section-head__body">
+              <SectionHeading
+                eyebrow="Meet The Owner"
+                title={`Hi, my name is ${OWNER.name}`}
+                lead={OWNER.intro}
+              />
+              <blockquote className="owner__quote">"{OWNER.quote}"</blockquote>
+              <div className="stack-gap">
+                {OWNER.story.map((para) => (
+                  <p key={para.slice(0, 24)} className="section-lead" style={{ marginTop: 0 }}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+              <p className="owner__sign mt">— {OWNER.name}</p>
+              <ul className="checklist mt-sm">
+                {OWNER.credentials.map((c) => (
+                  <li key={c} style={{ color: 'var(--muted-light)' }}>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <blockquote className="owner__quote">"{OWNER.quote}"</blockquote>
-          <div className="stack-gap">
-            {OWNER.story.map((para) => (
-              <p key={para.slice(0, 24)} className="section-lead" style={{ marginTop: 0 }}>
-                {para}
-              </p>
-            ))}
-          </div>
-          <p className="owner__sign mt">— {OWNER.name}</p>
-          <ul className="checklist mt-sm">
-            {OWNER.credentials.map((c) => (
-              <li key={c} style={{ color: 'var(--muted-light)' }}>
-                {c}
-              </li>
-            ))}
-          </ul>
         </Reveal>
       </div>
     </section>

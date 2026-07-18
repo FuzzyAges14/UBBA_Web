@@ -198,11 +198,14 @@ export default function Just4Kids() {
               Park. We&apos;ll confirm details before anything is booked.
             </p>
             <div className="flex-actions mt">
-              <Link to="/contact" className="btn btn--blue btn--lg">
-                {SITE.primaryCta} <span className="btn__arrow" aria-hidden="true">→</span>
+              <Link to="/just-4-kids/birthday-parties" className="btn btn--blue btn--lg">
+                Book a Birthday <span className="btn__arrow" aria-hidden="true">→</span>
               </Link>
-              <Link to="/just-4-kids/birthday-parties" className="btn btn--outline btn--lg">
-                Schedule a Party
+              <Link to="/just-4-kids/summer-camp" className="btn btn--outline btn--lg">
+                Explore Camp
+              </Link>
+              <Link to="/just-4-kids/parents-night-out" className="btn btn--outline btn--lg">
+                Parents&apos; Night Out
               </Link>
             </div>
           </Reveal>
