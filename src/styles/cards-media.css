@@ -1,0 +1,440 @@
+/* cards-media.css — extracted from former src/index.css (lines 939-1377) */
+/* ---------- Photos ---------- */
+.photo {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+  min-height: 240px;
+  background: var(--graphite);
+}
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.photo--tall {
+  min-height: 460px;
+}
+.photo--wide {
+  min-height: 300px;
+}
+.photo--zoom:hover img {
+  transform: scale(1.05);
+}
+.photo__credit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(10, 10, 10, 0.55);
+  padding: 0.25rem 0.5rem;
+  border-top-left-radius: 8px;
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  background: var(--red);
+  color: #fff;
+  overflow: hidden;
+  padding: 0.9rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.marquee__track {
+  display: flex;
+  gap: 2.5rem;
+  white-space: nowrap;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee__track span {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.marquee__track span::after {
+  content: '◆';
+  color: #0a0a0a;
+  font-size: 0.7rem;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Program rail ---------- */
+/* Balanced wrap: 4 → 2×2 → 1. No horizontal scrollbar / L-shaped orphans. */
+.rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4rem;
+  padding: 0.5rem 0;
+  overflow: visible;
+}
+@media (max-width: 1100px) {
+  .rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .rail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Program card (premium) */
+.pcard {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: clamp(280px, 36vw, 440px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+  background: var(--graphite);
+  border: 1px solid var(--line-dark);
+  isolation: isolate;
+}
+.pcard__art {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(160deg, var(--graphite-2), var(--black));
+  transition: transform 0.6s var(--ease);
+}
+.pcard__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.pcard:hover .pcard__img,
+.pcard:hover .pcard__art {
+  transform: scale(1.06);
+}
+.pcard__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    0deg,
+    rgba(10, 10, 10, 0.95) 6%,
+    rgba(10, 10, 10, 0.15) 55%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
+}
+.pcard__glyph {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  font-size: 2.2rem;
+  opacity: 0.9;
+}
+.pcard__body {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.pcard__age {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--blue);
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+.pcard__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.pcard__text {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.96rem;
+}
+/* Hover-to-reveal only on devices that can hover (mice). On phones/tablets
+   the description stays visible so content isn't hidden behind a hover. */
+@media (hover: hover) and (pointer: fine) {
+  .pcard__text {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease), opacity 0.3s var(--ease);
+  }
+  .pcard:hover .pcard__text,
+  .pcard:focus-within .pcard__text {
+    max-height: 140px;
+    opacity: 1;
+  }
+}
+@media (max-width: 620px) {
+  .pcard {
+    min-height: 360px;
+  }
+}
+/* Touch / no-hover: keep blurbs readable without hover */
+@media (hover: none) {
+  .pcard__text {
+    max-height: 140px;
+    opacity: 1;
+  }
+}
+.pcard__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+}
+.pcard__cta .btn__arrow {
+  transition: transform 0.2s var(--ease);
+}
+.pcard:hover .pcard__cta .btn__arrow {
+  transform: translateX(4px);
+}
+
+/* ---------- Generic grids ---------- */
+.grid {
+  display: grid;
+  gap: 1.4rem;
+}
+.rail > *,
+.grid > * {
+  min-width: 0;
+  height: 100%;
+}
+.grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+/*
+  Medium widths: 2 columns for even counts (4/6 items).
+  Exactly 3 items would leave a lonely half-width card (L-shape) — stack
+  those instead and keep a comfortable card width (not full-bleed wide).
+*/
+@media (max-width: 1100px) {
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid--3:has(> :nth-child(3):last-child) {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+  .grid--3:has(> :nth-child(3):last-child) > * {
+    width: 100%;
+    max-width: 26rem;
+  }
+}
+@media (max-width: 620px) {
+  .grid--2,
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+  }
+  .grid--3:has(> :nth-child(3):last-child) > * {
+    max-width: none;
+  }
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+/* Flip columns on desktop without using direction:rtl (which can confuse
+   layout/reading order on smaller screens). */
+.split--flip > :first-child {
+  order: 2;
+}
+.split--flip > :last-child {
+  order: 1;
+}
+/* Stack around half of a typical laptop/desktop so copy never squeezes
+   beside tall media at mid widths. */
+@media (max-width: 960px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .split--flip > :first-child,
+  .split--flip > :last-child {
+    order: initial;
+  }
+  .split .ph--tall,
+  .split .ph--wide {
+    min-height: 16rem;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Simple card */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-2);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+.card__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+.card__ages {
+  align-self: flex-start;
+  background: rgba(196, 18, 48, 0.1);
+  color: var(--red-dark);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+.card__title {
+  font-size: 1.3rem;
+}
+.card__text {
+  color: var(--muted);
+  font-size: 0.96rem;
+  flex: 1;
+}
+.card__link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: gap 0.18s var(--ease);
+}
+.card__link:hover {
+  gap: 0.75rem;
+}
+.card__top {
+  min-height: 160px;
+}
+
+/* ---------- Photo placeholder (art-directed) ---------- */
+.ph {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--graphite-2) 0%, var(--black) 75%);
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  min-height: 240px;
+  border: 1px solid var(--line-dark);
+  isolation: isolate;
+}
+.ph::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 28% 22%, rgba(196, 18, 48, 0.4), transparent 55%),
+    radial-gradient(circle at 82% 88%, rgba(37, 99, 235, 0.28), transparent 55%);
+}
+.ph::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 60% 40%, #000, transparent 75%);
+}
+.ph__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 2.8rem;
+  opacity: 0.92;
+  z-index: 1;
+}
+.ph__label {
+  position: relative;
+  z-index: 2;
+  padding: 0.75rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent);
+  width: 100%;
+}
+.ph__label::before {
+  content: 'PLACEHOLDER · ';
+  color: var(--blue);
+  letter-spacing: 0.1em;
+  font-size: 0.66rem;
+}
+.ph--tall {
+  min-height: 460px;
+}
+.ph--wide {
+  min-height: 280px;
+}
+/* Decorative corner mark used beside split media (Home value story). */
+.accent-orb {
+  position: absolute;
+  right: -26px;
+  top: -26px;
+  color: #fff;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (max-width: 960px) {
+  .accent-orb {
+    right: 10px;
+    top: 10px;
+    transform: scale(0.72);
+    transform-origin: top right;
+  }
+}

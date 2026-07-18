@@ -30,6 +30,35 @@ export const IMAGES = {
 
 export type NavLink = { label: string; to: string }
 
+/** Constrained program identifiers used across cards, glyphs, and detail pages. */
+export type ProgramId =
+  | 'tiny-tigers'
+  | 'junior-tigers'
+  | 'teen-martial-arts'
+  | 'adult-martial-arts'
+  | 'adult-program'
+  | 'family-programs'
+  | 'olympic-sparring'
+  | 'swat-team'
+  | 'self-defense'
+  | 'weapons-class'
+
+export type ProgramCategory = 'Children' | 'Adult & Family'
+
+/** Decorative glyphs for program discovery cards (presentation, not SEO content). */
+export const PROGRAM_GLYPHS: Partial<Record<ProgramId, string>> = {
+  'tiny-tigers': '🐯',
+  'junior-tigers': '🥋',
+  'teen-martial-arts': '⚡',
+  'adult-martial-arts': '💪',
+  'adult-program': '💪',
+  'family-programs': '👪',
+  'olympic-sparring': '🥇',
+  'swat-team': '🎯',
+  'self-defense': '🛡️',
+  'weapons-class': '🥋',
+}
+
 export const NAV: NavLink[] = [
   { label: 'Home', to: '/' },
   { label: "Children's Programs", to: '/programs/children' },
@@ -53,7 +82,7 @@ export const FOOTER_LINKS: NavLink[] = [
 ]
 
 export type ProgramCard = {
-  id: string
+  id: ProgramId
   title: string
   ages?: string
   blurb: string
@@ -61,6 +90,46 @@ export type ProgramCard = {
   slug: string
   image?: string
 }
+
+/** Homepage “You Belong Here” discovery tiles. */
+export type AudienceFeature = {
+  title: string
+  text: string
+  to: string
+  icon: string
+  cta: string
+}
+
+export const HOME_AUDIENCE_FEATURES: AudienceFeature[] = [
+  {
+    title: "Children's Classes",
+    text: 'Confidence, listening, discipline, respect, and friendships — the foundation for confident kids.',
+    to: '/programs/children',
+    icon: '🧒',
+    cta: "Explore Children's Programs",
+  },
+  {
+    title: 'Adult Classes',
+    text: 'Fitness, self-defense, stress relief, and real community for every level.',
+    to: '/programs/adult',
+    icon: '💪',
+    cta: 'Explore Adult Programs',
+  },
+  {
+    title: 'Workshops & Special Events',
+    text: 'Belt testing, tournaments, seminars, camps, and family events all year round.',
+    to: '/just-4-kids',
+    icon: '🎉',
+    cta: 'See Just 4 Kids',
+  },
+]
+
+/** Checklist bullets beside the homepage free-class form. */
+export const TRIAL_HIGHLIGHTS = [
+  'Friendly, certified instructors',
+  'Clean, welcoming, family-first facilities',
+  'Flexible schedules for busy families',
+] as const
 
 export const HOME_PROGRAM_CARDS: ProgramCard[] = [
   {
@@ -449,8 +518,10 @@ export const TESTIMONIALS: Testimonial[] = [
   },
 ]
 
+export type LocationId = 'allendale' | 'midland-park' | 'glen-rock'
+
 export type Location = {
-  id: string
+  id: LocationId
   name: string
   address: string
   city: string
@@ -502,6 +573,11 @@ export const GLEN_ROCK: Location = {
   note: 'Now enrolling — class schedule coming soon. Call us to reserve your spot.',
 }
 
+/** Locations shown in the UI, respecting the Glen Rock feature flag. */
+export function getVisibleLocations(): Location[] {
+  return SITE.showGlenRock ? [...LOCATIONS, GLEN_ROCK] : LOCATIONS
+}
+
 export const PROGRAM_OPTIONS = [
   'Tiny Tigers (Ages 3-5)',
   'Junior Tigers (Ages 6-10)',
@@ -524,13 +600,22 @@ export const EVENT_GUEST_OPTIONS = ['1-5', '6-10', '10+'] as const
 export type Stat = { value: number; suffix?: string; label: string; placeholder?: boolean }
 
 export const STATS: Stat[] = [
-  { value: LOCATIONS.length + (SITE.showGlenRock ? 1 : 0), label: 'NJ Locations' },
+  { value: getVisibleLocations().length, label: 'NJ Locations' },
   { value: 500, suffix: '+', label: 'Students Trained', placeholder: true },
   { value: 15, suffix: '+', label: 'Years Serving Bergen County', placeholder: true },
   { value: 5, suffix: '★', label: 'Average Parent Rating', placeholder: true },
 ]
 
-export const OWNER = {
+export type OwnerProfile = {
+  name: string
+  title: string
+  intro: string
+  story: string[]
+  quote: string
+  credentials: string[]
+}
+
+export const OWNER: OwnerProfile = {
   name: 'Sanghyun Lee',
   title: 'Head Instructor & Owner',
   // Placeholder biography — confirm details with the owner before launch.
@@ -725,7 +810,7 @@ export const JUST_4_KIDS_MENU: MegaGroup = {
 export type ProgramDetail = {
   slug: string
   name: string
-  category: 'Children' | 'Adult & Family'
+  category: ProgramCategory
   ages?: string
   image: string
   tagline: string

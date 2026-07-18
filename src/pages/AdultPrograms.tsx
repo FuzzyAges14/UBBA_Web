@@ -4,17 +4,10 @@ import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
+import ProgramCard from '../components/ProgramCard'
+import SectionHeading from '../components/SectionHeading'
 import SectionSeam from '../components/SectionSeam'
-import { ADULT_PROGRAMS, FAQS, SITE } from '../data/site'
-
-const GLYPH: Record<string, string> = {
-  'adult-program': '💪',
-  'family-programs': '👪',
-  'olympic-sparring': '🥇',
-  'swat-team': '🎯',
-  'self-defense': '🛡️',
-  'weapons-class': '🥋',
-}
+import { ADULT_PROGRAMS, FAQS, PROGRAM_GLYPHS, SITE } from '../data/site'
 
 export default function AdultPrograms() {
   return (
@@ -32,20 +25,14 @@ export default function AdultPrograms() {
           <div className="grid grid--3">
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
-                <div className="pcard">
-                  <div className="pcard__art" />
-                  <div className="pcard__scrim" />
-                  <span className="pcard__glyph" aria-hidden="true">
-                    {GLYPH[p.id]}
-                  </span>
-                  <div className="pcard__body">
-                    <h2 className="pcard__title">{p.title}</h2>
-                    <p className="pcard__text">{p.blurb}</p>
-                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
-                      Learn How It Works <span className="btn__arrow">→</span>
-                    </Link>
-                  </div>
-                </div>
+                <ProgramCard
+                  title={p.title}
+                  text={p.blurb}
+                  glyph={PROGRAM_GLYPHS[p.id]}
+                  to={`/programs/${p.slug}`}
+                  ctaLabel="Learn How It Works"
+                  titleAs="h2"
+                />
               </Reveal>
             ))}
           </div>
@@ -67,13 +54,11 @@ export default function AdultPrograms() {
             <Placeholder label="Adult Taekwondo training session" icon="🥋" variant="tall" />
           </Reveal>
           <Reveal>
-            <span className="eyebrow">Train Your Way</span>
-            <h2 className="section-title">Fitness, focus &amp; real self-defense</h2>
-            <p className="section-lead">
-              Whether you want to lose weight, relieve stress, or learn to protect
-              yourself and your family, our adult classes deliver a full-body workout
-              in a supportive, no-ego environment.
-            </p>
+            <SectionHeading
+              eyebrow="Train Your Way"
+              title={<>Fitness, focus &amp; real self-defense</>}
+              lead="Whether you want to lose weight, relieve stress, or learn to protect yourself and your family, our adult classes deliver a full-body workout in a supportive, no-ego environment."
+            />
             <Link to="/contact" className="btn btn--gold mt">
               {SITE.primaryCta} <span className="btn__arrow">→</span>
             </Link>
@@ -86,8 +71,7 @@ export default function AdultPrograms() {
       <section className="section section--offwhite">
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
-            <span className="eyebrow">FAQs</span>
-            <h2 className="section-title">Getting started as an adult</h2>
+            <SectionHeading eyebrow="FAQs" title="Getting started as an adult" />
           </Reveal>
           <Reveal delay={80}>
             <div className="mt">
