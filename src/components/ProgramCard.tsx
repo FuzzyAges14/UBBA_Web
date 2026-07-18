@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import OptimizedImage from './OptimizedImage'
-import { imageDimensionsFor } from '../data/site'
+import { imageDimensionsFor, imageSrcSetFor } from '../data/site'
 
 export type ProgramCardProps = {
   title: string
@@ -53,6 +53,7 @@ function CardBody({
       src={image}
       alt=""
       {...imageDimensionsFor(image)}
+      srcSet={imageSrcSetFor(image)}
       loading="lazy"
       sizes="(max-width: 720px) 100vw, 33vw"
     />

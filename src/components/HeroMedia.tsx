@@ -1,13 +1,12 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { HERO_MEDIA, IMAGE_DIMENSIONS } from '../data/site'
+import { HERO_MEDIA, IMAGE_DIMENSIONS, IMAGE_SRCSETS } from '../data/site'
 import { shouldLoadHeroVideo } from '../lib/heroMediaPolicy'
 import OptimizedImage from './OptimizedImage'
 
 /**
  * Full-bleed hero media: eager poster for LCP, optional autoplaying muted
  * video when conditions allow, with an accessible pause/play control.
- * Local WebM/MP4 paths are preferred when set; Mixkit CDN remains the
- * temporary placeholder fallback.
+ * Self-hosted WebM + MP4 under /media/; mobile gets a tighter poster crop.
  */
 export default function HeroMedia() {
   const [loadVideo, setLoadVideo] = useState(false)
@@ -64,17 +63,38 @@ export default function HeroMedia() {
 
   return (
     <>
-      <OptimizedImage
-        className="hero__poster"
-        src={HERO_MEDIA.poster}
-        alt=""
-        width={dims.width}
-        height={dims.height}
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-        aria-hidden="true"
-      />
+      <picture>
+        <source
+          media="(max-width: 720px)"
+          type="image/webp"
+          srcSet={`${HERO_MEDIA.posterMobileWebp} 960w, /media/hero-poster-mobile-640.webp 640w`}
+          sizes="100vw"
+        />
+        <source
+          media="(max-width: 720px)"
+          type="image/jpeg"
+          srcSet={`${HERO_MEDIA.posterMobile} 960w, /media/hero-poster-mobile-640.jpg 640w`}
+          sizes="100vw"
+        />
+        <source
+          type="image/webp"
+          srcSet="/media/hero-poster-960.webp 960w, /media/hero-poster-1280.webp 1280w, /media/hero-poster.webp 1920w"
+          sizes="100vw"
+        />
+        <OptimizedImage
+          className="hero__poster"
+          src={HERO_MEDIA.poster}
+          alt=""
+          width={dims.width}
+          height={dims.height}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          aria-hidden="true"
+          srcSet={IMAGE_SRCSETS.heroPoster}
+          sizes="100vw"
+        />
+      </picture>
       {loadVideo && (
         <video
           ref={videoRef}

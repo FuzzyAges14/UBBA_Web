@@ -10,7 +10,7 @@
 export const DEFAULT_SITE_URL = 'https://www.unitedbba.com'
 
 /** Default social-share image (path under `public/`). Replace before launch. */
-export const DEFAULT_OG_IMAGE_PATH = '/media/hero-poster.jpg'
+export const DEFAULT_OG_IMAGE_PATH = '/media/og-default.jpg'
 
 export function getSiteUrl(): string {
   // Vite / Vitest expose import.meta.env; plain Node (e.g. tsx scripts) may not.
