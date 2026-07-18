@@ -303,6 +303,15 @@
     linear-gradient(155deg, #fff7f0, #eef3ff 70%);
   border: 2px solid rgba(10, 10, 10, 0.08);
 }
+.media-frame > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+  border: 2px solid rgba(10, 10, 10, 0.08);
+}
 .media-frame__note {
   position: absolute;
   left: 0.75rem;

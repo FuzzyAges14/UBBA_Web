@@ -32,12 +32,12 @@ Committed under `public/media/` (see `public/media/README.md`):
 
 | File | Role | Target | Current (2026-07-18) |
 | --- | --- | --- | --- |
-| `hero-poster.jpg` | LCP / fallback | ≤ 150 KB, ~1920×1080 | **97 KB** |
-| `hero-poster.webp` | Modern LCP candidate | Smaller than JPEG | **71 KB** |
-| `hero-poster-mobile.jpg` | ≤720px art-directed crop | ≤ 100 KB | **76 KB** |
-| `hero.mp4` | H.264 fallback | ≤ 2–3 MB, 720p–1080p | **2.5 MB** (1920×1080, CRF 28) |
-| `hero.webm` | Modern browsers | Same duration, VP9 | **2.1 MB** (1280×720, CRF 34) |
-| `og-default.jpg` | Social share | 1200×630 | **67 KB** |
+| `hero-poster.jpg` | LCP / fallback | ≤ 150 KB, ~1920×1080 | **~123 KB** (unitedbba.com adult kick) |
+| `hero-poster.webp` | Modern LCP candidate | Smaller than JPEG | WebP sibling committed |
+| `hero-poster-mobile.jpg` | ≤720px art-directed crop | ≤ 120 KB | Mobile crop committed |
+| `hero.mp4` | H.264 fallback | ≤ 2–3 MB, 720p–1080p | **~1.2 MB** Ken Burns still montage |
+| `hero.webm` | Modern browsers | Same duration, VP9 | **~0.8 MB** |
+| `og-default.jpg` | Social share | 1200×630 | **~62 KB** |
 
 Env overrides (Vite) — optional now that defaults are local:
 
@@ -61,9 +61,8 @@ ffmpeg -y -i source.mp4 -vf "scale=-2:720" -c:v libvpx-vp9 -b:v 0 -crf 34 \
   -an -row-mt 1 public/media/hero.webm
 ```
 
-Do not ship copyrighted footage without authorization. Replace temporary
-Pexels/Wikimedia/Mixkit assets with academy-owned media before launch
-(see `docs/IMAGE_SOURCES.md`).
+Production stills and the hero montage are sourced from unitedbba.com
+(see `docs/IMAGE_SOURCES.md`). Prefer continuous dojang footage when available.
 
 ## Still photography
 

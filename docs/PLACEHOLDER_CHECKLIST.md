@@ -4,14 +4,12 @@ All placeholder content is intentionally labeled in the UI (`PLACEHOLDER` tags o
 images, "pending confirmation" notes on stats/programs). Track replacements here.
 
 ## Must replace before launch
-- [ ] All temporary stock photography & hero video with authentic UBBA media
-      (see `IMAGE_SOURCES.md` — currently self-hosted Pexels / Wikimedia CC0 /
-      Mixkit Free temporary package; no production hotlinks)
-- [ ] Provide attribution for any CC BY / CC BY-SA images kept, or swap for owned media
-- [x] Self-host hero MP4 + WebM under `public/media/` (temporary stock loop;
-      replace with academy footage before launch)
-- [ ] Owner portrait with a real photo of Sanghyun Lee
-      (**OWNER PHOTO REQUIRED** — UI Placeholder; no stock face shipped)
+- [x] Program / hero / owner / Just 4 Kids media from unitedbba.com (self-hosted;
+      see `IMAGE_SOURCES.md`) — location exteriors still open
+- [x] Self-host hero MP4 + WebM under `public/media/` (Ken Burns still montage;
+      prefer continuous dojang footage before launch)
+- [x] Owner portrait of Sanghyun Lee (Master Lee) from unitedbba.com
+- [ ] Location exterior / interior photos (Allendale, Midland Park, Glen Rock)
 - [ ] Testimonials with real, owner-approved reviews (no fabricated names/quotes)
 - [ ] Stats: "Students Trained", "Years Serving", "Average Parent Rating"
 - [ ] Midland Park phone & hours

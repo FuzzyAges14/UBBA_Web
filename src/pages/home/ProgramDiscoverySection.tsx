@@ -49,7 +49,6 @@ export default function ProgramDiscoverySection() {
                 </span>
               </div>
             </Link>
-            <span className="photo__credit">Placeholder photo</span>
           </Reveal>
 
           <div className="home-programs__stack">

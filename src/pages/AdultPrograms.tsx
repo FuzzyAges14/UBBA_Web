@@ -64,15 +64,12 @@ export default function AdultPrograms() {
               <div className="interior-media__veil" aria-hidden="true" />
               <OptimizedImage
                 src={IMAGES.action}
-                alt="Adult martial artist practicing a high kick (temporary stock photography)"
+                alt="Adult martial artist practicing a high kick in the dojang"
                 width={IMAGE_DIMENSIONS.action.width}
                 height={IMAGE_DIMENSIONS.action.height}
                 loading="lazy"
                 sizes="(max-width: 900px) 100vw, 42vw"
               />
-              <figcaption className="interior-media__credit">
-                Temporary stock — not UBBA instructors or students
-              </figcaption>
             </figure>
           </Reveal>
           <Reveal>

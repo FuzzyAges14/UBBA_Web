@@ -12,19 +12,16 @@ export const SITE = {
 }
 
 /* ---------------------------------------------------------------------------
- * Media (temporary commercially-licensed stock until authentic UBBA shoot).
- * Self-hosted under public/media/. Licenses: docs/IMAGE_SOURCES.md.
- * Performance: docs/PERFORMANCE.md. Agent 2 package: docs/MEDIA_CANDIDATES.md.
+ * Media from the live unitedbba.com site (same academy), self-hosted under
+ * public/media/. Provenance: docs/IMAGE_SOURCES.md.
+ * Performance: docs/PERFORMANCE.md.
  * ------------------------------------------------------------------------- */
 
 export const IMAGES = {
-  /** Self-hosted hero loop (Pexels 7045155). Override via VITE_HERO_VIDEO_*. */
+  /** Ken Burns loop of unitedbba.com stills. Override via VITE_HERO_VIDEO_*. */
   heroVideo: heroVideoMp4('/media/hero.mp4'),
   heroPoster: '/media/hero-poster.jpg',
-  /**
-   * OWNER PHOTO REQUIRED — DO NOT SUBSTITUTE WITH MISLEADING STOCK.
-   * UI uses Placeholder until an authentic Sanghyun Lee portrait is supplied.
-   */
+  /** Sanghyun Lee / Master Lee portrait from unitedbba.com/upload/about_us/. */
   instructorPortrait: '/media/owner-portrait.jpg',
   action: '/media/adult-action.jpg',
   kidsKicks: '/media/kids-kicks.jpg',
@@ -32,6 +29,9 @@ export const IMAGES = {
   teenSpar: '/media/teen-training.jpg',
   beltTest: '/media/respect-bow.jpg',
   ogDefault: '/media/og-default.jpg',
+  birthday: '/media/birthday-party.jpg',
+  summerCamp: '/media/summer-camp.jpg',
+  parentsNightOut: '/media/parents-night-out.jpg',
 } as const
 
 /** Structured hero sources for WebM + MP4 delivery and poster LCP. */
@@ -57,6 +57,9 @@ export const IMAGE_DIMENSIONS = {
   beltTest: { width: 1920, height: 1080 },
   instructorPortrait: { width: 1080, height: 1920 },
   ogDefault: { width: 1200, height: 630 },
+  birthday: { width: 1280, height: 720 },
+  summerCamp: { width: 1280, height: 720 },
+  parentsNightOut: { width: 1280, height: 720 },
   logo: { width: 300, height: 282 },
 } as const
 
@@ -74,6 +77,12 @@ export const IMAGE_SRCSETS = {
     '/media/respect-bow-640.jpg 640w, /media/respect-bow-960.jpg 960w, /media/respect-bow-1280.jpg 1280w, /media/respect-bow-1920.jpg 1920w',
   heroPoster:
     '/media/hero-poster-960.jpg 960w, /media/hero-poster-1280.jpg 1280w, /media/hero-poster.jpg 1920w',
+  birthday:
+    '/media/birthday-party-640.jpg 640w, /media/birthday-party-960.jpg 960w, /media/birthday-party-1280.jpg 1280w',
+  summerCamp:
+    '/media/summer-camp-640.jpg 640w, /media/summer-camp-960.jpg 960w, /media/summer-camp-1280.jpg 1280w',
+  parentsNightOut:
+    '/media/parents-night-out-640.jpg 640w, /media/parents-night-out-960.jpg 960w, /media/parents-night-out-1280.jpg 1280w',
 } as const
 
 export function imageDimensionsFor(src: string): { width: number; height: number } {
@@ -94,6 +103,12 @@ export function imageDimensionsFor(src: string): { width: number; height: number
       return IMAGE_DIMENSIONS.instructorPortrait
     case IMAGES.ogDefault:
       return IMAGE_DIMENSIONS.ogDefault
+    case IMAGES.birthday:
+      return IMAGE_DIMENSIONS.birthday
+    case IMAGES.summerCamp:
+      return IMAGE_DIMENSIONS.summerCamp
+    case IMAGES.parentsNightOut:
+      return IMAGE_DIMENSIONS.parentsNightOut
     default:
       return IMAGE_DIMENSIONS.heroPoster
   }
@@ -113,6 +128,12 @@ export function imageSrcSetFor(src: string): string | undefined {
       return IMAGE_SRCSETS.beltTest
     case IMAGES.heroPoster:
       return IMAGE_SRCSETS.heroPoster
+    case IMAGES.birthday:
+      return IMAGE_SRCSETS.birthday
+    case IMAGES.summerCamp:
+      return IMAGE_SRCSETS.summerCamp
+    case IMAGES.parentsNightOut:
+      return IMAGE_SRCSETS.parentsNightOut
     default:
       return undefined
   }

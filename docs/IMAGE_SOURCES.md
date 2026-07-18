@@ -2,63 +2,66 @@
 
 Production media is **self-hosted** under `public/media/` and referenced only
 from `IMAGES` / `HERO_MEDIA` / `IMAGE_DIMENSIONS` / `IMAGE_SRCSETS` in
-`src/data/site.ts`. Assets below follow Agent 2’s temporary free package in
-[`MEDIA_CANDIDATES.md`](MEDIA_CANDIDATES.md) (PR #27) until authentic UBBA
-photography and footage replace them.
+`src/data/site.ts`.
 
-Photos show a `Temporary stock photo` credit in program detail UI. Do **not**
-present stock participants as UBBA students, instructors, or locations.
+Primary source: the live academy site
+[unitedbba.com](https://unitedbba.com/) (same company). Assets were downloaded
+from `/upload/` on 2026-07-18, re-encoded for responsive delivery, and committed
+locally. Do **not** hotlink `unitedbba.com` in production.
+
+The old site had **no self-hosted hero video** — only a YouTube embed of an ATA
+franchise testimonial (`dKHeXC_2bHE`). The hero loop here is a Ken Burns montage
+built from unitedbba.com stills (adult kick, kids class, TKD group, adult
+featured portrait).
 
 ## Integrated production assets (2026-07-18)
 
-| Key / file | Usage | Source URL · ID | Creator | License | Download date | Original → production | Size | Temporary? |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `hero.mp4` | Home hero (H.264) | [Pexels 7045155](https://www.pexels.com/video/master-demonstrating-his-martial-art-skills-7045155/) | RDNE Stock project | [Pexels License](https://www.pexels.com/license/) — free commercial; no attribution required; no endorsement implication | 2026-07-18 | 1920×1080 source → 1920×1080 CRF28 muted `+faststart` | 2.5 MB | Yes — prefer authentic UBBA loop |
-| `hero.webm` | Home hero (VP9) | same | same | Pexels License | 2026-07-18 | 1280×720 VP9 CRF34 muted | 2.1 MB | Yes |
-| `hero-poster.jpg` (+ `.webp`, `-960`, `-1280`) | Hero LCP poster | Frame @ ~5s of 7045155 | RDNE | Pexels License | 2026-07-18 | 1920×1080 JPEG q≈78 | 97 KB (JPEG) / 71 KB (WebP) | Yes |
-| `hero-poster-mobile.jpg` (+ `-640`, `.webp`) | ≤720px poster crop | same frame, attention crop 4:5 | RDNE | Pexels License | 2026-07-18 | 960×1200 | 76 KB | Yes |
-| `og-default.jpg` | Open Graph / Twitter default | Crop of hero frame | RDNE | Pexels License | 2026-07-18 | 1200×630 | 67 KB | Yes |
-| `kids-kicks.jpg` (+ responsive) | Tiny Tigers / kids kicks slots | [Wikimedia CC0 class 01](https://commons.wikimedia.org/wiki/File:Children_practicing_taekwondo_in_National_stadium_01.jpg) | Oluwatoyinp | **CC0 1.0** — commercial OK; EXIF GPS stripped | 2026-07-18 | 4032×3024 → 1280×720 (+640/960) | 221 KB @1280 | Yes |
-| `kids-group.jpg` (+ responsive) | Junior / family group slots | [Wikimedia CC0 class 05](https://commons.wikimedia.org/wiki/File:Children_practicing_taekwondo_in_National_stadium_05.jpg) | Oluwatoyinp | **CC0 1.0** — EXIF GPS stripped | 2026-07-18 | 4032×3024 → 1280×720 | 189 KB @1280 | Yes |
-| `teen-training.jpg` (+ responsive) | Teen / Olympic sparring slots | [Pexels 30777328](https://www.pexels.com/photo/taekwondo-class-training-session-outdoors-30777328/) | Martin.que | Pexels License | 2026-07-18 | 8629×5753 → 1280×720 | 131 KB @1280 | Yes |
-| `adult-action.jpg` (+ responsive) | Adult / SWAT action slots | Frame of [Mixkit 49632](https://mixkit.co/free-stock-video/a-young-man-practicing-karate-moves-49632/) | Mixkit | [Mixkit Stock Video Free License](https://mixkit.co/license/#videoFree) — commercial OK | 2026-07-18 | 1920×1080 frame | 39 KB @1920 | Yes — karate studio; alt should say martial arts training |
-| `respect-bow.jpg` (+ responsive) | Self-defense / weapons (`beltTest`) — no longer reuses hero | [Pexels 7991209](https://www.pexels.com/photo/a-martial-arts-instructor-bowing-to-a-student-7991209/) | cottonbro studio | Pexels License | 2026-07-18 | 6365×4243 → 1920×1080 | 115 KB @1920 | Yes — respect/mentorship mood; not a belt-test photo |
+| Key / file | Usage | Source URL | Notes | Temporary? |
+| --- | --- | --- | --- | --- |
+| `hero.mp4` / `hero.webm` | Home hero loop | Ken Burns from unitedbba.com stills below | H.264 ~1.2 MB · VP9 ~0.8 MB · ~12s | Prefer authentic dojang footage when available |
+| `hero-poster.jpg` (+ responsive / mobile) | Hero LCP poster | [Adult-Martial-Arts.jpg](https://unitedbba.com/upload/about_us/Adult-Martial-Arts.jpg) | High-kick action still | No |
+| `og-default.jpg` | Open Graph / Twitter | Crop of adult action still | 1200×630 | No |
+| `owner-portrait.jpg` | Home “Meet The Owner” | [Owner-Sang.png](https://unitedbba.com/upload/about_us/Owner-Sang.png) | Master Lee / Sanghyun Lee portrait | No |
+| `kids-kicks.jpg` (+ responsive) | Tiny Tigers / kids kicks | [kids-martial-arts-featured.jpg](https://unitedbba.com/upload/featuredprograms/1781612542kids-martial-arts-featured.jpg) | Featured kids program portrait | No |
+| `kids-group.jpg` (+ responsive) | Junior / children overview | [kids-martial-arts1.jpg](https://unitedbba.com/upload/about_us/kids-martial-arts1.jpg) | Kids class punching line | No |
+| `teen-training.jpg` (+ responsive) | Teen / Olympic sparring | [element_image_3.jpg](https://unitedbba.com/upload/featured/15095578651502090678element_image_3.jpg) | Multi-age TKD group pose | No |
+| `adult-action.jpg` (+ responsive) | Adult / SWAT / benefits | [Adult-Martial-Arts.jpg](https://unitedbba.com/upload/about_us/Adult-Martial-Arts.jpg) | Same family as hero poster | No |
+| `respect-bow.jpg` (+ responsive) | Self-defense / weapons (`beltTest`) | [Karate-belt6.jpg](https://unitedbba.com/upload/program_category/Karate-belt6.jpg) | Black-belt grip banner | No |
+| `birthday-party.jpg` (+ responsive) | Birthday Parties | [birthdays-1.jpg](https://unitedbba.com/upload/programs/17816104581739211609birthdays-1.jpg) | Just 4 Kids | No |
+| `summer-camp.jpg` (+ responsive) | Summer Camp | [Summer-Camp.jpg](https://unitedbba.com/upload/programs/1520533409Summer-Camp.jpg) | Just 4 Kids | No |
+| `parents-night-out.jpg` (+ responsive) | Parents’ Night Out | [parents-night-out.jpg](https://unitedbba.com/upload/programs/1781611869parents-night-out.jpg) | Dojang pizza / games night | No |
 
-### License notes (verified on asset pages 2026-07-18)
+### Other unitedbba.com media inventoried (not all wired)
 
-- **Pexels:** Free commercial use; attribution not required; may edit; do not sell unaltered copies as stock; do not imply endorsement; identifiable people must not be shown in a bad light.
-- **Mixkit Free:** Commercial and personal use without attribution; redistribution as competing stock prohibited.
-- **CC0:** Public domain dedication; attribution appreciated but not required.
-- **Minors:** Several assets depict recognizable children — stock only; never present as UBBA students.
-- **Model/property release:** Per platform license terms; not separately verified beyond license page.
-- **Editing:** All stills re-encoded (resize, JPEG/WebP); EXIF GPS removed from Wikimedia phone photos.
-- **Self-host:** Yes for all integrated files. No production hotlinks remain.
+Crawled from the sitemap + program pages. Icons, UI graphics, and WebsiteDojo
+template cutouts were skipped for photographic slots. Notable extras available
+if needed later:
 
-## Removed / rejected (do not restore)
+- Featured: junior-tigers / Adult-Martial-Arts featured portraits
+- About header / welcome B&W class stills (`owner-bg1`, `Welcome-Text-karate-*`)
+- Self-defense: `womens-self-defense.jpg`, Krav backgrounds
+- Staff thumb: `/upload/staff/thumb/1726173772Instructor_image.png` (210×250)
+- YouTube only: ATA testimonial embed (not self-hosted; not used as hero)
 
-| Former asset | Reason |
-| --- | --- |
-| Mixkit CDN `49706-1080.mp4` hotlink | Third-party production dependency; karate void-studio art direction |
-| `/media/kids-stance.jpg` (Mixkit **48141** frame) | Mixkit **Restricted** free tier — personal use only |
-| `/media/kids-bow.jpg` (Mixkit **48140** frame) | Mixkit Restricted |
-| `/media/kids-motion.jpg` (Mixkit **48139** frame) | Mixkit Restricted + severe compression |
-| `/media/instructor-portrait.jpg` (Mixkit **49705** frame) | Misrepresents academy owner; UI already uses Placeholder |
-| Unsplash `Yf1SegAI84o` (Agent 2 AD1) | Visual inspection showed **BJJ grappling**, not Taekwondo — rejected for accuracy |
+### Rights
 
-## Authenticity-required slots (no stock substituted)
+These files were published on the academy’s own production website for the same
+business. Treat as academy-controlled marketing assets. Prefer a fresh owner
+photo shoot and location exteriors before launch when available.
+
+## Authenticity-required slots still open
 
 | Slot | Status |
 | --- | --- |
-| Owner portrait (`Sanghyun Lee`) | Placeholder in UI · path reserved as `/media/owner-portrait.jpg` · **OWNER PHOTO REQUIRED** |
-| Allendale / Midland Park / Glen Rock exteriors & interiors | Placeholder / location cards · **OWNER PHOTO REQUIRED** |
-| Birthday / Summer Camp / Parents’ Night Out as historical UBBA events | `MediaFrame` placeholders — do not fake with party stock |
+| Allendale / Midland Park / Glen Rock exteriors & interiors | `OwnerMediaSlot` placeholders — **location photos still needed** |
 | Testimonials | Text-only until owner-approved reviews |
+| Native dojang hero video | Ken Burns still-montage in place; replace with real footage when shot |
 
 ## Brand logo
 
 | Asset | Usage | File / URL | Source | Temporary? |
 | --- | --- | --- | --- | --- |
-| Site logo / favicon | Header, footer, browser tab | `/logo.png` | Official United Black Belt Academy logo from [unitedbba.com/upload/logo.png](https://unitedbba.com/upload/logo.png) | No — current academy logo |
+| Site logo / favicon | Header, footer, browser tab | `/logo.png` | Official logo from [unitedbba.com/upload/logo.png](https://unitedbba.com/upload/logo.png) | No |
 
 ## Fonts
 
@@ -69,9 +72,11 @@ present stock participants as UBBA students, instructors, or locations.
 
 ## Rules
 
-1. Do not hotlink production media.
+1. Do not hotlink production media (including `unitedbba.com/upload/…`).
 2. Do not commit watermarked previews or paid stock without a license receipt.
-3. Do not present stock people as UBBA students, instructors, or the owner.
+3. Do not present unrelated third-party stock people as UBBA students when
+   academy site assets are available.
 4. Do not use stock facility photos as UBBA locations.
 5. Update this file whenever an integrated asset changes.
-6. Prefer authentic UBBA hero footage (Agent 2 V-H12) before launch.
+6. Prefer authentic continuous hero footage over the Ken Burns still montage
+   when the academy provides a video.

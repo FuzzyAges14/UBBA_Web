@@ -52,12 +52,11 @@ export default function BenefitsSection() {
             <figure className="photo photo--tall photo--zoom">
               <OptimizedImage
                 src={IMAGES.action}
-                alt="Martial arts training in a dojang — temporary stock imagery"
+                alt="Martial arts training in a dojang"
                 {...IMAGE_DIMENSIONS.action}
                 loading="lazy"
                 sizes="(max-width: 900px) 100vw, 45vw"
               />
-              <figcaption className="photo__credit">Placeholder photo</figcaption>
             </figure>
           </div>
         </Reveal>
