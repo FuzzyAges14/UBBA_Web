@@ -1,0 +1,46 @@
+/* motifs.css — extracted from former src/index.css (lines 367-411) */
+/* ---------- Signature motifs ---------- */
+/* Dojang grid: faint training-floor lines */
+.dojang {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+.dojang--light {
+  background-image: linear-gradient(rgba(10, 10, 10, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 10, 0.035) 1px, transparent 1px);
+}
+.dojang--fade {
+  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 78%);
+}
+
+/* Motion lines: angled speed streaks */
+.motion-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.motion-lines span {
+  position: absolute;
+  height: 2px;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  opacity: 0.5;
+  transform: rotate(-18deg);
+}
+
+/* Belt progression accent bar */
+.belt-bar {
+  display: flex;
+  height: 6px;
+  width: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.belt-bar span {
+  flex: 1;
+}

@@ -1,0 +1,57 @@
+/* tokens.css — extracted from former src/index.css (lines 1-56) */
+/* Home hero display font (demo — personal use; license for commercial launch) */
+@font-face {
+  font-family: 'Ocean Rush';
+  src: url('/fonts/OceanRush.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand palette */
+  --black: #0a0a0a;
+  --graphite: #1b1b1d;
+  --graphite-2: #232327;
+  --red: #c41230;
+  --red-2: #e11836;
+  --red-dark: #97102a;
+  /* Accent (belt progression: white -> blue -> red -> black) */
+  --blue: #2563eb;
+  --blue-soft: #7ca9ff;
+  --white: #ffffff;
+  --off-white: #f6f3ee;
+  --soft-gray: #e7e7e7;
+  --muted: #6d6d72;
+  --muted-light: rgba(255, 255, 255, 0.66);
+  --line: rgba(10, 10, 10, 0.1);
+  --line-2: rgba(10, 10, 10, 0.06);
+  --line-dark: rgba(255, 255, 255, 0.12);
+  --ink: #14141a;
+
+  /* Heritage accents (used sparingly) */
+  --kr-red: #cd2e3a;
+  --kr-blue: #0047a0;
+
+  /* Typography */
+  --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: 'Teko', 'Inter', system-ui, sans-serif;
+  --font-impact: 'Anton', 'Teko', 'Inter', system-ui, sans-serif;
+
+  /* Layout */
+  --maxw: 1240px;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow-sm: 0 6px 20px rgba(10, 10, 10, 0.08);
+  --shadow: 0 24px 60px rgba(10, 10, 10, 0.14);
+  --shadow-lg: 0 40px 90px rgba(10, 10, 10, 0.3);
+  --header-h: 78px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

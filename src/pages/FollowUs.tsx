@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
-import { SOCIAL } from '../data/site'
+import ProgramCard from '../components/ProgramCard'
+import { SOCIAL, type SocialSlug } from '../data/site'
 
-const MARK: Record<string, string> = {
+const MARK: Record<SocialSlug, string> = {
   instagram: 'IG',
   facebook: 'FB',
 }
@@ -27,21 +27,15 @@ export default function FollowUs() {
           <div className="grid grid--2">
             {SOCIAL.map((network, i) => (
               <Reveal as="article" key={network.slug} delay={i * 90}>
-                <div className="pcard">
-                  <div className="pcard__art" />
-                  <div className="pcard__scrim" />
-                  <span className="pcard__glyph social-card__mark" aria-hidden="true">
-                    {MARK[network.slug]}
-                  </span>
-                  <div className="pcard__body">
-                    <span className="pcard__age">{network.handle}</span>
-                    <h3 className="pcard__title">{network.label}</h3>
-                    <p className="pcard__text">{network.blurb}</p>
-                    <Link to={`/follow-us/${network.slug}`} className="pcard__cta">
-                      See Recent Posts <span className="btn__arrow">→</span>
-                    </Link>
-                  </div>
-                </div>
+                <ProgramCard
+                  title={network.label}
+                  text={network.blurb}
+                  ages={network.handle}
+                  glyph={MARK[network.slug]}
+                  glyphClassName="social-card__mark"
+                  to={`/follow-us/${network.slug}`}
+                  ctaLabel="See Recent Posts"
+                />
               </Reveal>
             ))}
           </div>

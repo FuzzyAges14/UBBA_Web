@@ -1,17 +1,12 @@
-import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import Placeholder from '../components/Placeholder'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
+import ProgramCard from '../components/ProgramCard'
+import SectionHeading from '../components/SectionHeading'
 import SectionSeam from '../components/SectionSeam'
-import { CHILDREN_PROGRAMS, FAQS, SITE } from '../data/site'
-
-const GLYPH: Record<string, string> = {
-  'tiny-tigers': '🐯',
-  'junior-tigers': '🥋',
-  'teen-martial-arts': '⚡',
-}
+import { CHILDREN_PROGRAMS, FAQS, PROGRAM_GLYPHS } from '../data/site'
 
 const LEARN = [
   'Focus & listening skills that carry into the classroom',
@@ -38,21 +33,14 @@ export default function ChildrenPrograms() {
           <div className="grid grid--3">
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
-                <div className="pcard">
-                  <div className="pcard__art" />
-                  <div className="pcard__scrim" />
-                  <span className="pcard__glyph" aria-hidden="true">
-                    {GLYPH[p.id]}
-                  </span>
-                  <div className="pcard__body">
-                    {p.ages && <span className="pcard__age">{p.ages}</span>}
-                    <h3 className="pcard__title">{p.title}</h3>
-                    <p className="pcard__text">{p.blurb}</p>
-                    <Link to={`/programs/${p.slug}`} className="pcard__cta">
-                      Learn How It Works <span className="btn__arrow">→</span>
-                    </Link>
-                  </div>
-                </div>
+                <ProgramCard
+                  title={p.title}
+                  text={p.blurb}
+                  ages={p.ages}
+                  glyph={PROGRAM_GLYPHS[p.id]}
+                  to={`/programs/${p.slug}`}
+                  ctaLabel="Learn How It Works"
+                />
               </Reveal>
             ))}
           </div>
@@ -65,12 +53,11 @@ export default function ChildrenPrograms() {
         <div className="dojang" aria-hidden="true" />
         <div className="container split" style={{ position: 'relative' }}>
           <Reveal>
-            <span className="eyebrow">What Students Learn</span>
-            <h2 className="section-title">More than kicks &amp; punches</h2>
-            <p className="section-lead">
-              Every children's class blends high-energy fun with real life skills
-              that help kids become better students, friends, and family members.
-            </p>
+            <SectionHeading
+              eyebrow="What Students Learn"
+              title={<>More than kicks &amp; punches</>}
+              lead="Every children's class blends high-energy fun with real life skills that help kids become better students, friends, and family members."
+            />
             <ul className="checklist mt">
               {LEARN.map((l) => (
                 <li key={l} style={{ color: 'var(--muted-light)' }}>
@@ -93,8 +80,10 @@ export default function ChildrenPrograms() {
       <section className="section section--offwhite">
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
-            <span className="eyebrow">Parent FAQs</span>
-            <h2 className="section-title">What parents ask us most</h2>
+            <SectionHeading
+              eyebrow="Parent FAQs"
+              title="What parents ask us most"
+            />
           </Reveal>
           <Reveal delay={80}>
             <div className="mt">
