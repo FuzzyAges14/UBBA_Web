@@ -191,7 +191,7 @@ export default function Just4Kids() {
               Park. We&apos;ll confirm details before anything is booked.
             </p>
             <div className="flex-actions mt">
-              <Link to="/contact" className="btn btn--gold btn--lg">
+              <Link to="/contact" className="btn btn--blue btn--lg">
                 {SITE.primaryCta} <span className="btn__arrow" aria-hidden="true">→</span>
               </Link>
               <Link to="/just-4-kids/birthday-parties" className="btn btn--outline btn--lg">

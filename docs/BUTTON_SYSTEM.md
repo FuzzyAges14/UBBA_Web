@@ -44,7 +44,8 @@ Interaction design for buttons, CTAs, and editorial links. Built for conversion 
 | Dark-surface `.btn--outline` | Outline on hero / dark sections | Transparent, white border | Soft white fill wipe |
 | `.btn--lg` | Hero / banner size | Larger padding, min-height 48px | Same family motion |
 | `.btn--block` | Full-width (forms, mobile nav) | `width: 100%` | Same family motion |
-| `.text-link` | Editorial / card-style text CTA | Underline grows L→R | Arrow nudge |
+| `.text-link` | Inline editorial link (red) | Underline grows via `background-size` | Optional arrow nudge |
+| `.text-link--on-red` | Inline link on red banners | White underline at rest | Slight opacity on hover |
 | `.pcard__cta` | Program card link treatment | Underline + arrow (card hover/focus) | Same |
 | `.nav__link` | Header nav | Underline scaleX | Active/focus same |
 | Footer links | Chrome text links | Underline scaleX in blue-soft | Color brightens |
