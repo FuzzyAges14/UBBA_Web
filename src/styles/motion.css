@@ -28,7 +28,8 @@
   .feature:hover,
   .pill:hover,
   .loc-card:hover,
-  .pcard:hover .pcard__art {
+  .pcard:hover .pcard__art,
+  .pcard:hover .pcard__img {
     transform: none;
   }
 }

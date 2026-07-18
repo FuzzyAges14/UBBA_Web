@@ -178,6 +178,7 @@ photos later, see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md).
 Launch-readiness documents live in [`docs/`](docs/):
 
 - [`IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) — photo replacement + licensing log
+- [`PERFORMANCE.md`](docs/PERFORMANCE.md) — media encode targets, code splitting, bundle / Lighthouse checks
 - [`OWNER_APPROVAL_CHECKLIST.md`](docs/OWNER_APPROVAL_CHECKLIST.md) — facts to confirm
 - [`PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md) — placeholders to replace
 - [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md) — owner steps to link emails, social accounts, and form delivery

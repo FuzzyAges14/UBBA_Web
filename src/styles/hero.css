@@ -10,13 +10,18 @@
   background: var(--black);
   overflow: hidden;
 }
-.hero__video {
+.hero__video,
+.hero__poster {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 0;
+}
+.hero__poster {
+  /* Poster is the LCP image; video layers on top when enabled. */
+  background: var(--black);
 }
 /* Functional legibility scrim (not a decorative gradient) */
 .hero__overlay {

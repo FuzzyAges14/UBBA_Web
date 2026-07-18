@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ImgHTMLAttributes } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { SITE, LOCATIONS, MEGA_MENU, JUST_4_KIDS_MENU } from '../data/site'
 
@@ -86,6 +86,8 @@ export default function Header() {
               className="brand__logo"
               width={52}
               height={49}
+              decoding="async"
+              {...({ fetchpriority: 'high' } as ImgHTMLAttributes<HTMLImageElement>)}
             />
             <span className="brand__text">
               <span className="brand__name">United Black Belt</span>

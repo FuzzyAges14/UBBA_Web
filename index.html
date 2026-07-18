@@ -32,6 +32,10 @@
       content="Confidence-building Taekwondo and martial arts for kids, teens, and adults in Allendale and Midland Park, NJ. Try a class for free at United Black Belt Academy."
     />
     <meta name="twitter:image" content="https://www.unitedbba.com/media/hero-poster.jpg" />
+    <!-- LCP: hero poster is critical on the homepage entry. -->
+    <link rel="preload" as="image" href="/media/hero-poster.jpg" fetchpriority="high" />
+    <!-- Display font used on the home hero title (font-display: swap in CSS). -->
+    <link rel="preload" as="font" href="/fonts/OceanRush.otf" type="font/otf" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
