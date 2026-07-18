@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { CONTACT, SOCIAL_PROFILES } from '../data/contact'
 import { FOOTER_LINKS, LOCATIONS, SITE } from '../data/site'
 import Taegeuk from './Taegeuk'
 
@@ -37,6 +38,29 @@ export default function Footer() {
               Confidence-building Taekwondo for kids, teens, and adults across
               Bergen County, NJ. Discipline, respect, and real growth on every mat.
             </p>
+            {CONTACT.publicEmail && (
+              <p style={{ marginTop: '0.75rem' }}>
+                <a href={`mailto:${CONTACT.publicEmail}`}>{CONTACT.publicEmail}</a>
+              </p>
+            )}
+            <div className="footer__social" aria-label="Social media">
+              {SOCIAL_PROFILES.map((profile) =>
+                profile.href && profile.href !== '#' ? (
+                  <a
+                    key={profile.slug}
+                    href={profile.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {profile.label}
+                  </a>
+                ) : (
+                  <Link key={profile.slug} to={`/follow-us/${profile.slug}`}>
+                    {profile.label}
+                  </Link>
+                ),
+              )}
+            </div>
           </div>
 
           <div>

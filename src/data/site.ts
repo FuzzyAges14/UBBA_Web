@@ -1,3 +1,5 @@
+import { SOCIAL_PROFILES, type SocialProfileSlug } from './contact'
+
 export const SITE = {
   name: 'United Black Belt Academy',
   shortName: 'United Black Belt Academy',
@@ -600,9 +602,10 @@ export const FAQS: Faq[] = [
   },
 ]
 
-// Social profiles + recent-post placeholders — replace with live embeds/API
-// before launch. YouTube is intentionally omitted (no channel yet).
-export type SocialSlug = 'instagram' | 'facebook'
+// Social profiles: edit URLs/handles in `src/data/contact.ts` (SOCIAL_PROFILES).
+// Recent-post placeholders below can be swapped for live embeds/API later.
+// YouTube is intentionally omitted (no channel yet).
+export type SocialSlug = SocialProfileSlug
 
 export type SocialPost = {
   id: string
@@ -622,70 +625,60 @@ export type SocialLink = {
   recentPosts: SocialPost[]
 }
 
-export const SOCIAL: SocialLink[] = [
-  {
-    slug: 'instagram',
-    label: 'Instagram',
-    href: '#',
-    handle: '@unitedblackbelt',
-    blurb: 'Class moments, belt promotions, and academy life — see what is happening on the mat.',
-    placeholder: true,
-    recentPosts: [
-      {
-        id: 'ig-1',
-        caption: 'Evening class energy on the mat',
-        dateLabel: 'Recent',
-        href: '#',
-        placeholder: true,
-      },
-      {
-        id: 'ig-2',
-        caption: 'Tiny Tigers belt promotion day',
-        dateLabel: 'Recent',
-        href: '#',
-        placeholder: true,
-      },
-      {
-        id: 'ig-3',
-        caption: 'Junior Tigers sparring drills',
-        dateLabel: 'Recent',
-        href: '#',
-        placeholder: true,
-      },
-    ],
-  },
-  {
-    slug: 'facebook',
-    label: 'Facebook',
-    href: '#',
-    handle: 'United Black Belt Academy',
-    blurb: 'Events, camp updates, and community news for families across Bergen County.',
-    placeholder: true,
-    recentPosts: [
-      {
-        id: 'fb-1',
-        caption: "Parents' Night Out this Friday",
-        dateLabel: 'Recent',
-        href: '#',
-        placeholder: true,
-      },
-      {
-        id: 'fb-2',
-        caption: 'Summer camp registration is open',
-        dateLabel: 'Recent',
-        href: '#',
-        placeholder: true,
-      },
-      {
-        id: 'fb-3',
-        caption: 'Birthday party booking spots filling up',
-        dateLabel: 'Recent',
-        href: '#',
-        placeholder: true,
-      },
-    ],
-  },
-]
+const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
+  instagram: [
+    {
+      id: 'ig-1',
+      caption: 'Evening class energy on the mat',
+      dateLabel: 'Recent',
+      href: '#',
+      placeholder: true,
+    },
+    {
+      id: 'ig-2',
+      caption: 'Tiny Tigers belt promotion day',
+      dateLabel: 'Recent',
+      href: '#',
+      placeholder: true,
+    },
+    {
+      id: 'ig-3',
+      caption: 'Junior Tigers sparring drills',
+      dateLabel: 'Recent',
+      href: '#',
+      placeholder: true,
+    },
+  ],
+  facebook: [
+    {
+      id: 'fb-1',
+      caption: "Parents' Night Out this Friday",
+      dateLabel: 'Recent',
+      href: '#',
+      placeholder: true,
+    },
+    {
+      id: 'fb-2',
+      caption: 'Summer camp registration is open',
+      dateLabel: 'Recent',
+      href: '#',
+      placeholder: true,
+    },
+    {
+      id: 'fb-3',
+      caption: 'Birthday party booking spots filling up',
+      dateLabel: 'Recent',
+      href: '#',
+      placeholder: true,
+    },
+  ],
+}
+
+/** Profile links come from SOCIAL_PROFILES in contact.ts — edit URLs there. */
+export const SOCIAL: SocialLink[] = SOCIAL_PROFILES.map((profile) => ({
+  ...profile,
+  recentPosts: SOCIAL_RECENT_POSTS[profile.slug],
+}))
 
 export function getSocial(slug: string | undefined): SocialLink | undefined {
   return SOCIAL.find((s) => s.slug === slug)

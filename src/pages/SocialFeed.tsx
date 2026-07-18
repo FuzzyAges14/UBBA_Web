@@ -39,8 +39,8 @@ export default function SocialFeed() {
             <p className="section-lead">{network.blurb}</p>
             {network.placeholder && (
               <p className="ph-note mt-sm">
-                Profile link pending — replace the {network.label} URL in{' '}
-                <code>SOCIAL</code> before launch.
+                Profile link pending — paste the {network.label} URL into{' '}
+                <code>SOCIAL_PROFILES</code> in <code>src/data/contact.ts</code> before launch.
               </p>
             )}
             <div className="mt" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>

@@ -12,15 +12,16 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Testimonials with real, owner-approved reviews (no fabricated names/quotes)
 - [ ] Stats: "Students Trained", "Years Serving", "Average Parent Rating"
 - [ ] Midland Park phone & hours
-- [ ] Social media profile URLs + recent posts (`SOCIAL` — Instagram & Facebook only;
-      shown on `/follow-us` and `/follow-us/:network`; no YouTube channel)
+- [ ] Social media profile URLs in `src/data/contact.ts` (`SOCIAL_PROFILES`) + recent
+      posts on `/follow-us` / `/follow-us/:network` (Instagram & Facebook only; no YouTube)
 - [ ] Privacy Policy and Terms copy
 
-## Forms (front-end only today)
-- [ ] Connect `LeadForm` submissions to a backend/service
-      (Formspree, HubSpot, Mailchimp, Zapier, or custom API). The form validates
-      and shows a success state but does not send anything yet.
-- [ ] Add spam prevention (honeypot/CAPTCHA) and privacy acknowledgement link
+## Forms & email delivery
+- [x] `LeadForm` posts to `/api/leads` (see `docs/BACKEND.md`)
+- [x] Honeypot spam field on the form
+- [ ] Set real `CONTACT.notifyEmails` + `SOCIAL_PROFILES` in `src/data/contact.ts`
+- [ ] Configure Resend or SMTP in `.env` so requests leave log-only mode
+- [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 
 ## Fonts
 - [ ] The hero title uses the **Ocean Rush DEMO** font (free for personal use
