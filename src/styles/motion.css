@@ -31,6 +31,9 @@
   .pcard:hover .pcard__img {
     transform: none;
   }
+  .pcard__scrim::after {
+    transition: none;
+  }
   /* Buttons/links: keep hover color/fill states, drop motion. */
   .btn,
   .btn__arrow,
