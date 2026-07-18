@@ -35,7 +35,7 @@ export default function ChildrenPrograms() {
           <div className="grid grid--3">
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
-                <div className="pcard" style={{ minHeight: 420 }}>
+                <div className="pcard">
                   <div className="pcard__art" />
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">
