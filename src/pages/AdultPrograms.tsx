@@ -82,7 +82,7 @@ export default function AdultPrograms() {
               lead="Whether you want a motivating alternative to the gym, a place to relieve stress, or practical self-defense skills, adult classes deliver a full-body workout in a supportive, no-ego environment — no prior martial arts background required."
             />
             <div className="flex-actions mt">
-              <Link to="/contact" className="btn btn--gold">
+              <Link to="/contact" className="btn btn--blue">
                 {SITE.primaryCta} <span className="btn__arrow">→</span>
               </Link>
               <Link to="/locations/allendale" className="btn btn--outline">

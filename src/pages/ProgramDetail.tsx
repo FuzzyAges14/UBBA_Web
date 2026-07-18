@@ -76,7 +76,7 @@ export default function ProgramDetail() {
                   <li key={l}>{l}</li>
                 ))}
               </ul>
-              <Link to="/contact" className="btn btn--gold mt">
+              <Link to="/contact" className="btn btn--blue mt">
                 {SITE.primaryCta} <span className="btn__arrow">→</span>
               </Link>
             </div>
