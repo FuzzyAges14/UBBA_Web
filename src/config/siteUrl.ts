@@ -13,7 +13,14 @@ export const DEFAULT_SITE_URL = 'https://www.unitedbba.com'
 export const DEFAULT_OG_IMAGE_PATH = '/media/hero-poster.jpg'
 
 export function getSiteUrl(): string {
-  const fromEnv = (import.meta.env.VITE_SITE_URL as string | undefined)?.trim()
+  // Vite / Vitest expose import.meta.env; plain Node (e.g. tsx scripts) may not.
+  const viteEnv =
+    typeof import.meta !== 'undefined' && import.meta.env
+      ? (import.meta.env.VITE_SITE_URL as string | undefined)
+      : undefined
+  const nodeEnv =
+    typeof process !== 'undefined' ? process.env?.VITE_SITE_URL ?? process.env?.SITE_URL : undefined
+  const fromEnv = (viteEnv ?? nodeEnv)?.trim()
   if (fromEnv) return fromEnv.replace(/\/+$/, '')
   return DEFAULT_SITE_URL
 }
