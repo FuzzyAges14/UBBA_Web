@@ -180,29 +180,234 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
   },
 ]
 
-export const JUST_4_KIDS = [
+export type EventInquiryIntent = 'birthday' | 'summer-camp' | 'parents-night-out'
+
+export type Faq = { q: string; a: string }
+
+export type Just4KidsOffering = {
+  id: string
+  title: string
+  tag: string
+  blurb: string
+  to: string
+  icon: string
+  sticker: string
+  ctaLabel: string
+  image: string
+}
+
+/** Hub tiles for the Just 4 Kids overview page. */
+export const JUST_4_KIDS: Just4KidsOffering[] = [
   {
     id: 'birthday-parties',
     title: 'Birthday Parties',
     tag: 'All ages',
     blurb:
-      'Supervised martial arts parties packed with games and activities that teach courtesy and respect while everyone has a blast.',
+      'Jam-packed martial arts parties with games, board breaks, and cool moves — fully supervised so the birthday kid is the star.',
+    to: '/just-4-kids/birthday-parties',
+    icon: '🎂',
+    sticker: 'Board Break!',
+    ctaLabel: 'Plan a Party',
+    image: IMAGES.kidsGroup,
   },
   {
     id: 'summer-camp',
     title: 'Summer / Day Camp',
     tag: 'Ages 3-12',
     blurb:
-      'An action-packed camp focused on life skills, confidence, and an unforgettable summer of movement, games, and friendships.',
+      'Themes, crafts, games, and martial arts all summer long — the action-packed camp kids beg to come back to.',
+    to: '/just-4-kids/summer-camp',
+    icon: '☀️',
+    sticker: 'Most Exciting Summer!',
+    ctaLabel: 'Reserve a Spot',
+    image: IMAGES.kidsKicks,
   },
   {
     id: 'parents-night-out',
     title: "Parents' Night Out",
     tag: 'Monthly Friday',
     blurb:
-      'Games, laughter, and pizza once a month on a Friday. Open to non-students, so bring a friend and enjoy a night off.',
+      'Games, laughter, and pizza once a month on a Friday. Open to non-students — bring a friend and enjoy a night off.',
+    to: '/just-4-kids#parents-night-out',
+    icon: '🍕',
+    sticker: 'Pizza Night!',
+    ctaLabel: 'Save a Spot',
+    image: IMAGES.teenSpar,
   },
 ]
+
+export type Just4KidsDetail = {
+  slug: string
+  name: string
+  tag: string
+  heroTitle: string
+  heroIntro: string
+  kidsWill: { label: string; icon: string }[]
+  activities: string[]
+  includes: string[]
+  parentsSupply?: string[]
+  whatToBring?: string[]
+  weekNotes?: string[]
+  faqs: Faq[]
+  formIntent: EventInquiryIntent
+  ctaLabel: string
+  image: string
+  sticker: string
+}
+
+export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
+  'birthday-parties': {
+    slug: 'birthday-parties',
+    name: 'Birthday Parties',
+    tag: 'All ages',
+    heroTitle: 'The most exciting birthday party ever',
+    heroIntro:
+      'Have a birthday jam-packed with FUN activities, fully organized and supervised by qualified staff — that will make it a HIT!',
+    kidsWill: [
+      { label: 'Break boards', icon: '💥' },
+      { label: 'Learn cool martial arts moves', icon: '🥋' },
+      { label: 'Have a kicking good time', icon: '🎉' },
+    ],
+    activities: [
+      'Martial arts themed games & mini lesson',
+      'Movie-style moves under instructor supervision',
+      'Board breaking for that big wow moment',
+      'Cake-cutting ceremony (sword optional with staff)',
+      'Opening of gifts & group photo',
+    ],
+    includes: [
+      'Exclusive use of our facility for ~1.5 hours',
+      'Up to 20 participants in the party package',
+      'Taekwondo lesson, self-defense intro, board breaking & games',
+      'Qualified staff who run the whole party flow',
+      'Option to customize activities to fit your child',
+    ],
+    parentsSupply: [
+      'Table covers, plates & utensils',
+      'Pizza (or other party food)',
+      'Birthday cake',
+    ],
+    faqs: [
+      {
+        q: 'What age groups are available for birthday parties?',
+        a: 'All ages! We tailor games and the mini lesson so every guest can join in.',
+      },
+      {
+        q: 'Do my child or guests need martial arts experience?',
+        a: 'Absolutely not. No experience — and no uniform — is necessary. Comfortable clothes are perfect.',
+      },
+      {
+        q: 'Will kids be fighting each other?',
+        a: 'No way! Everything is instructor-led, safe, and focused on fun games, pads, and boards — not sparring each other.',
+      },
+      {
+        q: 'What happens after I send an inquiry?',
+        a: 'One of our instructors will call you to discuss your event, confirm details, and secure your date. You can also call the school directly.',
+      },
+      {
+        q: 'Do guests need a waiver?',
+        a: 'Yes — every child needs a waiver signed by a parent or guardian to participate.',
+      },
+    ],
+    formIntent: 'birthday',
+    ctaLabel: 'Schedule My Party',
+    image: IMAGES.kidsGroup,
+    sticker: 'Fun & Awesome!',
+  },
+  'summer-camp': {
+    slug: 'summer-camp',
+    name: 'Summer / Day Camp',
+    tag: 'Ages 3-12',
+    heroTitle: "Make this your child's most exciting summer ever",
+    heroIntro:
+      'Themes, arts & crafts, games, outings, and martial arts taught by Black Belt instructors — plus plenty of time to make friends.',
+    kidsWill: [
+      { label: 'Break boards', icon: '💥' },
+      { label: 'Learn martial arts moves', icon: '🥋' },
+      { label: 'Make new friends', icon: '🤝' },
+    ],
+    activities: [
+      'Martial arts classes with Black Belt instructors',
+      'Weekly themes that spark imagination',
+      'Arts & crafts projects',
+      'Games, free play, and social time',
+      'Projects, outings, and unforgettable camp energy',
+    ],
+    includes: [
+      'Action-packed days built around fun first',
+      'Character & life-skills lessons woven into themes',
+      'A safe, supervised environment for ages 3–12',
+      'No martial arts experience required',
+    ],
+    whatToBring: [
+      'A healthy lunch packed daily',
+      'Two snacks',
+      'A water bottle',
+      'Comfortable clothes that won’t restrict movement (t-shirt + shorts/sweatpants)',
+    ],
+    weekNotes: [
+      'Each week focuses on a different theme with coordinating character lessons.',
+      'Uniforms are NOT necessary — just comfy clothes ready to move.',
+      'All campers need a waiver signed by a parent or guardian.',
+    ],
+    faqs: [
+      {
+        q: 'When are the camps and how much do they cost?',
+        a: 'Dates, weekly themes, and pricing vary by season. Send an inquiry below (or call us) and our team will share the current schedule and rates.',
+      },
+      {
+        q: 'Will my kid actually have fun?',
+        a: 'That’s the whole point. Our primary goal is a playful, safe environment — kids have a blast, and our instructors do too.',
+      },
+      {
+        q: 'Does my child need previous martial arts experience?',
+        a: 'Nope! All ability levels are welcome. Experienced kids help new ones, and everyone feels at home on day one.',
+      },
+      {
+        q: 'Will my child be learning how to “fight”?',
+        a: 'We practice self-defense and movement skills in a controlled way. Kids are not fighting each other — instructors keep everything age-appropriate and safe.',
+      },
+    ],
+    formIntent: 'summer-camp',
+    ctaLabel: 'Reserve a Spot',
+    image: IMAGES.kidsKicks,
+    sticker: 'Camp Vibes!',
+  },
+}
+
+export function getJust4KidsDetail(slug: string): Just4KidsDetail | undefined {
+  return JUST_4_KIDS_DETAILS[slug]
+}
+
+/** Parents' Night Out lives on the hub (no separate original-site page). */
+export const PARENTS_NIGHT_OUT = {
+  id: 'parents-night-out',
+  title: "Parents' Night Out",
+  tag: 'Monthly Friday · All ages',
+  headline: 'Fun for kids. Relaxation for you.',
+  blurb:
+    'Need a break? Drop the kids for an evening packed with games, laughter, and delicious pizza while you enjoy a well-deserved night off.',
+  highlights: [
+    'Held once a month on a Friday',
+    'Open to non-students — bring friends!',
+    'Games, laughter, and pizza included',
+    'Spots fill fast — reserve early',
+  ],
+  faqs: [
+    {
+      q: 'Who can attend Parents’ Night Out?',
+      a: 'It’s open to students and non-students. Friends are welcome — just reserve a spot so we can plan pizza and activities.',
+    },
+    {
+      q: 'When is the next Parents’ Night Out?',
+      a: 'We host it monthly on a Friday. Send an inquiry (or call) and we’ll share the next date and details for your preferred location.',
+    },
+  ] satisfies Faq[],
+  formIntent: 'parents-night-out' as EventInquiryIntent,
+  ctaLabel: 'Save a Spot',
+  image: IMAGES.teenSpar,
+  sticker: 'Pizza Night!',
+}
 
 export const VALUES = [
   'Confidence',
@@ -300,8 +505,13 @@ export const PROGRAM_OPTIONS = [
   'Teen Martial Arts',
   'Adult Martial Arts',
   'Family Programs',
+  'Birthday Parties',
+  'Summer / Day Camp',
+  "Parents' Night Out",
   'Not sure yet',
 ]
+
+export const EVENT_GUEST_OPTIONS = ['1-5', '6-10', '10+'] as const
 
 /* ---------------------------------------------------------------------------
  * Trust signals & stats.
@@ -369,8 +579,6 @@ export const GETTING_STARTED: BeltStep[] = [
     text: 'Progress through the ranks with a team that believes in you every step of the way.',
   },
 ]
-
-export type Faq = { q: string; a: string }
 
 export const FAQS: Faq[] = [
   {
@@ -507,9 +715,9 @@ export const MEGA_MENU: MegaGroup[] = [
   {
     heading: 'Just 4 Kids',
     links: [
-      { label: 'Birthday Parties', to: '/just-4-kids' },
-      { label: 'Summer / Day Camp', to: '/just-4-kids' },
-      { label: "Parents' Night Out", to: '/just-4-kids' },
+      { label: 'Birthday Parties', to: '/just-4-kids/birthday-parties' },
+      { label: 'Summer / Day Camp', to: '/just-4-kids/summer-camp' },
+      { label: "Parents' Night Out", to: '/just-4-kids#parents-night-out' },
     ],
   },
 ]
@@ -716,6 +924,16 @@ export const SEO: Record<string, SeoMeta> = {
     title: 'Just 4 Kids — Parties, Camp & Nights Out | United Black Belt Academy',
     description:
       'Martial arts birthday parties, summer camp, and Parents’ Night Out in Bergen County, NJ. The fun doesn’t stop at the mat.',
+  },
+  '/just-4-kids/birthday-parties': {
+    title: 'Martial Arts Birthday Parties | United Black Belt Academy',
+    description:
+      'Book a martial arts birthday party in Allendale, Midland Park, or Glen Rock, NJ — board breaking, games, and stress-free fun for all ages.',
+  },
+  '/just-4-kids/summer-camp': {
+    title: 'Summer Camp | United Black Belt Academy',
+    description:
+      'Action-packed martial arts summer camp for ages 3–12 in Bergen County, NJ — themes, crafts, games, and confidence-building fun.',
   },
   '/follow-us': {
     title: 'Follow Us — Instagram & Facebook | United Black Belt Academy',

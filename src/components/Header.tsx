@@ -57,7 +57,8 @@ export default function Header() {
   }
 
   const programsActive =
-    location.pathname.startsWith('/programs') || location.pathname === '/just-4-kids'
+    location.pathname.startsWith('/programs') ||
+    location.pathname.startsWith('/just-4-kids')
 
   return (
     <>

@@ -5,6 +5,8 @@ import ChildrenPrograms from './pages/ChildrenPrograms'
 import AdultPrograms from './pages/AdultPrograms'
 import ProgramDetail from './pages/ProgramDetail'
 import Just4Kids from './pages/Just4Kids'
+import BirthdayParties from './pages/BirthdayParties'
+import SummerCamp from './pages/SummerCamp'
 import FollowUs from './pages/FollowUs'
 import SocialFeed from './pages/SocialFeed'
 import Contact from './pages/Contact'
@@ -21,6 +23,8 @@ export default function App() {
         <Route path="/programs/adult" element={<AdultPrograms />} />
         <Route path="/programs/:slug" element={<ProgramDetail />} />
         <Route path="/just-4-kids" element={<Just4Kids />} />
+        <Route path="/just-4-kids/birthday-parties" element={<BirthdayParties />} />
+        <Route path="/just-4-kids/summer-camp" element={<SummerCamp />} />
         <Route path="/follow-us" element={<FollowUs />} />
         <Route path="/follow-us/:network" element={<SocialFeed />} />
         <Route path="/contact" element={<Contact />} />

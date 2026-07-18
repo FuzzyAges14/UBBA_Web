@@ -34,6 +34,35 @@ describe('App routing', () => {
     expect(
       screen.getByRole('heading', { name: /the fun doesn't stop at the mat/i }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /book a birthday/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids/birthday-parties',
+    )
+    expect(screen.getByRole('link', { name: /explore camp/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids/summer-camp',
+    )
+  })
+
+  it('renders the birthday parties detail page with inquiry form', () => {
+    renderAt('/just-4-kids/birthday-parties')
+    expect(
+      screen.getByRole('heading', { name: /most exciting birthday party ever/i, level: 1 }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /schedule my party/i })).toBeInTheDocument()
+    expect(screen.getByText(/what we provide/i)).toBeInTheDocument()
+  })
+
+  it('renders the summer camp detail page with reserve form', () => {
+    renderAt('/just-4-kids/summer-camp')
+    expect(
+      screen.getByRole('heading', {
+        name: /most exciting summer ever/i,
+        level: 1,
+      }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /reserve a spot/i })).toBeInTheDocument()
+    expect(screen.getByText(/what to bring/i)).toBeInTheDocument()
   })
 
   it('keeps Just 4 Kids in Programs and links Follow Us to its own page', () => {
@@ -50,8 +79,19 @@ describe('App routing', () => {
     fireEvent.click(screen.getByRole('button', { name: /programs/i }))
     const programsPanel = primaryNav.querySelector('.mega')
     expect(programsPanel).toBeTruthy()
-    expect(within(programsPanel as HTMLElement).getByText(/birthday parties/i)).toBeInTheDocument()
-    expect(within(programsPanel as HTMLElement).getByText(/summer \/ day camp/i)).toBeInTheDocument()
+    const panel = programsPanel as HTMLElement
+    expect(within(panel).getByRole('link', { name: /birthday parties/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids/birthday-parties',
+    )
+    expect(within(panel).getByRole('link', { name: /summer \/ day camp/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids/summer-camp',
+    )
+    expect(within(panel).getByRole('link', { name: /parents' night out/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids#parents-night-out',
+    )
   })
 
   it('renders the Follow Us hub with Instagram and Facebook options', () => {
