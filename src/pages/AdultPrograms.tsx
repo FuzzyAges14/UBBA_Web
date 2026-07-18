@@ -5,7 +5,8 @@ import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
 import SectionSeam from '../components/SectionSeam'
-import { ADULT_PROGRAMS, FAQS, SITE } from '../data/site'
+import OptimizedImage from '../components/OptimizedImage'
+import { ADULT_PROGRAMS, FAQS, SITE, imageDimensionsFor } from '../data/site'
 
 const GLYPH: Record<string, string> = {
   'adult-program': '💪',
@@ -33,7 +34,18 @@ export default function AdultPrograms() {
             {ADULT_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 70}>
                 <div className="pcard">
-                  <div className="pcard__art" />
+                  {p.image ? (
+                    <OptimizedImage
+                      className="pcard__img"
+                      src={p.image}
+                      alt=""
+                      {...imageDimensionsFor(p.image)}
+                      loading="lazy"
+                      sizes="(max-width: 720px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div className="pcard__art" />
+                  )}
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">
                     {GLYPH[p.id]}

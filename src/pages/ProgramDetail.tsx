@@ -1,12 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 import PageHero from '../components/PageHero'
-import Placeholder from '../components/Placeholder'
+import OptimizedImage from '../components/OptimizedImage'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import CtaBanner from '../components/CtaBanner'
 import SectionSeam from '../components/SectionSeam'
 import NotFound from './NotFound'
-import { getProgram, FAQS, SITE } from '../data/site'
+import { getProgram, FAQS, SITE, imageDimensionsFor } from '../data/site'
 
 export default function ProgramDetail() {
   const { slug } = useParams()
@@ -17,6 +17,7 @@ export default function ProgramDetail() {
   const isChildren = program.category === 'Children'
   const categoryLabel = isChildren ? "Children's Programs" : 'Adult & Family Programs'
   const categoryTo = isChildren ? '/programs/children' : '/programs/adult'
+  const dims = imageDimensionsFor(program.image)
 
   return (
     <>
@@ -36,7 +37,17 @@ export default function ProgramDetail() {
       <section className="section">
         <div className="container split">
           <Reveal>
-            <Placeholder label={`${program.name} class`} icon="🥋" variant="tall" />
+            <div className="photo photo--tall">
+              <OptimizedImage
+                src={program.image}
+                alt=""
+                width={dims.width}
+                height={dims.height}
+                loading="lazy"
+                sizes="(max-width: 900px) 100vw, 42vw"
+              />
+              <span className="photo__credit">Placeholder photo</span>
+            </div>
           </Reveal>
           <Reveal delay={100}>
             {program.ages && <span className="card__ages">{program.ages}</span>}

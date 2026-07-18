@@ -8,18 +8,20 @@ import Marquee from '../components/Marquee'
 import StatCounter from '../components/StatCounter'
 import Taegeuk from '../components/Taegeuk'
 import Faq from '../components/Faq'
+import HeroMedia from '../components/HeroMedia'
+import OptimizedImage from '../components/OptimizedImage'
 import {
   HOME_PROGRAM_CARDS,
   LOCATIONS,
   GLEN_ROCK,
   SITE,
-  IMAGES,
   TESTIMONIALS,
   VALUES,
   STATS,
   OWNER,
   GETTING_STARTED,
   FAQS,
+  imageDimensionsFor,
 } from '../data/site'
 
 const fadeUp = {
@@ -45,17 +47,7 @@ export default function Home() {
     <>
       {/* ---------- Hero (cinematic video) ---------- */}
       <section className="hero">
-        <video
-          className="hero__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={IMAGES.heroPoster}
-          aria-hidden="true"
-        >
-          <source src={IMAGES.heroVideo} type="video/mp4" />
-        </video>
+        <HeroMedia />
         <div className="hero__overlay" aria-hidden="true" />
         <div className="dojang dojang--fade" aria-hidden="true" />
         <div className="container hero__inner">
@@ -149,7 +141,18 @@ export default function Home() {
             {HOME_PROGRAM_CARDS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 80}>
                 <div className="pcard">
-                  <div className="pcard__art" />
+                  {p.image ? (
+                    <OptimizedImage
+                      className="pcard__img"
+                      src={p.image}
+                      alt=""
+                      {...imageDimensionsFor(p.image)}
+                      loading="lazy"
+                      sizes="(max-width: 720px) 100vw, 25vw"
+                    />
+                  ) : (
+                    <div className="pcard__art" />
+                  )}
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph" aria-hidden="true">
                     {PROGRAM_GLYPH[p.id]}

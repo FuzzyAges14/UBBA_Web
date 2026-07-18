@@ -1,4 +1,5 @@
 import { SOCIAL_PROFILES, type SocialProfileSlug } from './contact'
+import { heroVideoMp4, heroVideoWebm } from '../lib/mediaEnv'
 
 export const SITE = {
   name: 'United Black Belt Academy',
@@ -14,10 +15,16 @@ export const SITE = {
  * Media (PLACEHOLDER assets sourced from free/CC libraries).
  * Replace with the academy's own photography/video before launch.
  * Licenses & attribution are tracked in docs/IMAGE_SOURCES.md.
+ * Performance guidance: docs/PERFORMANCE.md
  * ------------------------------------------------------------------------- */
+
+/** Temporary Mixkit CDN fallback until self-hosted hero files are deployed. */
+const HERO_VIDEO_CDN_MP4 = 'https://assets.mixkit.co/videos/49706/49706-1080.mp4'
+
 export const IMAGES = {
   // Hero background video (Mixkit free license) + local poster fallback.
-  heroVideo: 'https://assets.mixkit.co/videos/49706/49706-1080.mp4',
+  // Prefer self-hosting via VITE_HERO_VIDEO_MP4 / VITE_HERO_VIDEO_WEBM.
+  heroVideo: heroVideoMp4(HERO_VIDEO_CDN_MP4),
   heroPoster: '/media/hero-poster.jpg',
   instructorPortrait: '/media/instructor-portrait.jpg',
   // Clean, consistent studio/dojang photography (self-hosted; Mixkit free license).
@@ -27,6 +34,48 @@ export const IMAGES = {
   teenSpar: '/media/kids-motion.jpg',
   beltTest: '/media/hero-poster.jpg',
 } as const
+
+/** Structured hero sources for WebM + MP4 delivery and poster LCP. */
+export const HERO_MEDIA = {
+  poster: IMAGES.heroPoster,
+  mp4: IMAGES.heroVideo,
+  webm: heroVideoWebm(),
+  /** Production target paths once academy footage is encoded (see docs/PERFORMANCE.md). */
+  productionMp4Path: '/media/hero.mp4',
+  productionWebmPath: '/media/hero.webm',
+} as const
+
+/** Intrinsic sizes for CLS-safe <img> rendering (matches committed files). */
+export const IMAGE_DIMENSIONS = {
+  heroPoster: { width: 1920, height: 1080 },
+  action: { width: 1920, height: 1080 },
+  kidsKicks: { width: 1280, height: 720 },
+  kidsGroup: { width: 1280, height: 720 },
+  teenSpar: { width: 1280, height: 720 },
+  beltTest: { width: 1920, height: 1080 },
+  instructorPortrait: { width: 1080, height: 1920 },
+  logo: { width: 300, height: 282 },
+} as const
+
+export function imageDimensionsFor(src: string): { width: number; height: number } {
+  switch (src) {
+    case IMAGES.action:
+      return IMAGE_DIMENSIONS.action
+    case IMAGES.kidsKicks:
+      return IMAGE_DIMENSIONS.kidsKicks
+    case IMAGES.kidsGroup:
+      return IMAGE_DIMENSIONS.kidsGroup
+    case IMAGES.teenSpar:
+      return IMAGE_DIMENSIONS.teenSpar
+    case IMAGES.beltTest:
+    case IMAGES.heroPoster:
+      return IMAGE_DIMENSIONS.beltTest
+    case IMAGES.instructorPortrait:
+      return IMAGE_DIMENSIONS.instructorPortrait
+    default:
+      return IMAGE_DIMENSIONS.heroPoster
+  }
+}
 
 export type NavLink = { label: string; to: string }
 
