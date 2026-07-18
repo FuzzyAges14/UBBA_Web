@@ -12,35 +12,36 @@ export const SITE = {
 }
 
 /* ---------------------------------------------------------------------------
- * Media (PLACEHOLDER assets sourced from free/CC libraries).
- * Replace with the academy's own photography/video before launch.
- * Licenses & attribution are tracked in docs/IMAGE_SOURCES.md.
- * Performance guidance: docs/PERFORMANCE.md
+ * Media (temporary commercially-licensed stock until authentic UBBA shoot).
+ * Self-hosted under public/media/. Licenses: docs/IMAGE_SOURCES.md.
+ * Performance: docs/PERFORMANCE.md. Agent 2 package: docs/MEDIA_CANDIDATES.md.
  * ------------------------------------------------------------------------- */
 
-/** Temporary Mixkit CDN fallback until self-hosted hero files are deployed. */
-const HERO_VIDEO_CDN_MP4 = 'https://assets.mixkit.co/videos/49706/49706-1080.mp4'
-
 export const IMAGES = {
-  // Hero background video (Mixkit free license) + local poster fallback.
-  // Prefer self-hosting via VITE_HERO_VIDEO_MP4 / VITE_HERO_VIDEO_WEBM.
-  heroVideo: heroVideoMp4(HERO_VIDEO_CDN_MP4),
+  /** Self-hosted hero loop (Pexels 7045155). Override via VITE_HERO_VIDEO_*. */
+  heroVideo: heroVideoMp4('/media/hero.mp4'),
   heroPoster: '/media/hero-poster.jpg',
-  instructorPortrait: '/media/instructor-portrait.jpg',
-  // Clean, consistent studio/dojang photography (self-hosted; Mixkit free license).
+  /**
+   * OWNER PHOTO REQUIRED — DO NOT SUBSTITUTE WITH MISLEADING STOCK.
+   * UI uses Placeholder until an authentic Sanghyun Lee portrait is supplied.
+   */
+  instructorPortrait: '/media/owner-portrait.jpg',
   action: '/media/adult-action.jpg',
-  kidsKicks: '/media/kids-stance.jpg',
-  kidsGroup: '/media/kids-bow.jpg',
-  teenSpar: '/media/kids-motion.jpg',
-  beltTest: '/media/hero-poster.jpg',
+  kidsKicks: '/media/kids-kicks.jpg',
+  kidsGroup: '/media/kids-group.jpg',
+  teenSpar: '/media/teen-training.jpg',
+  beltTest: '/media/respect-bow.jpg',
+  ogDefault: '/media/og-default.jpg',
 } as const
 
 /** Structured hero sources for WebM + MP4 delivery and poster LCP. */
 export const HERO_MEDIA = {
   poster: IMAGES.heroPoster,
+  posterWebp: '/media/hero-poster.webp',
+  posterMobile: '/media/hero-poster-mobile.jpg',
+  posterMobileWebp: '/media/hero-poster-mobile.webp',
   mp4: IMAGES.heroVideo,
-  webm: heroVideoWebm(),
-  /** Production target paths once academy footage is encoded (see docs/PERFORMANCE.md). */
+  webm: heroVideoWebm('/media/hero.webm'),
   productionMp4Path: '/media/hero.mp4',
   productionWebmPath: '/media/hero.webm',
 } as const
@@ -48,13 +49,31 @@ export const HERO_MEDIA = {
 /** Intrinsic sizes for CLS-safe <img> rendering (matches committed files). */
 export const IMAGE_DIMENSIONS = {
   heroPoster: { width: 1920, height: 1080 },
+  heroPosterMobile: { width: 960, height: 1200 },
   action: { width: 1920, height: 1080 },
   kidsKicks: { width: 1280, height: 720 },
   kidsGroup: { width: 1280, height: 720 },
   teenSpar: { width: 1280, height: 720 },
   beltTest: { width: 1920, height: 1080 },
   instructorPortrait: { width: 1080, height: 1920 },
+  ogDefault: { width: 1200, height: 630 },
   logo: { width: 300, height: 282 },
+} as const
+
+/** Responsive JPEG srcsets (WebP counterparts share the same widths). */
+export const IMAGE_SRCSETS = {
+  kidsKicks:
+    '/media/kids-kicks-640.jpg 640w, /media/kids-kicks-960.jpg 960w, /media/kids-kicks-1280.jpg 1280w',
+  kidsGroup:
+    '/media/kids-group-640.jpg 640w, /media/kids-group-960.jpg 960w, /media/kids-group-1280.jpg 1280w',
+  teenSpar:
+    '/media/teen-training-640.jpg 640w, /media/teen-training-960.jpg 960w, /media/teen-training-1280.jpg 1280w',
+  action:
+    '/media/adult-action-640.jpg 640w, /media/adult-action-960.jpg 960w, /media/adult-action-1280.jpg 1280w, /media/adult-action-1920.jpg 1920w',
+  beltTest:
+    '/media/respect-bow-640.jpg 640w, /media/respect-bow-960.jpg 960w, /media/respect-bow-1280.jpg 1280w, /media/respect-bow-1920.jpg 1920w',
+  heroPoster:
+    '/media/hero-poster-960.jpg 960w, /media/hero-poster-1280.jpg 1280w, /media/hero-poster.jpg 1920w',
 } as const
 
 export function imageDimensionsFor(src: string): { width: number; height: number } {
@@ -68,12 +87,34 @@ export function imageDimensionsFor(src: string): { width: number; height: number
     case IMAGES.teenSpar:
       return IMAGE_DIMENSIONS.teenSpar
     case IMAGES.beltTest:
-    case IMAGES.heroPoster:
       return IMAGE_DIMENSIONS.beltTest
+    case IMAGES.heroPoster:
+      return IMAGE_DIMENSIONS.heroPoster
     case IMAGES.instructorPortrait:
       return IMAGE_DIMENSIONS.instructorPortrait
+    case IMAGES.ogDefault:
+      return IMAGE_DIMENSIONS.ogDefault
     default:
       return IMAGE_DIMENSIONS.heroPoster
+  }
+}
+
+export function imageSrcSetFor(src: string): string | undefined {
+  switch (src) {
+    case IMAGES.action:
+      return IMAGE_SRCSETS.action
+    case IMAGES.kidsKicks:
+      return IMAGE_SRCSETS.kidsKicks
+    case IMAGES.kidsGroup:
+      return IMAGE_SRCSETS.kidsGroup
+    case IMAGES.teenSpar:
+      return IMAGE_SRCSETS.teenSpar
+    case IMAGES.beltTest:
+      return IMAGE_SRCSETS.beltTest
+    case IMAGES.heroPoster:
+      return IMAGE_SRCSETS.heroPoster
+    default:
+      return undefined
   }
 }
 

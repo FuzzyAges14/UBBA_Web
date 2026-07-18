@@ -1,6 +1,7 @@
 /**
  * Optional production overrides for self-hosted hero video.
- * Set in `.env` / host env (see docs/PERFORMANCE.md).
+ * Defaults point at committed files under `public/media/`.
+ * Set in `.env` / host env to override (see docs/PERFORMANCE.md).
  *
  * VITE_HERO_VIDEO_MP4=/media/hero.mp4
  * VITE_HERO_VIDEO_WEBM=/media/hero.webm
@@ -18,10 +19,10 @@ function readViteEnv(key: 'VITE_HERO_VIDEO_MP4' | 'VITE_HERO_VIDEO_WEBM'): strin
   }
 }
 
-export function heroVideoMp4(fallback: string): string {
+export function heroVideoMp4(fallback = '/media/hero.mp4'): string {
   return readViteEnv('VITE_HERO_VIDEO_MP4') ?? fallback
 }
 
-export function heroVideoWebm(): string | undefined {
-  return readViteEnv('VITE_HERO_VIDEO_WEBM')
+export function heroVideoWebm(fallback = '/media/hero.webm'): string | undefined {
+  return readViteEnv('VITE_HERO_VIDEO_WEBM') ?? fallback
 }
