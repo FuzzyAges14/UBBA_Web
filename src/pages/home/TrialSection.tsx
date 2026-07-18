@@ -11,7 +11,7 @@ export default function TrialSection() {
           <SectionHeading
             eyebrow="Get Started"
             title="Crush your fitness goals while learning how to protect yourself"
-            lead="Tell us a little about yourself and we'll help you choose the perfect program. Your first class is completely free — no pressure, just a great workout."
+            lead="Tell us a little about your goals and preferred school. We'll help you choose a program and schedule a free introductory class — no pressure, just a welcoming first step onto the mat."
           />
           <ul className="checklist mt">
             {TRIAL_HIGHLIGHTS.map((item) => (

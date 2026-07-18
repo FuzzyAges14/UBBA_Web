@@ -15,6 +15,7 @@ const SummerCamp = lazy(() => import('./pages/SummerCamp'))
 const ParentsNightOut = lazy(() => import('./pages/ParentsNightOut'))
 const FollowUs = lazy(() => import('./pages/FollowUs'))
 const SocialFeed = lazy(() => import('./pages/SocialFeed'))
+const LocationDetail = lazy(() => import('./pages/LocationDetail'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Privacy = lazy(() => import('./pages/Privacy'))
 const Terms = lazy(() => import('./pages/Terms'))
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/just-4-kids/parents-night-out" element={<ParentsNightOut />} />
           <Route path="/follow-us" element={<FollowUs />} />
           <Route path="/follow-us/:network" element={<SocialFeed />} />
+          <Route path="/locations/:slug" element={<LocationDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
