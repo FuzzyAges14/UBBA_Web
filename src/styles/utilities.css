@@ -61,7 +61,10 @@
 .section--graphite .checklist li::before {
   color: var(--blue);
 }
-/* Keep checklists clear of the lead copy above them */
-.section-lead + .checklist {
+/* Keep checklists clear of the copy / headings above them */
+.section-lead + .checklist,
+.section-title + .checklist,
+h2 + .checklist,
+h3 + .checklist {
   margin-top: 2.5rem;
 }

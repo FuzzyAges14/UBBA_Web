@@ -85,7 +85,7 @@ export default function ParentsNightOut() {
               childcare. Open to non-students — bring friends!
             </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>What the evening looks like</h3>
-            <ul className="checklist mt-sm">
+            <ul className="checklist">
               {detail.activities.map((a) => (
                 <li key={a}>{a}</li>
               ))}
@@ -99,7 +99,7 @@ export default function ParentsNightOut() {
           <Reveal>
             <span className="eyebrow">The Night Includes</span>
             <h2 className="section-title">Easy for parents</h2>
-            <ul className="checklist mt">
+            <ul className="checklist">
               {detail.includes.map((item) => (
                 <li key={item}>{item}</li>
               ))}

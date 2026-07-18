@@ -303,11 +303,14 @@
 .media-frame > img {
   width: 100%;
   height: auto;
+  /* Keep the natural 16:9 frame without re-cropping faces at the edges */
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
   display: block;
   border-radius: inherit;
   border: 2px solid rgba(10, 10, 10, 0.08);
+  background: linear-gradient(155deg, #fff7f0, #eef3ff 70%);
 }
 .media-frame__note {
   position: absolute;

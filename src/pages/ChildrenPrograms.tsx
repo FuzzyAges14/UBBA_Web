@@ -89,7 +89,7 @@ export default function ChildrenPrograms() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <figure className="interior-media interior-media--tall interior-media--focus-top">
+            <figure className="interior-media interior-media--wide interior-media--focus-center">
               <div className="interior-media__veil" aria-hidden="true" />
               <OptimizedImage
                 src={IMAGES.kidsGroup}
