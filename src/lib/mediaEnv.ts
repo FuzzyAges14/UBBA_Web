@@ -4,13 +4,24 @@
  *
  * VITE_HERO_VIDEO_MP4=/media/hero.mp4
  * VITE_HERO_VIDEO_WEBM=/media/hero.webm
+ *
+ * Safe under Vite, Vitest, and plain Node (e.g. `pnpm sitemap` via tsx).
  */
+function readViteEnv(key: 'VITE_HERO_VIDEO_MP4' | 'VITE_HERO_VIDEO_WEBM'): string | undefined {
+  const viteEnv =
+    typeof import.meta !== 'undefined' && import.meta.env
+      ? (import.meta.env[key] as string | undefined)
+      : undefined
+  const nodeEnv =
+    typeof process !== 'undefined' ? process.env?.[key] : undefined
+  const value = (viteEnv ?? nodeEnv)?.trim()
+  return value && value.length > 0 ? value : undefined
+}
+
 export function heroVideoMp4(fallback: string): string {
-  const fromEnv = import.meta.env.VITE_HERO_VIDEO_MP4
-  return typeof fromEnv === 'string' && fromEnv.length > 0 ? fromEnv : fallback
+  return readViteEnv('VITE_HERO_VIDEO_MP4') ?? fallback
 }
 
 export function heroVideoWebm(): string | undefined {
-  const fromEnv = import.meta.env.VITE_HERO_VIDEO_WEBM
-  return typeof fromEnv === 'string' && fromEnv.length > 0 ? fromEnv : undefined
+  return readViteEnv('VITE_HERO_VIDEO_WEBM')
 }

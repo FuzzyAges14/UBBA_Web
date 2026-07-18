@@ -45,14 +45,31 @@ test.describe('Critical marketing flows', () => {
     await expect(page.getByRole('heading', { level: 1, name: /tiny tigers/i })).toBeVisible()
   })
 
-  test('locations section is reachable from the homepage', async ({ page }) => {
+  test('locations section is reachable from the homepage', async ({ page }, testInfo) => {
     await page.goto('/')
-    await page.getByRole('navigation', { name: /primary/i }).getByRole('link', {
-      name: /^locations$/i,
-    }).click()
+
+    if (testInfo.project.name === 'mobile-chrome') {
+      await page.getByRole('button', { name: /open menu/i }).click()
+      await page.getByRole('navigation', { name: /mobile/i }).getByRole('link', {
+        name: /^locations$/i,
+      }).click()
+    } else {
+      await page.getByRole('navigation', { name: /primary/i }).getByRole('link', {
+        name: /^locations$/i,
+      }).click()
+    }
+
     await expect(page.locator('#locations')).toBeVisible()
     await expect(page.getByText(/allendale/i).first()).toBeVisible()
     await expect(page.getByText(/midland park/i).first()).toBeVisible()
+  })
+
+  test('location landing pages load', async ({ page }) => {
+    await page.goto('/locations/allendale')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/allendale/i)
+
+    await page.goto('/locations/midland-park')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/midland park/i)
   })
 
   test('event inquiry form submits with mocked API', async ({ page }) => {

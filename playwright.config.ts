@@ -27,9 +27,10 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm preview --host 127.0.0.1 --port 4173',
+    // Build when dist/ is missing (local `pnpm test:e2e`); CI already runs `pnpm build` via test:ci.
+    command: 'sh -c "test -d dist || pnpm build; pnpm preview --host 127.0.0.1 --port 4173"',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 180_000,
   },
 })
