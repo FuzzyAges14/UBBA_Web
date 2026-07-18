@@ -122,7 +122,7 @@ button {
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 clamp(1.1rem, 4vw, 2.4rem);
+  padding: 0 clamp(1.25rem, 5vw, 2.4rem);
 }
 
 .section {
@@ -819,6 +819,9 @@ button {
 .hero h1 .accent {
   color: var(--blue-soft);
 }
+.hero h1 .accent--red {
+  color: var(--red-2);
+}
 .hero__tagline {
   margin-top: 1.2rem;
   font-family: var(--font-display);
@@ -874,45 +877,60 @@ button {
   gap: 0.4rem;
 }
 
-/* Phone / narrow windows: give display titles more air so wraps don't feel cramped */
+/* Phone / narrow windows: keep titles & content inset from the side edges */
 @media (max-width: 720px) {
-  .hero h1 {
-    font-size: clamp(2.15rem, 8vw, 3.25rem);
-    letter-spacing: 0.06em;
-    line-height: 1.42;
+  .container {
+    padding-left: max(1.5rem, env(safe-area-inset-left, 0px) + 1.25rem);
+    padding-right: max(1.5rem, env(safe-area-inset-right, 0px) + 1.25rem);
   }
-  .hero__tagline {
-    margin-top: 1.4rem;
+  .hero h1 {
+    font-size: clamp(1.95rem, 7.2vw, 2.75rem);
     letter-spacing: 0.03em;
     line-height: 1.28;
+    max-width: 10.5em;
+  }
+  .hero__tagline {
+    font-size: clamp(1.1rem, 4.2vw, 1.45rem);
+    line-height: 1.22;
+    max-width: 18ch;
+  }
+  .hero__sub {
+    font-size: 1.02rem;
+    max-width: 36ch;
+  }
+  .hero__actions {
+    gap: 0.75rem;
+  }
+  .hero__actions .btn--lg {
+    padding-left: 1.35rem;
+    padding-right: 1.35rem;
   }
   .section-title {
-    font-size: clamp(2rem, 7.2vw, 2.75rem);
-    letter-spacing: 0.02em;
-    line-height: 1.16;
+    font-size: clamp(1.85rem, 6.5vw, 2.45rem);
+    line-height: 1.12;
+    max-width: 18ch;
   }
   .page-hero h1 {
-    letter-spacing: 0.02em;
-    line-height: 1.16;
+    font-size: clamp(1.85rem, 6.6vw, 2.6rem);
+    line-height: 1.12;
   }
   .j4k-hero__brand {
-    letter-spacing: 0.04em;
-    line-height: 1.28;
+    font-size: clamp(1.15rem, 4vw, 1.6rem);
+    max-width: 14ch;
   }
-  .j4k-hero h1 {
-    letter-spacing: 0.02em;
-    line-height: 1.18;
-  }
+  .j4k-hero h1,
   .j4k-hero--splash h1 {
-    font-size: clamp(2.1rem, 8vw, 3.2rem);
-    letter-spacing: 0.05em;
-    line-height: 1.38;
+    font-size: clamp(1.7rem, 6.4vw, 2.4rem);
+    letter-spacing: 0.03em;
+    line-height: 1.22;
+    max-width: 11em;
   }
-  .brand__name {
-    letter-spacing: 0.02em;
-  }
-  .brand__text {
-    line-height: 1.15;
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding-left: max(1.75rem, env(safe-area-inset-left, 0px) + 1.35rem);
+    padding-right: max(1.75rem, env(safe-area-inset-right, 0px) + 1.35rem);
   }
 }
 
@@ -2622,9 +2640,6 @@ button {
   .j4k-signup__intro .j4k-easy {
     margin-top: 1.5rem;
     gap: 1.5rem;
-  }
-  .j4k-hero h1 {
-    max-width: none;
   }
   .fun-sticker {
     width: 3.6rem;

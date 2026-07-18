@@ -68,7 +68,8 @@ export default function Home() {
             📍 Allendale &amp; Midland Park, NJ
           </motion.span>
           <motion.h1 initial="hidden" animate="show" custom={1} variants={fadeUp}>
-            United Black <span className="accent">Belt</span> Academy
+            United <span className="accent accent--red">Black</span>{' '}
+            <span className="accent">Belt</span> Academy
           </motion.h1>
           <motion.h2
             className="hero__tagline"
