@@ -47,13 +47,14 @@ describe('App routing', () => {
     expect(
       await screen.findByRole('heading', { name: /the fun doesn't stop at the mat/i }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /book a birthday/i })).toHaveAttribute(
+    expect(screen.getByRole('heading', { name: /pick your adventure/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /three steps to fun/i })).toBeInTheDocument()
+    expect(
+      screen.queryByRole('heading', { name: /questions about just 4 kids/i }),
+    ).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /plan a party/i })).toHaveAttribute(
       'href',
       '/just-4-kids/birthday-parties',
-    )
-    expect(screen.getByRole('link', { name: /explore camp/i })).toHaveAttribute(
-      'href',
-      '/just-4-kids/summer-camp',
     )
   })
 

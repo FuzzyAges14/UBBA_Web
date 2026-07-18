@@ -10,33 +10,35 @@ export default function TestimonialsSection() {
         <Reveal>
           <div className="home-section-head home-section-head--dark">
             <span className="home-section-num" aria-hidden="true">
-              07
+              06
             </span>
-            <span className="eyebrow">Reviews</span>
-          </div>
-          <p className="feature-quote">"{featured.quote}"</p>
-          <p className="quote__by mt">
-            {featured.name}{' '}
-            <span className="quote__role">— {featured.role}</span>
-          </p>
-          <p className="ph-note mt-sm">
-            Placeholder reviews · pending owner-approved testimonials
-          </p>
-        </Reveal>
+            <div className="home-section-head__body">
+              <span className="eyebrow">Reviews</span>
+              <p className="feature-quote">"{featured.quote}"</p>
+              <p className="quote__by mt">
+                {featured.name}{' '}
+                <span className="quote__role">— {featured.role}</span>
+              </p>
+              <p className="ph-note mt-sm">
+                Placeholder reviews · pending owner-approved testimonials
+              </p>
 
-        <div className="home-reviews__list mt-lg">
-          {rest.map((t, i) => (
-            <Reveal key={t.name} delay={i * 80}>
-              <figure className="home-reviews__quote">
-                <blockquote className="home-reviews__text">"{t.quote}"</blockquote>
-                <figcaption>
-                  <div className="quote__by">{t.name}</div>
-                  <div className="quote__role">{t.role}</div>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
+              <div className="home-reviews__list mt-lg">
+                {rest.map((t, i) => (
+                  <Reveal key={t.name} delay={i * 80}>
+                    <figure className="home-reviews__quote">
+                      <blockquote className="home-reviews__text">"{t.quote}"</blockquote>
+                      <figcaption>
+                        <div className="quote__by">{t.name}</div>
+                        <div className="quote__role">{t.role}</div>
+                      </figcaption>
+                    </figure>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

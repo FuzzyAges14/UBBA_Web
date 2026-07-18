@@ -64,13 +64,10 @@
   max-width: 18ch;
 }
 .j4k-hero__lead {
-  margin: 1.2rem 0 1.6rem;
+  margin: 1.2rem 0 0;
   max-width: 34rem;
   font-size: 1.1rem;
   color: var(--muted);
-}
-.j4k-hero .flex-actions {
-  margin-top: 0.25rem;
 }
 
 /* Heritage accent under brand — ties playful pages to main UBBA system */
@@ -331,27 +328,6 @@
   line-height: 1.35;
 }
 
-.j4k-close {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  background:
-    radial-gradient(700px 280px at 20% 0%, rgba(225, 24, 54, 0.1), transparent 60%),
-    radial-gradient(700px 280px at 90% 100%, rgba(37, 99, 235, 0.12), transparent 55%),
-    var(--off-white);
-}
-.j4k-close .section-title {
-  margin-left: auto;
-  margin-right: auto;
-}
-.j4k-close .section-lead {
-  margin-left: auto;
-  margin-right: auto;
-}
-.j4k-close .flex-actions {
-  justify-content: center;
-}
-
 .fun-sticker {
   --sticker-rotate: -8deg;
   --sticker-delay: 0s;
@@ -488,9 +464,6 @@
   }
   .j4k-will {
     gap: 1.6rem;
-  }
-  .j4k-hero .flex-actions {
-    flex-wrap: wrap;
   }
   .j4k-signup {
     gap: 2.75rem;
