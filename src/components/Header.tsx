@@ -278,7 +278,7 @@ export default function Header() {
                 <strong>{locationCount}</strong> Locations
               </span>
             </span>
-            <Link to="/contact" className="btn btn--gold">
+            <Link to="/contact" className="btn btn--blue">
               {SITE.primaryCta}
             </Link>
             <button
@@ -386,7 +386,7 @@ export default function Header() {
           </nav>
         </div>
         <div className="mobile-nav__cta">
-          <Link to="/contact" className="btn btn--gold btn--block mobile-nav__cta-btn">
+          <Link to="/contact" className="btn btn--blue btn--block mobile-nav__cta-btn">
             {SITE.primaryCta}
           </Link>
         </div>

@@ -1,82 +1,163 @@
-/* buttons.css — extracted from former src/index.css (lines 280-365) */
-/* ---------- Buttons ---------- */
+/* buttons.css — UBBA button + CTA interaction family */
+
 .btn {
+  /* Solid primary (red) — free-class / conversion default */
   --btn-bg: var(--red);
   --btn-fg: #fff;
+  /* Brighter wipe reads clearly on hover while keeping white labels ≥ AA */
+  --btn-fill: var(--red-2);
+  --btn-hover-fg: #fff;
+  --btn-border: transparent;
+  --btn-border-hover: transparent;
+  --btn-shadow: rgba(196, 18, 48, 0.32);
+
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
+  min-height: 44px;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.98rem;
   letter-spacing: -0.01em;
-  padding: 0.9rem 1.6rem;
+  line-height: 1.1;
+  padding: 0.85rem 1.55rem;
   border-radius: 999px;
-  border: 1.5px solid transparent;
-  background: var(--btn-bg);
+  border: 1.5px solid var(--btn-border);
   color: var(--btn-fg);
   cursor: pointer;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
-    background 0.2s var(--ease), color 0.2s var(--ease);
+  text-decoration: none;
+  /* Layered fill via background-image wipe — keeps label text above the fill */
+  background-color: var(--btn-bg);
+  background-image: linear-gradient(var(--btn-fill), var(--btn-fill));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position: left center;
+  box-shadow: none;
   overflow: hidden;
+  transition:
+    transform var(--btn-lift-duration) var(--ease),
+    box-shadow var(--btn-lift-duration) var(--ease),
+    color var(--btn-duration) var(--ease),
+    border-color var(--btn-duration) var(--ease),
+    background-color var(--btn-duration) var(--ease),
+    background-size var(--btn-duration) var(--ease),
+    opacity 0.2s var(--ease);
 }
 
-.btn .btn__arrow {
-  transition: transform 0.2s var(--ease);
-}
-.btn:hover .btn__arrow {
-  transform: translateX(4px);
+.btn__arrow {
+  display: inline-block;
+  transition: transform var(--btn-lift-duration) var(--ease);
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(196, 18, 48, 0.32);
+/* Fine-pointer hover: lift, wipe, arrow nudge. Touch relies on :active. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not(:disabled):not([aria-disabled='true']) {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px var(--btn-shadow);
+    color: var(--btn-hover-fg);
+    border-color: var(--btn-border-hover);
+    background-size: 100% 100%;
+  }
+
+  .btn:hover:not(:disabled):not([aria-disabled='true']) .btn__arrow {
+    transform: translateX(4px);
+  }
 }
-.btn:active {
+
+.btn:active:not(:disabled):not([aria-disabled='true']) {
   transform: translateY(0) scale(0.98);
+  box-shadow: 0 6px 14px var(--btn-shadow);
 }
 
-/* Secondary/accent CTA button. Named "gold" historically; now the blue accent. */
+.btn:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* Dark surfaces: keep a high-contrast focus ring */
+.hero .btn:focus-visible,
+.page-hero .btn:focus-visible,
+.section--dark .btn:focus-visible,
+.section--graphite .btn:focus-visible,
+.cta-banner .btn:focus-visible,
+.header .btn:focus-visible,
+.footer .btn:focus-visible,
+.mobile-nav .btn:focus-visible {
+  outline-color: var(--blue-soft);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  pointer-events: none;
+  background-size: 0% 100%;
+}
+
+/* ---------- Color variants ---------- */
+
+/* Canonical blue accent (secondary/highlight CTA). */
+.btn--blue {
+  --btn-bg: var(--blue);
+  --btn-fg: #ffffff;
+  --btn-fill: #1d4ed8;
+  --btn-shadow: rgba(37, 99, 235, 0.36);
+}
+
+/*
+  Legacy alias — historically named "gold", renders the blue accent.
+  Prefer .btn--blue in new markup. Do not interpret the name as a gold color.
+*/
 .btn--gold {
   --btn-bg: var(--blue);
   --btn-fg: #ffffff;
-}
-.btn--gold:hover {
-  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.36);
+  --btn-fill: #1d4ed8;
+  --btn-shadow: rgba(37, 99, 235, 0.36);
 }
 
 .btn--dark {
   --btn-bg: var(--black);
   --btn-fg: #fff;
-}
-.btn--dark:hover {
-  box-shadow: 0 16px 34px rgba(10, 10, 10, 0.3);
+  --btn-fill: var(--graphite-2);
+  --btn-shadow: rgba(10, 10, 10, 0.3);
 }
 
 .btn--ghost {
   --btn-bg: transparent;
   --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, 0.45);
+  --btn-fill: rgba(255, 255, 255, 0.16);
+  --btn-hover-fg: #fff;
+  --btn-border: rgba(255, 255, 255, 0.45);
+  --btn-border-hover: #fff;
+  --btn-shadow: transparent;
+  background-color: transparent;
 }
-.btn--ghost:hover {
-  --btn-bg: rgba(255, 255, 255, 0.08);
-  border-color: #fff;
-  box-shadow: none;
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--ghost:hover:not(:disabled):not([aria-disabled='true']) {
+    box-shadow: none;
+  }
 }
 
 .btn--outline {
   /* Solid fill keeps the control from dissolving into cream/off-white pages */
   --btn-bg: #fff;
   --btn-fg: var(--ink);
-  border-color: rgba(10, 10, 10, 0.42);
+  --btn-fill: var(--black);
+  --btn-hover-fg: #fff;
+  --btn-border: rgba(10, 10, 10, 0.42);
+  --btn-border-hover: var(--black);
+  --btn-shadow: transparent;
 }
-.btn--outline:hover {
-  --btn-bg: var(--black);
-  --btn-fg: #fff;
-  border-color: var(--black);
-  box-shadow: none;
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--outline:hover:not(:disabled):not([aria-disabled='true']) {
+    box-shadow: none;
+  }
 }
 
 /* Outline is ink-on-light by default; invert on dark surfaces so it doesn't vanish. */
@@ -87,28 +168,26 @@
 .cta-banner .btn--outline {
   --btn-bg: transparent;
   --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, 0.55);
-}
-.page-hero .btn--outline:hover,
-.hero .btn--outline:hover,
-.section--dark .btn--outline:hover,
-.section--graphite .btn--outline:hover,
-.cta-banner .btn--outline:hover {
-  --btn-bg: rgba(255, 255, 255, 0.12);
-  --btn-fg: #fff;
-  border-color: #fff;
-  box-shadow: none;
+  --btn-fill: rgba(255, 255, 255, 0.16);
+  --btn-hover-fg: #fff;
+  --btn-border: rgba(255, 255, 255, 0.55);
+  --btn-border-hover: #fff;
+  background-color: transparent;
 }
 
+/* ---------- Size variants ---------- */
+
 .btn--lg {
+  min-height: 48px;
   padding: 1.05rem 2rem;
   font-size: 1.05rem;
 }
+
 .btn--block {
   width: 100%;
 }
 
-/* Text links — underline growth, keyboard-visible */
+/* Text links — underline growth, keyboard-visible (homepage + interior) */
 .text-link {
   color: var(--red);
   font-weight: 600;
@@ -117,26 +196,54 @@
   background-position: 0 100%;
   background-repeat: no-repeat;
   background-size: 0 2px;
-  transition: background-size 0.25s var(--ease), color 0.2s var(--ease);
+  transition:
+    background-size 0.25s var(--ease),
+    color 0.2s var(--ease),
+    opacity 0.2s var(--ease);
 }
-.text-link:hover {
-  background-size: 100% 2px;
+
+.text-link .btn__arrow {
+  display: inline-block;
+  transition: transform var(--btn-lift-duration) var(--ease);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link:hover {
+    background-size: 100% 2px;
+  }
+
+  .text-link:hover .btn__arrow {
+    transform: translateX(4px);
+  }
+}
+
 .text-link:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
   border-radius: 2px;
+  background-size: 100% 2px;
 }
+
+.text-link:active .btn__arrow {
+  transform: translateX(2px);
+}
+
+/* Inline link on red CTA banners (e.g. homepage final CTA secondary) */
 .text-link--on-red {
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 0.18em;
   background-image: none;
 }
-.text-link--on-red:hover {
-  color: #fff;
-  opacity: 0.92;
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link--on-red:hover {
+    color: #fff;
+    opacity: 0.92;
+    background-size: 0;
+  }
 }
+
 .text-link--on-red:focus-visible {
   outline-color: #fff;
 }

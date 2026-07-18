@@ -119,7 +119,7 @@ export default function Footer() {
                   )}
                 </div>
               ))}
-              <Link to="/contact" className="btn btn--gold mt-sm">
+              <Link to="/contact" className="btn btn--blue mt-sm">
                 {SITE.primaryCta}
               </Link>
             </div>

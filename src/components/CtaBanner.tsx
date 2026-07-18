@@ -27,7 +27,7 @@ export default function CtaBanner({
             <h2>{title}</h2>
             <p>{text}</p>
             <div className="flex-actions" style={{ justifyContent: 'center' }}>
-              <Link to={primaryTo} className="btn btn--gold btn--lg">
+              <Link to={primaryTo} className="btn btn--blue btn--lg">
                 {primaryLabel}
               </Link>
               <Link to={secondaryTo} className="btn btn--ghost btn--lg">

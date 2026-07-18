@@ -45,7 +45,7 @@ export default function LocationDetail() {
         intro={page.headline}
       >
         <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
-          <Link to="/contact" className="btn btn--gold btn--lg">
+          <Link to="/contact" className="btn btn--blue btn--lg">
             {SITE.primaryCta} <span className="btn__arrow">→</span>
           </Link>
           {loc.phone && (
@@ -158,7 +158,7 @@ export default function LocationDetail() {
               >
                 Get Directions
               </a>
-              <Link to="/contact" className="btn btn--gold">
+              <Link to="/contact" className="btn btn--blue">
                 Request a Free Class
               </Link>
             </div>

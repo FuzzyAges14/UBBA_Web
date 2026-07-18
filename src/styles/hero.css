@@ -32,21 +32,33 @@
   min-width: 44px;
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
   background: rgba(10, 10, 10, 0.72);
   color: #fff;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   backdrop-filter: blur(6px);
+  transition:
+    background-color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    transform 0.18s var(--ease);
 }
-.hero__media-toggle:hover {
-  background: rgba(10, 10, 10, 0.88);
-  border-color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .hero__media-toggle:hover {
+    background: rgba(10, 10, 10, 0.9);
+    border-color: #fff;
+  }
+}
+.hero__media-toggle:active {
+  transform: scale(0.97);
 }
 .hero__media-toggle:focus-visible {
   outline: 3px solid var(--blue-soft);
   outline-offset: 3px;
+}
+.hero__media-toggle[aria-pressed='true'] {
+  border-color: rgba(255, 255, 255, 0.75);
 }
 /* Functional legibility scrim (not a decorative gradient) */
 .hero__overlay {
