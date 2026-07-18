@@ -2,6 +2,7 @@
 /* Owned by interior-pages visual work. Avoid homepage-only .hero* rules. */
 
 /* ---------- Page-hero families (default / dark) ---------- */
+/* Brand wordmark above H1 — keep size in sync with .j4k-hero__brand */
 .page-hero__brand {
   margin: 0 0 0.55rem;
   font-family: var(--font-impact);
