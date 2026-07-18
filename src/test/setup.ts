@@ -24,9 +24,8 @@ if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
 
 // Quiet jsdom gaps used by hero video + route scroll manager.
 if (typeof window !== 'undefined') {
-  if (typeof window.scrollTo !== 'function') {
-    window.scrollTo = () => undefined
-  }
+  // jsdom may define scrollTo as a throwing stub — always replace it.
+  window.scrollTo = () => undefined
   const mediaProto = window.HTMLMediaElement?.prototype as HTMLMediaElement & {
     __ubbaPlayStubbed?: boolean
   }

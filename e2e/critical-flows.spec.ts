@@ -28,8 +28,8 @@ test.describe('Critical marketing flows', () => {
 
     await page.goto('/contact')
     await page.getByLabel(/full name/i).fill('E2E Parent')
-    await page.getByLabel(/^email$/i).fill('e2e@example.com')
-    await page.getByLabel(/^phone$/i).fill('2015550100')
+    await page.getByLabel(/^email/i).fill('e2e@example.com')
+    await page.getByLabel(/^phone/i).fill('2015550100')
     await page.getByRole('button', { name: /try a class for free/i }).click()
     await expect(page.getByText(/you.?re all set/i)).toBeVisible()
   })
@@ -39,12 +39,12 @@ test.describe('Critical marketing flows', () => {
 
     await page.goto('/')
     await page.getByRole('button', { name: /open menu/i }).click()
-    await page.getByRole('button', { name: /^programs$/i }).click()
-    // Mega/mobile program links currently route to category overviews.
-    await page.getByRole('link', { name: /tiny tigers/i }).click()
-    await expect(page).toHaveURL(/\/programs\/children/)
+    const mobileNav = page.getByRole('navigation', { name: /mobile/i })
+    await mobileNav.getByRole('button', { name: /^programs$/i }).click()
+    await mobileNav.getByRole('link', { name: /tiny tigers/i }).click()
+    await expect(page).toHaveURL(/\/programs\/tiny-tigers/)
     await expect(
-      page.getByRole('heading', { level: 1, name: /children's martial arts programs/i }),
+      page.getByRole('heading', { level: 1, name: /^tiny tigers$/i }),
     ).toBeVisible()
   })
 
@@ -86,8 +86,8 @@ test.describe('Critical marketing flows', () => {
 
     await page.goto('/just-4-kids/birthday-parties')
     await page.getByLabel(/parent \/ guardian name/i).fill('Sam Parent')
-    await page.getByLabel(/^email$/i).fill('sam@example.com')
-    await page.getByLabel(/^phone$/i).fill('2015559999')
+    await page.getByLabel(/^email/i).fill('sam@example.com')
+    await page.getByLabel(/^phone/i).fill('2015559999')
     await page.getByRole('button', { name: /schedule my party/i }).click()
     await expect(page.getByText(/party request sent/i)).toBeVisible()
   })

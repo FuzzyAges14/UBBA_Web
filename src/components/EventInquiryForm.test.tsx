@@ -104,8 +104,8 @@ describe('EventInquiryForm', () => {
     renderForm('birthday')
 
     await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
-    await user.type(screen.getByLabelText(/^email$/i), 'not-valid')
-    await user.type(screen.getByLabelText(/^phone$/i), '2015559999')
+    await user.type(screen.getByLabelText(/^email/i), 'not-valid')
+    await user.type(screen.getByLabelText(/^phone/i), '2015559999')
     await user.click(screen.getByRole('button', { name: /schedule my party/i }))
 
     expect(screen.getByText(/valid email/i)).toBeInTheDocument()
@@ -124,8 +124,8 @@ describe('EventInquiryForm', () => {
     renderForm('parents-night-out')
 
     await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
-    await user.type(screen.getByLabelText(/^email$/i), 'sam@example.com')
-    await user.type(screen.getByLabelText(/^phone$/i), '2015559999')
+    await user.type(screen.getByLabelText(/^email/i), 'sam@example.com')
+    await user.type(screen.getByLabelText(/^phone/i), '2015559999')
     await user.click(screen.getByRole('button', { name: /save a spot/i }))
 
     await waitFor(() => {
@@ -138,8 +138,8 @@ describe('EventInquiryForm', () => {
     renderForm('parents-night-out')
 
     await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
-    await user.type(screen.getByLabelText(/^email$/i), 'sam@example.com')
-    await user.type(screen.getByLabelText(/^phone$/i), '2015559999')
+    await user.type(screen.getByLabelText(/^email/i), 'sam@example.com')
+    await user.type(screen.getByLabelText(/^phone/i), '2015559999')
     await user.type(screen.getByLabelText(/child’s name/i), 'Alex')
     await user.type(screen.getByLabelText(/child’s age/i), '6')
     await user.click(screen.getByRole('button', { name: /save a spot/i }))

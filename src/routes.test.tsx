@@ -79,7 +79,7 @@ describe('Public routes', () => {
     })
   })
 
-  it('navigates from Programs mega menu to the children overview', async () => {
+  it('navigates from Programs mega menu to Tiny Tigers detail', async () => {
     renderAppAt('/')
 
     const primaryNav = await screen.findByRole('navigation', { name: /primary/i })
@@ -93,7 +93,7 @@ describe('Public routes', () => {
     expect(
       await screen.findByRole('heading', {
         level: 1,
-        name: /children's martial arts programs/i,
+        name: /^tiny tigers$/i,
       }),
     ).toBeInTheDocument()
   })

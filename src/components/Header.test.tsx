@@ -85,13 +85,14 @@ describe('Header navigation', () => {
     renderHeader()
 
     await user.click(screen.getByRole('button', { name: /open menu/i }))
-    const programsTrigger = screen.getByRole('button', { name: /^programs$/i })
+    const mobileNav = screen.getByRole('navigation', { name: /mobile/i })
+    const programsTrigger = within(mobileNav).getByRole('button', { name: /^programs$/i })
     expect(programsTrigger).toHaveAttribute('aria-expanded', 'false')
     expect(programsTrigger).toHaveAttribute('aria-controls', 'mobile-programs')
 
     await user.click(programsTrigger)
     expect(programsTrigger).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByRole('link', { name: /tiny tigers/i })).toBeInTheDocument()
+    expect(within(mobileNav).getByRole('link', { name: /tiny tigers/i })).toBeInTheDocument()
   })
 
   it('provides a skip link to main content in the app shell', async () => {

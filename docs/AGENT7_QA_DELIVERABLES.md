@@ -4,24 +4,21 @@
 
 See [`docs/QA.md`](QA.md). Critical conversion paths (free-class + event inquiry), routing/SEO titles, navigation keyboard behavior, and API abuse cases are automated. Visual polish and live email delivery remain manual.
 
+This branch is rebased onto current `main` (Agents 1–6 landed) so QA coverage uses the integrated SEO, location pages, hardened API, and accessibility APIs.
+
 ## 2. Coverage added
 
 | Area | Files |
 | --- | --- |
 | Routes / H1 / titles | `src/routes.test.tsx`, `src/App.test.tsx` |
-| SEO metadata | `src/components/Seo.test.tsx` |
-| Header / mobile nav / skip link | `src/components/Header.test.tsx` |
+| SEO metadata (canonical/OG/Twitter) | `src/components/Seo.test.tsx` (from main + kept) |
+| Header / mobile nav / skip link | `src/components/Header.test.tsx`, `Accessibility.test.tsx` |
 | Lead + event forms | `src/components/LeadForm.test.tsx`, `EventInquiryForm.test.tsx` |
-| Accessibility (axe) | `src/accessibility.test.tsx`, `src/test/axe.ts` |
-| API HTTP | `server/app.test.ts` (+ extras in `server/leads.test.ts`) |
+| Accessibility (axe) | `src/accessibility.test.tsx`, `src/test/axe.ts`, `Accessibility.test.tsx` |
+| API HTTP | `server/app.test.ts` (rate limit, CORS, headers from Agent 5) |
 | E2E | `e2e/critical-flows.spec.ts`, `playwright.config.ts` |
 | CI | `.github/workflows/ci.yml` |
 | Manual checklist | `docs/QA.md` |
-
-### Minimal production changes for testability
-- Skip link + `#main` focus target (`Layout.tsx`, `index.css`)
-- Mobile menu Escape + focus restore (`Header.tsx`)
-- FAQ `aria-controls` / `aria-labelledby` (`Faq.tsx`)
 
 ## 3. Commands
 
@@ -38,17 +35,15 @@ Full browser/device/network/keyboard checklist: [`docs/QA.md`](QA.md#manual-qa-c
 
 ## 5. Known untested areas
 
-- Rate limiting (pending Agent 5) — `it.todo` in `server/app.test.ts`
-- Dedicated `/locations/*` pages (not in app yet)
-- Full Open Graph / Twitter tag matrix (pending Agent 1)
-- Real SMTP/Resend delivery; Safari/WebKit CI; Lighthouse CI
-- Heading-order axe rule disabled pending content/structure cleanup
+- Real SMTP/Resend delivery (mocked in automation)
+- Safari/WebKit in CI; Lighthouse CI
+- Color-contrast axe rule (disabled under jsdom)
 
-## 6. Final test results (this branch)
+## 6. Final test results (rebased branch)
 
 | Command | Result |
 | --- | --- |
 | `pnpm lint` | Pass |
-| `pnpm test` | **94 passed**, 1 todo |
+| `pnpm test` | Pass (full suite on current main) |
 | `pnpm build` | Pass |
-| `pnpm test:e2e` | **10 passed**, 2 skipped (project-scoped) |
+| `pnpm test:e2e` | Pass |
