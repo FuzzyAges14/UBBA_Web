@@ -58,19 +58,6 @@ const COPY: Record<
   },
 }
 
-function buildEventMessage(intent: EventInquiryIntent, data: FormData): string {
-  const parts: string[] = []
-  if (intent === 'birthday') {
-    const date = String(data.get('party_date') ?? '').trim()
-    const guests = String(data.get('guests') ?? '').trim()
-    if (date) parts.push(`Preferred date: ${date}`)
-    if (guests) parts.push(`Guests: ${guests}`)
-  }
-  const message = String(data.get('message') ?? '').trim()
-  if (message) parts.push(message)
-  return parts.join('\n')
-}
-
 export default function EventInquiryForm({
   intent,
   defaultLocation,
@@ -84,6 +71,8 @@ export default function EventInquiryForm({
   const [errors, setErrors] = useState<Errors>({})
   const copy = COPY[intent]
   const showPartyFields = intent === 'birthday'
+  const showCampFields = intent === 'summer-camp'
+  const showChildFields = intent === 'summer-camp' || intent === 'parents-night-out'
 
   function validate(data: FormData): Errors {
     const next: Errors = {}
@@ -108,12 +97,18 @@ export default function EventInquiryForm({
     setSending(true)
     try {
       const result = await submitLead({
+        intent,
         name: String(data.get('name') ?? '').trim(),
         email: String(data.get('email') ?? '').trim(),
         phone: String(data.get('phone') ?? '').trim(),
         location: String(data.get('location') ?? '').trim() || undefined,
         program: copy.programValue,
-        message: buildEventMessage(intent, data) || undefined,
+        partyDate: String(data.get('party_date') ?? '').trim() || undefined,
+        guests: String(data.get('guests') ?? '').trim() || undefined,
+        childName: String(data.get('child_name') ?? '').trim() || undefined,
+        childAge: String(data.get('child_age') ?? '').trim() || undefined,
+        preferredWeeks: String(data.get('preferred_weeks') ?? '').trim() || undefined,
+        message: String(data.get('message') ?? '').trim() || undefined,
         website: String(data.get('website') ?? '').trim() || undefined,
         source: route.pathname || '/just-4-kids',
       })
@@ -180,7 +175,7 @@ export default function EventInquiryForm({
         </div>
 
         <div className="field field--full">
-          <label htmlFor={`event-name-${intent}`}>Full Name</label>
+          <label htmlFor={`event-name-${intent}`}>Parent / Guardian Name</label>
           <input
             id={`event-name-${intent}`}
             name="name"
@@ -240,8 +235,55 @@ export default function EventInquiryForm({
           </select>
         </div>
 
+        {showChildFields && (
+          <>
+            <div className="field">
+              <label htmlFor={`event-child-${intent}`}>Child’s Name</label>
+              <input
+                id={`event-child-${intent}`}
+                name="child_name"
+                type="text"
+                placeholder="Child’s first name"
+                disabled={sending}
+              />
+            </div>
+            <div className="field">
+              <label htmlFor={`event-age-${intent}`}>Child’s Age</label>
+              <input
+                id={`event-age-${intent}`}
+                name="child_age"
+                type="text"
+                inputMode="numeric"
+                placeholder={intent === 'summer-camp' ? 'Ages 3–12' : 'Age'}
+                disabled={sending}
+              />
+            </div>
+          </>
+        )}
+
         {showPartyFields && (
           <>
+            <div className="field">
+              <label htmlFor={`event-child-bday-${intent}`}>Birthday Child’s Name</label>
+              <input
+                id={`event-child-bday-${intent}`}
+                name="child_name"
+                type="text"
+                placeholder="Birthday child’s name"
+                disabled={sending}
+              />
+            </div>
+            <div className="field">
+              <label htmlFor={`event-age-bday-${intent}`}>Child’s Age</label>
+              <input
+                id={`event-age-bday-${intent}`}
+                name="child_age"
+                type="text"
+                inputMode="numeric"
+                placeholder="Turning…"
+                disabled={sending}
+              />
+            </div>
             <div className="field">
               <label htmlFor={`event-date-${intent}`}>Preferred Date</label>
               <input
@@ -273,6 +315,19 @@ export default function EventInquiryForm({
           </>
         )}
 
+        {showCampFields && (
+          <div className="field field--full">
+            <label htmlFor={`event-weeks-${intent}`}>Preferred Weeks / Sessions</label>
+            <input
+              id={`event-weeks-${intent}`}
+              name="preferred_weeks"
+              type="text"
+              placeholder="e.g. Week of July 7, or any available week"
+              disabled={sending}
+            />
+          </div>
+        )}
+
         <div className="field field--full">
           <label htmlFor={`event-message-${intent}`}>Message</label>
           <textarea
@@ -280,9 +335,9 @@ export default function EventInquiryForm({
             name="message"
             placeholder={
               intent === 'birthday'
-                ? 'Birthday child’s name, age, or anything we should know…'
+                ? 'Anything else we should know about the party…'
                 : intent === 'summer-camp'
-                  ? 'Child’s age, preferred weeks, or questions…'
+                  ? 'Questions about themes, drop-off, or siblings…'
                   : 'How many kids, preferred Friday, or questions…'
             }
             disabled={sending}

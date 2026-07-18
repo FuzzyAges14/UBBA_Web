@@ -1,10 +1,30 @@
+import type { InquiryIntent } from '../src/data/contact.ts'
 import { deliverLeadEmail } from './email.ts'
 import type { LeadPayload, LeadResult } from './types.ts'
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+const VALID_INTENTS: InquiryIntent[] = [
+  'free-class',
+  'birthday',
+  'summer-camp',
+  'parents-night-out',
+]
+
 function asString(value: unknown): string {
   return typeof value === 'string' ? value.trim() : ''
+}
+
+function parseIntent(value: unknown, program: string | undefined): InquiryIntent | undefined {
+  const raw = asString(value)
+  if (VALID_INTENTS.includes(raw as InquiryIntent)) return raw as InquiryIntent
+
+  // Infer from program label when intent omitted (older clients)
+  if (program === 'Birthday Parties') return 'birthday'
+  if (program === 'Summer / Day Camp') return 'summer-camp'
+  if (program === "Parents' Night Out") return 'parents-night-out'
+  if (program) return 'free-class'
+  return undefined
 }
 
 export function parseLeadPayload(body: unknown): { lead?: LeadPayload; error?: string } {
@@ -27,14 +47,23 @@ export function parseLeadPayload(body: unknown): { lead?: LeadPayload; error?: s
   if (!emailRe.test(email)) return { error: 'Enter a valid email address.' }
   if (!phone) return { error: 'Please enter a phone number.' }
 
+  const program = asString(data.program) || undefined
+  const intent = parseIntent(data.intent, program)
+
   return {
     lead: {
       name,
       email,
       phone,
+      intent,
       location: asString(data.location) || undefined,
-      program: asString(data.program) || undefined,
+      program,
       message: asString(data.message) || undefined,
+      partyDate: asString(data.partyDate) || undefined,
+      guests: asString(data.guests) || undefined,
+      childName: asString(data.childName) || undefined,
+      childAge: asString(data.childAge) || undefined,
+      preferredWeeks: asString(data.preferredWeeks) || undefined,
       source: asString(data.source) || undefined,
     },
   }

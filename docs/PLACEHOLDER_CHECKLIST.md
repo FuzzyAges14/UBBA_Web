@@ -17,9 +17,10 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Privacy Policy and Terms copy
 
 ## Forms & email delivery
-- [x] `LeadForm` posts to `/api/leads` (see `docs/BACKEND.md`)
-- [x] Honeypot spam field on the form
-- [ ] Set real `CONTACT.notifyEmails` + `SOCIAL_PROFILES` in `src/data/contact.ts`
+- [x] `LeadForm` (free class) posts to `/api/leads` (see `docs/BACKEND.md`)
+- [x] Birthday + summer camp signups (`EventInquiryForm`) post to `/api/leads`
+- [x] Honeypot spam field on the forms
+- [ ] Set real `CONTACT.notifyEmails` / `INQUIRY_TYPES` + `SOCIAL_PROFILES` in `src/data/contact.ts`
 - [ ] Configure Resend or SMTP in `.env` so requests leave log-only mode
 - [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 

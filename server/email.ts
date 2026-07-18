@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
-import type { SocialProfile } from '../src/data/contact.ts'
-import { serverConfig } from './config.ts'
+import { getInquiryType, type SocialProfile } from '../src/data/contact.ts'
+import { notifyEmailsForIntent, serverConfig } from './config.ts'
 import type { LeadPayload } from './types.ts'
 
 function escapeHtml(value: string): string {
@@ -42,55 +42,98 @@ function socialLinksBlock(profiles: SocialProfile[]): { text: string; html: stri
   }
 }
 
-/** Human-readable request label for free-class vs Just 4 Kids inquiries. */
-export function requestLabelForProgram(program?: string): string {
-  const p = program?.trim() || ''
-  if (p === 'Birthday Parties') return 'Birthday Party Inquiry'
-  if (p === 'Summer / Day Camp') return 'Summer Camp Inquiry'
-  if (p === "Parents' Night Out") return "Parents' Night Out Inquiry"
-  return serverConfig.subjectPrefix || 'Free Class Request'
+/** Human-readable request label from intent (preferred) or legacy program string. */
+export function requestLabelForLead(lead: Pick<LeadPayload, 'intent' | 'program'>): string {
+  if (lead.intent) return getInquiryType(lead.intent).label
+
+  // Legacy fallbacks when older clients omit intent
+  const p = lead.program?.trim() || ''
+  if (p === 'Birthday Parties') return getInquiryType('birthday').label
+  if (p === 'Summer / Day Camp') return getInquiryType('summer-camp').label
+  if (p === "Parents' Night Out") return getInquiryType('parents-night-out').label
+  return getInquiryType('free-class').label
+}
+
+type DetailRow = { label: string; value: string }
+
+function detailRows(lead: LeadPayload): DetailRow[] {
+  const rows: DetailRow[] = [
+    { label: 'Name', value: lead.name },
+    { label: 'Email', value: lead.email },
+    { label: 'Phone', value: lead.phone },
+    { label: 'Location', value: lead.location?.trim() || 'Not specified' },
+    { label: 'Program', value: lead.program?.trim() || 'Not specified' },
+  ]
+
+  if (lead.childName?.trim()) rows.push({ label: 'Child', value: lead.childName.trim() })
+  if (lead.childAge?.trim()) rows.push({ label: 'Child age', value: lead.childAge.trim() })
+  if (lead.partyDate?.trim()) rows.push({ label: 'Preferred date', value: lead.partyDate.trim() })
+  if (lead.guests?.trim()) rows.push({ label: 'Guests', value: lead.guests.trim() })
+  if (lead.preferredWeeks?.trim()) {
+    rows.push({ label: 'Preferred weeks', value: lead.preferredWeeks.trim() })
+  }
+
+  return rows
 }
 
 export function buildLeadEmail(lead: LeadPayload) {
   const submittedAt = formatSubmittedAt()
-  const location = lead.location?.trim() || 'Not specified'
-  const program = lead.program?.trim() || 'Not specified'
   const message = lead.message?.trim() || '(No message provided)'
   const source = lead.source?.trim() || 'Website form'
   const social = socialLinksBlock(serverConfig.socialProfiles)
-  const requestLabel = requestLabelForProgram(lead.program)
+  const requestLabel = requestLabelForLead(lead)
+  const rows = detailRows(lead)
 
   const subject = `${requestLabel} — ${lead.name}${
     lead.location?.trim() ? ` (${lead.location.trim()})` : ''
   }`
 
-  const text = [
+  const pad = (label: string) => `${label}:`.padEnd(18, ' ')
+  const textLines = [
     requestLabel.toUpperCase(),
-    '='.repeat(Math.min(requestLabel.length, 32)),
+    '='.repeat(Math.min(requestLabel.length, 40)),
     '',
-    `Name:       ${lead.name}`,
-    `Email:      ${lead.email}`,
-    `Phone:      ${lead.phone}`,
-    `Location:   ${location}`,
-    `Program:    ${program}`,
+    ...rows.map((r) => `${pad(r.label)}${r.value}`),
     '',
     'Message:',
     message,
     '',
     '------------------',
-    `Submitted:  ${submittedAt}`,
-    `Source:     ${source}`,
+    `Submitted:     ${submittedAt}`,
+    `Source:        ${source}`,
+  ]
+  if (lead.intent) textLines.push(`Intent:        ${lead.intent}`)
+  textLines.push(
     '',
     social.text,
     '',
     'Tip: Reply to this email to contact the visitor directly.',
-  ].join('\n')
+  )
+  const text = textLines.join('\n')
 
-  const row = (label: string, value: string) => `
+  const rowHtml = (label: string, value: string) => `
     <tr>
-      <td style="padding:10px 14px;border-bottom:1px solid #eee;color:#666;font-size:13px;width:120px;vertical-align:top;">${escapeHtml(label)}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #eee;color:#666;font-size:13px;width:130px;vertical-align:top;">${escapeHtml(label)}</td>
       <td style="padding:10px 14px;border-bottom:1px solid #eee;color:#111;font-size:15px;font-weight:600;vertical-align:top;">${value}</td>
     </tr>`
+
+  const htmlRows = rows
+    .map((r) => {
+      if (r.label === 'Email') {
+        return rowHtml(
+          r.label,
+          `<a href="mailto:${escapeHtml(r.value)}" style="color:#C41230;text-decoration:none;">${escapeHtml(r.value)}</a>`,
+        )
+      }
+      if (r.label === 'Phone') {
+        return rowHtml(
+          r.label,
+          `<a href="tel:${escapeHtml(r.value.replace(/[^0-9+]/g, ''))}" style="color:#C41230;text-decoration:none;">${escapeHtml(r.value)}</a>`,
+        )
+      }
+      return rowHtml(r.label, escapeHtml(r.value))
+    })
+    .join('')
 
   const html = `<!DOCTYPE html>
 <html>
@@ -103,11 +146,7 @@ export function buildLeadEmail(lead: LeadPayload) {
     </div>
     <div style="padding:8px 10px 0;">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
-        ${row('Name', escapeHtml(lead.name))}
-        ${row('Email', `<a href="mailto:${escapeHtml(lead.email)}" style="color:#C41230;text-decoration:none;">${escapeHtml(lead.email)}</a>`)}
-        ${row('Phone', `<a href="tel:${escapeHtml(lead.phone.replace(/[^0-9+]/g, ''))}" style="color:#C41230;text-decoration:none;">${escapeHtml(lead.phone)}</a>`)}
-        ${row('Location', escapeHtml(location))}
-        ${row('Program', escapeHtml(program))}
+        ${htmlRows}
       </table>
       <div style="padding:16px 14px 8px;">
         <p style="margin:0 0 6px;color:#666;font-size:13px;">Message</p>
@@ -196,7 +235,8 @@ export async function deliverLeadEmail(lead: LeadPayload): Promise<{ mode: 'emai
   const { subject, text, html } = buildLeadEmail(lead)
   const from = `"${serverConfig.fromName}" <${serverConfig.fromEmail}>`
   const replyTo = serverConfig.replyToVisitor ? lead.email : undefined
-  const to = serverConfig.notifyEmails
+  const to = notifyEmailsForIntent(lead.intent)
+  const label = requestLabelForLead(lead)
 
   if (to.length === 0) {
     throw new Error('No notify emails configured. Edit CONTACT.notifyEmails in src/data/contact.ts')
@@ -205,7 +245,7 @@ export async function deliverLeadEmail(lead: LeadPayload): Promise<{ mode: 'emai
   const transport = serverConfig.transport
 
   if (transport.kind === 'log') {
-    console.log(`\n——— ${requestLabelForProgram(lead.program)} (email not configured — logging only) ———`)
+    console.log(`\n——— ${label} (email not configured — logging only) ———`)
     console.log(`To: ${to.join(', ')}`)
     console.log(`From: ${from}`)
     if (replyTo) console.log(`Reply-To: ${replyTo}`)

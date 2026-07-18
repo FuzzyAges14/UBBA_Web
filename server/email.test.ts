@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { buildLeadEmail } from './email.ts'
+import { buildLeadEmail, requestLabelForLead } from './email.ts'
 
 describe('buildLeadEmail', () => {
-  it('formats a detailed plain-text and HTML message', () => {
+  it('formats a detailed plain-text and HTML free-class message', () => {
     const { subject, text, html } = buildLeadEmail({
+      intent: 'free-class',
       name: 'Jane Doe',
       email: 'jane@example.com',
       phone: '(201) 555-0123',
@@ -17,13 +18,13 @@ describe('buildLeadEmail', () => {
     expect(subject).toContain('Jane Doe')
     expect(subject).toContain('Allendale')
 
-    expect(text).toContain('Name:       Jane Doe')
-    expect(text).toContain('Email:      jane@example.com')
-    expect(text).toContain('Phone:      (201) 555-0123')
-    expect(text).toContain('Location:   Allendale')
-    expect(text).toContain('Program:    Tiny Tigers (Ages 3-5)')
+    expect(text).toContain('Jane Doe')
+    expect(text).toContain('jane@example.com')
+    expect(text).toContain('(201) 555-0123')
+    expect(text).toContain('Allendale')
+    expect(text).toContain('Tiny Tigers (Ages 3-5)')
     expect(text).toContain('Looking for a weekday class.')
-    expect(text).toContain('Source:     /contact')
+    expect(text).toContain('Source:        /contact')
 
     expect(html).toContain('Free Class Request')
     expect(html).toContain('Jane Doe')
@@ -44,21 +45,59 @@ describe('buildLeadEmail', () => {
     expect(html).toContain('&lt;b&gt;bold&lt;/b&gt;')
   })
 
-  it('labels Just 4 Kids birthday inquiries distinctly', () => {
+  it('formats birthday inquiries with structured party fields', () => {
     const { subject, text, html } = buildLeadEmail({
+      intent: 'birthday',
       name: 'Sam Parent',
       email: 'sam@example.com',
       phone: '2015559999',
       location: 'Midland Park',
       program: 'Birthday Parties',
-      message: 'Preferred date: Sat 2pm\nGuests: 6-10',
+      childName: 'Alex',
+      childAge: '7',
+      partyDate: 'Sat July 26 at 2pm',
+      guests: '6-10',
+      message: 'Please have board breaking.',
       source: '/just-4-kids/birthday-parties',
     })
 
     expect(subject).toContain('Birthday Party Inquiry')
     expect(subject).not.toContain('Free Class Request')
     expect(text).toContain('BIRTHDAY PARTY INQUIRY')
+    expect(text).toContain('Preferred date:')
+    expect(text).toContain('Sat July 26 at 2pm')
+    expect(text).toContain('Guests:')
+    expect(text).toContain('6-10')
+    expect(text).toContain('Alex')
     expect(html).toContain('Birthday Party Inquiry')
-    expect(html).toContain('Preferred date: Sat 2pm')
+    expect(html).toContain('Preferred date')
+    expect(html).toContain('Sat July 26 at 2pm')
+    expect(html).toContain('Alex')
+  })
+
+  it('formats summer camp inquiries with child and week details', () => {
+    const { subject, text, html } = buildLeadEmail({
+      intent: 'summer-camp',
+      name: 'Jordan Lee',
+      email: 'jordan@example.com',
+      phone: '2015551111',
+      location: 'Allendale',
+      program: 'Summer / Day Camp',
+      childName: 'Mia',
+      childAge: '8',
+      preferredWeeks: 'Week of July 7',
+      message: 'Needs early drop-off.',
+      source: '/just-4-kids/summer-camp',
+    })
+
+    expect(requestLabelForLead({ intent: 'summer-camp' })).toBe('Summer Camp Inquiry')
+    expect(subject).toContain('Summer Camp Inquiry')
+    expect(text).toContain('SUMMER CAMP INQUIRY')
+    expect(text).toContain('Mia')
+    expect(text).toContain('Preferred weeks:')
+    expect(text).toContain('Week of July 7')
+    expect(html).toContain('Summer Camp Inquiry')
+    expect(html).toContain('Preferred weeks')
+    expect(html).toContain('Week of July 7')
   })
 })
