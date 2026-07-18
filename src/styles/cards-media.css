@@ -55,6 +55,17 @@
   width: max-content;
   animation: marquee 32s linear infinite;
 }
+.marquee__track--static {
+  animation: none;
+  flex-wrap: wrap;
+  white-space: normal;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  justify-content: center;
+  gap: 0.35rem 1.5rem;
+  padding: 0 1rem;
+}
 .marquee__track span {
   font-family: var(--font-display);
   text-transform: uppercase;

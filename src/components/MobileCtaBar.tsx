@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export default function MobileCtaBar() {
   return (
     <nav className="mobile-cta" aria-label="Quick actions">
-      <a href="tel:2019622922">
+      <a href="tel:2019622922" aria-label="Call Allendale studio">
         <span className="ic" aria-hidden="true">📞</span>
         Call
       </a>
