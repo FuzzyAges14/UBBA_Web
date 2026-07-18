@@ -27,7 +27,7 @@ export default function FollowUs() {
           <div className="grid grid--2">
             {SOCIAL.map((network, i) => (
               <Reveal as="article" key={network.slug} delay={i * 90}>
-                <div className="pcard" style={{ minHeight: 380 }}>
+                <div className="pcard">
                   <div className="pcard__art" />
                   <div className="pcard__scrim" />
                   <span className="pcard__glyph social-card__mark" aria-hidden="true">
