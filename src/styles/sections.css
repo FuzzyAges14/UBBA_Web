@@ -745,41 +745,6 @@
 }
 
 /* ---------- Homepage art direction (scoped) ---------- */
-.home-section-head {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.85rem 1.25rem;
-  align-items: start;
-}
-.home-section-head__body {
-  min-width: 0;
-}
-.home-section-num {
-  font-family: var(--font-impact);
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  color: rgba(10, 10, 10, 0.1);
-  padding-top: 0.15rem;
-  user-select: none;
-}
-.home-section-head--dark .home-section-num {
-  color: rgba(255, 255, 255, 0.14);
-}
-@media (max-width: 620px) {
-  .home-section-head {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-  .home-section-num {
-    font-size: 1.5rem;
-    color: var(--red);
-  }
-  .home-section-head--dark .home-section-num {
-    color: var(--blue-soft);
-  }
-}
-
 .home-trust {
   background: var(--off-white);
   border-bottom: 1px solid var(--line);

@@ -7,18 +7,11 @@ export default function BeltJourneySection() {
     <section className="section section--graphite home-journey">
       <div className="container">
         <Reveal>
-          <div className="home-section-head home-section-head--dark">
-            <span className="home-section-num" aria-hidden="true">
-              05
-            </span>
-            <div className="home-section-head__body">
-              <SectionHeading
-                eyebrow="Getting Started"
-                title="Your journey, belt by belt"
-                lead="Starting is simple. Here's the path from your first free class to lifelong growth."
-              />
-            </div>
-          </div>
+          <SectionHeading
+            eyebrow="Getting Started"
+            title="Your journey, belt by belt"
+            lead="Starting is simple. Here's the path from your first free class to lifelong growth."
+          />
         </Reveal>
 
         <ol className="home-journey__path mt">

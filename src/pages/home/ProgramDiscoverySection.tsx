@@ -8,18 +8,11 @@ export default function ProgramDiscoverySection() {
     <section className="section home-programs" id="programs">
       <div className="container">
         <Reveal>
-          <div className="home-section-head">
-            <span className="home-section-num" aria-hidden="true">
-              01
-            </span>
-            <div className="home-section-head__body">
-              <SectionHeading
-                eyebrow="Find Your Path"
-                title={<>Programs for every age &amp; stage</>}
-                lead="From Tiny Tigers to adult martial arts, choose an age-specific path — then try a free class in Allendale or Midland Park."
-              />
-            </div>
-          </div>
+          <SectionHeading
+            eyebrow="Find Your Path"
+            title={<>Programs for every age &amp; stage</>}
+            lead="From Tiny Tigers to adult martial arts, choose an age-specific path — then try a free class in Allendale or Midland Park."
+          />
         </Reveal>
 
         <div className="rail mt">
