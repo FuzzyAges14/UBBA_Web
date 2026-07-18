@@ -311,6 +311,11 @@
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
+/* Prevent grid items from forcing horizontal page scroll on narrow viewports
+   (default min-width:auto can expand tracks past the container). */
+.split > * {
+  min-width: 0;
+}
 /* Flip columns on desktop without using direction:rtl (which can confuse
    layout/reading order on smaller screens). */
 .split--flip > :first-child {
@@ -331,8 +336,12 @@
   }
   .split .ph--tall,
   .split .ph--wide {
+    width: 100%;
+    max-width: 100%;
     min-height: 16rem;
+    /* Height-driven aspect-ratio was forcing ~341px min width on phones */
     aspect-ratio: 4 / 3;
+    height: auto;
   }
 }
 
