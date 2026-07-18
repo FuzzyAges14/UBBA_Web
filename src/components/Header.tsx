@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { SITE, LOCATIONS, MEGA_MENU, JUST_4_KIDS_MENU } from '../data/site'
 
@@ -20,6 +20,10 @@ export default function Header() {
   const location = useLocation()
   const closeTimer = useRef<number | undefined>(undefined)
   const j4kCloseTimer = useRef<number | undefined>(undefined)
+  const menuBtnRef = useRef<HTMLButtonElement | null>(null)
+  const mobileNavRef = useRef<HTMLDivElement | null>(null)
+  const megaId = useId()
+  const j4kId = useId()
 
   const locationCount = LOCATIONS.length + (SITE.showGlenRock ? 1 : 0)
 
@@ -41,6 +45,65 @@ export default function Header() {
       document.body.style.overflow = ''
     }
   }, [menuOpen])
+
+  // Keep closed-drawer focusables out of the tab order (CSS only translates it off-screen).
+  useEffect(() => {
+    const drawer = mobileNavRef.current
+    if (!drawer) return
+    if (menuOpen) drawer.removeAttribute('inert')
+    else drawer.setAttribute('inert', '')
+  }, [menuOpen])
+
+  // Focus first interactive item when the mobile drawer opens; restore on close.
+  useEffect(() => {
+    if (!menuOpen) return
+    const drawer = mobileNavRef.current
+    if (!drawer) return
+
+    const focusables = drawer.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )
+    const first = focusables[0]
+    first?.focus()
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setMenuOpen(false)
+        menuBtnRef.current?.focus()
+        return
+      }
+      if (e.key !== 'Tab' || focusables.length === 0) return
+
+      const list = Array.from(focusables)
+      const firstEl = list[0]
+      const lastEl = list[list.length - 1]
+      const active = document.activeElement as HTMLElement | null
+
+      if (e.shiftKey && active === firstEl) {
+        e.preventDefault()
+        lastEl.focus()
+      } else if (!e.shiftKey && active === lastEl) {
+        e.preventDefault()
+        firstEl.focus()
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen])
+
+  // Escape closes desktop mega menus and returns focus to their triggers.
+  useEffect(() => {
+    if (!megaOpen && !j4kOpen) return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Escape') return
+      setMegaOpen(false)
+      setJ4kOpen(false)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [megaOpen, j4kOpen])
 
   const openMega = () => {
     window.clearTimeout(closeTimer.current)
@@ -68,6 +131,16 @@ export default function Header() {
 
   const programsActive = location.pathname.startsWith('/programs')
   const just4KidsActive = location.pathname.startsWith('/just-4-kids')
+
+  function toggleMenu() {
+    setMenuOpen((v) => {
+      if (v) {
+        // Closing via button — restore focus after state update
+        queueMicrotask(() => menuBtnRef.current?.focus())
+      }
+      return !v
+    })
+  }
 
   return (
     <>
@@ -114,15 +187,23 @@ export default function Header() {
                 className={`nav__link ${programsActive ? 'is-active' : ''}`}
                 aria-expanded={megaOpen}
                 aria-haspopup="true"
+                aria-controls={megaId}
                 onClick={() => {
                   setJ4kOpen(false)
                   setMegaOpen((v) => !v)
                 }}
               >
-                Programs <span className="nav__caret">▼</span>
+                Programs <span className="nav__caret" aria-hidden="true">▼</span>
               </button>
               {megaOpen && (
-                <div className="mega" onMouseEnter={openMega} onMouseLeave={scheduleClose}>
+                <div
+                  id={megaId}
+                  className="mega"
+                  role="region"
+                  aria-label="Programs"
+                  onMouseEnter={openMega}
+                  onMouseLeave={scheduleClose}
+                >
                   {MEGA_MENU.map((group) => (
                     <div key={group.heading}>
                       <div className="mega__heading">{group.heading}</div>
@@ -148,16 +229,20 @@ export default function Header() {
                 className={`nav__link ${just4KidsActive ? 'is-active' : ''}`}
                 aria-expanded={j4kOpen}
                 aria-haspopup="true"
+                aria-controls={j4kId}
                 onClick={() => {
                   setMegaOpen(false)
                   setJ4kOpen((v) => !v)
                 }}
               >
-                Just 4 Kids <span className="nav__caret">▼</span>
+                Just 4 Kids <span className="nav__caret" aria-hidden="true">▼</span>
               </button>
               {j4kOpen && (
                 <div
+                  id={j4kId}
                   className="mega mega--j4k"
+                  role="region"
+                  aria-label="Just 4 Kids"
                   onMouseEnter={openJ4k}
                   onMouseLeave={scheduleJ4kClose}
                 >
@@ -195,12 +280,13 @@ export default function Header() {
               {SITE.primaryCta}
             </Link>
             <button
+              ref={menuBtnRef}
               type="button"
               className={`hamburger ${menuOpen ? 'is-open' : ''}`}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={toggleMenu}
             >
               <span />
               <span />
@@ -216,8 +302,12 @@ export default function Header() {
         header box (~78px) and the menu appears empty.
       */}
       <div
+        ref={mobileNavRef}
         className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
         id="mobile-nav"
+        role={menuOpen ? 'dialog' : undefined}
+        aria-modal={menuOpen || undefined}
+        aria-label="Site menu"
         aria-hidden={!menuOpen}
       >
         <div className="mobile-nav__scroll">

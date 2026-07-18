@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
   EVENT_GUEST_OPTIONS,
@@ -17,6 +17,8 @@ const locationChoices = [
   ...LOCATIONS.map((l) => l.name),
   ...(SITE.showGlenRock ? [GLEN_ROCK.name] : []),
 ]
+
+const FIELD_ORDER = ['name', 'email', 'phone'] as const
 
 const COPY: Record<
   EventInquiryIntent,
@@ -66,6 +68,7 @@ export default function EventInquiryForm({
   defaultLocation?: string
 }) {
   const route = useLocation()
+  const formId = useId()
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
@@ -73,6 +76,16 @@ export default function EventInquiryForm({
   const showPartyFields = intent === 'birthday'
   const showCampFields = intent === 'summer-camp'
   const showChildFields = intent === 'summer-camp' || intent === 'parents-night-out'
+  const successRef = useRef<HTMLHeadingElement | null>(null)
+  const summaryRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (submitted) successRef.current?.focus()
+  }, [submitted])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) summaryRef.current?.focus()
+  }, [errors])
 
   function validate(data: FormData): Errors {
     const next: Errors = {}
@@ -127,14 +140,40 @@ export default function EventInquiryForm({
     }
   }
 
+  const ids = {
+    name: `${formId}-name`,
+    email: `${formId}-email`,
+    phone: `${formId}-phone`,
+    location: `${formId}-location`,
+    child: `${formId}-child`,
+    age: `${formId}-age`,
+    childBday: `${formId}-child-bday`,
+    ageBday: `${formId}-age-bday`,
+    date: `${formId}-date`,
+    guests: `${formId}-guests`,
+    weeks: `${formId}-weeks`,
+    message: `${formId}-message`,
+    website: `${formId}-website`,
+    summary: `${formId}-summary`,
+  }
+
+  const fieldErrors = FIELD_ORDER.filter((key) => errors[key])
+  const fieldLabels = {
+    name: 'Parent / Guardian Name',
+    email: 'Email',
+    phone: 'Phone',
+  } as const
+
   if (submitted) {
     return (
       <div className="leadform leadform--event">
-        <div className="form-success" role="status">
-          <div className="form-success__icon">
+        <div className="form-success" role="status" aria-live="polite">
+          <div className="form-success__icon" aria-hidden="true">
             {intent === 'birthday' ? '🎂' : intent === 'summer-camp' ? '☀️' : '🍕'}
           </div>
-          <h3>{copy.successTitle}</h3>
+          <h3 ref={successRef} tabIndex={-1}>
+            {copy.successTitle}
+          </h3>
           <p>{copy.successBody}</p>
           <button
             type="button"
@@ -149,24 +188,55 @@ export default function EventInquiryForm({
   }
 
   return (
-    <form className="leadform leadform--event" onSubmit={handleSubmit} noValidate>
+    <form
+      className="leadform leadform--event"
+      onSubmit={handleSubmit}
+      noValidate
+      aria-busy={sending || undefined}
+    >
       <div className="leadform__head">
         <span className="eyebrow">{copy.eyebrow}</span>
       </div>
+      <p className="form-instructions">
+        Fields marked with an asterisk (*) are required. We&apos;ll follow up to confirm
+        availability — dates and packages are not final until we contact you.
+      </p>
       <div className="leadform__steps" aria-hidden="true">
         <i className="on" />
         <i className="on" />
         <i className="on" />
       </div>
-      <div className="form-grid">
+
+      {(fieldErrors.length > 0 || errors.form) && (
         <div
-          className="field field--full"
-          aria-hidden="true"
-          style={{ position: 'absolute', left: '-9999px', height: 0, overflow: 'hidden' }}
+          ref={summaryRef}
+          id={ids.summary}
+          className="form-error-summary"
+          role="alert"
+          tabIndex={-1}
         >
-          <label htmlFor={`event-website-${intent}`}>Website</label>
+          <p className="form-error-summary__title">
+            {errors.form
+              ? errors.form
+              : 'Please fix the following before sending your request:'}
+          </p>
+          {fieldErrors.length > 0 && (
+            <ul>
+              {fieldErrors.map((key) => (
+                <li key={key}>
+                  <a href={`#${ids[key]}`}>{fieldLabels[key]}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
+      <div className="form-grid">
+        <div className="field field--full hp-field" aria-hidden="true">
+          <label htmlFor={ids.website}>Website</label>
           <input
-            id={`event-website-${intent}`}
+            id={ids.website}
             name="website"
             type="text"
             tabIndex={-1}
@@ -175,54 +245,82 @@ export default function EventInquiryForm({
         </div>
 
         <div className="field field--full">
-          <label htmlFor={`event-name-${intent}`}>Parent / Guardian Name</label>
+          <label htmlFor={ids.name}>
+            Parent / Guardian Name <span className="req" aria-hidden="true">*</span>
+          </label>
           <input
-            id={`event-name-${intent}`}
+            id={ids.name}
             name="name"
             type="text"
             autoComplete="name"
+            required
+            aria-required="true"
             aria-invalid={errors.name ? 'true' : undefined}
+            aria-describedby={errors.name ? `${ids.name}-error` : undefined}
             placeholder="Your name"
             disabled={sending}
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {errors.name && (
+            <span className="error" id={`${ids.name}-error`}>
+              {errors.name}
+            </span>
+          )}
         </div>
 
         <div className="field">
-          <label htmlFor={`event-email-${intent}`}>Email</label>
+          <label htmlFor={ids.email}>
+            Email <span className="req" aria-hidden="true">*</span>
+          </label>
           <input
-            id={`event-email-${intent}`}
+            id={ids.email}
             name="email"
             type="email"
             autoComplete="email"
+            required
+            aria-required="true"
             aria-invalid={errors.email ? 'true' : undefined}
+            aria-describedby={errors.email ? `${ids.email}-error` : undefined}
             placeholder="you@example.com"
             disabled={sending}
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {errors.email && (
+            <span className="error" id={`${ids.email}-error`}>
+              {errors.email}
+            </span>
+          )}
         </div>
 
         <div className="field">
-          <label htmlFor={`event-phone-${intent}`}>Phone</label>
+          <label htmlFor={ids.phone}>
+            Phone <span className="req" aria-hidden="true">*</span>
+          </label>
           <input
-            id={`event-phone-${intent}`}
+            id={ids.phone}
             name="phone"
             type="tel"
             autoComplete="tel"
+            required
+            aria-required="true"
             aria-invalid={errors.phone ? 'true' : undefined}
+            aria-describedby={errors.phone ? `${ids.phone}-error` : undefined}
             placeholder="(201) 555-0123"
             disabled={sending}
           />
-          {errors.phone && <span className="error">{errors.phone}</span>}
+          {errors.phone && (
+            <span className="error" id={`${ids.phone}-error`}>
+              {errors.phone}
+            </span>
+          )}
         </div>
 
         <div className="field">
-          <label htmlFor={`event-location-${intent}`}>Location</label>
+          <label htmlFor={ids.location}>Location</label>
           <select
-            id={`event-location-${intent}`}
+            id={ids.location}
             name="location"
             defaultValue={defaultLocation ?? ''}
             disabled={sending}
+            autoComplete="address-level2"
           >
             <option value="" disabled>
               Choose a location
@@ -238,22 +336,24 @@ export default function EventInquiryForm({
         {showChildFields && (
           <>
             <div className="field">
-              <label htmlFor={`event-child-${intent}`}>Child’s Name</label>
+              <label htmlFor={ids.child}>Child’s Name</label>
               <input
-                id={`event-child-${intent}`}
+                id={ids.child}
                 name="child_name"
                 type="text"
+                autoComplete="off"
                 placeholder="Child’s first name"
                 disabled={sending}
               />
             </div>
             <div className="field">
-              <label htmlFor={`event-age-${intent}`}>Child’s Age</label>
+              <label htmlFor={ids.age}>Child’s Age</label>
               <input
-                id={`event-age-${intent}`}
+                id={ids.age}
                 name="child_age"
                 type="text"
                 inputMode="numeric"
+                autoComplete="off"
                 placeholder={intent === 'summer-camp' ? 'Ages 3–12' : 'Age'}
                 disabled={sending}
               />
@@ -264,40 +364,43 @@ export default function EventInquiryForm({
         {showPartyFields && (
           <>
             <div className="field">
-              <label htmlFor={`event-child-bday-${intent}`}>Birthday Child’s Name</label>
+              <label htmlFor={ids.childBday}>Birthday Child’s Name</label>
               <input
-                id={`event-child-bday-${intent}`}
+                id={ids.childBday}
                 name="child_name"
                 type="text"
+                autoComplete="off"
                 placeholder="Birthday child’s name"
                 disabled={sending}
               />
             </div>
             <div className="field">
-              <label htmlFor={`event-age-bday-${intent}`}>Child’s Age</label>
+              <label htmlFor={ids.ageBday}>Child’s Age</label>
               <input
-                id={`event-age-bday-${intent}`}
+                id={ids.ageBday}
                 name="child_age"
                 type="text"
                 inputMode="numeric"
+                autoComplete="off"
                 placeholder="Turning…"
                 disabled={sending}
               />
             </div>
             <div className="field">
-              <label htmlFor={`event-date-${intent}`}>Preferred Date</label>
+              <label htmlFor={ids.date}>Preferred Date</label>
               <input
-                id={`event-date-${intent}`}
+                id={ids.date}
                 name="party_date"
                 type="text"
+                autoComplete="off"
                 placeholder="Date & time"
                 disabled={sending}
               />
             </div>
             <div className="field">
-              <label htmlFor={`event-guests-${intent}`}>Guests</label>
+              <label htmlFor={ids.guests}>Guests</label>
               <select
-                id={`event-guests-${intent}`}
+                id={ids.guests}
                 name="guests"
                 defaultValue=""
                 disabled={sending}
@@ -317,11 +420,12 @@ export default function EventInquiryForm({
 
         {showCampFields && (
           <div className="field field--full">
-            <label htmlFor={`event-weeks-${intent}`}>Preferred Weeks / Sessions</label>
+            <label htmlFor={ids.weeks}>Preferred Weeks / Sessions</label>
             <input
-              id={`event-weeks-${intent}`}
+              id={ids.weeks}
               name="preferred_weeks"
               type="text"
+              autoComplete="off"
               placeholder="e.g. Week of July 7, or any available week"
               disabled={sending}
             />
@@ -329,10 +433,11 @@ export default function EventInquiryForm({
         )}
 
         <div className="field field--full">
-          <label htmlFor={`event-message-${intent}`}>Message</label>
+          <label htmlFor={ids.message}>Message</label>
           <textarea
-            id={`event-message-${intent}`}
+            id={ids.message}
             name="message"
+            autoComplete="off"
             placeholder={
               intent === 'birthday'
                 ? 'Anything else we should know about the party…'
@@ -345,14 +450,9 @@ export default function EventInquiryForm({
         </div>
 
         <div className="field field--full">
-          {errors.form && (
-            <span className="error" role="alert" style={{ display: 'block', marginBottom: '0.75rem' }}>
-              {errors.form}
-            </span>
-          )}
           <button type="submit" className="btn btn--lg btn--block btn--gold" disabled={sending}>
             {sending ? 'Sending…' : copy.submit}{' '}
-            {!sending && <span className="btn__arrow">→</span>}
+            {!sending && <span className="btn__arrow" aria-hidden="true">→</span>}
           </button>
           <p className="form-reassure">{copy.reassure}</p>
         </div>

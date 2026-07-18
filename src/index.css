@@ -117,6 +117,48 @@ button {
   border-radius: 4px;
 }
 
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link — visible on keyboard focus */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  z-index: 200;
+  padding: 0.75rem 1.1rem;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 0 0 10px 10px;
+  transform: translateY(-120%);
+  transition: transform 0.2s var(--ease);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+main#main:focus {
+  outline: none;
+}
+main#main:focus-visible {
+  outline: none;
+}
+
 /* ---------- Layout ---------- */
 .container {
   width: 100%;
@@ -776,6 +818,31 @@ button {
   object-fit: cover;
   z-index: 0;
 }
+.hero__media-toggle {
+  position: absolute;
+  right: clamp(0.85rem, 3vw, 1.5rem);
+  bottom: clamp(0.85rem, 3vw, 1.5rem);
+  z-index: 3;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(10, 10, 10, 0.72);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.hero__media-toggle:hover {
+  background: rgba(10, 10, 10, 0.88);
+  border-color: #fff;
+}
+.hero__media-toggle:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 3px;
+}
 /* Functional legibility scrim (not a decorative gradient) */
 .hero__overlay {
   position: absolute;
@@ -991,6 +1058,17 @@ button {
   white-space: nowrap;
   width: max-content;
   animation: marquee 32s linear infinite;
+}
+.marquee__track--static {
+  animation: none;
+  flex-wrap: wrap;
+  white-space: normal;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  justify-content: center;
+  gap: 0.35rem 1.5rem;
+  padding: 0 1rem;
 }
 .marquee__track span {
   font-family: var(--font-display);
@@ -1964,12 +2042,10 @@ button {
 .faq__a {
   overflow: hidden;
   color: var(--muted);
-  max-height: 0;
-  transition: max-height 0.3s var(--ease), padding 0.3s var(--ease);
-}
-.faq__item.open .faq__a {
-  max-height: 220px;
   padding-bottom: 1.2rem;
+}
+.faq__a[hidden] {
+  display: none;
 }
 
 /* ---------- CTA banner ---------- */
@@ -2205,6 +2281,22 @@ button {
   .loc-card:hover,
   .pcard:hover .pcard__art {
     transform: none;
+  }
+  .hamburger span,
+  .mobile-nav,
+  .faq__icon,
+  .hero__scroll {
+    transition: none !important;
+  }
+  .hero__scroll {
+    display: none;
+  }
+  .j4k-confetti,
+  .fun-sticker,
+  .fun-sticker__peel,
+  .fun-sticker__sun-bob,
+  .fun-sticker__wave-line {
+    animation: none !important;
   }
 }
 
@@ -2660,5 +2752,73 @@ button {
   .fun-sticker__sun-bob,
   .fun-sticker__wave-line {
     animation: none;
+  }
+}
+
+/* Form a11y helpers */
+.req {
+  color: var(--red);
+  font-weight: 700;
+  margin-left: 0.15rem;
+}
+.form-instructions {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.form-error-summary {
+  margin: 0 0 1.1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  background: rgba(200, 16, 46, 0.08);
+}
+.form-error-summary__title {
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  color: var(--red-dark, var(--red));
+  font-size: 0.95rem;
+}
+.form-error-summary ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.form-error-summary a {
+  color: var(--red-dark, var(--red));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-success h3:focus {
+  outline: none;
+}
+.form-success h3:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.form-error-summary:focus {
+  outline: none;
+}
+.form-error-summary:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  width: 1px !important;
+}
+
+/* Closed mobile drawer: hide from pointer hit-testing even before JS inert */
+.mobile-nav:not(.is-open) {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (max-width: 1120px) {
+  .mobile-nav.is-open {
+    visibility: visible;
+    pointer-events: auto;
   }
 }

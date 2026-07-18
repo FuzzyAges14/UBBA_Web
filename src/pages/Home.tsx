@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import Placeholder from '../components/Placeholder'
 import LeadForm from '../components/LeadForm'
@@ -8,6 +8,7 @@ import Marquee from '../components/Marquee'
 import StatCounter from '../components/StatCounter'
 import Taegeuk from '../components/Taegeuk'
 import Faq from '../components/Faq'
+import HeroVideo from '../components/HeroVideo'
 import {
   HOME_PROGRAM_CARDS,
   LOCATIONS,
@@ -38,24 +39,21 @@ const PROGRAM_GLYPH: Record<string, string> = {
   'adult-martial-arts': '💪',
 }
 
+const staticFade = {
+  hidden: { opacity: 1, y: 0 },
+  show: { opacity: 1, y: 0, transition: { duration: 0 } },
+}
+
 export default function Home() {
   const locations = SITE.showGlenRock ? [...LOCATIONS, GLEN_ROCK] : LOCATIONS
+  const reduceMotion = useReducedMotion()
+  const heroMotion = reduceMotion ? staticFade : fadeUp
 
   return (
     <>
       {/* ---------- Hero (cinematic video) ---------- */}
-      <section className="hero">
-        <video
-          className="hero__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={IMAGES.heroPoster}
-          aria-hidden="true"
-        >
-          <source src={IMAGES.heroVideo} type="video/mp4" />
-        </video>
+      <section className="hero" aria-labelledby="home-hero-title">
+        <HeroVideo src={IMAGES.heroVideo} poster={IMAGES.heroPoster} />
         <div className="hero__overlay" aria-hidden="true" />
         <div className="dojang dojang--fade" aria-hidden="true" />
         <div className="container hero__inner">
@@ -63,29 +61,35 @@ export default function Home() {
             className="hero__badge"
             initial="hidden"
             animate="show"
-            variants={fadeUp}
+            variants={heroMotion}
           >
-            📍 Allendale &amp; Midland Park, NJ
+            <span aria-hidden="true">📍</span> Allendale &amp; Midland Park, NJ
           </motion.span>
-          <motion.h1 initial="hidden" animate="show" custom={1} variants={fadeUp}>
+          <motion.h1
+            id="home-hero-title"
+            initial="hidden"
+            animate="show"
+            custom={1}
+            variants={heroMotion}
+          >
             United <span className="accent accent--red">Black</span>{' '}
             <span className="accent">Belt</span> Academy
           </motion.h1>
-          <motion.h2
+          <motion.p
             className="hero__tagline"
             initial="hidden"
             animate="show"
             custom={2}
-            variants={fadeUp}
+            variants={heroMotion}
           >
             Confidence Building Martial Arts Classes in Allendale &amp; Midland Park
-          </motion.h2>
+          </motion.p>
           <motion.p
             className="hero__sub"
             initial="hidden"
             animate="show"
             custom={3}
-            variants={fadeUp}
+            variants={heroMotion}
           >
             We build confidence, discipline, focus, and real self-defense skills —
             for kids, teens, and adults. Train with a team that believes in you.
@@ -95,13 +99,13 @@ export default function Home() {
             initial="hidden"
             animate="show"
             custom={4}
-            variants={fadeUp}
+            variants={heroMotion}
           >
             <Link to="/contact" className="btn btn--lg">
-              {SITE.primaryCta} <span className="btn__arrow">→</span>
+              {SITE.primaryCta} <span className="btn__arrow" aria-hidden="true">→</span>
             </Link>
             <Link to="/programs/children" className="btn btn--ghost btn--lg">
-              Children's Programs
+              Children&apos;s Programs
             </Link>
             <Link to="/programs/adult" className="btn btn--ghost btn--lg">
               Adult Programs
@@ -112,16 +116,16 @@ export default function Home() {
             initial="hidden"
             animate="show"
             custom={5}
-            variants={fadeUp}
+            variants={heroMotion}
           >
             <span>
-              <span className="dot">★★★★★</span> Loved by local families
+              <span className="dot" aria-hidden="true">★★★★★</span> Loved by local families
             </span>
             <span>
-              <span className="dot">●</span> Ages 3 through adult
+              <span className="dot" aria-hidden="true">●</span> Ages 3 through adult
             </span>
             <span>
-              <span className="dot">●</span> {locations.length} convenient locations
+              <span className="dot" aria-hidden="true">●</span> {locations.length} convenient locations
             </span>
           </motion.div>
         </div>

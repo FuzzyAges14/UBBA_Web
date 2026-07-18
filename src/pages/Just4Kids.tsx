@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import MediaFrame from '../components/MediaFrame'
 import SectionSeam from '../components/SectionSeam'
@@ -39,7 +39,15 @@ const fadeUp = {
   }),
 }
 
+const staticFade = {
+  hidden: { opacity: 1, y: 0 },
+  show: { opacity: 1, y: 0, transition: { duration: 0 } },
+}
+
 export default function Just4Kids() {
+  const reduceMotion = useReducedMotion()
+  const heroMotion = reduceMotion ? staticFade : fadeUp
+
   return (
     <>
       <section className="j4k-hero j4k-hero--splash">
@@ -56,11 +64,11 @@ export default function Just4Kids() {
             custom={0}
             initial="hidden"
             animate="show"
-            variants={fadeUp}
+            variants={heroMotion}
           >
             {SITE.shortName}
           </motion.p>
-          <motion.h1 custom={1} initial="hidden" animate="show" variants={fadeUp}>
+          <motion.h1 custom={1} initial="hidden" animate="show" variants={heroMotion}>
             The fun doesn&apos;t stop at the mat!
           </motion.h1>
           <motion.p
@@ -68,7 +76,7 @@ export default function Just4Kids() {
             custom={2}
             initial="hidden"
             animate="show"
-            variants={fadeUp}
+            variants={heroMotion}
           >
             Birthday bashes, summer adventures, and pizza-powered parents&apos; nights out — packed
             with awesome activities kids love.
@@ -78,10 +86,10 @@ export default function Just4Kids() {
             custom={3}
             initial="hidden"
             animate="show"
-            variants={fadeUp}
+            variants={heroMotion}
           >
             <Link to="/just-4-kids/birthday-parties" className="btn btn--gold btn--lg">
-              Book a Birthday <span className="btn__arrow">→</span>
+              Book a Birthday <span className="btn__arrow" aria-hidden="true">→</span>
             </Link>
             <Link to="/just-4-kids/summer-camp" className="btn btn--outline btn--lg">
               Explore Camp
