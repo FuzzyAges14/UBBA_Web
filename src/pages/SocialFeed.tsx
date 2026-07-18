@@ -46,7 +46,7 @@ export default function SocialFeed() {
             <div className="mt" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
               <a
                 href={network.href}
-                className="btn btn--gold"
+                className="btn btn--blue"
                 title={
                   network.placeholder
                     ? `${network.label} profile (link pending)`

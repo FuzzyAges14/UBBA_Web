@@ -19,7 +19,7 @@ export default function FinalCtaSection() {
               class in Allendale or Midland Park. The first step is simple.
             </p>
             <div className="flex-actions" style={{ justifyContent: 'center' }}>
-              <Link to="/contact" className="btn btn--gold btn--lg">
+              <Link to="/contact" className="btn btn--blue btn--lg">
                 {SITE.primaryCta} <span className="btn__arrow">→</span>
               </Link>
               <Link to="/locations/allendale" className="btn btn--ghost btn--lg">

@@ -88,7 +88,7 @@ export default function Just4Kids() {
             animate="show"
             variants={heroMotion}
           >
-            <Link to="/just-4-kids/birthday-parties" className="btn btn--gold btn--lg">
+            <Link to="/just-4-kids/birthday-parties" className="btn btn--blue btn--lg">
               Book a Birthday <span className="btn__arrow" aria-hidden="true">→</span>
             </Link>
             <Link to="/just-4-kids/summer-camp" className="btn btn--outline btn--lg">
@@ -148,7 +148,7 @@ export default function Just4Kids() {
                       {prog.title}
                     </h3>
                     <p>{prog.blurb}</p>
-                    <Link to={prog.to} className="btn btn--gold mt-sm">
+                    <Link to={prog.to} className="btn btn--blue mt-sm">
                       {prog.ctaLabel} <span className="btn__arrow">→</span>
                     </Link>
                   </div>
