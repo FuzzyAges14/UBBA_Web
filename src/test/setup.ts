@@ -23,10 +23,13 @@ if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
 }
 
 // Quiet jsdom gaps used by hero video + route scroll manager.
+// jsdom ships a scrollTo stub that throws "Not implemented" — always replace it.
 if (typeof window !== 'undefined') {
-  if (typeof window.scrollTo !== 'function') {
-    window.scrollTo = () => undefined
-  }
+  Object.defineProperty(window, 'scrollTo', {
+    value: () => undefined,
+    writable: true,
+    configurable: true,
+  })
   const mediaProto = window.HTMLMediaElement?.prototype as HTMLMediaElement & {
     __ubbaPlayStubbed?: boolean
   }

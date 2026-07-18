@@ -98,4 +98,62 @@ describe('EventInquiryForm', () => {
     expect(screen.getByText(/please enter your full name/i)).toBeInTheDocument()
     expect(fetch).not.toHaveBeenCalled()
   })
+
+  it('rejects an invalid email on event inquiry', async () => {
+    const user = userEvent.setup()
+    renderForm('birthday')
+
+    await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
+    await user.type(screen.getByLabelText(/^email/i), 'not-valid')
+    await user.type(screen.getByLabelText(/^phone/i), '2015559999')
+    await user.click(screen.getByRole('button', { name: /schedule my party/i }))
+
+    expect(screen.getByText(/valid email/i)).toBeInTheDocument()
+    expect(fetch).not.toHaveBeenCalled()
+  })
+
+  it('shows an error when the event API fails', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: false,
+        json: async () => ({ ok: false, error: 'Could not send your request.' }),
+      }),
+    )
+    const user = userEvent.setup()
+    renderForm('parents-night-out')
+
+    await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
+    await user.type(screen.getByLabelText(/^email/i), 'sam@example.com')
+    await user.type(screen.getByLabelText(/^phone/i), '2015559999')
+    await user.click(screen.getByRole('button', { name: /save a spot/i }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toHaveTextContent(/could not send/i)
+    })
+  })
+
+  it('posts a Parents Night Out inquiry', async () => {
+    const user = userEvent.setup()
+    renderForm('parents-night-out')
+
+    await user.type(screen.getByLabelText(/parent \/ guardian name/i), 'Sam Parent')
+    await user.type(screen.getByLabelText(/^email/i), 'sam@example.com')
+    await user.type(screen.getByLabelText(/^phone/i), '2015559999')
+    await user.type(screen.getByLabelText(/child’s name/i), 'Alex')
+    await user.type(screen.getByLabelText(/child’s age/i), '6')
+    await user.click(screen.getByRole('button', { name: /save a spot/i }))
+
+    await waitFor(() => {
+      expect(screen.getByText(/you.?re on the list/i)).toBeInTheDocument()
+    })
+
+    const body = JSON.parse((fetch as ReturnType<typeof vi.fn>).mock.calls[0][1].body as string)
+    expect(body).toMatchObject({
+      intent: 'parents-night-out',
+      childName: 'Alex',
+      childAge: '6',
+      program: "Parents' Night Out",
+    })
+  })
 })

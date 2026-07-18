@@ -160,6 +160,25 @@ describe('parseLeadPayload', () => {
     expect(lead?.name).toBe('JaneDoe')
     expect(lead?.message).toBe('Helloworld')
   })
+
+  it('rejects non-object bodies', () => {
+    expect(parseLeadPayload(null).error).toMatch(/invalid json/i)
+    expect(parseLeadPayload('string').error).toMatch(/invalid json/i)
+  })
+
+  it('trims and keeps optional fields undefined when blank', () => {
+    const { lead, error } = parseLeadPayload({
+      name: '  Pat  ',
+      email: 'pat@example.com',
+      phone: '2015550000',
+      location: '   ',
+      message: '',
+    })
+    expect(error).toBeUndefined()
+    expect(lead?.name).toBe('Pat')
+    expect(lead?.location).toBeUndefined()
+    expect(lead?.message).toBeUndefined()
+  })
 })
 
 describe('submitLead', () => {
