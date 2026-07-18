@@ -652,10 +652,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 38%;
   transition: transform 0.5s var(--ease);
 }
 .feature:hover .feature__img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .feature__body {
   z-index: 1;
