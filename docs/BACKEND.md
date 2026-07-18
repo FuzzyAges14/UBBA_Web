@@ -82,6 +82,27 @@ The marketing site can stay on Netlify/Vercel as a static build. Host the API (`
 
 Without mail credentials the API still accepts requests and logs the formatted email — useful for staging.
 
+## Security configuration (production)
+
+| Variable | Purpose |
+| --- | --- |
+| `CORS_ORIGINS` | Comma-separated browser origins allowed to `POST /api/leads`. **Required in production** when browsers send `Origin` — an empty list rejects those requests (no silent allow-all). |
+| `TRUST_PROXY` | Set `1` / `true` behind Render, Railway, Fly, nginx, etc. so per-IP rate limits use the real client address. |
+| `RATE_LIMIT_MAX` | Max lead posts per IP per window (default `30`). |
+| `RATE_LIMIT_WINDOW_MS` | Window length in ms (default `900000` = 15 minutes). |
+| `MIN_FORM_MS` | Minimum time between form open and submit (default `2000`). Faster posts are treated as spam (silent success). |
+| `CAPTCHA_SECRET` or `TURNSTILE_SECRET_KEY` | Optional. When set, `/api/leads` requires a valid `captchaToken`. Leave unset for the default CAPTCHA-free form. |
+
+The API also sets Helmet security headers, validates/length-limits every lead field, rejects unknown JSON keys, strips control characters from email subjects, and never lets the client choose mail recipients.
+
+### Proxy + CORS checklist
+
+1. Set `NODE_ENV=production` on the host.
+2. Set `CORS_ORIGINS=https://your-domain.com,https://www.your-domain.com`.
+3. If the API is behind a reverse proxy, set `TRUST_PROXY=1`.
+4. Confirm a real form submit still delivers mail (or logs in staging).
+5. Confirm a second origin (or curl with a fake `Origin`) receives `403` when not listed.
+
 ## Add another request type later
 
 1. Add a key to `INQUIRY_TYPES` in `src/data/contact.ts`.
