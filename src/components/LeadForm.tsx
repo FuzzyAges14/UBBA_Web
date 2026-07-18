@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LOCATIONS, PROGRAM_OPTIONS, GLEN_ROCK, SITE } from '../data/site'
 import { submitLead } from '../lib/submitLead'
@@ -14,6 +14,7 @@ const locationChoices = [
 
 export default function LeadForm({ defaultLocation }: { defaultLocation?: string }) {
   const location = useLocation()
+  const formStartedAt = useRef(Date.now())
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
@@ -50,6 +51,7 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
         message: String(data.get('message') ?? '').trim() || undefined,
         website: String(data.get('website') ?? '').trim() || undefined,
         source: location.pathname || '/',
+        formStartedAt: formStartedAt.current,
       })
       if (!result.ok) {
         setErrors({ form: result.error || 'Could not send your request.' })
@@ -57,6 +59,7 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
       }
       setSubmitted(true)
       form.reset()
+      formStartedAt.current = Date.now()
     } catch {
       setErrors({
         form: 'Could not reach the server. Please try again or call us.',
@@ -79,7 +82,10 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
           <button
             type="button"
             className="btn btn--outline mt"
-            onClick={() => setSubmitted(false)}
+            onClick={() => {
+              formStartedAt.current = Date.now()
+              setSubmitted(false)
+            }}
           >
             Send another request
           </button>

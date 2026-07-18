@@ -17,6 +17,10 @@ export type LeadFormValues = {
   source?: string
   /** Honeypot — leave empty */
   website?: string
+  /** Epoch ms when the form mounted — used server-side for timing spam checks */
+  formStartedAt?: number
+  /** Optional CAPTCHA token when the site wires a widget + CAPTCHA_SECRET */
+  captchaToken?: string
 }
 
 export type SubmitLeadResponse = {
