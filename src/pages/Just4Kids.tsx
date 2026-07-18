@@ -2,16 +2,32 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import MediaFrame from '../components/MediaFrame'
-import EventInquiryForm from '../components/EventInquiryForm'
-import Faq from '../components/Faq'
-import CtaBanner from '../components/CtaBanner'
-import { JUST_4_KIDS, PARENTS_NIGHT_OUT, SITE } from '../data/site'
+import { JUST_4_KIDS, SITE } from '../data/site'
+import type { FunStickerKind } from '../components/FunSticker'
 
 const STEPS = [
   { t: 'Select Program', d: 'Pick a birthday bash, summer camp, or parents’ night out.' },
   { t: 'Enroll Your Child', d: 'Send a quick inquiry — we’ll help you lock in the details.' },
   { t: 'Let The Fun Begin!', d: 'Drop off and relax while our team delivers the laughs.' },
 ]
+
+const TILE_STICKERS: Record<
+  string,
+  { kind: FunStickerKind; spot?: 'tl' | 'tr' | 'bl' | 'br'; rotate?: number; delay?: number }[]
+> = {
+  'birthday-parties': [
+    { kind: 'cake', spot: 'tr', rotate: -12, delay: 0 },
+    { kind: 'balloon', spot: 'bl', rotate: 8, delay: 0.4 },
+  ],
+  'summer-camp': [
+    { kind: 'wave', spot: 'tr', rotate: 4, delay: 0 },
+    { kind: 'sun', spot: 'bl', rotate: -10, delay: 0.3 },
+  ],
+  'parents-night-out': [
+    { kind: 'pizza', spot: 'tr', rotate: -8, delay: 0 },
+    { kind: 'glasses', spot: 'bl', rotate: 10, delay: 0.35 },
+  ],
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -108,11 +124,9 @@ export default function Just4Kids() {
               <Reveal key={prog.id} delay={i * 80}>
                 <article className="j4k-tile">
                   <MediaFrame
-                    src={prog.image}
-                    alt={prog.title}
-                    sticker={prog.sticker}
-                    stickerTone={i === 1 ? 'blue' : i === 2 ? 'cream' : 'gold'}
-                    stickerRotate={i % 2 === 0 ? -10 : 9}
+                    label={prog.title}
+                    icon={prog.icon}
+                    stickers={TILE_STICKERS[prog.id] ?? []}
                   />
                   <div className="j4k-tile__body">
                     <span className="card__ages">{prog.tag}</span>
@@ -131,46 +145,6 @@ export default function Just4Kids() {
           </div>
         </div>
       </section>
-
-      <section className="section" id="parents-night-out">
-        <div className="container j4k-form-layout">
-          <Reveal>
-            <span className="card__ages">{PARENTS_NIGHT_OUT.tag}</span>
-            <h2 className="section-title" style={{ marginTop: '0.6rem' }}>
-              {PARENTS_NIGHT_OUT.headline}
-            </h2>
-            <p className="section-lead">{PARENTS_NIGHT_OUT.blurb}</p>
-            <MediaFrame
-              src={PARENTS_NIGHT_OUT.image}
-              alt="Kids having fun at Parents' Night Out"
-              sticker={PARENTS_NIGHT_OUT.sticker}
-              stickerTone="cream"
-              stickerRotate={-8}
-              className="mt"
-            />
-            <ul className="checklist mt">
-              {PARENTS_NIGHT_OUT.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-            <div className="mt">
-              <Faq items={[...PARENTS_NIGHT_OUT.faqs]} />
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <EventInquiryForm intent="parents-night-out" />
-          </Reveal>
-        </div>
-      </section>
-
-      <CtaBanner
-        title="Plan something unforgettable"
-        text="Book a party, reserve a camp spot, or join the next parents' night out — kids have a blast, and you get the easy version of planning."
-        primaryTo="/just-4-kids/birthday-parties#birthday-inquiry"
-        primaryLabel="Schedule a Party"
-        secondaryTo="/just-4-kids/summer-camp#camp-inquiry"
-        secondaryLabel="Reserve Camp"
-      />
     </>
   )
 }

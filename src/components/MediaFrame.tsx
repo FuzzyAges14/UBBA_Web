@@ -1,35 +1,34 @@
-import type { ReactNode } from 'react'
-import Sticker from './Sticker'
+import Placeholder from './Placeholder'
+import FunSticker, { type FunStickerKind } from './FunSticker'
 
 type MediaFrameProps = {
-  src: string
-  alt: string
-  sticker?: string
-  stickerTone?: 'red' | 'blue' | 'gold' | 'cream'
-  stickerRotate?: number
+  label: string
+  icon?: string
+  stickers?: { kind: FunStickerKind; spot?: 'tl' | 'tr' | 'bl' | 'br'; rotate?: number; delay?: number }[]
   className?: string
-  children?: ReactNode
+  variant?: 'tall' | 'wide' | 'default'
 }
 
-/** Image frame with an optional side sticker for Just 4 Kids pages. */
+/** Placeholder media with optional peeling visual stickers for Just 4 Kids. */
 export default function MediaFrame({
-  src,
-  alt,
-  sticker,
-  stickerTone = 'gold',
-  stickerRotate = -10,
+  label,
+  icon = '🎉',
+  stickers = [],
   className = '',
-  children,
+  variant = 'wide',
 }: MediaFrameProps) {
   return (
     <div className={`media-frame ${className}`.trim()}>
-      <img src={src} alt={alt} className="media-frame__img" loading="lazy" />
-      {sticker && (
-        <Sticker tone={stickerTone} rotate={stickerRotate} className="media-frame__sticker">
-          {sticker}
-        </Sticker>
-      )}
-      {children}
+      <Placeholder label={label} icon={icon} variant={variant} />
+      {stickers.map((s) => (
+        <FunSticker
+          key={`${s.kind}-${s.spot ?? 'tr'}`}
+          kind={s.kind}
+          spot={s.spot}
+          rotate={s.rotate}
+          delay={s.delay}
+        />
+      ))}
     </div>
   )
 }

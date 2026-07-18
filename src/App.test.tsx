@@ -65,6 +65,15 @@ describe('App routing', () => {
     expect(screen.getByText(/what to bring/i)).toBeInTheDocument()
   })
 
+  it("renders the Parents' Night Out detail page with inquiry form", () => {
+    renderAt('/just-4-kids/parents-night-out')
+    expect(
+      screen.getByRole('heading', { name: /fun for kids\. relaxation for you/i, level: 1 }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /save a spot/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /^spots fill fast$/i })).toBeInTheDocument()
+  })
+
   it('keeps Just 4 Kids in Programs and links Follow Us to its own page', () => {
     renderAt('/')
 
@@ -90,7 +99,7 @@ describe('App routing', () => {
     )
     expect(within(panel).getByRole('link', { name: /parents' night out/i })).toHaveAttribute(
       'href',
-      '/just-4-kids#parents-night-out',
+      '/just-4-kids/parents-night-out',
     )
   })
 

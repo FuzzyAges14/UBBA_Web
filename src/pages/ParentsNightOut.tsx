@@ -6,9 +6,9 @@ import MediaFrame from '../components/MediaFrame'
 import EventInquiryForm from '../components/EventInquiryForm'
 import { getJust4KidsDetail } from '../data/site'
 
-export default function SummerCamp() {
-  const detail = getJust4KidsDetail('summer-camp')!
-  const formId = 'camp-inquiry'
+export default function ParentsNightOut() {
+  const detail = getJust4KidsDetail('parents-night-out')!
+  const formId = 'pno-inquiry'
 
   return (
     <>
@@ -16,7 +16,7 @@ export default function SummerCamp() {
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'Just 4 Kids', to: '/just-4-kids' },
-          { label: 'Summer Camp' },
+          { label: "Parents' Night Out" },
         ]}
         title={detail.heroTitle}
         intro={detail.heroIntro}
@@ -31,12 +31,12 @@ export default function SummerCamp() {
         </div>
       </PageHero>
 
-      <section className="section j4k-surface j4k-surface--sun">
+      <section className="section j4k-surface">
         <div className="j4k-confetti" aria-hidden="true" />
         <div className="container">
           <Reveal>
-            <span className="eyebrow">Campers Will</span>
-            <h2 className="section-title">Our summer camps are packed with fun</h2>
+            <span className="eyebrow">Kids Will</span>
+            <h2 className="section-title">Friday night energy, zero parent stress</h2>
           </Reveal>
           <div className="j4k-will mt">
             {detail.kidsWill.map((item, i) => (
@@ -57,25 +57,25 @@ export default function SummerCamp() {
         <div className="container split">
           <Reveal>
             <MediaFrame
-              label="Summer camp photo — coming soon"
+              label="Parents' Night Out photo — coming soon"
               icon={detail.mediaIcon}
               stickers={[
-                { kind: 'wave', spot: 'tr', rotate: 3, delay: 0 },
-                { kind: 'palm', spot: 'bl', rotate: -8, delay: 0.25 },
-                { kind: 'sun', spot: 'br', rotate: 12, delay: 0.55 },
+                { kind: 'pizza', spot: 'tr', rotate: -10, delay: 0 },
+                { kind: 'glasses', spot: 'bl', rotate: 8, delay: 0.3 },
+                { kind: 'sparkle', spot: 'br', rotate: -6, delay: 0.6 },
               ]}
             />
           </Reveal>
           <Reveal delay={80}>
             <span className="card__ages">{detail.tag}</span>
             <h2 className="section-title" style={{ marginTop: '0.6rem' }}>
-              Summertime is fun time — and learning time
+              Drop them off. Enjoy your night.
             </h2>
             <p className="section-lead">
-              Kids enjoy games, projects, and outings plus life-enriching skills: self-confidence,
-              respect, self-control, and friendship. No martial arts experience necessary.
+              Once a month on a Friday, kids get games, laughter, and pizza while you get a real
+              night off. Open to non-students — bring friends!
             </p>
-            <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>What’s in a camp day</h3>
+            <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>What the evening looks like</h3>
             <ul className="checklist mt-sm">
               {detail.activities.map((a) => (
                 <li key={a}>{a}</li>
@@ -86,37 +86,19 @@ export default function SummerCamp() {
       </section>
 
       <section className="section section--offwhite">
-        <div className="container j4k-pack">
+        <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
-            <div>
-              <span className="eyebrow">Weekly Themes</span>
-              <h2 className="section-title">Built for imagination</h2>
-              <ul className="checklist mt">
-                {(detail.weekNotes ?? []).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <ul className="checklist mt-sm">
-                {detail.includes.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="ph-note mt-sm">
-                Camp dates, weekly themes &amp; pricing — pending seasonal owner confirmation.
-                Inquire for the current schedule.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={90}>
-            <div>
-              <span className="eyebrow">Pack List</span>
-              <h2 className="section-title">What to bring</h2>
-              <ul className="checklist mt">
-                {(detail.whatToBring ?? []).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
+            <span className="eyebrow">The Night Includes</span>
+            <h2 className="section-title">Easy for parents</h2>
+            <ul className="checklist mt">
+              {detail.includes.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="ph-note mt-sm">
+              Next date &amp; pricing — pending owner confirmation. Inquire to get the upcoming
+              Friday details.
+            </p>
           </Reveal>
         </div>
       </section>
@@ -124,25 +106,25 @@ export default function SummerCamp() {
       <section className="section" id={formId}>
         <div className="container j4k-form-layout">
           <Reveal>
-            <span className="eyebrow">Getting Started Is Easy</span>
-            <h2 className="section-title">Reserve your child’s spot</h2>
+            <span className="eyebrow">Reserve Early</span>
+            <h2 className="section-title">Spots fill fast</h2>
             <ol className="j4k-easy mt">
               <li>
-                <strong>Enter your info</strong>
-                <span>Tell us who you’re signing up.</span>
+                <strong>Tell us who&apos;s coming</strong>
+                <span>How many kids — and which location.</span>
               </li>
               <li>
-                <strong>Enroll your child</strong>
-                <span>We’ll confirm dates and details.</span>
+                <strong>We confirm the Friday</strong>
+                <span>You’ll get the next date and details.</span>
               </li>
               <li>
-                <strong>Begin summer camp</strong>
-                <span>Drop off and let the fun begin!</span>
+                <strong>Drop off &amp; unwind</strong>
+                <span>Pizza, games, and supervised fun await.</span>
               </li>
             </ol>
           </Reveal>
           <Reveal delay={100}>
-            <EventInquiryForm intent="summer-camp" />
+            <EventInquiryForm intent="parents-night-out" />
           </Reveal>
         </div>
       </section>
@@ -151,7 +133,7 @@ export default function SummerCamp() {
         <div className="container" style={{ maxWidth: '820px' }}>
           <Reveal>
             <span className="eyebrow">FAQs</span>
-            <h2 className="section-title">Summer camp questions</h2>
+            <h2 className="section-title">Parents&apos; Night Out questions</h2>
           </Reveal>
           <Reveal delay={80}>
             <div className="mt">

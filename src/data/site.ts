@@ -191,9 +191,7 @@ export type Just4KidsOffering = {
   blurb: string
   to: string
   icon: string
-  sticker: string
   ctaLabel: string
-  image: string
 }
 
 /** Hub tiles for the Just 4 Kids overview page. */
@@ -206,9 +204,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
       'Jam-packed martial arts parties with games, board breaks, and cool moves — fully supervised so the birthday kid is the star.',
     to: '/just-4-kids/birthday-parties',
     icon: '🎂',
-    sticker: 'Board Break!',
     ctaLabel: 'Plan a Party',
-    image: IMAGES.kidsGroup,
   },
   {
     id: 'summer-camp',
@@ -218,9 +214,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
       'Themes, crafts, games, and martial arts all summer long — the action-packed camp kids beg to come back to.',
     to: '/just-4-kids/summer-camp',
     icon: '☀️',
-    sticker: 'Most Exciting Summer!',
     ctaLabel: 'Reserve a Spot',
-    image: IMAGES.kidsKicks,
   },
   {
     id: 'parents-night-out',
@@ -228,11 +222,9 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     tag: 'Monthly Friday',
     blurb:
       'Games, laughter, and pizza once a month on a Friday. Open to non-students — bring a friend and enjoy a night off.',
-    to: '/just-4-kids#parents-night-out',
+    to: '/just-4-kids/parents-night-out',
     icon: '🍕',
-    sticker: 'Pizza Night!',
     ctaLabel: 'Save a Spot',
-    image: IMAGES.teenSpar,
   },
 ]
 
@@ -251,8 +243,7 @@ export type Just4KidsDetail = {
   faqs: Faq[]
   formIntent: EventInquiryIntent
   ctaLabel: string
-  image: string
-  sticker: string
+  mediaIcon: string
 }
 
 export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
@@ -311,8 +302,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     ],
     formIntent: 'birthday',
     ctaLabel: 'Schedule My Party',
-    image: IMAGES.kidsGroup,
-    sticker: 'Fun & Awesome!',
+    mediaIcon: '🎂',
   },
   'summer-camp': {
     slug: 'summer-camp',
@@ -370,43 +360,54 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     ],
     formIntent: 'summer-camp',
     ctaLabel: 'Reserve a Spot',
-    image: IMAGES.kidsKicks,
-    sticker: 'Camp Vibes!',
+    mediaIcon: '☀️',
+  },
+  'parents-night-out': {
+    slug: 'parents-night-out',
+    name: "Parents' Night Out",
+    tag: 'Monthly Friday · All ages',
+    heroTitle: 'Fun for kids. Relaxation for you.',
+    heroIntro:
+      'Need a break? Drop the kids for an evening packed with games, laughter, and delicious pizza while you enjoy a well-deserved night off.',
+    kidsWill: [
+      { label: 'Play games all night', icon: '🎮' },
+      { label: 'Share pizza & laughs', icon: '🍕' },
+      { label: 'Make Friday memories', icon: '✨' },
+    ],
+    activities: [
+      'Supervised games and free play',
+      'Pizza dinner with the group',
+      'Laughs with friends — students and non-students welcome',
+      'A calm, structured evening so parents can actually go out',
+    ],
+    includes: [
+      'Held once a month on a Friday',
+      'Open to non-students — bring friends!',
+      'Games, laughter, and pizza',
+      'Spots fill fast — reserve early',
+    ],
+    faqs: [
+      {
+        q: 'Who can attend Parents’ Night Out?',
+        a: 'It’s open to students and non-students. Friends are welcome — just reserve a spot so we can plan pizza and activities.',
+      },
+      {
+        q: 'When is the next Parents’ Night Out?',
+        a: 'We host it monthly on a Friday. Send an inquiry (or call) and we’ll share the next date and details for your preferred location.',
+      },
+      {
+        q: 'What should kids bring?',
+        a: 'Just comfortable clothes and a good appetite. We’ll confirm anything location-specific when we lock in your spot.',
+      },
+    ],
+    formIntent: 'parents-night-out',
+    ctaLabel: 'Save a Spot',
+    mediaIcon: '🍕',
   },
 }
 
 export function getJust4KidsDetail(slug: string): Just4KidsDetail | undefined {
   return JUST_4_KIDS_DETAILS[slug]
-}
-
-/** Parents' Night Out lives on the hub (no separate original-site page). */
-export const PARENTS_NIGHT_OUT = {
-  id: 'parents-night-out',
-  title: "Parents' Night Out",
-  tag: 'Monthly Friday · All ages',
-  headline: 'Fun for kids. Relaxation for you.',
-  blurb:
-    'Need a break? Drop the kids for an evening packed with games, laughter, and delicious pizza while you enjoy a well-deserved night off.',
-  highlights: [
-    'Held once a month on a Friday',
-    'Open to non-students — bring friends!',
-    'Games, laughter, and pizza included',
-    'Spots fill fast — reserve early',
-  ],
-  faqs: [
-    {
-      q: 'Who can attend Parents’ Night Out?',
-      a: 'It’s open to students and non-students. Friends are welcome — just reserve a spot so we can plan pizza and activities.',
-    },
-    {
-      q: 'When is the next Parents’ Night Out?',
-      a: 'We host it monthly on a Friday. Send an inquiry (or call) and we’ll share the next date and details for your preferred location.',
-    },
-  ] satisfies Faq[],
-  formIntent: 'parents-night-out' as EventInquiryIntent,
-  ctaLabel: 'Save a Spot',
-  image: IMAGES.teenSpar,
-  sticker: 'Pizza Night!',
 }
 
 export const VALUES = [
@@ -717,7 +718,7 @@ export const MEGA_MENU: MegaGroup[] = [
     links: [
       { label: 'Birthday Parties', to: '/just-4-kids/birthday-parties' },
       { label: 'Summer / Day Camp', to: '/just-4-kids/summer-camp' },
-      { label: "Parents' Night Out", to: '/just-4-kids#parents-night-out' },
+      { label: "Parents' Night Out", to: '/just-4-kids/parents-night-out' },
     ],
   },
 ]
@@ -934,6 +935,11 @@ export const SEO: Record<string, SeoMeta> = {
     title: 'Summer Camp | United Black Belt Academy',
     description:
       'Action-packed martial arts summer camp for ages 3–12 in Bergen County, NJ — themes, crafts, games, and confidence-building fun.',
+  },
+  '/just-4-kids/parents-night-out': {
+    title: "Parents' Night Out | United Black Belt Academy",
+    description:
+      'Monthly Friday Parents’ Night Out in Bergen County, NJ — games, pizza, and supervised fun while parents enjoy a night off.',
   },
   '/follow-us': {
     title: 'Follow Us — Instagram & Facebook | United Black Belt Academy',

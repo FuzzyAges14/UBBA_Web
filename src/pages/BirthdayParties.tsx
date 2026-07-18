@@ -4,7 +4,6 @@ import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
 import EventInquiryForm from '../components/EventInquiryForm'
-import CtaBanner from '../components/CtaBanner'
 import { getJust4KidsDetail } from '../data/site'
 
 export default function BirthdayParties() {
@@ -58,11 +57,13 @@ export default function BirthdayParties() {
         <div className="container split">
           <Reveal>
             <MediaFrame
-              src={detail.image}
-              alt="Kids celebrating at a martial arts birthday party"
-              sticker={detail.sticker}
-              stickerTone="gold"
-              stickerRotate={-12}
+              label="Birthday party photo — coming soon"
+              icon={detail.mediaIcon}
+              stickers={[
+                { kind: 'cake', spot: 'tr', rotate: -14, delay: 0 },
+                { kind: 'shades', spot: 'bl', rotate: 10, delay: 0.35 },
+                { kind: 'balloon', spot: 'br', rotate: -6, delay: 0.7 },
+              ]}
             />
           </Reveal>
           <Reveal delay={80}>
@@ -159,15 +160,6 @@ export default function BirthdayParties() {
           </Reveal>
         </div>
       </section>
-
-      <CtaBanner
-        title="Don’t wait until the last minute"
-        text="Everyone loves martial arts birthday parties — book in advance and just handle the who and when."
-        primaryTo={`#${formId}`}
-        primaryLabel={detail.ctaLabel}
-        secondaryTo="/just-4-kids"
-        secondaryLabel="Back to Just 4 Kids"
-      />
     </>
   )
 }
