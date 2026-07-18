@@ -157,6 +157,22 @@
     rgba(10, 10, 10, 0.15) 55%,
     rgba(10, 10, 10, 0.5) 100%
   );
+  pointer-events: none;
+}
+/* Soft low-opacity wash that animates in with the hover description so
+   body copy stays legible over busy photo backgrounds. */
+.pcard__scrim::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(10, 10, 10, 0.5) 0%,
+    rgba(10, 10, 10, 0.22) 48%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
 }
 .pcard__glyph {
   position: absolute;
@@ -205,6 +221,10 @@
     max-height: 140px;
     opacity: 1;
   }
+  .pcard:hover .pcard__scrim::after,
+  .pcard:focus-within .pcard__scrim::after {
+    opacity: 1;
+  }
 }
 @media (max-width: 620px) {
   .pcard {
@@ -215,6 +235,9 @@
 @media (hover: none) {
   .pcard__text {
     max-height: 140px;
+    opacity: 1;
+  }
+  .pcard__scrim::after {
     opacity: 1;
   }
 }
