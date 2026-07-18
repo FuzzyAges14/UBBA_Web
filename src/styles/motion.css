@@ -28,7 +28,13 @@
   .pill:hover,
   .loc-card:hover,
   .pcard:hover .pcard__art,
-  .pcard:hover .pcard__img {
+  .pcard:hover .pcard__img,
+  .home-program-row:hover,
+  .home-feature:hover .feature__img {
+    transform: none;
+  }
+  .home-feature:hover .home-feature__cta .btn__arrow,
+  .home-program-row:hover .home-program-row__arrow {
     transform: none;
   }
   .hamburger span,

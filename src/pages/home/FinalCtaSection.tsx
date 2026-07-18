@@ -8,27 +8,31 @@ import { SITE } from '../../data/site'
  */
 export default function FinalCtaSection() {
   return (
-    <section className="section">
+    <section className="home-final-cta" aria-labelledby="home-final-cta-title">
+      <div className="dojang" aria-hidden="true" />
       <div className="container">
         <Reveal>
-          <div className="cta-banner">
-            <div className="dojang" aria-hidden="true" />
-            <h2>Confidence starts with one class</h2>
+          <div className="cta-banner cta-banner--bleed">
+            <h2 id="home-final-cta-title">Confidence starts with one class</h2>
             <p>
               Beginners are welcome — kids, teens, and adults can start with a free
               class in Allendale or Midland Park. The first step is simple.
             </p>
-            <div className="flex-actions" style={{ justifyContent: 'center' }}>
+            <div className="flex-actions home-final-cta__actions">
               <Link to="/contact" className="btn btn--gold btn--lg">
                 {SITE.primaryCta} <span className="btn__arrow">→</span>
               </Link>
               <Link to="/locations/allendale" className="btn btn--ghost btn--lg">
-                Allendale
-              </Link>
-              <Link to="/locations/midland-park" className="btn btn--ghost btn--lg">
-                Midland Park
+                Allendale school
               </Link>
             </div>
+            <p className="home-final-cta__secondary">
+              Or visit our{' '}
+              <Link to="/locations/midland-park" className="text-link text-link--on-red">
+                Midland Park location
+              </Link>
+              .
+            </p>
           </div>
         </Reveal>
       </div>

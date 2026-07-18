@@ -107,3 +107,36 @@
 .btn--block {
   width: 100%;
 }
+
+/* Text links — underline growth, keyboard-visible */
+.text-link {
+  color: var(--red);
+  font-weight: 600;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 2px;
+  transition: background-size 0.25s var(--ease), color 0.2s var(--ease);
+}
+.text-link:hover {
+  background-size: 100% 2px;
+}
+.text-link:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.text-link--on-red {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  background-image: none;
+}
+.text-link--on-red:hover {
+  color: #fff;
+  opacity: 0.92;
+}
+.text-link--on-red:focus-visible {
+  outline-color: #fff;
+}
