@@ -10,7 +10,7 @@ type StatCounterProps = {
 export default function StatCounter({
   value,
   suffix = '',
-  duration = 1400,
+  duration = 2000,
 }: StatCounterProps) {
   const ref = useRef<HTMLSpanElement | null>(null)
   const [display, setDisplay] = useState(0)

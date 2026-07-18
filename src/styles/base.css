@@ -87,7 +87,7 @@ button {
   font-size: 0.95rem;
   border-radius: 0 0 10px 10px;
   transform: translateY(-120%);
-  transition: transform 0.2s var(--ease);
+  transition: transform 0.28s var(--ease);
 }
 .skip-link:focus,
 .skip-link:focus-visible {

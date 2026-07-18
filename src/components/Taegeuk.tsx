@@ -25,7 +25,7 @@ export default function Taegeuk({
       aria-hidden="true"
       style={
         shouldSpin
-          ? { animation: 'tg-spin 24s linear infinite' }
+          ? { animation: 'tg-spin 34s linear infinite' }
           : undefined
       }
     >
