@@ -12,7 +12,6 @@ const TOP_NAV = [
 ]
 
 export default function Header() {
-  const [solid, setSolid] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [megaOpen, setMegaOpen] = useState(false)
   const [j4kOpen, setJ4kOpen] = useState(false)
@@ -23,13 +22,6 @@ export default function Header() {
   const j4kCloseTimer = useRef<number | undefined>(undefined)
 
   const locationCount = LOCATIONS.length + (SITE.showGlenRock ? 1 : 0)
-
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -79,7 +71,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`header ${solid ? 'header--solid' : ''}`}>
+      <header className="header">
         <div className="belt-bar header__accent" aria-hidden="true">
           <span style={{ background: '#f4f4f4' }} />
           <span style={{ background: 'var(--blue)' }} />
@@ -213,9 +205,9 @@ export default function Header() {
       </header>
 
       {/*
-        Keep the mobile drawer outside <header>. The solid header uses
+        Keep the mobile drawer outside <header>. The header uses
         backdrop-filter, which makes position:fixed descendants size to the
-        header box (~78px) and the menu appears empty after scroll.
+        header box (~78px) and the menu appears empty.
       */}
       <div
         className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}

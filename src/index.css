@@ -418,13 +418,7 @@ button {
   right: 0;
   z-index: 80;
   color: #fff;
-  transition: background 0.3s var(--ease), border-color 0.3s var(--ease),
-    backdrop-filter 0.3s var(--ease);
-  background: transparent;
-  border-bottom: 1px solid transparent;
-}
-.header--solid {
-  background: rgba(10, 10, 10, 0.86);
+  background: rgba(10, 10, 10, 0.94);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line-dark);
 }
