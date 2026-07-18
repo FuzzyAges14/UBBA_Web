@@ -78,7 +78,7 @@ export default function ProgramDetail() {
                 {program.audience}
               </p>
               <h3>What you&apos;ll work on</h3>
-              <ul className="checklist mt-sm">
+              <ul className="checklist">
                 {program.learn.map((l) => (
                   <li key={l}>{l}</li>
                 ))}

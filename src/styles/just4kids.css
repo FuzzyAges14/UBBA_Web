@@ -34,11 +34,12 @@
 .j4k-hero .breadcrumbs a:hover {
   color: var(--red);
 }
+/* Match .page-hero__brand sizing; color may differ on the light J4K surface */
 .j4k-hero__brand {
-  margin: 1.2rem 0 0;
+  margin: 0 0 0.55rem;
   font-family: var(--font-impact);
-  font-size: clamp(1.45rem, 3.6vw, 2.1rem);
-  letter-spacing: 0.02em;
+  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--red);
   line-height: 1.1;
@@ -75,7 +76,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0.85rem 0 0;
+  margin: 0;
   max-width: 11rem;
 }
 .j4k-hero__accent-bar {
@@ -303,11 +304,14 @@
 .media-frame > img {
   width: 100%;
   height: auto;
+  /* Keep the natural 16:9 frame without re-cropping faces at the edges */
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
   display: block;
   border-radius: inherit;
   border: 2px solid rgba(10, 10, 10, 0.08);
+  background: linear-gradient(155deg, #fff7f0, #eef3ff 70%);
 }
 .media-frame__note {
   position: absolute;

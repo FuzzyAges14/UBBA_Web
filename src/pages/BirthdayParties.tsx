@@ -86,7 +86,7 @@ export default function BirthdayParties() {
               supervised option instead of planning every detail yourself.
             </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>So many fun activities</h3>
-            <ul className="checklist mt-sm">
+            <ul className="checklist">
               {detail.activities.map((a) => (
                 <li key={a}>{a}</li>
               ))}
@@ -101,7 +101,7 @@ export default function BirthdayParties() {
             <div>
               <span className="eyebrow">Birthday Package</span>
               <h2 className="section-title">What we provide</h2>
-              <ul className="checklist mt">
+              <ul className="checklist">
                 {detail.includes.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -117,7 +117,7 @@ export default function BirthdayParties() {
             <div>
               <span className="eyebrow">You Bring</span>
               <h2 className="section-title">What parents supply</h2>
-              <ul className="checklist mt">
+              <ul className="checklist">
                 {(detail.parentsSupply ?? []).map((item) => (
                   <li key={item}>{item}</li>
                 ))}

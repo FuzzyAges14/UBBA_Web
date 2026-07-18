@@ -2,6 +2,7 @@
 /* Owned by interior-pages visual work. Avoid homepage-only .hero* rules. */
 
 /* ---------- Page-hero families (default / dark) ---------- */
+/* Brand wordmark above H1 — keep size in sync with .j4k-hero__brand */
 .page-hero__brand {
   margin: 0 0 0.55rem;
   font-family: var(--font-impact);
@@ -118,11 +119,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 40%;
   transition: transform 0.7s var(--ease);
 }
 
 .interior-media--focus-top img {
-  object-position: 50% 18%;
+  object-position: 50% 28%;
 }
 
 .interior-media--focus-center img {
@@ -130,7 +132,7 @@
 }
 
 .section--dark .interior-media:hover img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .interior-media__credit {
@@ -258,7 +260,7 @@
 }
 
 .program-detail__photo img {
-  object-position: 50% 28%;
+  object-position: center 36%;
 }
 
 /* ---------- Location family ---------- */

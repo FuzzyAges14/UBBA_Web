@@ -8,19 +8,12 @@ export default function FaqSection() {
     <section className="section section--offwhite home-faq">
       <div className="container home-faq__inner">
         <Reveal>
-          <div className="home-section-head">
-            <span className="home-section-num" aria-hidden="true">
-              07
-            </span>
-            <div className="home-section-head__body">
-              <SectionHeading
-                eyebrow="Good To Know"
-                title={<>Questions parents &amp; new students ask</>}
-              />
-              <div className="mt">
-                <Faq items={FAQS} />
-              </div>
-            </div>
+          <SectionHeading
+            eyebrow="Good To Know"
+            title={<>Questions parents &amp; new students ask</>}
+          />
+          <div className="mt">
+            <Faq items={FAQS} />
           </div>
         </Reveal>
       </div>

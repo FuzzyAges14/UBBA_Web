@@ -86,7 +86,7 @@ export default function SummerCamp() {
               with structure and play.
             </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>What’s in a camp day</h3>
-            <ul className="checklist mt-sm">
+            <ul className="checklist">
               {detail.activities.map((a) => (
                 <li key={a}>{a}</li>
               ))}
@@ -101,12 +101,12 @@ export default function SummerCamp() {
             <div>
               <span className="eyebrow">Weekly Themes</span>
               <h2 className="section-title">Built for imagination</h2>
-              <ul className="checklist mt">
+              <ul className="checklist">
                 {(detail.weekNotes ?? []).map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <ul className="checklist mt-sm">
+              <ul className="checklist mt">
                 {detail.includes.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -121,7 +121,7 @@ export default function SummerCamp() {
             <div>
               <span className="eyebrow">Pack List</span>
               <h2 className="section-title">What to bring</h2>
-              <ul className="checklist mt">
+              <ul className="checklist">
                 {(detail.whatToBring ?? []).map((item) => (
                   <li key={item}>{item}</li>
                 ))}

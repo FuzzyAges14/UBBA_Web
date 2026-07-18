@@ -9,17 +9,18 @@ Primary source: the live academy site
 from `/upload/` on 2026-07-18, re-encoded for responsive delivery, and committed
 locally. Do **not** hotlink `unitedbba.com` in production.
 
-The old site had **no self-hosted hero video** — only a YouTube embed of an ATA
-franchise testimonial (`dKHeXC_2bHE`). The hero loop here is a Ken Burns montage
-built from unitedbba.com stills (adult kick, kids class, TKD group, adult
-featured portrait).
+The live unitedbba.com homepage uses a Vimeo background clip
+(`253381000` — **“Website Dojo Standard BG Video”**, a WebsiteDojo template
+stock loop, ~20s B&W martial-arts montage). That same clip is now self-hosted
+here as the home hero. A separate YouTube embed (`dKHeXC_2bHE`) on the old site
+is an ATA franchise testimonial and is not used as the hero.
 
 ## Integrated production assets (2026-07-18)
 
 | Key / file | Usage | Source URL | Notes | Temporary? |
 | --- | --- | --- | --- | --- |
-| `hero.mp4` / `hero.webm` | Home hero loop | Ken Burns from unitedbba.com stills below | H.264 ~1.2 MB · VP9 ~0.8 MB · ~12s | Prefer authentic dojang footage when available |
-| `hero-poster.jpg` (+ responsive / mobile) | Hero LCP poster | [Adult-Martial-Arts.jpg](https://unitedbba.com/upload/about_us/Adult-Martial-Arts.jpg) | High-kick action still | No |
+| `hero.mp4` / `hero.webm` | Home hero loop | [Vimeo 253381000](https://vimeo.com/253381000) (same clip as unitedbba.com homepage background) | H.264 ~2.4 MB · VP9 ~2.5 MB · ~20s · muted | Prefer authentic UBBA dojang footage when available |
+| `hero-poster.jpg` (+ responsive / mobile) | Hero LCP poster | Frame from Vimeo 253381000 (~3s) | Matches hero loop before video loads | Yes — replace with UBBA still when real footage lands |
 | `og-default.jpg` | Open Graph / Twitter | Crop of adult action still | 1200×630 | No |
 | `owner-portrait.jpg` | Home “Meet The Owner” | [Owner-Sang.png](https://unitedbba.com/upload/about_us/Owner-Sang.png) | Master Lee / Sanghyun Lee portrait | No |
 | `kids-kicks.jpg` (+ responsive) | Tiny Tigers / kids kicks | [kids-martial-arts-featured.jpg](https://unitedbba.com/upload/featuredprograms/1781612542kids-martial-arts-featured.jpg) | Featured kids program portrait | No |
@@ -55,7 +56,7 @@ photo shoot and location exteriors before launch when available.
 | --- | --- |
 | Allendale / Midland Park / Glen Rock exteriors & interiors | `OwnerMediaSlot` placeholders — **location photos still needed** |
 | Testimonials | Text-only until owner-approved reviews |
-| Native dojang hero video | Ken Burns still-montage in place; replace with real footage when shot |
+| Native dojang hero video | WebsiteDojo/Vimeo stock loop in place (same as live unitedbba.com); replace with real UBBA footage when shot |
 
 ## Brand logo
 

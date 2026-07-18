@@ -363,7 +363,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center 28%;
   display: block;
 }
 /* Sticky only while the 2-column layout is active. Once stacked, sticky would
@@ -652,10 +652,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 38%;
   transition: transform 0.5s var(--ease);
 }
 .feature:hover .feature__img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .feature__body {
   z-index: 1;
@@ -745,41 +746,6 @@
 }
 
 /* ---------- Homepage art direction (scoped) ---------- */
-.home-section-head {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.85rem 1.25rem;
-  align-items: start;
-}
-.home-section-head__body {
-  min-width: 0;
-}
-.home-section-num {
-  font-family: var(--font-impact);
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  color: rgba(10, 10, 10, 0.1);
-  padding-top: 0.15rem;
-  user-select: none;
-}
-.home-section-head--dark .home-section-num {
-  color: rgba(255, 255, 255, 0.14);
-}
-@media (max-width: 620px) {
-  .home-section-head {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-  .home-section-num {
-    font-size: 1.5rem;
-    color: var(--red);
-  }
-  .home-section-head--dark .home-section-num {
-    color: var(--blue-soft);
-  }
-}
-
 .home-trust {
   background: var(--off-white);
   border-bottom: 1px solid var(--line);
@@ -787,20 +753,28 @@
 .home-trust__inner {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem 1.75rem;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  color: var(--muted);
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem 1.75rem;
+  padding: 1.15rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
 }
 .home-trust__item {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  line-height: 1.35;
+  max-width: 100%;
 }
 .home-trust__mark {
   color: var(--red);
   letter-spacing: 0.05em;
   font-size: 0.78rem;
+  flex-shrink: 0;
 }
 .home-trust__dot {
   width: 6px;
@@ -808,6 +782,18 @@
   border-radius: 50%;
   background: var(--blue);
   flex-shrink: 0;
+}
+@media (max-width: 720px) {
+  .home-trust__inner {
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.25rem 0;
+    font-size: 0.92rem;
+  }
+  .home-trust__item {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .home-benefits__split {
