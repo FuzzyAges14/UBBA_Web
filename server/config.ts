@@ -1,5 +1,10 @@
 import 'dotenv/config'
-import { CONTACT, SOCIAL_PROFILES } from '../src/data/contact.ts'
+import {
+  CONTACT,
+  INQUIRY_TYPES,
+  SOCIAL_PROFILES,
+  type InquiryIntent,
+} from '../src/data/contact.ts'
 
 export type MailTransport =
   | { kind: 'resend'; apiKey: string }
@@ -7,9 +12,16 @@ export type MailTransport =
   | { kind: 'smtp'; host: string; port: number; secure: boolean; user: string; pass: string }
   | { kind: 'log' }
 
-function parseNotifyEmails(): string[] {
-  const fromEnv = process.env.NOTIFY_EMAILS?.split(/[,;\s]+/).map((e) => e.trim()).filter(Boolean)
-  if (fromEnv && fromEnv.length > 0) return fromEnv
+function parseEmailList(value: string | undefined): string[] {
+  return (value ?? '')
+    .split(/[,;\s]+/)
+    .map((e) => e.trim())
+    .filter(Boolean)
+}
+
+function parseDefaultNotifyEmails(): string[] {
+  const fromEnv = parseEmailList(process.env.NOTIFY_EMAILS)
+  if (fromEnv.length > 0) return fromEnv
   return [...CONTACT.notifyEmails]
 }
 
@@ -37,9 +49,25 @@ function resolveTransport(): MailTransport {
   return { kind: 'log' }
 }
 
+const defaultNotifyEmails = parseDefaultNotifyEmails()
+
+/** Resolve notify inboxes for a given form intent (type override → default). */
+export function notifyEmailsForIntent(intent: InquiryIntent | undefined): string[] {
+  const key = intent ?? 'free-class'
+  const typeEmails = INQUIRY_TYPES[key]?.notifyEmails?.filter(Boolean)
+  if (typeEmails && typeEmails.length > 0) return [...typeEmails]
+
+  // Optional per-type env overrides, e.g. NOTIFY_EMAILS_BIRTHDAY=...
+  const envKey = `NOTIFY_EMAILS_${key.replace(/-/g, '_').toUpperCase()}`
+  const fromEnv = parseEmailList(process.env[envKey])
+  if (fromEnv.length > 0) return fromEnv
+
+  return defaultNotifyEmails
+}
+
 export const serverConfig = {
   port: Number(process.env.API_PORT || 3001),
-  notifyEmails: parseNotifyEmails(),
+  notifyEmails: defaultNotifyEmails,
   publicEmail: process.env.PUBLIC_EMAIL?.trim() || CONTACT.publicEmail,
   fromName: process.env.MAIL_FROM_NAME?.trim() || CONTACT.fromName,
   /**
@@ -50,11 +78,11 @@ export const serverConfig = {
     process.env.MAIL_FROM_EMAIL?.trim() ||
     process.env.SMTP_USER?.trim() ||
     CONTACT.publicEmail,
-  subjectPrefix: CONTACT.subjectPrefix,
   replyToVisitor: CONTACT.replyToVisitor,
   transport: resolveTransport(),
   socialProfiles: SOCIAL_PROFILES,
-  /** Comma-separated origins allowed to call the API (empty = reflect request origin in dev). */
+  inquiryTypes: INQUIRY_TYPES,
+  /** Comma-separated origins allowed to call the API (empty = allow any in dev). */
   corsOrigins: (process.env.CORS_ORIGINS || '')
     .split(',')
     .map((o) => o.trim())

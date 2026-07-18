@@ -1,4 +1,4 @@
-# Backend: free-class emails & social links
+# Backend: form emails & social links
 
 Everything you usually need to edit lives in **one file**:
 
@@ -6,21 +6,32 @@ Everything you usually need to edit lives in **one file**:
 
 | I want to… | Edit |
 | --- | --- |
-| Change who receives free-class requests | `CONTACT.notifyEmails` (add as many addresses as you like) |
+| Change who receives form emails (default) | `CONTACT.notifyEmails` |
+| Send birthday / camp emails to a different inbox | `INQUIRY_TYPES.birthday.notifyEmails` or `INQUIRY_TYPES['summer-camp'].notifyEmails` |
+| Change email titles (“Birthday Party Inquiry”, etc.) | `INQUIRY_TYPES.*.label` |
 | Change the public mailto address | `CONTACT.publicEmail` |
 | Add / update Instagram or Facebook | `SOCIAL_PROFILES` → set `href`, `handle`, then `placeholder: false` |
-| Change the email subject prefix | `CONTACT.subjectPrefix` |
 
 Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.example`](../.env.example). Never commit `.env`.
 
-## How a free-class / Just 4 Kids request works
+## Forms that email staff
 
-1. Someone submits a form on the site (`LeadForm` or Just 4 Kids `EventInquiryForm`).
-2. The browser `POST`s to `/api/leads`.
-3. The API validates the fields, builds a detailed HTML + plain-text email, and sends it to every address in `notifyEmails`.
-4. The email subject / title follows the selected program (e.g. “Birthday Party Inquiry” vs “Free Class Request”).
-5. **Reply-To** is set to the visitor’s email, so staff can hit Reply and reach them directly.
-6. Configured Instagram / Facebook profile links are included at the bottom of the email.
+| Form | Page | Intent |
+| --- | --- | --- |
+| Free class (`LeadForm`) | Home, Contact | `free-class` |
+| Birthday party signup | `/just-4-kids/birthday-parties` | `birthday` |
+| Summer camp signup | `/just-4-kids/summer-camp` | `summer-camp` |
+| Parents’ Night Out | `/just-4-kids/parents-night-out` | `parents-night-out` |
+
+## How a request works
+
+1. Someone submits a form (`LeadForm` or Just 4 Kids `EventInquiryForm`).
+2. The browser `POST`s to `/api/leads` with an `intent` plus the filled fields.
+3. The API validates, builds a detailed HTML + plain-text email, and sends it to the right inbox(es).
+4. Birthday emails include child name/age, preferred date, and guest count as their own rows.
+5. Summer camp emails include child name/age and preferred weeks as their own rows.
+6. **Reply-To** is the visitor’s email so staff can hit Reply.
+7. Configured Instagram / Facebook profile links are included at the bottom.
 
 ## Run locally
 
@@ -48,6 +59,15 @@ Set either `SMTP_URL=...` **or** `SMTP_HOST` + `SMTP_USER` + `SMTP_PASS` in `.en
 
 Gmail typically needs an [App Password](https://support.google.com/accounts/answer/185833), not your normal login password.
 
+### Optional per-type inbox overrides via env
+
+```bash
+NOTIFY_EMAILS_BIRTHDAY=parties@unitedbba.com
+NOTIFY_EMAILS_SUMMER_CAMP=camp@unitedbba.com
+```
+
+These override `CONTACT.notifyEmails` for that form only (same idea as `INQUIRY_TYPES.*.notifyEmails` in `contact.ts`).
+
 ## Deploy the API
 
 The marketing site can stay on Netlify/Vercel as a static build. Host the API (`pnpm start:api`) on any Node host (Render, Railway, Fly.io, a VPS) and either:
@@ -59,6 +79,6 @@ Without mail credentials the API still accepts requests and logs the formatted e
 
 ## Add another request type later
 
-1. Reuse `server/email.ts` helpers (or copy `buildLeadEmail`).
-2. Add a route in `server/app.ts` (e.g. `POST /api/birthday-parties`).
-3. Point a new form at that path the same way `src/lib/submitLead.ts` posts to `/api/leads`.
+1. Add a key to `INQUIRY_TYPES` in `src/data/contact.ts`.
+2. Extend `InquiryIntent` in the same file (+ `VALID_INTENTS` in `server/leads.ts`).
+3. Point a form at `/api/leads` with that `intent` (see `EventInquiryForm`).

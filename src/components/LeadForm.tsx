@@ -41,6 +41,7 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
     setSending(true)
     try {
       const result = await submitLead({
+        intent: 'free-class',
         name: String(data.get('name') ?? '').trim(),
         email: String(data.get('email') ?? '').trim(),
         phone: String(data.get('phone') ?? '').trim(),

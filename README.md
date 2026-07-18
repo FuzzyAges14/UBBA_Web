@@ -145,7 +145,7 @@ saving, the site updates instantly while `pnpm dev` is running.
 
 | I want to change... | Look for |
 | --- | --- |
-| Who gets free-class request emails | [`src/data/contact.ts`](src/data/contact.ts) → `CONTACT.notifyEmails` |
+| Who gets free-class / birthday / camp emails | [`src/data/contact.ts`](src/data/contact.ts) → `CONTACT.notifyEmails` + `INQUIRY_TYPES` |
 | Instagram / Facebook profile links | [`src/data/contact.ts`](src/data/contact.ts) → `SOCIAL_PROFILES` |
 | Phone number, address, or hours | `LOCATIONS` (Allendale / Midland Park) and `GLEN_ROCK` |
 | Whether Glen Rock shows on the site | `SITE.showGlenRock` — set to `true` (show) or `false` (hide) |

@@ -3,8 +3,9 @@
  * CONTACT & SOCIAL — edit this file to wire up email + Instagram / Facebook
  * =============================================================================
  *
- * Free-class form submissions are emailed to every address in `notifyEmails`.
- * Instagram / Facebook profile links used across the site come from `SOCIAL_PROFILES`.
+ * Form submissions (free class, birthday parties, summer camp, etc.) are emailed
+ * to the addresses below. Instagram / Facebook profile links come from
+ * `SOCIAL_PROFILES`.
  *
  * After editing:
  *   1. Save this file
@@ -29,12 +30,30 @@ export type SocialProfile = {
   placeholder?: boolean
 }
 
+/** Every form on the site posts with one of these intents. */
+export type InquiryIntent =
+  | 'free-class'
+  | 'birthday'
+  | 'summer-camp'
+  | 'parents-night-out'
+
+export type InquiryTypeConfig = {
+  /** Shown as the email title / subject prefix */
+  label: string
+  /**
+   * Optional extra inboxes for this request type only.
+   * Leave empty to use CONTACT.notifyEmails.
+   * Example: ['parties@unitedbba.com']
+   */
+  notifyEmails?: string[]
+}
+
 /* ---------------------------------------------------------------------------
- * Where free-class / lead requests are delivered
+ * Where requests are delivered (default for every form)
  * ------------------------------------------------------------------------- */
 export const CONTACT = {
   /**
-   * Inbox(es) that receive every free-class request.
+   * Inbox(es) that receive form submissions by default.
    * Add as many as you like — each gets the same detailed email.
    */
   notifyEmails: [
@@ -48,15 +67,34 @@ export const CONTACT = {
   /** From-name shown in the academy's inbox (not the visitor's name). */
   fromName: 'UBBA Website',
 
-  /** Subject prefix so requests are easy to filter in Gmail/Outlook. */
-  subjectPrefix: 'Free Class Request',
-
   /**
    * When true, the visitor's email is set as Reply-To so staff can hit
    * "Reply" and email the lead directly.
    */
   replyToVisitor: true,
 } as const
+
+/* ---------------------------------------------------------------------------
+ * Per-form email labels (+ optional separate inboxes)
+ * Edit labels anytime. Add notifyEmails only if that form should go elsewhere.
+ * ------------------------------------------------------------------------- */
+export const INQUIRY_TYPES: Record<InquiryIntent, InquiryTypeConfig> = {
+  'free-class': {
+    label: 'Free Class Request',
+    // notifyEmails: ['trials@unitedbba.com'],
+  },
+  birthday: {
+    label: 'Birthday Party Inquiry',
+    // notifyEmails: ['parties@unitedbba.com'],
+  },
+  'summer-camp': {
+    label: 'Summer Camp Inquiry',
+    // notifyEmails: ['camp@unitedbba.com'],
+  },
+  'parents-night-out': {
+    label: "Parents' Night Out Inquiry",
+  },
+}
 
 /* ---------------------------------------------------------------------------
  * Instagram & Facebook profile links
@@ -87,4 +125,8 @@ export function getSocialProfile(
   slug: string | undefined,
 ): SocialProfile | undefined {
   return SOCIAL_PROFILES.find((s) => s.slug === slug)
+}
+
+export function getInquiryType(intent: InquiryIntent | undefined): InquiryTypeConfig {
+  return INQUIRY_TYPES[intent ?? 'free-class'] ?? INQUIRY_TYPES['free-class']
 }

@@ -73,6 +73,7 @@ describe('LeadForm', () => {
     )
     const body = JSON.parse((fetch as ReturnType<typeof vi.fn>).mock.calls[0][1].body as string)
     expect(body).toMatchObject({
+      intent: 'free-class',
       name: 'Jane Doe',
       email: 'jane@example.com',
       phone: '2015550123',

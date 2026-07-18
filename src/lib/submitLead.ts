@@ -1,10 +1,19 @@
+import type { InquiryIntent } from '../data/contact'
+
 export type LeadFormValues = {
   name: string
   email: string
   phone: string
+  /** Which form was submitted — drives email title + optional inbox routing */
+  intent?: InquiryIntent
   location?: string
   program?: string
   message?: string
+  partyDate?: string
+  guests?: string
+  childName?: string
+  childAge?: string
+  preferredWeeks?: string
   source?: string
   /** Honeypot — leave empty */
   website?: string
@@ -18,7 +27,8 @@ export type SubmitLeadResponse = {
 }
 
 /**
- * Posts a free-class request to the UBBA API (`POST /api/leads`).
+ * Posts a form inquiry to the UBBA API (`POST /api/leads`).
+ * Works for free-class, birthday, summer camp, and Parents' Night Out.
  * In Vite dev, requests are proxied to the local API server.
  */
 export async function submitLead(values: LeadFormValues): Promise<SubmitLeadResponse> {
