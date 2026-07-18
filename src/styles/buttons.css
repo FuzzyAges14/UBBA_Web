@@ -67,9 +67,10 @@
 }
 
 .btn--outline {
-  --btn-bg: transparent;
+  /* Solid fill keeps the control from dissolving into cream/off-white pages */
+  --btn-bg: #fff;
   --btn-fg: var(--ink);
-  border-color: rgba(10, 10, 10, 0.38);
+  border-color: rgba(10, 10, 10, 0.42);
 }
 .btn--outline:hover {
   --btn-bg: var(--black);
@@ -84,8 +85,9 @@
 .section--dark .btn--outline,
 .section--graphite .btn--outline,
 .cta-banner .btn--outline {
+  --btn-bg: transparent;
   --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.55);
 }
 .page-hero .btn--outline:hover,
 .hero .btn--outline:hover,

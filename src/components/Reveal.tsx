@@ -36,6 +36,9 @@ export default function Reveal({
       return
     }
 
+    // Low threshold + expanded rootMargin so tall blocks (maps, cards) still
+    // reveal when only a sliver enters the viewport — avoiding "blank" sections
+    // that look like white-on-white contrast failures.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -45,7 +48,7 @@ export default function Reveal({
           }
         })
       },
-      { threshold: 0.15 },
+      { threshold: 0.01, rootMargin: '64px 0px 64px 0px' },
     )
 
     observer.observe(el)
