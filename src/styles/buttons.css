@@ -1,0 +1,87 @@
+/* buttons.css — extracted from former src/index.css (lines 280-365) */
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-bg: var(--red);
+  --btn-fg: #fff;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease), color 0.2s var(--ease);
+  overflow: hidden;
+}
+
+.btn .btn__arrow {
+  transition: transform 0.2s var(--ease);
+}
+.btn:hover .btn__arrow {
+  transform: translateX(4px);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(196, 18, 48, 0.32);
+}
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Secondary/accent CTA button. Named "gold" historically; now the blue accent. */
+.btn--gold {
+  --btn-bg: var(--blue);
+  --btn-fg: #ffffff;
+}
+.btn--gold:hover {
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.36);
+}
+
+.btn--dark {
+  --btn-bg: var(--black);
+  --btn-fg: #fff;
+}
+.btn--dark:hover {
+  box-shadow: 0 16px 34px rgba(10, 10, 10, 0.3);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: #fff;
+  border-color: rgba(255, 255, 255, 0.32);
+}
+.btn--ghost:hover {
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  border-color: #fff;
+  box-shadow: none;
+}
+
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  border-color: rgba(10, 10, 10, 0.2);
+}
+.btn--outline:hover {
+  --btn-bg: var(--black);
+  --btn-fg: #fff;
+  border-color: var(--black);
+  box-shadow: none;
+}
+
+.btn--lg {
+  padding: 1.05rem 2rem;
+  font-size: 1.05rem;
+}
+.btn--block {
+  width: 100%;
+}

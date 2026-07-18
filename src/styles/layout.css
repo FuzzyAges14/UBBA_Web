@@ -1,0 +1,160 @@
+/* layout.css — extracted from former src/index.css (lines 120-278) */
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2.4rem);
+}
+
+.section {
+  position: relative;
+  padding: clamp(4rem, 9vw, 7.5rem) 0;
+}
+
+.section--tight {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+}
+
+.section--dark {
+  background: var(--black);
+  color: var(--white);
+}
+
+.section--graphite {
+  background: var(--graphite);
+  color: var(--white);
+}
+
+.section--offwhite {
+  background: var(--off-white);
+}
+
+/* Soft bridges between sections with different backgrounds */
+.section-seam {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 0;
+  overflow: hidden;
+}
+.section-seam--wave {
+  height: 64px;
+  background: linear-gradient(
+    to bottom,
+    var(--seam-from) 0%,
+    color-mix(in srgb, var(--seam-from) 55%, var(--seam-to)) 46%,
+    var(--seam-to) 100%
+  );
+}
+.section-seam__fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--seam-from) 80%, transparent) 0%,
+    transparent 50%,
+    color-mix(in srgb, var(--seam-to) 55%, transparent) 100%
+  );
+}
+.section-seam__svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.section-seam__accent {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 50%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--blue) 55%, transparent) 22%,
+    color-mix(in srgb, var(--red) 65%, transparent) 50%,
+    color-mix(in srgb, var(--blue) 55%, transparent) 78%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  transform: translateY(-50%);
+}
+.section-seam--fade {
+  height: 72px;
+  background: linear-gradient(
+    to bottom,
+    var(--seam-from) 0%,
+    color-mix(in srgb, var(--seam-from) 55%, var(--seam-to)) 42%,
+    var(--seam-to) 100%
+  );
+}
+@media (max-width: 640px) {
+  .section-seam--wave {
+    height: 48px;
+  }
+  .section-seam--fade {
+    height: 56px;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  background: var(--red);
+  display: inline-block;
+}
+
+.section--dark .eyebrow,
+.section--graphite .eyebrow {
+  color: var(--blue-soft);
+}
+.section--dark .eyebrow::before,
+.section--graphite .eyebrow::before {
+  background: var(--blue);
+}
+
+.section-title {
+  font-size: clamp(2.4rem, 5.2vw, 3.9rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.02;
+  margin-top: 1rem;
+}
+
+.section-lead {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.08rem;
+  margin-top: 1.1rem;
+}
+
+.section--dark .section-lead,
+.section--graphite .section-lead {
+  color: var(--muted-light);
+}
+
+.text-center {
+  text-align: center;
+}
+.center-block {
+  margin-left: auto;
+  margin-right: auto;
+}
