@@ -87,22 +87,29 @@
 /* ---------- Interior media (program / atmospheric stock) ---------- */
 .interior-media {
   position: relative;
+  /* Reset UA <figure> margins (often 1em 40px) that force horizontal scroll on phones */
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
   border-radius: var(--radius);
   overflow: hidden;
   isolation: isolate;
   background: var(--graphite);
   border: 1px solid var(--line-dark);
   min-height: 280px;
+  box-sizing: border-box;
 }
 
 .interior-media--tall {
   min-height: 460px;
   aspect-ratio: 3 / 4;
+  height: auto;
 }
 
 .interior-media--wide {
   min-height: 300px;
   aspect-ratio: 16 / 10;
+  height: auto;
 }
 
 .interior-media img {
@@ -383,8 +390,11 @@
   }
 
   .interior-media--tall {
+    width: 100%;
+    max-width: 100%;
     min-height: 360px;
     aspect-ratio: 4 / 5;
+    height: auto;
   }
 
   .program-overview__grid::before {

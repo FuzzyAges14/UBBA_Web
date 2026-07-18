@@ -1,10 +1,10 @@
 # Visual QA Report — Agent 7 (Responsive / Accessibility / Visual)
 
-**Date:** 2026-07-18  
-**Baseline:** `origin/main` @ `0d8116f` (contrast fix #26)  
+**Date:** 2026-07-18 (rebased onto redesigned `main` the same day)  
+**Baseline:** `origin/main` including Agents 1–2 docs + homepage (#29) + interior (#30) + buttons (#31)  
 **QA branch:** `cursor/visual-a11y-qa-26db`  
 **Environment:** Chromium (Playwright) + Google Chrome headless on Linux CI VM  
-**Scope note:** Sibling redesign agents (creative direction, media research, buttons, homepage, interior, integration) were still open as PRs during this pass. This report validates the **current integrated main baseline** plus defects fixed on the QA branch. Redesign PRs were inspected for shared-file risk; a full post-merge re-QA remains required after Agent 8 squash-merges.
+**Sync note:** Branch was rebased onto latest `main` after redesign PRs landed. Git auto-merged cleanly; QA fixes were re-verified. An additional overflow from interior `<figure>` UA margins was fixed post-rebase.
 
 Screenshots: `/opt/cursor/artifacts/visual-qa/` (also produced under `test-results/visual-qa/` by `e2e/visual-responsive-qa.spec.ts`).
 
@@ -46,6 +46,7 @@ Screenshots: `/opt/cursor/artifacts/visual-qa/` (also produced under `test-resul
 | VQA-02 | Medium | Yes (a11y) | Global header | Desktop | Programs / Just 4 Kids mega Escape closed menus but did **not** restore focus to the trigger (comment claimed it did). | Refs + `queueMicrotask` focus restore in `Header.tsx`; unit + E2E coverage |
 | VQA-03 | Medium | No* | Just 4 Kids heroes | All | Breadcrumb ink at `rgba(20,20,26,0.55)` failed AA on light playful backgrounds. | Raised to `0.72` in `just4kids.css` |
 | VQA-04 | Low | No | `/` hero | Desktop | `.hero__scroll` at `rgba(255,255,255,0.55)` was hard to read over video (decorative / `aria-hidden`). | Raised to `0.78` |
+| VQA-12 | High | Yes | `/programs/children` (and other interior splits using `.interior-media`) | 320 | Post-merge overflow: UA `<figure>` margin (`1em 40px`) + tall aspect media pushed `scrollWidth` to 356. | Reset `.interior-media { margin: 0; width/max-width: 100% }` in `interior.css` |
 
 \*Contrast failures are launch-quality blockers for body/UI text; breadcrumbs are secondary navigation but were corrected.
 
@@ -152,13 +153,14 @@ See `docs/PERFORMANCE.md` and `docs/IMAGE_SOURCES.md` for architecture; update t
 
 This QA branch touches files also edited by open redesign PRs:
 
-| File | Also touched by |
+| File | Also touched by (now on `main`) |
 | --- | --- |
-| `src/styles/hero.css` | Homepage art direction (#29) |
-| `src/styles/sections.css` | Homepage (#29), buttons (#31), interior (#30) |
-| `src/styles/cards-media.css` | Interior (#30) |
-| `src/styles/just4kids.css` | Interior (#30) |
-| `src/components/Header.tsx` | Buttons (#31) may touch CTA classes only |
+| `src/styles/hero.css` | Homepage art direction (#29) — rebased cleanly |
+| `src/styles/sections.css` | Homepage (#29), buttons (#31), interior (#30) — rebased cleanly |
+| `src/styles/cards-media.css` | Interior (#30) — rebased cleanly |
+| `src/styles/just4kids.css` | Interior (#30) — rebased cleanly |
+| `src/styles/interior.css` | Interior (#30) — QA added figure margin reset after rebase |
+| `src/components/Header.tsx` | Buttons (#31) — focus-restore patch still present |
 
 **Integration guidance:** Do not take “ours/theirs” wholesale. Re-apply:
 

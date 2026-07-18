@@ -1,8 +1,9 @@
 # Responsive Test Matrix — Agent 7
 
-**Baseline:** `origin/main` @ `0d8116f` + QA fixes on `cursor/visual-a11y-qa-26db`  
+**Baseline:** Redesigned `origin/main` (homepage #29, interior #30, buttons #31) + QA fixes on `cursor/visual-a11y-qa-26db` (rebased)  
 **Harness:** `e2e/visual-responsive-qa.spec.ts` (Chromium + mobile-chrome / Pixel 7)  
-**Artifacts:** `/opt/cursor/artifacts/visual-qa/` and `test-results/visual-qa/`
+**Artifacts:** `/opt/cursor/artifacts/visual-qa/` and `test-results/visual-qa/`  
+**Post-rebase smoke:** Overflow ALL_OK across `/`, children/adult programs, J4K, birthday, Allendale, contact @ 320–1440.
 
 Legend: **P** = Pass · **F** = Fail · **S** = Soft pass / caveat · **N/A** = not applicable · **—** = not separately captured
 
