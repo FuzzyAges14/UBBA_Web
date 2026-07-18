@@ -28,6 +28,7 @@ export default function AdultPrograms() {
                 <ProgramCard
                   title={p.title}
                   text={p.blurb}
+                  image={p.image}
                   glyph={PROGRAM_GLYPHS[p.id]}
                   to={`/programs/${p.slug}`}
                   ctaLabel="Learn How It Works"

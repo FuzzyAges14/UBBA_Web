@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import OptimizedImage from './OptimizedImage'
+import { imageDimensionsFor } from '../data/site'
 
 export type ProgramCardProps = {
   title: string
@@ -7,6 +9,8 @@ export type ProgramCardProps = {
   ctaLabel: string
   ages?: string
   glyph?: string
+  /** Optional card background photo (lazy-loaded). */
+  image?: string
   /** Extra class on the glyph span (e.g. social marks). */
   glyphClassName?: string
   /**
@@ -29,6 +33,7 @@ function CardBody({
   ages,
   glyph,
   glyphClassName,
+  image,
   titleAs: TitleTag = 'h3',
   wrapLink,
 }: ProgramCardProps) {
@@ -42,9 +47,22 @@ function CardBody({
     </Link>
   )
 
+  const art = image ? (
+    <OptimizedImage
+      className="pcard__img"
+      src={image}
+      alt=""
+      {...imageDimensionsFor(image)}
+      loading="lazy"
+      sizes="(max-width: 720px) 100vw, 33vw"
+    />
+  ) : (
+    <div className="pcard__art" />
+  )
+
   return (
     <>
-      <div className="pcard__art" />
+      {art}
       <div className="pcard__scrim" />
       {glyph != null && (
         <span

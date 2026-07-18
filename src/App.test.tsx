@@ -12,27 +12,27 @@ function renderAt(path: string) {
 }
 
 describe('App routing', () => {
-  it('renders the home hero headline', () => {
+  it('renders the home hero headline', async () => {
     renderAt('/')
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: /confidence building martial arts/i,
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the Children\'s Programs page', () => {
+  it('renders the Children\'s Programs page', async () => {
     renderAt('/programs/children')
     expect(
-      screen.getByRole('heading', { name: /children's programs/i, level: 1 }),
+      await screen.findByRole('heading', { name: /children's programs/i, level: 1 }),
     ).toBeInTheDocument()
     expect(screen.getAllByText(/tiny tigers/i).length).toBeGreaterThan(0)
   })
 
-  it('renders the Just 4 Kids page headline', () => {
+  it('renders the Just 4 Kids page headline', async () => {
     renderAt('/just-4-kids')
     expect(
-      screen.getByRole('heading', { name: /the fun doesn't stop at the mat/i }),
+      await screen.findByRole('heading', { name: /the fun doesn't stop at the mat/i }),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /book a birthday/i })).toHaveAttribute(
       'href',
@@ -44,19 +44,19 @@ describe('App routing', () => {
     )
   })
 
-  it('renders the birthday parties detail page with inquiry form', () => {
+  it('renders the birthday parties detail page with inquiry form', async () => {
     renderAt('/just-4-kids/birthday-parties')
     expect(
-      screen.getByRole('heading', { name: /most exciting birthday party ever/i, level: 1 }),
+      await screen.findByRole('heading', { name: /most exciting birthday party ever/i, level: 1 }),
     ).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /schedule my party/i })).toBeInTheDocument()
     expect(screen.getByText(/what we provide/i)).toBeInTheDocument()
   })
 
-  it('renders the summer camp detail page with reserve form', () => {
+  it('renders the summer camp detail page with reserve form', async () => {
     renderAt('/just-4-kids/summer-camp')
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: /most exciting summer ever/i,
         level: 1,
       }),
@@ -65,19 +65,19 @@ describe('App routing', () => {
     expect(screen.getByText(/what to bring/i)).toBeInTheDocument()
   })
 
-  it("renders the Parents' Night Out detail page with inquiry form", () => {
+  it("renders the Parents' Night Out detail page with inquiry form", async () => {
     renderAt('/just-4-kids/parents-night-out')
     expect(
-      screen.getByRole('heading', { name: /fun for kids\. relaxation for you/i, level: 1 }),
+      await screen.findByRole('heading', { name: /fun for kids\. relaxation for you/i, level: 1 }),
     ).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /save a spot/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /^spots fill fast$/i })).toBeInTheDocument()
   })
 
-  it('keeps Just 4 Kids as its own nav item separate from Programs', () => {
+  it('keeps Just 4 Kids as its own nav item separate from Programs', async () => {
     renderAt('/')
 
-    const primaryNav = screen.getByRole('navigation', { name: /primary/i })
+    const primaryNav = await screen.findByRole('navigation', { name: /primary/i })
     expect(
       within(primaryNav).getByRole('link', { name: /follow us/i }),
     ).toHaveAttribute('href', '/follow-us')
@@ -111,9 +111,9 @@ describe('App routing', () => {
     )
   })
 
-  it('renders the Follow Us hub with Instagram and Facebook options', () => {
+  it('renders the Follow Us hub with Instagram and Facebook options', async () => {
     renderAt('/follow-us')
-    expect(screen.getByRole('heading', { name: /follow us/i, level: 1 })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: /follow us/i, level: 1 })).toBeInTheDocument()
     const postLinks = screen.getAllByRole('link', { name: /see recent posts/i })
     expect(postLinks).toHaveLength(2)
     expect(postLinks[0]).toHaveAttribute('href', '/follow-us/instagram')
@@ -121,39 +121,51 @@ describe('App routing', () => {
     expect(screen.queryByText(/youtube/i)).not.toBeInTheDocument()
   })
 
-  it('renders an Instagram feed page with post links', () => {
+  it('renders an Instagram feed page with post links', async () => {
     renderAt('/follow-us/instagram')
-    expect(screen.getByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
     expect(screen.getByText(/evening class energy on the mat/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /visit instagram profile/i })).toBeInTheDocument()
   })
 
-  it('shows a 404 for an unknown social network', () => {
+  it('shows a 404 for an unknown social network', async () => {
     renderAt('/follow-us/youtube')
     expect(
-      screen.getByRole('heading', { name: /page not found/i }),
+      await screen.findByRole('heading', { name: /page not found/i }),
     ).toBeInTheDocument()
   })
 
-  it('renders a unique program detail page', () => {
+  it('renders a unique program detail page', async () => {
     renderAt('/programs/tiny-tigers')
     expect(
-      screen.getByRole('heading', { name: /tiny tigers/i, level: 1 }),
+      await screen.findByRole('heading', { name: /tiny tigers/i, level: 1 }),
     ).toBeInTheDocument()
     expect(screen.getByText(/what you'll learn/i)).toBeInTheDocument()
   })
 
-  it('shows a 404 for an unknown program slug', () => {
+  it('shows a 404 for an unknown program slug', async () => {
     renderAt('/programs/not-a-real-program')
     expect(
-      screen.getByRole('heading', { name: /page not found/i }),
+      await screen.findByRole('heading', { name: /page not found/i }),
     ).toBeInTheDocument()
   })
 
-  it('shows a 404 for unknown routes', () => {
+  it('shows a 404 for unknown routes', async () => {
     renderAt('/does-not-exist')
     expect(
-      screen.getByRole('heading', { name: /page not found/i }),
+      await screen.findByRole('heading', { name: /page not found/i }),
+    ).toBeInTheDocument()
+  })
+
+  it('loads privacy and terms via direct navigation', async () => {
+    renderAt('/privacy')
+    expect(
+      await screen.findByRole('heading', { name: /privacy policy/i, level: 1 }),
+    ).toBeInTheDocument()
+
+    renderAt('/terms')
+    expect(
+      await screen.findByRole('heading', { name: /terms and conditions/i, level: 1 }),
     ).toBeInTheDocument()
   })
 })
