@@ -21,7 +21,9 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [x] Birthday + summer camp signups (`EventInquiryForm`) post to `/api/leads`
 - [x] Honeypot spam field on the forms
 - [ ] Set real `CONTACT.notifyEmails` / `INQUIRY_TYPES` + `SOCIAL_PROFILES` in `src/data/contact.ts`
+      (step-by-step: [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md))
 - [ ] Configure Resend or SMTP in `.env` so requests leave log-only mode
+      (same owner setup guide)
 - [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 
 ## Fonts

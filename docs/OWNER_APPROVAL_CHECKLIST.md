@@ -32,9 +32,11 @@ approved. Configuration lives in `src/data/site.ts`.
 
 ## Contact & legal
 - [ ] Email addresses (`CONTACT` in `src/data/contact.ts` — notify + public)
+      — follow [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md)
 - [ ] Social media links + recent-post placeholders (`SOCIAL_PROFILES` in
       `src/data/contact.ts` — Instagram & Facebook
       pages under `/follow-us`; YouTube omitted)
+      — same owner setup guide
 - [ ] Privacy Policy final copy
 - [ ] Terms and Conditions final copy
 - [ ] Photography rights for all replaced images (see `IMAGE_SOURCES.md`)

@@ -1,5 +1,10 @@
 # Backend: form emails & social links
 
+> **Owner-friendly walkthrough:** for a full checklist of which emails to use,
+> what to edit, how to connect Resend/Gmail/SMTP, and how to deploy so live
+> forms deliver — see
+> [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md).
+
 Everything you usually need to edit lives in **one file**:
 
 [`src/data/contact.ts`](../src/data/contact.ts)

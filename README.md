@@ -28,8 +28,11 @@ pnpm dev:all      # website (:5173) + API for free-class emails (:3001)
 For the frontend only: `pnpm dev`. For the API only: `pnpm dev:api`.
 
 Free-class form submissions are emailed by the small Node API — see
-[`docs/BACKEND.md`](docs/BACKEND.md). Edit recipient emails and Instagram /
-Facebook profile links in [`src/data/contact.ts`](src/data/contact.ts).
+[`docs/BACKEND.md`](docs/BACKEND.md). **Owner step-by-step:** how to link
+inboxes, Instagram/Facebook, and mail delivery is in
+[`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md).
+Edit recipient emails and social profile links in
+[`src/data/contact.ts`](src/data/contact.ts).
 
 ## 🚀 Launching your website
 
@@ -97,7 +100,9 @@ Check the [`docs/`](docs/) checklists — a few things still use placeholders:
   licensed versions.
 - Add Glen Rock's real class hours.
 - Set mail delivery in `.env` (Resend or SMTP) so free-class requests reach the
-  inbox listed in `src/data/contact.ts` — see [`docs/BACKEND.md`](docs/BACKEND.md).
+  inbox listed in `src/data/contact.ts` — follow
+  [`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md)
+  (technical reference: [`docs/BACKEND.md`](docs/BACKEND.md)).
 - Confirm testimonials, stats, and owner details with the owner.
 
 ## Available scripts
@@ -170,6 +175,7 @@ Launch-readiness documents live in [`docs/`](docs/):
 - [`IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) — photo replacement + licensing log
 - [`OWNER_APPROVAL_CHECKLIST.md`](docs/OWNER_APPROVAL_CHECKLIST.md) — facts to confirm
 - [`PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md) — placeholders to replace
+- [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md) — owner steps to link emails, social accounts, and form delivery
 - [`BACKEND.md`](docs/BACKEND.md) — free-class emails, social links, API setup
 
 ### Notes
