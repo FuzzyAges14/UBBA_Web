@@ -80,7 +80,7 @@ function LocationBlock({ loc }: { loc: Location }) {
             </a>
           )}
           {loc.page && (
-            <Link to={`/locations/${loc.id}`} className="btn btn--ghost">
+            <Link to={`/locations/${loc.id}`} className="btn btn--outline">
               {loc.name} school page
             </Link>
           )}

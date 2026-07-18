@@ -225,7 +225,7 @@ export default function LocationDetail() {
                 Just 4 Kids Events
               </Link>
               {sibling?.page && (
-                <Link to={`/locations/${sibling.id}`} className="btn btn--ghost">
+                <Link to={`/locations/${sibling.id}`} className="btn btn--outline">
                   Also see {sibling.name}
                 </Link>
               )}

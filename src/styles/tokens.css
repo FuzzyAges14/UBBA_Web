@@ -22,10 +22,11 @@
   --white: #ffffff;
   --off-white: #f6f3ee;
   --soft-gray: #e7e7e7;
-  --muted: #6d6d72;
-  --muted-light: rgba(255, 255, 255, 0.66);
-  --line: rgba(10, 10, 10, 0.1);
-  --line-2: rgba(10, 10, 10, 0.06);
+  /* Muted body copy — tuned for ≥4.5:1 on --off-white / white cards */
+  --muted: #58585e;
+  --muted-light: rgba(255, 255, 255, 0.78);
+  --line: rgba(10, 10, 10, 0.14);
+  --line-2: rgba(10, 10, 10, 0.1);
   --line-dark: rgba(255, 255, 255, 0.12);
   --ink: #14141a;
 
