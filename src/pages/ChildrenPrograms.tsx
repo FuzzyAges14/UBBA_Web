@@ -35,7 +35,7 @@ export default function ChildrenPrograms() {
         intro="Confidence, focus, discipline, and respect — built one class at a time. Age-specific Taekwondo for kids and teens at our Allendale and Midland Park schools."
       />
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="angle" />
 
       <section className="section">
         <div className="container program-overview__grid">
@@ -58,7 +58,7 @@ export default function ChildrenPrograms() {
         </div>
       </section>
 
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="belt" />
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
@@ -104,7 +104,7 @@ export default function ChildrenPrograms() {
         </div>
       </section>
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="fade" />
 
       <section className="section section--offwhite">
         <div className="container interior-faq">

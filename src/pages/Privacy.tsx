@@ -11,7 +11,7 @@ export default function Privacy() {
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Privacy Policy' }]}
         title="Privacy Policy"
       />
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="fade" />
       <section className="section">
         <div className="container legal-prose">
           <div className="stack-gap">

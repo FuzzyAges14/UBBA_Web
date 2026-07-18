@@ -49,7 +49,7 @@ export default function ProgramDetail() {
         }
       />
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="angle" />
 
       <section className="section">
         <div className="container split">
@@ -91,7 +91,7 @@ export default function ProgramDetail() {
         </div>
       </section>
 
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="belt" />
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
@@ -125,7 +125,7 @@ export default function ProgramDetail() {
 
       {related.length > 0 && (
         <>
-          <SectionSeam from="dark" to="off-white" />
+          <SectionSeam from="dark" to="off-white" variant="fade" />
           <section className="section">
             <div className="container">
               <Reveal>
@@ -166,7 +166,7 @@ export default function ProgramDetail() {
         </>
       )}
 
-      {!related.length && <SectionSeam from="dark" to="off-white" />}
+      {!related.length && <SectionSeam from="dark" to="off-white" variant="line" />}
 
       <section className="section section--offwhite">
         <div className="container interior-faq">

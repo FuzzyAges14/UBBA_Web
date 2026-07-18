@@ -26,7 +26,7 @@ export default function AdultPrograms() {
         intro="Fitness, focus, and practical self-defense for adults — plus family training options. Beginners are welcome at our Allendale and Midland Park schools."
       />
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="angle" />
 
       <section className="section">
         <div className="container program-overview__grid">
@@ -54,7 +54,7 @@ export default function AdultPrograms() {
         </div>
       </section>
 
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="line" />
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
@@ -93,7 +93,7 @@ export default function AdultPrograms() {
         </div>
       </section>
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="belt" />
 
       <section className="section section--offwhite">
         <div className="container interior-faq">

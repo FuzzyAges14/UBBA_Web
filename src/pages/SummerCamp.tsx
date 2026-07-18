@@ -33,7 +33,7 @@ export default function SummerCamp() {
         </div>
       </PageHero>
 
-      <SectionSeam from="j4k-hero" to="j4k-sun" />
+      <SectionSeam from="j4k-hero" to="j4k-sun" variant="fade" />
 
       <section className="section j4k-surface j4k-surface--sun">
         <div className="j4k-confetti" aria-hidden="true" />
@@ -57,7 +57,7 @@ export default function SummerCamp() {
         </div>
       </section>
 
-      <SectionSeam from="j4k-sun" to="off-white" />
+      <SectionSeam from="j4k-sun" to="off-white" variant="wave" />
 
       <section className="section">
         <div className="container split">

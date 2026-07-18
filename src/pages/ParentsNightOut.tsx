@@ -33,7 +33,7 @@ export default function ParentsNightOut() {
         </div>
       </PageHero>
 
-      <SectionSeam from="j4k-hero" to="j4k" />
+      <SectionSeam from="j4k-hero" to="j4k" variant="angle" />
 
       <section className="section j4k-surface">
         <div className="j4k-confetti" aria-hidden="true" />
@@ -57,7 +57,7 @@ export default function ParentsNightOut() {
         </div>
       </section>
 
-      <SectionSeam from="j4k" to="off-white" />
+      <SectionSeam from="j4k" to="off-white" variant="line" />
 
       <section className="section">
         <div className="container split">
