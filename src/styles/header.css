@@ -113,6 +113,7 @@
   align-items: center;
   gap: 0.85rem;
   flex-shrink: 0;
+  margin-left: 0.5rem;
 }
 /* Compact CTA so the long free-class label doesn’t dominate the bar */
 .header .btn--header {
