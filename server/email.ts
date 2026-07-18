@@ -42,6 +42,15 @@ function socialLinksBlock(profiles: SocialProfile[]): { text: string; html: stri
   }
 }
 
+/** Human-readable request label for free-class vs Just 4 Kids inquiries. */
+export function requestLabelForProgram(program?: string): string {
+  const p = program?.trim() || ''
+  if (p === 'Birthday Parties') return 'Birthday Party Inquiry'
+  if (p === 'Summer / Day Camp') return 'Summer Camp Inquiry'
+  if (p === "Parents' Night Out") return "Parents' Night Out Inquiry"
+  return serverConfig.subjectPrefix || 'Free Class Request'
+}
+
 export function buildLeadEmail(lead: LeadPayload) {
   const submittedAt = formatSubmittedAt()
   const location = lead.location?.trim() || 'Not specified'
@@ -49,14 +58,15 @@ export function buildLeadEmail(lead: LeadPayload) {
   const message = lead.message?.trim() || '(No message provided)'
   const source = lead.source?.trim() || 'Website form'
   const social = socialLinksBlock(serverConfig.socialProfiles)
+  const requestLabel = requestLabelForProgram(lead.program)
 
-  const subject = `${serverConfig.subjectPrefix} — ${lead.name}${
+  const subject = `${requestLabel} — ${lead.name}${
     lead.location?.trim() ? ` (${lead.location.trim()})` : ''
   }`
 
   const text = [
-    'FREE CLASS REQUEST',
-    '==================',
+    requestLabel.toUpperCase(),
+    '='.repeat(Math.min(requestLabel.length, 32)),
     '',
     `Name:       ${lead.name}`,
     `Email:      ${lead.email}`,
@@ -89,7 +99,7 @@ export function buildLeadEmail(lead: LeadPayload) {
     <div style="background:#0A0A0A;padding:20px 24px;">
       <div style="height:4px;background:linear-gradient(90deg,#f4f4f4 0 25%,#2563eb 25% 50%,#C41230 50% 75%,#0A0A0A 75% 100%);margin-bottom:14px;border-radius:2px;"></div>
       <p style="margin:0;color:#C9A227;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">United Black Belt Academy</p>
-      <h1 style="margin:8px 0 0;color:#ffffff;font-size:22px;line-height:1.25;">Free Class Request</h1>
+      <h1 style="margin:8px 0 0;color:#ffffff;font-size:22px;line-height:1.25;">${escapeHtml(requestLabel)}</h1>
     </div>
     <div style="padding:8px 10px 0;">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
@@ -195,7 +205,7 @@ export async function deliverLeadEmail(lead: LeadPayload): Promise<{ mode: 'emai
   const transport = serverConfig.transport
 
   if (transport.kind === 'log') {
-    console.log('\n——— Free class request (email not configured — logging only) ———')
+    console.log(`\n——— ${requestLabelForProgram(lead.program)} (email not configured — logging only) ———`)
     console.log(`To: ${to.join(', ')}`)
     console.log(`From: ${from}`)
     if (replyTo) console.log(`Reply-To: ${replyTo}`)

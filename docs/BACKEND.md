@@ -13,13 +13,14 @@ Everything you usually need to edit lives in **one file**:
 
 Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.example`](../.env.example). Never commit `.env`.
 
-## How a free-class request works
+## How a free-class / Just 4 Kids request works
 
-1. Someone submits the form on the site (`LeadForm`).
+1. Someone submits a form on the site (`LeadForm` or Just 4 Kids `EventInquiryForm`).
 2. The browser `POST`s to `/api/leads`.
 3. The API validates the fields, builds a detailed HTML + plain-text email, and sends it to every address in `notifyEmails`.
-4. **Reply-To** is set to the visitor’s email, so staff can hit Reply and reach them directly.
-5. Configured Instagram / Facebook profile links are included at the bottom of the email.
+4. The email subject / title follows the selected program (e.g. “Birthday Party Inquiry” vs “Free Class Request”).
+5. **Reply-To** is set to the visitor’s email, so staff can hit Reply and reach them directly.
+6. Configured Instagram / Facebook profile links are included at the bottom of the email.
 
 ## Run locally
 
