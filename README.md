@@ -121,6 +121,11 @@ Check the [`docs/`](docs/) checklists — a few things still use placeholders:
 | `pnpm lint` | Run ESLint over the project |
 | `pnpm test` | Run the Vitest test suite once |
 | `pnpm test:watch` | Run Vitest in watch mode |
+| `pnpm test:ci` | Lint, Vitest, and production build (CI default) |
+| `pnpm test:e2e` | Playwright end-to-end tests (runs against `pnpm preview`) |
+| `pnpm test:e2e:ui` | Playwright UI mode |
+
+Manual QA checklist and strategy: [`docs/QA.md`](docs/QA.md).
 
 ## Project structure
 
