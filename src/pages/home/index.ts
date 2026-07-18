@@ -1,4 +1,5 @@
 export { default as HeroSection } from './HeroSection'
+export { default as TrustStrip } from './TrustStrip'
 export { default as ProgramDiscoverySection } from './ProgramDiscoverySection'
 export { default as BenefitsSection } from './BenefitsSection'
 export { default as StatsSection } from './StatsSection'
