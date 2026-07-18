@@ -7,7 +7,14 @@ import CtaBanner from '../components/CtaBanner'
 import ProgramCard from '../components/ProgramCard'
 import SectionSeam from '../components/SectionSeam'
 import NotFound from './NotFound'
-import { getProgram, FAQS, SITE, LOCATIONS, imageDimensionsFor } from '../data/site'
+import {
+  getProgram,
+  FAQS,
+  SITE,
+  LOCATIONS,
+  imageDimensionsFor,
+  imageSrcSetFor,
+} from '../data/site'
 
 export default function ProgramDetail() {
   const { slug } = useParams()
@@ -52,10 +59,11 @@ export default function ProgramDetail() {
                 alt=""
                 width={dims.width}
                 height={dims.height}
+                srcSet={imageSrcSetFor(program.image)}
                 loading="lazy"
                 sizes="(max-width: 900px) 100vw, 42vw"
               />
-              <span className="photo__credit">Placeholder photo</span>
+              <span className="photo__credit">Temporary stock photo</span>
             </div>
           </Reveal>
           <Reveal delay={100}>

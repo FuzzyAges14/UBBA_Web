@@ -5,7 +5,7 @@ import OptimizedImage from './OptimizedImage'
 describe('OptimizedImage', () => {
   it('sets dimensions and defaults to lazy loading', () => {
     const { container } = render(
-      <OptimizedImage src="/media/kids-bow.jpg" alt="Class bow" width={1280} height={720} />,
+      <OptimizedImage src="/media/kids-group.jpg" alt="Class bow" width={1280} height={720} />,
     )
     const img = container.querySelector('img') as HTMLImageElement
     expect(img).toHaveAttribute('width', '1280')
