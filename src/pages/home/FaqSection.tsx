@@ -5,13 +5,18 @@ import { FAQS } from '../../data/site'
 
 export default function FaqSection() {
   return (
-    <section className="section section--offwhite">
-      <div className="container" style={{ maxWidth: '820px' }}>
+    <section className="section section--offwhite home-faq">
+      <div className="container home-faq__inner">
         <Reveal>
-          <SectionHeading
-            eyebrow="Good To Know"
-            title={<>Questions parents &amp; new students ask</>}
-          />
+          <div className="home-section-head">
+            <span className="home-section-num" aria-hidden="true">
+              09
+            </span>
+            <SectionHeading
+              eyebrow="Good To Know"
+              title={<>Questions parents &amp; new students ask</>}
+            />
+          </div>
         </Reveal>
         <Reveal delay={80}>
           <div className="mt">

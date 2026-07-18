@@ -1,47 +1,64 @@
-import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
-import Placeholder from '../../components/Placeholder'
+import OptimizedImage from '../../components/OptimizedImage'
 import SectionHeading from '../../components/SectionHeading'
 import Taegeuk from '../../components/Taegeuk'
-import { SITE, VALUES } from '../../data/site'
+import { IMAGE_DIMENSIONS, IMAGES } from '../../data/site'
+
+const BENEFIT_POINTS = [
+  'Confidence that shows up at school, work, and home',
+  'Discipline and focus practiced every class',
+  'Fitness and coordination for every age',
+  'Practical self-defense in a welcoming dojang',
+] as const
 
 export default function BenefitsSection() {
   return (
-    <section className="section section--dark">
+    <section className="section section--dark home-benefits">
       <div className="dojang" aria-hidden="true" />
-      <div className="container split" style={{ position: 'relative' }}>
+      <div className="motion-lines" aria-hidden="true">
+        <span style={{ top: '18%', left: '-5%' }} />
+        <span style={{ top: '62%', left: '45%', width: '55%' }} />
+      </div>
+      <div className="container split home-benefits__split">
         <Reveal>
-          <SectionHeading
-            eyebrow="Why It Matters"
-            title={
-              <>
-                We help parents raise confident leaders &amp; adults reach their full
-                potential
-              </>
-            }
-            lead="Martial arts is about far more than kicks and punches. Every class is built to strengthen the skills that carry into school, work, and life."
-          />
-          <div className="pill-row">
-            {VALUES.map((v) => (
-              <span className="pill" key={v}>
-                {v}
-              </span>
-            ))}
+          <div className="home-section-head home-section-head--dark">
+            <span className="home-section-num" aria-hidden="true">
+              02
+            </span>
+            <SectionHeading
+              eyebrow="Why It Matters"
+              title={
+                <>
+                  We help parents raise confident leaders &amp; adults reach their full
+                  potential
+                </>
+              }
+              lead="Martial arts is about far more than kicks and punches. Every class is built to strengthen the skills that carry into school, work, and life."
+            />
           </div>
-          <Link to="/contact" className="btn btn--blue mt">
-            {SITE.primaryCta} <span className="btn__arrow">→</span>
-          </Link>
+          <ul className="checklist mt">
+            {BENEFIT_POINTS.map((item) => (
+              <li key={item} style={{ color: 'var(--muted-light)' }}>
+                {item}
+              </li>
+            ))}
+          </ul>
         </Reveal>
         <Reveal delay={120}>
-          <div style={{ position: 'relative' }}>
+          <div className="home-benefits__media">
             <div className="accent-orb" aria-hidden="true">
               <Taegeuk size={88} spin />
             </div>
-            <Placeholder
-              label="Instructor coaching a young student"
-              icon="🏆"
-              variant="tall"
-            />
+            <figure className="photo photo--tall photo--zoom">
+              <OptimizedImage
+                src={IMAGES.action}
+                alt="Martial arts training in a dojang — temporary stock imagery"
+                {...IMAGE_DIMENSIONS.action}
+                loading="lazy"
+                sizes="(max-width: 900px) 100vw, 45vw"
+              />
+              <figcaption className="photo__credit">Placeholder photo</figcaption>
+            </figure>
           </div>
         </Reveal>
       </div>

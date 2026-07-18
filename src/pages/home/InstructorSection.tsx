@@ -1,28 +1,39 @@
-import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
 import Placeholder from '../../components/Placeholder'
 import SectionHeading from '../../components/SectionHeading'
-import { OWNER, SITE } from '../../data/site'
+import { OWNER } from '../../data/site'
 
+/**
+ * Owner portrait must remain an authentic UBBA photo.
+ * Do not substitute stock — see docs/IMAGE_SOURCES.md.
+ */
 export default function InstructorSection() {
   return (
-    <section className="section section--dark" id="owner">
+    <section className="section section--dark home-owner" id="owner">
       <div className="container owner">
         <div className="owner__sticky">
           <Reveal>
             <Placeholder
-              label={`${OWNER.name}, Head Instructor`}
+              label={`OWNER PHOTO REQUIRED — ${OWNER.name}, Head Instructor`}
               icon="🥋"
               variant="tall"
             />
+            <p className="ph-note mt-sm">
+              Authentic owner portrait required — do not substitute with misleading stock
+            </p>
           </Reveal>
         </div>
         <Reveal delay={100} className="owner__copy">
-          <SectionHeading
-            eyebrow="Meet The Owner"
-            title={`Hi, my name is ${OWNER.name}`}
-            lead={OWNER.intro}
-          />
+          <div className="home-section-head home-section-head--dark">
+            <span className="home-section-num" aria-hidden="true">
+              04
+            </span>
+            <SectionHeading
+              eyebrow="Meet The Owner"
+              title={`Hi, my name is ${OWNER.name}`}
+              lead={OWNER.intro}
+            />
+          </div>
           <blockquote className="owner__quote">"{OWNER.quote}"</blockquote>
           <div className="stack-gap">
             {OWNER.story.map((para) => (
@@ -39,9 +50,6 @@ export default function InstructorSection() {
               </li>
             ))}
           </ul>
-          <Link to="/contact" className="btn btn--blue mt">
-            {SITE.primaryCta} <span className="btn__arrow">→</span>
-          </Link>
         </Reveal>
       </div>
     </section>

@@ -5,14 +5,26 @@ import { TRIAL_HIGHLIGHTS } from '../../data/site'
 
 export default function TrialSection() {
   return (
-    <section className="section" id="trial">
+    <section className="section home-trial" id="trial">
+      <div className="dojang dojang--light" aria-hidden="true" />
       <div className="container split">
         <Reveal>
-          <SectionHeading
-            eyebrow="Get Started"
-            title="Crush your fitness goals while learning how to protect yourself"
-            lead="Tell us a little about your goals and preferred school. We'll help you choose a program and schedule a free introductory class — no pressure, just a welcoming first step onto the mat."
-          />
+          <div className="home-section-head">
+            <span className="home-section-num" aria-hidden="true">
+              03
+            </span>
+            <SectionHeading
+              eyebrow="Get Started"
+              title="Crush your fitness goals while learning how to protect yourself"
+              lead="Tell us a little about your goals and preferred school. We'll help you choose a program and schedule a free introductory class — no pressure, just a welcoming first step onto the mat."
+            />
+          </div>
+          <div className="belt-bar home-trial__belt" aria-hidden="true">
+            <span style={{ background: '#f4f4f4' }} />
+            <span style={{ background: 'var(--blue)' }} />
+            <span style={{ background: 'var(--red)' }} />
+            <span style={{ background: 'var(--black)' }} />
+          </div>
           <ul className="checklist mt">
             {TRIAL_HIGHLIGHTS.map((item) => (
               <li key={item}>{item}</li>

@@ -197,7 +197,7 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.95rem;
-  color: inherit;
+  color: var(--red);
   text-decoration: none;
   padding: 0.2rem 0;
   min-height: 44px;
@@ -245,4 +245,26 @@
 
 .text-link:active .btn__arrow {
   transform: translateX(2px);
+}
+
+/* On red CTA banners — keep white and skip the underline wipe */
+.text-link--on-red {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.text-link--on-red::after {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link--on-red:hover {
+    color: #fff;
+    opacity: 0.92;
+  }
+}
+
+.text-link--on-red:focus-visible {
+  outline-color: #fff;
 }

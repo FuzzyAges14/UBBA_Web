@@ -5,10 +5,15 @@ export default function TestimonialsSection() {
   const [featured, ...rest] = TESTIMONIALS
 
   return (
-    <section className="section section--dark" id="reviews">
+    <section className="section section--dark home-reviews" id="reviews">
       <div className="container">
         <Reveal>
-          <span className="eyebrow">Reviews</span>
+          <div className="home-section-head home-section-head--dark">
+            <span className="home-section-num" aria-hidden="true">
+              07
+            </span>
+            <span className="eyebrow">Reviews</span>
+          </div>
           <p className="feature-quote">"{featured.quote}"</p>
           <p className="quote__by mt">
             {featured.name}{' '}
@@ -18,16 +23,12 @@ export default function TestimonialsSection() {
             Placeholder reviews · pending owner-approved testimonials
           </p>
         </Reveal>
-        <div className="grid grid--2 mt-lg">
+
+        <div className="home-reviews__list mt-lg">
           {rest.map((t, i) => (
-            <Reveal key={t.name} delay={i * 90}>
-              <figure className="quote" style={{ margin: 0 }}>
-                <div className="quote__stars" aria-label="5 out of 5 stars">
-                  ★★★★★
-                </div>
-                <blockquote className="quote__text" style={{ margin: 0 }}>
-                  "{t.quote}"
-                </blockquote>
+            <Reveal key={t.name} delay={i * 80}>
+              <figure className="home-reviews__quote">
+                <blockquote className="home-reviews__text">"{t.quote}"</blockquote>
                 <figcaption>
                   <div className="quote__by">{t.name}</div>
                   <div className="quote__role">{t.role}</div>
