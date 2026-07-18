@@ -53,7 +53,7 @@ Screenshots: `/opt/cursor/artifacts/visual-qa/` (also produced under `test-resul
 
 | ID | Severity | Blocking? | Route | Viewport | Issue | Recommended fix | Owner |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| VQA-05 | High | Launch | `/` | Desktop (≥721px, motion allowed) | Hero MP4 still loads from Mixkit CDN (`assets.mixkit.co/.../49706-1080.mp4`). Poster is local. Third-party production dependency. | Self-host WebM/MP4 under `/media/` per media pipeline; keep poster-first + conditional load | Agent 3 / media |
+| VQA-05 | High | Launch | `/` | Desktop (≥721px, motion allowed) | **Resolved in integration (Agent 3):** hero is self-hosted `/media/hero.webm` + `/media/hero.mp4` with local poster variants. No Mixkit CDN hotlink remains. | Keep poster-first + conditional load; replace with authentic UBBA footage before launch | Done |
 | VQA-06 | Medium | Soft | `/` mobile | 320–390 short heights | Sticky `.mobile-cta` covers lower hero body copy until scroll (H1 remains visible). | Tighten hero copy length on ≤390 or add bottom padding inside hero content equal to CTA height | Homepage / chrome |
 | VQA-07 | Medium | Soft | Global mobile | ≤1120 | Sticky Call always dials Allendale (`2019622922`) even for Midland Park intent | Location-aware tel or Locations-first flow | Product |
 | VQA-08 | Medium | Soft | `/follow-us` | All | Placeholder social links (`href: '#'`) | Wire real URLs or disable until ready | Content |
