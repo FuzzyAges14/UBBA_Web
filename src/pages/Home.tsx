@@ -25,21 +25,21 @@ export default function Home() {
       <Marquee items={VALUES} />
       <TrustStrip />
       <ProgramDiscoverySection />
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="angle" />
       <BenefitsSection />
       <SectionSeam from="dark" to="graphite" variant="fade" />
       <StatsSection />
-      <SectionSeam from="graphite" to="off-white" />
+      <SectionSeam from="graphite" to="off-white" variant="belt" />
       <TrialSection />
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="line" />
       <InstructorSection />
       <SectionSeam from="dark" to="graphite" variant="fade" />
       <BeltJourneySection />
-      <SectionSeam from="graphite" to="off-white" />
+      <SectionSeam from="graphite" to="off-white" variant="angle" />
       <AudienceSection />
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="wave" />
       <TestimonialsSection />
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="belt" />
       <LocationsSection />
       <FaqSection />
       <FinalCtaSection />

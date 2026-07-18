@@ -33,7 +33,7 @@ export default function BirthdayParties() {
         </div>
       </PageHero>
 
-      <SectionSeam from="j4k-hero" to="j4k" />
+      <SectionSeam from="j4k-hero" to="j4k" variant="wave" />
 
       <section className="section j4k-surface">
         <div className="j4k-confetti" aria-hidden="true" />
@@ -57,7 +57,7 @@ export default function BirthdayParties() {
         </div>
       </section>
 
-      <SectionSeam from="j4k" to="off-white" />
+      <SectionSeam from="j4k" to="off-white" variant="fade" />
 
       <section className="section">
         <div className="container split">

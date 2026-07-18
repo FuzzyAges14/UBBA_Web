@@ -38,6 +38,19 @@
   line-height: 0;
   overflow: hidden;
 }
+
+/* Soft color blend — default / quiet neighbor */
+.section-seam--fade {
+  height: 72px;
+  background: linear-gradient(
+    to bottom,
+    var(--seam-from) 0%,
+    color-mix(in srgb, var(--seam-from) 55%, var(--seam-to)) 42%,
+    var(--seam-to) 100%
+  );
+}
+
+/* Signature curved SVG — use sparingly so it stays distinctive */
 .section-seam--wave {
   height: 64px;
   background: linear-gradient(
@@ -84,21 +97,96 @@
   opacity: 0.5;
   transform: translateY(-50%);
 }
-.section-seam--fade {
-  height: 72px;
+
+/* Diagonal slash — energetic cut between tones */
+.section-seam--angle {
+  height: 56px;
+  background: var(--seam-from);
+}
+.section-seam--angle .section-seam__svg {
+  height: 100%;
+}
+
+/* Belt-rank accent bar bridging tones */
+.section-seam--belt {
+  height: 40px;
   background: linear-gradient(
     to bottom,
     var(--seam-from) 0%,
-    color-mix(in srgb, var(--seam-from) 55%, var(--seam-to)) 42%,
+    var(--seam-from) 38%,
+    var(--seam-to) 62%,
     var(--seam-to) 100%
   );
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.section-seam__belt {
+  display: flex;
+  width: min(280px, 42vw);
+  height: 5px;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.section-seam__belt-seg {
+  flex: 1;
+}
+.section-seam__belt-seg--white {
+  background: #f5f5f5;
+}
+.section-seam__belt-seg--blue {
+  background: var(--blue);
+}
+.section-seam__belt-seg--red {
+  background: var(--red);
+}
+.section-seam__belt-seg--black {
+  background: var(--black);
+}
+
+/* Thin centered rule with a short blend */
+.section-seam--line {
+  height: 36px;
+  background: linear-gradient(
+    to bottom,
+    var(--seam-from) 0%,
+    color-mix(in srgb, var(--seam-from) 40%, var(--seam-to)) 50%,
+    var(--seam-to) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-seam__rule {
+  width: min(120px, 28vw);
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--red) 70%, transparent) 35%,
+    color-mix(in srgb, var(--blue) 70%, transparent) 65%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
 @media (max-width: 640px) {
   .section-seam--wave {
     height: 48px;
   }
   .section-seam--fade {
     height: 56px;
+  }
+  .section-seam--angle {
+    height: 40px;
+  }
+  .section-seam--belt {
+    height: 32px;
+  }
+  .section-seam--line {
+    height: 28px;
   }
 }
 

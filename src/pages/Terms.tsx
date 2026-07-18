@@ -11,7 +11,7 @@ export default function Terms() {
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Terms and Conditions' }]}
         title="Terms and Conditions"
       />
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="fade" />
       <section className="section">
         <div className="container legal-prose">
           <div className="stack-gap">

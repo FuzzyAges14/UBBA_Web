@@ -119,7 +119,7 @@ export default function Just4Kids() {
         </div>
       </section>
 
-      <SectionSeam from="j4k-hero" to="off-white" />
+      <SectionSeam from="j4k-hero" to="off-white" variant="wave" />
 
       <section className="section">
         <div className="container">
@@ -145,7 +145,7 @@ export default function Just4Kids() {
         </div>
       </section>
 
-      <SectionSeam from="off-white" to="j4k" />
+      <SectionSeam from="off-white" to="j4k" variant="angle" />
 
       <section className="section j4k-surface">
         <div className="j4k-confetti" aria-hidden="true" />
@@ -186,7 +186,7 @@ export default function Just4Kids() {
         </div>
       </section>
 
-      <SectionSeam from="j4k" to="off-white" />
+      <SectionSeam from="j4k" to="off-white" variant="line" />
 
       <section className="section j4k-close">
         <div className="container">

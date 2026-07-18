@@ -59,7 +59,7 @@ export default function LocationDetail() {
         </div>
       </PageHero>
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="fade" />
 
       <section className="section">
         <div className="container split">
@@ -87,7 +87,7 @@ export default function LocationDetail() {
         </div>
       </section>
 
-      <SectionSeam from="off-white" to="dark" />
+      <SectionSeam from="off-white" to="dark" variant="angle" />
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
@@ -166,7 +166,7 @@ export default function LocationDetail() {
         </div>
       </section>
 
-      <SectionSeam from="dark" to="off-white" />
+      <SectionSeam from="dark" to="off-white" variant="belt" />
 
       <section className="section">
         <div className="container">
