@@ -23,8 +23,8 @@ accordingly (include `www` only if that is the canonical host).
    `twitterCard`, `twitterTitle`, `twitterDescription`, `twitterImage`, `robots`.
 4. Program detail pages (`/programs/:slug`) inherit titles/descriptions from
    `PROGRAM_DETAILS` when no static override exists.
-5. Future location pages: copy entries from `LOCATION_SEO` into the live
-   resolver once `/locations/allendale` and `/locations/midland-park` exist.
+5. Location landing pages (`/locations/allendale`, `/locations/midland-park`)
+   are included in `SEO` / `LOCATION_SEO` and the sitemap.
 
 ## Social share image
 

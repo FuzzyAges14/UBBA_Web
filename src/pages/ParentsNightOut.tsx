@@ -78,8 +78,9 @@ export default function ParentsNightOut() {
               Drop them off. Enjoy your night.
             </h2>
             <p className="section-lead">
-              Once a month on a Friday, kids get games, laughter, and pizza while you get a real
-              night off. Open to non-students — bring friends!
+              Once a month on a Friday, kids get supervised games, laughter, and pizza while
+              you get a real night off — dinner, errands, or downtime without planning
+              childcare. Open to non-students — bring friends!
             </p>
             <h3 style={{ marginTop: '1.6rem', fontSize: '1.2rem' }}>What the evening looks like</h3>
             <ul className="checklist mt-sm">
@@ -129,6 +130,11 @@ export default function ParentsNightOut() {
             <div className="j4k-signup__intro">
               <span className="eyebrow">Reserve Early</span>
               <h2 className="section-title">Spots fill fast</h2>
+              <p className="section-lead" style={{ marginTop: '0.75rem' }}>
+                Submit an inquiry with how many kids are coming and which school you prefer.
+                We reply with the next Friday date, capacity, and current details — dates and
+                fees still need owner confirmation each season.
+              </p>
               <ol className="j4k-easy">
                 <li>
                   <strong>Tell us who&apos;s coming</strong>
@@ -143,6 +149,17 @@ export default function ParentsNightOut() {
                   <span>Pizza, games, and supervised fun await.</span>
                 </li>
               </ol>
+              <div className="flex-actions mt">
+                <Link to="/locations/allendale" className="btn btn--outline">
+                  Allendale
+                </Link>
+                <Link to="/locations/midland-park" className="btn btn--outline">
+                  Midland Park
+                </Link>
+                <Link to="/contact" className="btn btn--ghost">
+                  Contact
+                </Link>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={100}>

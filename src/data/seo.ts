@@ -112,6 +112,14 @@ export const SEO: Record<string, SeoMeta> = {
     `Contact & Free Class Request | ${brand}`,
     'Contact United Black Belt Academy in Allendale or Midland Park, NJ. Request a free class, ask about programs, or get directions to a location near you.',
   ),
+  '/locations/allendale': meta(
+    `Taekwondo & Martial Arts in Allendale, NJ | ${brand}`,
+    'Train at United Black Belt Academy in Allendale, NJ — kids, teen, and adult martial arts with a free trial class. Confirm hours and enrollment details on this page.',
+  ),
+  '/locations/midland-park': meta(
+    `Taekwondo & Martial Arts in Midland Park, NJ | ${brand}`,
+    'Train at United Black Belt Academy in Midland Park, NJ — family-friendly martial arts for kids, teens, and adults. Request a free class to get started.',
+  ),
   '/privacy': meta(
     `Privacy Policy | ${brand}`,
     'Privacy policy for United Black Belt Academy — how we handle information submitted through our website forms and contact requests.',
@@ -122,20 +130,10 @@ export const SEO: Record<string, SeoMeta> = {
   ),
 }
 
-/**
- * Location landing-page SEO — ready for Agent 2 routes
- * (`/locations/allendale`, `/locations/midland-park`).
- * Not wired into the live resolver or sitemap until those pages exist.
- */
+/** Alias kept for docs / callers that reference location SEO as a group. */
 export const LOCATION_SEO: Record<string, SeoMeta> = {
-  '/locations/allendale': meta(
-    `Taekwondo & Martial Arts in Allendale, NJ | ${brand}`,
-    'Train at United Black Belt Academy in Allendale, NJ — kids, teen, and adult martial arts with a free trial class. Confirm hours and enrollment details on this page.',
-  ),
-  '/locations/midland-park': meta(
-    `Taekwondo & Martial Arts in Midland Park, NJ | ${brand}`,
-    'Train at United Black Belt Academy in Midland Park, NJ — family-friendly martial arts for kids, teens, and adults. Request a free class to get started.',
-  ),
+  '/locations/allendale': SEO['/locations/allendale'],
+  '/locations/midland-park': SEO['/locations/midland-park'],
 }
 
 const NOT_FOUND_SEO: SeoMeta = meta(
@@ -201,8 +199,8 @@ export function resolveSeo(pathname: string): ResolvedSeo {
 }
 
 /**
- * Indexable paths for sitemap generation (static pages + program details).
- * Excludes 404 and future location pages until those routes ship.
+ * Indexable paths for sitemap generation (static pages + program details +
+ * location landing pages). Excludes 404 / `indexable: false` routes.
  */
 export function getIndexablePaths(): string[] {
   const staticPaths = Object.entries(SEO)
