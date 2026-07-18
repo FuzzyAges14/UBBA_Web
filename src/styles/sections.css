@@ -804,7 +804,14 @@
 .home-feature {
   min-height: 100%;
   text-decoration: none;
-  color: inherit;
+  color: #fff;
+}
+.home-feature .feature__body h3,
+.home-feature .feature__body p {
+  color: #fff;
+}
+.home-feature .feature__body p {
+  color: rgba(255, 255, 255, 0.86);
 }
 .home-feature:focus-visible {
   outline: 3px solid var(--blue-soft);
