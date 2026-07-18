@@ -83,11 +83,19 @@ Primary content types live in `src/data/site.ts` (and `contact.ts` for emails /
 social URLs). Notable unions/interfaces:
 
 - `ProgramId`, `ProgramCard`, `ProgramDetail`, `ProgramCategory`
-- `Location`, `Testimonial`, `Faq`, `BeltStep`, `Stat`
-- `NavLink`, `MegaGroup`, `SeoMeta`
+- `Location`, `LocationId`, `Testimonial`, `Faq`, `BeltStep`, `Stat`
+- `NavLink`, `MegaGroup`
 - `EventInquiryIntent`, `Just4KidsOffering`, `Just4KidsDetail`
 - `AudienceFeature`, `OwnerProfile`
 - `getVisibleLocations()` for the Glen Rock feature flag
+
+SEO metadata types and route records live in `src/data/seo.ts` (canonical /
+Open Graph / Twitter). Do not reintroduce a duplicate `SeoMeta` / `SEO` export
+in `site.ts`.
+
+`ProgramCard` accepts `titleAs` (`h2` | `h3`) so listing pages can keep the
+SEO heading hierarchy (`h2` cards under a page H1) while homepage sections keep
+`h3` under section H2s.
 
 ## Editing guide
 
