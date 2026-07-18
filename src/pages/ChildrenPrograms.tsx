@@ -1,13 +1,20 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Placeholder from '../components/Placeholder'
+import OptimizedImage from '../components/OptimizedImage'
 import CtaBanner from '../components/CtaBanner'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
 import ProgramCard from '../components/ProgramCard'
 import SectionHeading from '../components/SectionHeading'
 import SectionSeam from '../components/SectionSeam'
-import { CHILDREN_PROGRAMS, FAQS, PROGRAM_GLYPHS, SITE } from '../data/site'
+import {
+  CHILDREN_PROGRAMS,
+  FAQS,
+  IMAGE_DIMENSIONS,
+  IMAGES,
+  PROGRAM_GLYPHS,
+  SITE,
+} from '../data/site'
 
 const LEARN = [
   'Focus & listening skills that carry into the classroom',
@@ -22,6 +29,7 @@ export default function ChildrenPrograms() {
   return (
     <>
       <PageHero
+        family="program"
         crumbs={[{ label: 'Home', to: '/' }, { label: "Children's Programs" }]}
         title="Children's Martial Arts Programs"
         intro="Confidence, focus, discipline, and respect — built one class at a time. Age-specific Taekwondo for kids and teens at our Allendale and Midland Park schools."
@@ -30,7 +38,7 @@ export default function ChildrenPrograms() {
       <SectionSeam from="dark" to="off-white" />
 
       <section className="section">
-        <div className="container">
+        <div className="container program-overview__grid">
           <div className="grid grid--3">
             {CHILDREN_PROGRAMS.map((p, i) => (
               <Reveal as="article" key={p.id} delay={i * 90}>
@@ -54,7 +62,7 @@ export default function ChildrenPrograms() {
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container split" style={{ position: 'relative' }}>
+        <div className="container split interior-split">
           <Reveal>
             <SectionHeading
               eyebrow="What Students Learn"
@@ -81,7 +89,20 @@ export default function ChildrenPrograms() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <Placeholder label="Kids Taekwondo class" icon="🥋" variant="tall" />
+            <figure className="interior-media interior-media--tall interior-media--focus-top">
+              <div className="interior-media__veil" aria-hidden="true" />
+              <OptimizedImage
+                src={IMAGES.kidsGroup}
+                alt="Young martial arts students bowing together in class (temporary stock photography)"
+                width={IMAGE_DIMENSIONS.kidsGroup.width}
+                height={IMAGE_DIMENSIONS.kidsGroup.height}
+                loading="lazy"
+                sizes="(max-width: 900px) 100vw, 42vw"
+              />
+              <figcaption className="interior-media__credit">
+                Temporary stock — not UBBA students
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -89,7 +110,7 @@ export default function ChildrenPrograms() {
       <SectionSeam from="dark" to="off-white" />
 
       <section className="section section--offwhite">
-        <div className="container" style={{ maxWidth: '820px' }}>
+        <div className="container interior-faq">
           <Reveal>
             <SectionHeading
               eyebrow="Parent FAQs"

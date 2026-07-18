@@ -65,6 +65,7 @@ export default function BirthdayParties() {
             <MediaFrame
               label="Birthday party photo — coming soon"
               icon={detail.mediaIcon}
+              ownerRequired
               stickers={[
                 { kind: 'cake', spot: 'tr', rotate: -14, delay: 0 },
                 { kind: 'shades', spot: 'bl', rotate: 10, delay: 0.35 },

@@ -68,6 +68,18 @@ export default function Just4Kids() {
           >
             {SITE.shortName}
           </motion.p>
+          <motion.div
+            className="j4k-hero__accent"
+            aria-hidden="true"
+            custom={0}
+            initial="hidden"
+            animate="show"
+            variants={heroMotion}
+          >
+            <span className="j4k-hero__accent-bar j4k-hero__accent-bar--red" />
+            <span className="j4k-hero__accent-dot" />
+            <span className="j4k-hero__accent-bar j4k-hero__accent-bar--blue" />
+          </motion.div>
           <motion.h1 custom={1} initial="hidden" animate="show" variants={heroMotion}>
             The fun doesn&apos;t stop at the mat!
           </motion.h1>
@@ -94,6 +106,9 @@ export default function Just4Kids() {
             <Link to="/just-4-kids/summer-camp" className="btn btn--outline btn--lg">
               Explore Camp
             </Link>
+            <Link to="/just-4-kids/parents-night-out" className="btn btn--outline btn--lg">
+              Parents&apos; Night Out
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -105,6 +120,10 @@ export default function Just4Kids() {
           <Reveal>
             <span className="eyebrow">How It Works</span>
             <h2 className="section-title">Three steps to fun</h2>
+            <p className="section-lead">
+              From inquiry to drop-off, each Just 4 Kids experience is built for busy parents and
+              high-energy kids.
+            </p>
           </Reveal>
           <div className="grid grid--3 mt" style={{ rowGap: '2.6rem' }}>
             {STEPS.map((s, i) => (
@@ -140,6 +159,7 @@ export default function Just4Kids() {
                     label={prog.title}
                     icon={prog.icon}
                     stickers={TILE_STICKERS[prog.id] ?? []}
+                    ownerRequired
                   />
                   <div className="j4k-tile__body">
                     <span className="card__ages">{prog.tag}</span>
@@ -156,6 +176,29 @@ export default function Just4Kids() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <SectionSeam from="j4k" to="off-white" />
+
+      <section className="section j4k-close">
+        <div className="container">
+          <Reveal>
+            <span className="eyebrow">Ready When You Are</span>
+            <h2 className="section-title">Questions about Just 4 Kids?</h2>
+            <p className="section-lead">
+              Tell us which experience you want and which school works best — Allendale or Midland
+              Park. We&apos;ll confirm details before anything is booked.
+            </p>
+            <div className="flex-actions mt">
+              <Link to="/contact" className="btn btn--gold btn--lg">
+                {SITE.primaryCta} <span className="btn__arrow" aria-hidden="true">→</span>
+              </Link>
+              <Link to="/just-4-kids/birthday-parties" className="btn btn--outline btn--lg">
+                Schedule a Party
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>
