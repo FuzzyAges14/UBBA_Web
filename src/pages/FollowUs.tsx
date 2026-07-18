@@ -35,7 +35,7 @@ export default function FollowUs() {
                   </span>
                   <div className="pcard__body">
                     <span className="pcard__age">{network.handle}</span>
-                    <h3 className="pcard__title">{network.label}</h3>
+                    <h2 className="pcard__title">{network.label}</h2>
                     <p className="pcard__text">{network.blurb}</p>
                     <Link to={`/follow-us/${network.slug}`} className="pcard__cta">
                       See Recent Posts <span className="btn__arrow">→</span>
