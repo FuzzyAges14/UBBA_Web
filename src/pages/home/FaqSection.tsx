@@ -10,19 +10,17 @@ export default function FaqSection() {
         <Reveal>
           <div className="home-section-head">
             <span className="home-section-num" aria-hidden="true">
-              09
+              07
             </span>
             <div className="home-section-head__body">
               <SectionHeading
                 eyebrow="Good To Know"
                 title={<>Questions parents &amp; new students ask</>}
               />
+              <div className="mt">
+                <Faq items={FAQS} />
+              </div>
             </div>
-          </div>
-        </Reveal>
-        <Reveal delay={80}>
-          <div className="mt">
-            <Faq items={FAQS} />
           </div>
         </Reveal>
       </div>

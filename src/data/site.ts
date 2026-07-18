@@ -203,39 +203,6 @@ export type ProgramCard = {
   image?: string
 }
 
-/** Homepage “You Belong Here” discovery tiles. */
-export type AudienceFeature = {
-  title: string
-  text: string
-  to: string
-  icon: string
-  cta: string
-}
-
-export const HOME_AUDIENCE_FEATURES: AudienceFeature[] = [
-  {
-    title: "Children's Classes",
-    text: 'Confidence, listening, discipline, respect, and friendships — the foundation for confident kids.',
-    to: '/programs/children',
-    icon: '🧒',
-    cta: "Explore Children's Programs",
-  },
-  {
-    title: 'Adult Classes',
-    text: 'Fitness, self-defense, stress relief, and real community for every level.',
-    to: '/programs/adult',
-    icon: '💪',
-    cta: 'Explore Adult Programs',
-  },
-  {
-    title: 'Workshops & Special Events',
-    text: 'Belt testing, tournaments, seminars, camps, and family events all year round.',
-    to: '/just-4-kids',
-    icon: '🎉',
-    cta: 'See Just 4 Kids',
-  },
-]
-
 /** Checklist bullets beside the homepage free-class form. */
 export const TRIAL_HIGHLIGHTS = [
   'Kids, teens, and adult programs',

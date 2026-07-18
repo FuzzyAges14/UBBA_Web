@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import MediaFrame from '../components/MediaFrame'
 import SectionSeam from '../components/SectionSeam'
+import type { FunStickerKind } from '../components/FunSticker'
 import { IMAGES, JUST_4_KIDS, SITE } from '../data/site'
 
 const TILE_IMAGES: Record<string, string> = {
@@ -10,7 +11,6 @@ const TILE_IMAGES: Record<string, string> = {
   'summer-camp': IMAGES.summerCamp,
   'parents-night-out': IMAGES.parentsNightOut,
 }
-import type { FunStickerKind } from '../components/FunSticker'
 
 const STEPS = [
   { t: 'Select Program', d: 'Pick a birthday bash, summer camp, or parents’ night out.' },
@@ -99,23 +99,6 @@ export default function Just4Kids() {
             Birthday bashes, summer adventures, and pizza-powered parents&apos; nights out — packed
             with awesome activities kids love.
           </motion.p>
-          <motion.div
-            className="flex-actions"
-            custom={3}
-            initial="hidden"
-            animate="show"
-            variants={heroMotion}
-          >
-            <Link to="/just-4-kids/birthday-parties" className="btn btn--blue btn--lg">
-              Book a Birthday <span className="btn__arrow" aria-hidden="true">→</span>
-            </Link>
-            <Link to="/just-4-kids/summer-camp" className="btn btn--outline btn--lg">
-              Explore Camp
-            </Link>
-            <Link to="/just-4-kids/parents-night-out" className="btn btn--outline btn--lg">
-              Parents&apos; Night Out
-            </Link>
-          </motion.div>
         </div>
       </section>
 
@@ -183,32 +166,6 @@ export default function Just4Kids() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      <SectionSeam from="j4k" to="off-white" variant="line" />
-
-      <section className="section j4k-close">
-        <div className="container">
-          <Reveal>
-            <span className="eyebrow">Ready When You Are</span>
-            <h2 className="section-title">Questions about Just 4 Kids?</h2>
-            <p className="section-lead">
-              Tell us which experience you want and which school works best — Allendale or Midland
-              Park. We&apos;ll confirm details before anything is booked.
-            </p>
-            <div className="flex-actions mt">
-              <Link to="/just-4-kids/birthday-parties" className="btn btn--blue btn--lg">
-                Book a Birthday <span className="btn__arrow" aria-hidden="true">→</span>
-              </Link>
-              <Link to="/just-4-kids/summer-camp" className="btn btn--outline btn--lg">
-                Explore Camp
-              </Link>
-              <Link to="/just-4-kids/parents-night-out" className="btn btn--outline btn--lg">
-                Parents&apos; Night Out
-              </Link>
-            </div>
-          </Reveal>
         </div>
       </section>
     </>

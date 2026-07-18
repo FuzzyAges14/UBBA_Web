@@ -47,24 +47,15 @@ describe('App routing', () => {
     expect(
       await screen.findByRole('heading', { name: /the fun doesn't stop at the mat/i }),
     ).toBeInTheDocument()
-    const birthdayLinks = screen.getAllByRole('link', { name: /book a birthday/i })
-    expect(birthdayLinks.length).toBeGreaterThan(0)
-    birthdayLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', '/just-4-kids/birthday-parties')
-    })
-    const campLinks = screen.getAllByRole('link', { name: /explore camp/i })
-    expect(campLinks.length).toBeGreaterThan(0)
-    campLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', '/just-4-kids/summer-camp')
-    })
+    expect(screen.getByRole('heading', { name: /pick your adventure/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /three steps to fun/i })).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: /questions about just 4 kids/i }),
-    ).toBeInTheDocument()
-    const pnoLinks = screen.getAllByRole('link', { name: /parents.? night out/i })
-    expect(pnoLinks.length).toBeGreaterThan(0)
-    pnoLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', '/just-4-kids/parents-night-out')
-    })
+      screen.queryByRole('heading', { name: /questions about just 4 kids/i }),
+    ).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /plan a party/i })).toHaveAttribute(
+      'href',
+      '/just-4-kids/birthday-parties',
+    )
   })
 
   it('renders the birthday parties detail page with inquiry form', async () => {

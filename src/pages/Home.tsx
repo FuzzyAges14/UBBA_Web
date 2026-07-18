@@ -2,7 +2,6 @@ import Marquee from '../components/Marquee'
 import SectionSeam from '../components/SectionSeam'
 import { VALUES } from '../data/site'
 import {
-  AudienceSection,
   BeltJourneySection,
   BenefitsSection,
   FaqSection,
@@ -35,13 +34,11 @@ export default function Home() {
       <InstructorSection />
       <SectionSeam from="dark" to="graphite" variant="fade" />
       <BeltJourneySection />
-      <SectionSeam from="graphite" to="off-white" variant="angle" />
-      <AudienceSection />
-      <SectionSeam from="off-white" to="dark" variant="wave" />
+      <SectionSeam from="graphite" to="dark" variant="wave" />
       <TestimonialsSection />
       <SectionSeam from="dark" to="off-white" variant="belt" />
-      <LocationsSection />
       <FaqSection />
+      <LocationsSection />
       <FinalCtaSection />
     </>
   )

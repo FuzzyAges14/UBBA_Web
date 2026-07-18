@@ -28,13 +28,7 @@
   .pill:hover,
   .loc-card:hover,
   .pcard:hover .pcard__art,
-  .pcard:hover .pcard__img,
-  .home-program-row:hover,
-  .home-feature:hover .feature__img {
-    transform: none;
-  }
-  .home-feature:hover .home-feature__cta .btn__arrow,
-  .home-program-row:hover .home-program-row__arrow {
+  .pcard:hover .pcard__img {
     transform: none;
   }
   /* Buttons/links: keep hover color/fill states, drop motion. */
