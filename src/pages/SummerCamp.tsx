@@ -65,6 +65,7 @@ export default function SummerCamp() {
             <MediaFrame
               label="Summer camp photo — coming soon"
               icon={detail.mediaIcon}
+              ownerRequired
               stickers={[
                 { kind: 'wave', spot: 'tr', rotate: 3, delay: 0 },
                 { kind: 'palm', spot: 'bl', rotate: -8, delay: 0.25 },

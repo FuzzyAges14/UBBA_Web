@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import LeadForm from '../components/LeadForm'
 import PageHero from '../components/PageHero'
+import SectionSeam from '../components/SectionSeam'
 import { LOCATIONS, GLEN_ROCK, SITE } from '../data/site'
 import type { Location } from '../data/site'
 
@@ -26,14 +27,11 @@ function LocationBlock({ loc }: { loc: Location }) {
         </div>
       </div>
       <div>
-        <h2
-          className="section-title"
-          style={{ fontSize: '1.9rem', marginTop: 0, display: 'flex', alignItems: 'center', gap: '0.6rem' }}
-        >
+        <h2 className="section-title contact-loc__title">
           {loc.name}
           {loc.isNew && <span className="loc-badge">New</span>}
         </h2>
-        <p className="section-lead" style={{ marginTop: '0.6rem' }}>
+        <p className="section-lead contact-loc__address">
           {loc.address}
           <br />
           {loc.city}
@@ -44,14 +42,9 @@ function LocationBlock({ loc }: { loc: Location }) {
           </p>
         )}
         {loc.phone ? (
-          <p style={{ marginTop: '0.5rem' }}>
+          <p className="contact-loc__phone">
             <strong>Phone: </strong>
-            <a
-              href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
-              style={{ color: 'var(--red-dark)', fontWeight: 600 }}
-            >
-              {loc.phone}
-            </a>
+            <a href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}>{loc.phone}</a>
           </p>
         ) : (
           <p className="ph-note" style={{ marginTop: '0.5rem' }}>
@@ -96,14 +89,17 @@ export default function Contact() {
   return (
     <>
       <PageHero
+        family="contact"
         center
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
         title="Try A Class For Free!"
         intro="Ready to start Taekwondo or martial arts in Allendale or Midland Park? Tell us about your family and we’ll help you pick a program — then schedule your complimentary introductory class."
       />
 
+      <SectionSeam from="dark" to="off-white" />
+
       <section className="section">
-        <div className="container stack-gap" style={{ gap: '3.5rem' }}>
+        <div className="container stack-gap contact-locations">
           {locations.map((loc) => (
             <Reveal key={loc.id}>
               <LocationBlock loc={loc} />
@@ -112,19 +108,18 @@ export default function Contact() {
         </div>
       </section>
 
+      <SectionSeam from="off-white" to="dark" />
+
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container split" style={{ position: 'relative' }}>
+        <div className="container split contact-form-panel interior-split">
           <Reveal>
             <span className="eyebrow">Send A Message</span>
             <h2 className="section-title">Let's get you on the mat</h2>
             <p className="section-lead">
               Fill out the form and we'll be in touch to schedule your free class.
               Prefer to talk? Call our Allendale school at{' '}
-              <a href="tel:2019622922" style={{ color: 'var(--blue-soft)', fontWeight: 600 }}>
-                201-962-2922
-              </a>
-              .
+              <a href="tel:2019622922">201-962-2922</a>.
             </p>
           </Reveal>
           <Reveal delay={100}>

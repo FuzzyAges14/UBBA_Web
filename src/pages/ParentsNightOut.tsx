@@ -65,6 +65,7 @@ export default function ParentsNightOut() {
             <MediaFrame
               label="Parents' Night Out photo — coming soon"
               icon={detail.mediaIcon}
+              ownerRequired
               stickers={[
                 { kind: 'pizza', spot: 'tr', rotate: -10, delay: 0 },
                 { kind: 'glasses', spot: 'bl', rotate: 8, delay: 0.3 },
