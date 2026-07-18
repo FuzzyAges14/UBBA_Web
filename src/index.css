@@ -440,8 +440,10 @@ button {
   gap: 0.7rem;
 }
 .brand__logo {
-  width: 42px;
-  height: 42px;
+  width: 52px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 .brand__text {
   display: flex;
