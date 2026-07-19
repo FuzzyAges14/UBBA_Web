@@ -1,4 +1,4 @@
-import { getVisibleLocations } from '../../data/site'
+import { formatVisibleLocationList, getVisibleLocations } from '../../data/site'
 
 /**
  * Post-hero trust signals — kept out of the first viewport so the hero stays
@@ -6,6 +6,7 @@ import { getVisibleLocations } from '../../data/site'
  */
 export default function TrustStrip() {
   const locationCount = getVisibleLocations().length
+  const locationList = formatVisibleLocationList({ style: 'ampersand' })
 
   return (
     <aside className="home-trust" aria-label="Academy highlights">
@@ -26,7 +27,7 @@ export default function TrustStrip() {
         </span>
         <span className="home-trust__item home-trust__item--place">
           <span className="home-trust__dot" aria-hidden="true" />
-          Allendale &amp; Midland Park, NJ
+          {locationList}, NJ
         </span>
       </div>
     </aside>

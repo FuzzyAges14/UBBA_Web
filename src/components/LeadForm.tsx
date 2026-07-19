@@ -1,6 +1,13 @@
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
-import { useLocation } from 'react-router-dom'
-import { LOCATIONS, PROGRAM_OPTIONS, GLEN_ROCK, SITE } from '../data/site'
+import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react'
+import { useLocation, useSearchParams } from 'react-router-dom'
+import {
+  LOCATIONS,
+  PROGRAM_OPTIONS,
+  GLEN_ROCK,
+  SITE,
+  resolveLocationOption,
+  resolveProgramOption,
+} from '../data/site'
 import { submitLead } from '../lib/submitLead'
 
 type Errors = Partial<Record<'name' | 'email' | 'phone' | 'form', string>>
@@ -14,8 +21,21 @@ const locationChoices = [
 
 const FIELD_ORDER = ['name', 'email', 'phone'] as const
 
-export default function LeadForm({ defaultLocation }: { defaultLocation?: string }) {
+export type LeadFormProps = {
+  defaultLocation?: string
+  /** Program option label or slug (e.g. `tiny-tigers`). Invalid values are ignored. */
+  defaultProgram?: string
+  /** Override the submit button label (defaults to SITE.primaryCta). */
+  submitLabel?: string
+}
+
+export default function LeadForm({
+  defaultLocation,
+  defaultProgram,
+  submitLabel = SITE.primaryCta,
+}: LeadFormProps) {
   const location = useLocation()
+  const [searchParams] = useSearchParams()
   const formStartedAt = useRef(Date.now())
   const formId = useId()
   const [submitted, setSubmitted] = useState(false)
@@ -23,6 +43,28 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
   const [errors, setErrors] = useState<Errors>({})
   const successRef = useRef<HTMLHeadingElement | null>(null)
   const summaryRef = useRef<HTMLDivElement | null>(null)
+
+  const initialLocation = useMemo(
+    () =>
+      resolveLocationOption(defaultLocation) ??
+      resolveLocationOption(searchParams.get('location')) ??
+      '',
+    [defaultLocation, searchParams],
+  )
+
+  const initialProgram = useMemo(
+    () =>
+      resolveProgramOption(defaultProgram) ??
+      resolveProgramOption(searchParams.get('program')) ??
+      '',
+    [defaultProgram, searchParams],
+  )
+
+  const [selectedProgram, setSelectedProgram] = useState(initialProgram)
+
+  useEffect(() => {
+    setSelectedProgram(initialProgram)
+  }, [initialProgram])
 
   useEffect(() => {
     if (submitted) successRef.current?.focus()
@@ -260,7 +302,8 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
           <select
             id={ids.location}
             name="location"
-            defaultValue={defaultLocation ?? ''}
+            defaultValue={initialLocation}
+            key={`location-${initialLocation || 'empty'}`}
             disabled={sending}
             autoComplete="address-level2"
           >
@@ -277,7 +320,13 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
 
         <div className="field">
           <label htmlFor={ids.program}>Program</label>
-          <select id={ids.program} name="program" defaultValue="" disabled={sending}>
+          <select
+            id={ids.program}
+            name="program"
+            value={selectedProgram}
+            onChange={(e) => setSelectedProgram(e.target.value)}
+            disabled={sending}
+          >
             <option value="" disabled>
               Choose a program
             </option>
@@ -302,12 +351,12 @@ export default function LeadForm({ defaultLocation }: { defaultLocation?: string
 
         <div className="field field--full">
           <button type="submit" className="btn btn--lg btn--block" disabled={sending}>
-            {sending ? 'Sending…' : SITE.primaryCta}{' '}
+            {sending ? 'Sending…' : submitLabel}{' '}
             {!sending && <span className="btn__arrow" aria-hidden="true">→</span>}
           </button>
           <p className="form-reassure">
-            No experience required · Beginners welcome · No obligation — we&apos;ll
-            contact you to schedule your first class.
+            No experience required · Beginner-friendly classes · No obligation to
+            enroll — we&apos;ll contact you to schedule your first class.
           </p>
         </div>
       </div>

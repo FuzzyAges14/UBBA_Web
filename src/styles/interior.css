@@ -417,3 +417,179 @@
     transform: none;
   }
 }
+
+/* ---------- Children's enrollment strip ---------- */
+.section--compact {
+  padding-block: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+.enroll-strip__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem 1.5rem;
+  counter-reset: none;
+}
+
+.enroll-strip__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem 1rem;
+  align-items: start;
+  padding: 1.15rem 1.1rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.enroll-strip__num {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 8px 16px rgba(196, 18, 48, 0.28);
+  flex-shrink: 0;
+}
+
+.enroll-strip__copy h3 {
+  margin: 0.15rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.enroll-strip__copy p {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+.enroll-strip__connector {
+  display: none;
+}
+
+.enroll-strip__detail-links {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 62ch;
+}
+
+.enroll-strip__detail-links a {
+  font-weight: 600;
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.enroll-strip__locations {
+  flex-wrap: wrap;
+}
+
+@media (min-width: 901px) {
+  .enroll-strip__step {
+    padding-right: 1.4rem;
+  }
+
+  .enroll-strip__connector {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -0.9rem;
+    width: 1.1rem;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(196, 18, 48, 0.55), rgba(0, 71, 160, 0.35));
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .enroll-strip__connector::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid rgba(0, 71, 160, 0.55);
+    border-top: 2px solid rgba(0, 71, 160, 0.55);
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .enroll-strip__steps {
+    grid-template-columns: 1fr;
+  }
+
+  .enroll-strip__step + .enroll-strip__step::before {
+    content: '';
+    position: absolute;
+    left: 2.2rem;
+    top: -1.05rem;
+    width: 2px;
+    height: 0.85rem;
+    background: linear-gradient(180deg, rgba(196, 18, 48, 0.45), rgba(0, 71, 160, 0.35));
+  }
+}
+
+/* ---------- Info callout (service note, not alert) ---------- */
+.info-callout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6px 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(0, 71, 160, 0.05), transparent 42%),
+    #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-callout__accent {
+  background: linear-gradient(180deg, var(--kr-blue), var(--kr-red));
+}
+
+.info-callout__body {
+  padding: clamp(1.35rem, 3vw, 1.85rem) clamp(1.25rem, 3vw, 2rem);
+}
+
+.info-callout__title {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+}
+
+.info-callout__text {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.info-callout__text p {
+  margin: 0;
+}
+
+/* ---------- Children's inline free-class section ---------- */
+.children-free-class__grid {
+  align-items: start;
+}
+
+.children-free-class__reassure {
+  max-width: 36ch;
+}
+
+@media (max-width: 900px) {
+  .children-free-class .interior-media--wide {
+    min-height: 220px;
+  }
+}

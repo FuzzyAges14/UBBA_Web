@@ -30,7 +30,7 @@ describe('parseLeadPayload', () => {
       email: 'Jane@Example.com',
       phone: '2015550123',
       location: 'Allendale',
-      program: 'Adult Martial Arts',
+      program: 'Adult Martial Arts (Ages 18+)',
       message: 'Hi',
       source: '/',
     })
@@ -41,7 +41,7 @@ describe('parseLeadPayload', () => {
       email: 'jane@example.com',
       phone: '2015550123',
       location: 'Allendale',
-      program: 'Adult Martial Arts',
+      program: 'Adult Martial Arts (Ages 18+)',
       message: 'Hi',
       source: '/',
       partyDate: undefined,

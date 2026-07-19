@@ -14,16 +14,22 @@ import {
   IMAGES,
   PROGRAM_GLYPHS,
   SITE,
+  formatVisibleLocationList,
+  getVisibleLocations,
+  locationCtaPath,
 } from '../data/site'
 
 export default function AdultPrograms() {
+  const locations = getVisibleLocations()
+  const locationList = formatVisibleLocationList({ style: 'and' })
+
   return (
     <>
       <PageHero
         family="program"
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Adult & Family Programs' }]}
         title="Adult & Family Martial Arts"
-        intro="Fitness, focus, and practical self-defense for adults — plus family training options. Beginners are welcome at our Allendale and Midland Park schools."
+        intro={`Fitness, focus, and practical self-defense for adults — plus family training options. Beginners are welcome at our ${locationList} schools.`}
       />
 
       <SectionSeam from="dark" to="off-white" variant="angle" />
@@ -80,14 +86,13 @@ export default function AdultPrograms() {
             />
             <div className="flex-actions mt">
               <Link to="/contact" className="btn btn--blue">
-                {SITE.primaryCta} <span className="btn__arrow">→</span>
+                {SITE.primaryCta} <span className="btn__arrow" aria-hidden="true">→</span>
               </Link>
-              <Link to="/locations/allendale" className="btn btn--outline">
-                Allendale
-              </Link>
-              <Link to="/locations/midland-park" className="btn btn--outline">
-                Midland Park
-              </Link>
+              {locations.map((loc) => (
+                <Link key={loc.id} to={locationCtaPath(loc)} className="btn btn--outline">
+                  {loc.name}
+                </Link>
+              ))}
             </div>
           </Reveal>
         </div>

@@ -1,10 +1,11 @@
 import Reveal from '../../components/Reveal'
 import LocationCard from '../../components/LocationCard'
 import SectionHeading from '../../components/SectionHeading'
-import { getVisibleLocations } from '../../data/site'
+import { formatVisibleLocationList, getVisibleLocations } from '../../data/site'
 
 export default function LocationsSection() {
   const locations = getVisibleLocations()
+  const locationList = formatVisibleLocationList({ style: 'ampersand' })
 
   return (
     <section className="section home-locations" id="locations">
@@ -12,7 +13,7 @@ export default function LocationsSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Our Schools"
-            title="Train in Allendale & Midland Park"
+            title={`Train in ${locationList}`}
             lead={`${locations.length} Bergen County schools — pick the campus that fits your commute, then request a free class at the location you prefer.`}
           />
         </Reveal>

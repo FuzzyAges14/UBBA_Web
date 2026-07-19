@@ -203,19 +203,29 @@ export type ProgramCard = {
   image?: string
 }
 
-/** Checklist bullets beside the homepage free-class form. */
-export const TRIAL_HIGHLIGHTS = [
-  'Kids, teens, and adult programs',
-  'Allendale & Midland Park locations',
-  'Beginners welcome — no experience required',
-] as const
+/**
+ * Canonical age ranges for core programs. Prefer these labels over ad-hoc
+ * strings so cards, SEO, forms, and FAQs stay consistent.
+ */
+export const PROGRAM_AGE_RANGES = {
+  'tiny-tigers': 'Ages 3-5',
+  'junior-tigers': 'Ages 6-10',
+  'teen-martial-arts': 'Ages 11-17',
+  'adult-program': 'Ages 18+',
+} as const
+
+export type AgeRangedProgramSlug = keyof typeof PROGRAM_AGE_RANGES
+
+export function programAges(slug: AgeRangedProgramSlug): string {
+  return PROGRAM_AGE_RANGES[slug]
+}
 
 export const HOME_PROGRAM_CARDS: ProgramCard[] = [
   {
     id: 'tiny-tigers',
     slug: 'tiny-tigers',
     title: 'Tiny Tigers',
-    ages: 'Ages 3-5',
+    ages: programAges('tiny-tigers'),
     image: IMAGES.kidsKicks,
     blurb:
       'A playful first step into martial arts that builds focus, listening skills, and confidence through age-appropriate games and drills.',
@@ -224,7 +234,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     id: 'junior-tigers',
     slug: 'junior-tigers',
     title: 'Junior Tigers',
-    ages: 'Ages 6-10',
+    ages: programAges('junior-tigers'),
     image: IMAGES.kidsGroup,
     blurb:
       'Structured classes where kids sharpen coordination, discipline, and self-control while making new friends and earning belts.',
@@ -233,7 +243,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     id: 'teen-martial-arts',
     slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
-    ages: 'Ages 11-17',
+    ages: programAges('teen-martial-arts'),
     image: IMAGES.teenSpar,
     blurb:
       'A positive outlet that channels energy into fitness, resilience, and leadership as teens build real self-defense skills.',
@@ -242,7 +252,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     id: 'adult-martial-arts',
     slug: 'adult-program',
     title: 'Adult Martial Arts',
-    ages: 'Ages 18+',
+    ages: programAges('adult-program'),
     image: IMAGES.action,
     blurb:
       'Get in the best shape of your life while learning practical self-defense in a welcoming, no-ego training environment.',
@@ -254,7 +264,7 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     id: 'tiny-tigers',
     slug: 'tiny-tigers',
     title: 'Tiny Tigers',
-    ages: 'Ages 3-5',
+    ages: programAges('tiny-tigers'),
     image: IMAGES.kidsKicks,
     blurb:
       'Our youngest students develop focus, balance, and confidence through fun, high-energy drills designed for little movers.',
@@ -263,7 +273,7 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     id: 'junior-tigers',
     slug: 'junior-tigers',
     title: 'Junior Tigers',
-    ages: 'Ages 6-10',
+    ages: programAges('junior-tigers'),
     image: IMAGES.kidsGroup,
     blurb:
       'Kids build discipline, respect, and coordination while progressing through a clear belt curriculum that rewards effort.',
@@ -272,12 +282,28 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     id: 'teen-martial-arts',
     slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
-    ages: 'Ages 11-17',
+    ages: programAges('teen-martial-arts'),
     image: IMAGES.teenSpar,
     blurb:
       'Teens grow stronger and more confident, learning practical self-defense and leadership that carries into everyday life.',
   },
 ]
+
+/** Compact enrollment steps shown on the children's programs overview. */
+export const CHILDREN_ENROLLMENT_STEPS = [
+  {
+    title: 'Choose an Age Group',
+    text: 'Find the program that matches your child’s age and goals.',
+  },
+  {
+    title: 'Schedule a Free Class',
+    text: 'Select your preferred academy and request an introductory class.',
+  },
+  {
+    title: 'Meet the Instructor',
+    text: 'Visit the academy, experience a class, and discuss the best next step.',
+  },
+] as const
 
 export const ADULT_PROGRAMS: ProgramCard[] = [
   {
@@ -731,17 +757,112 @@ export function getVisibleLocations(): Location[] {
   return SITE.showGlenRock ? [...LOCATIONS, GLEN_ROCK] : LOCATIONS
 }
 
+/** Natural-language list of visible school names (respects showGlenRock). */
+export function formatVisibleLocationList(
+  options: { style?: 'and' | 'or' | 'ampersand'; withState?: boolean } = {},
+): string {
+  const { style = 'and', withState = false } = options
+  const names = getVisibleLocations().map((loc) =>
+    withState ? `${loc.name}, NJ` : loc.name,
+  )
+  if (names.length === 0) return ''
+  if (names.length === 1) return names[0]
+  if (names.length === 2) {
+    const join = style === 'ampersand' ? ' & ' : style === 'or' ? ' or ' : ' and '
+    return `${names[0]}${join}${names[1]}`
+  }
+  const head = names.slice(0, -1).join(', ')
+  const tail = names[names.length - 1]
+  if (style === 'or') return `${head}, or ${tail}`
+  if (style === 'ampersand') return `${head}, & ${tail}`
+  return `${head}, and ${tail}`
+}
+
+/** Path for a location CTA — detail page when available, otherwise contact. */
+export function locationCtaPath(loc: Location): string {
+  return loc.page ? `/locations/${loc.id}` : '/contact'
+}
+
+/**
+ * Deep-link to the children's free-class form with optional program/location
+ * preselection (query params + #free-class hash).
+ */
+export function childrenFreeClassHref(options: {
+  program?: string
+  location?: string
+} = {}): string {
+  const params = new URLSearchParams()
+  if (options.program) params.set('program', options.program)
+  if (options.location) params.set('location', options.location)
+  const query = params.toString()
+  return `/programs/children${query ? `?${query}` : ''}#free-class`
+}
+
+/** Checklist bullets beside the homepage free-class form. */
+export function getTrialHighlights(): string[] {
+  return [
+    'Kids, teens, and adult programs',
+    `${formatVisibleLocationList({ style: 'ampersand' })} locations`,
+    'Beginners welcome — no experience required',
+  ]
+}
+
 export const PROGRAM_OPTIONS = [
-  'Tiny Tigers (Ages 3-5)',
-  'Junior Tigers (Ages 6-10)',
-  'Teen Martial Arts',
-  'Adult Martial Arts',
+  `Tiny Tigers (${PROGRAM_AGE_RANGES['tiny-tigers']})`,
+  `Junior Tigers (${PROGRAM_AGE_RANGES['junior-tigers']})`,
+  `Teen Martial Arts (${PROGRAM_AGE_RANGES['teen-martial-arts']})`,
+  `Adult Martial Arts (${PROGRAM_AGE_RANGES['adult-program']})`,
   'Family Programs',
   'Birthday Parties',
   'Summer / Day Camp',
   "Parents' Night Out",
   'Not sure yet',
 ]
+
+/** Map program detail slugs to lead-form option labels. */
+export const PROGRAM_SLUG_OPTIONS: Partial<Record<string, string>> = {
+  'tiny-tigers': PROGRAM_OPTIONS[0],
+  'junior-tigers': PROGRAM_OPTIONS[1],
+  'teen-martial-arts': PROGRAM_OPTIONS[2],
+  'adult-program': PROGRAM_OPTIONS[3],
+  'family-programs': 'Family Programs',
+}
+
+/**
+ * Resolve a program query/slug/label to a valid PROGRAM_OPTIONS value.
+ * Invalid values return undefined so the form stays on its empty default.
+ */
+export function resolveProgramOption(
+  value: string | null | undefined,
+): string | undefined {
+  if (!value) return undefined
+  const trimmed = value.trim()
+  if (!trimmed) return undefined
+  if ((PROGRAM_OPTIONS as readonly string[]).includes(trimmed)) return trimmed
+  const fromSlug = PROGRAM_SLUG_OPTIONS[trimmed.toLowerCase()]
+  if (fromSlug) return fromSlug
+  const lower = trimmed.toLowerCase()
+  return PROGRAM_OPTIONS.find(
+    (option) =>
+      option.toLowerCase() === lower ||
+      option.toLowerCase().startsWith(`${lower} (`) ||
+      option.toLowerCase().startsWith(`${lower} `),
+  )
+}
+
+/** Resolve a location query/id/name to a visible location display name. */
+export function resolveLocationOption(
+  value: string | null | undefined,
+): string | undefined {
+  if (!value) return undefined
+  const trimmed = value.trim()
+  if (!trimmed) return undefined
+  const lower = trimmed.toLowerCase()
+  const match = getVisibleLocations().find(
+    (loc) => loc.id === lower || loc.name.toLowerCase() === lower,
+  )
+  return match?.name
+}
 
 export const EVENT_GUEST_OPTIONS = ['1-5', '6-10', '10+'] as const
 
@@ -824,7 +945,7 @@ export const GETTING_STARTED: BeltStep[] = [
 export const FAQS: Faq[] = [
   {
     q: 'What age can children start martial arts?',
-    a: 'Children can start as early as age 3 in our Tiny Tigers program. We also offer Junior Tigers for ages 6–10, teen classes for ages 11–17, and adult training for ages 18+.',
+    a: `Children can start as early as age 3 in our Tiny Tigers program (${PROGRAM_AGE_RANGES['tiny-tigers']}). We also offer Junior Tigers (${PROGRAM_AGE_RANGES['junior-tigers']}), Teen Martial Arts (${PROGRAM_AGE_RANGES['teen-martial-arts']}), and adult training (${PROGRAM_AGE_RANGES['adult-program']}).`,
   },
   {
     q: 'What should students wear to their first class?',
@@ -844,7 +965,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: 'Which UBBA location should I choose?',
-    a: 'Choose the school that is easiest for your family: Allendale or Midland Park (and Glen Rock when you prefer that campus). Program options are similar across our Bergen County schools; we can help match class times when you inquire.',
+    a: `Choose the school that is easiest for your family: ${formatVisibleLocationList({ style: 'or' })}. Program options are similar across our Bergen County schools; we can help match class times when you inquire.`,
   },
 ]
 
@@ -937,16 +1058,32 @@ export const MEGA_MENU: MegaGroup[] = [
     heading: "Children's Programs",
     links: [
       { label: 'Overview', to: '/programs/children' },
-      { label: 'Tiny Tigers', to: '/programs/tiny-tigers', meta: 'Ages 3-5' },
-      { label: 'Junior Tigers', to: '/programs/junior-tigers', meta: 'Ages 6-10' },
-      { label: 'Teen Martial Arts', to: '/programs/teen-martial-arts', meta: 'Ages 11-17' },
+      {
+        label: 'Tiny Tigers',
+        to: '/programs/tiny-tigers',
+        meta: programAges('tiny-tigers'),
+      },
+      {
+        label: 'Junior Tigers',
+        to: '/programs/junior-tigers',
+        meta: programAges('junior-tigers'),
+      },
+      {
+        label: 'Teen Martial Arts',
+        to: '/programs/teen-martial-arts',
+        meta: programAges('teen-martial-arts'),
+      },
     ],
   },
   {
     heading: 'Adult & Family',
     links: [
       { label: 'Overview', to: '/programs/adult' },
-      { label: 'Adult Program', to: '/programs/adult-program', meta: 'Ages 18+' },
+      {
+        label: 'Adult Program',
+        to: '/programs/adult-program',
+        meta: programAges('adult-program'),
+      },
       { label: 'Family Programs', to: '/programs/family-programs' },
       { label: 'Olympic Sparring', to: '/programs/olympic-sparring' },
       { label: 'SWAT Team', to: '/programs/swat-team' },
@@ -993,9 +1130,8 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'tiny-tigers',
     name: 'Tiny Tigers',
     category: 'Children',
-    ages: 'Ages 3-5',
-    audience:
-      'Preschoolers and early elementary kids who are ready for a playful, structured first class — perfect for families in Allendale, Midland Park, and nearby Bergen County towns.',
+    ages: programAges('tiny-tigers'),
+    audience: `Preschoolers and early elementary kids who are ready for a playful, structured first class — perfect for families in ${formatVisibleLocationList({ style: 'and' })}, and nearby Bergen County towns.`,
     image: IMAGES.kidsKicks,
     tagline: 'A playful, confidence-first introduction to Taekwondo.',
     description:
@@ -1014,9 +1150,8 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'junior-tigers',
     name: 'Junior Tigers',
     category: 'Children',
-    ages: 'Ages 6-10',
-    audience:
-      'School-age kids who thrive with clear goals, active friends, and a positive place to grow focus and self-control.',
+    ages: programAges('junior-tigers'),
+    audience: `School-age kids who thrive with clear goals, active friends, and a positive place to grow focus and self-control — families train with us in ${formatVisibleLocationList({ style: 'and' })} and nearby towns.`,
     image: IMAGES.kidsGroup,
     tagline: 'Discipline, focus, and leadership through the belt journey.',
     description:
@@ -1035,9 +1170,8 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'teen-martial-arts',
     name: 'Teen Martial Arts',
     category: 'Children',
-    ages: 'Ages 11-17',
-    audience:
-      'Tweens and teens who want fitness, resilience, and practical self-defense in a supportive peer group — beginners welcome.',
+    ages: programAges('teen-martial-arts'),
+    audience: `Tweens and teens who want fitness, resilience, and practical self-defense in a supportive peer group — beginners welcome at our ${formatVisibleLocationList({ style: 'and' })} schools.`,
     image: IMAGES.teenSpar,
     tagline: 'Strength, resilience, and real self-defense for teens.',
     description:
@@ -1056,7 +1190,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'adult-program',
     name: 'Adult Program',
     category: 'Adult & Family',
-    ages: 'Ages 18+',
+    ages: programAges('adult-program'),
     audience:
       'Adults of any fitness level — from complete beginners to returning athletes — who want a purposeful workout and practical martial arts skills.',
     image: IMAGES.action,

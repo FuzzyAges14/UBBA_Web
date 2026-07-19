@@ -1,5 +1,11 @@
 import { absoluteAssetUrl, absoluteUrl, DEFAULT_OG_IMAGE_PATH } from '../config/siteUrl'
-import { getProgram, PROGRAM_DETAILS, SITE, type ProgramDetail } from './site'
+import {
+  formatVisibleLocationList,
+  getProgram,
+  PROGRAM_DETAILS,
+  SITE,
+  type ProgramDetail,
+} from './site'
 
 export type OgType = 'website' | 'article'
 export type TwitterCard = 'summary' | 'summary_large_image'
@@ -56,14 +62,18 @@ function meta(
 
 function programSeo(program: ProgramDetail): SeoMeta {
   const ages = program.ages ? ` (${program.ages})` : ''
-  const locale = 'Allendale & Midland Park, NJ'
+  const locale = formatVisibleLocationList({ style: 'ampersand', withState: true })
   const snippet = program.description.length > 140
     ? `${program.description.slice(0, 137).trim()}…`
     : program.description
-  return meta(
-    `${program.name}${ages} in ${locale} | ${brand}`,
-    `${program.tagline} ${snippet} Request a free class at ${brand}.`,
-  )
+  const isChildren = program.category === 'Children'
+  const title = isChildren
+    ? `${program.name}${ages} | ${brand}`
+    : `${program.name}${ages} in ${locale} | ${brand}`
+  const description = isChildren
+    ? `${program.tagline} Children’s martial arts at United Black Belt Academy in ${locale}. ${snippet}`
+    : `${program.tagline} ${snippet} Request a free class at ${brand}.`
+  return meta(title, description)
 }
 
 /** Static route metadata (unique title + description per public page). */
@@ -73,8 +83,8 @@ export const SEO: Record<string, SeoMeta> = {
     'Confidence-building Taekwondo and martial arts for kids, teens, and adults in Allendale and Midland Park, NJ. Try a class for free at United Black Belt Academy.',
   ),
   '/programs/children': meta(
-    `Kids Martial Arts Classes in Allendale & Midland Park, NJ | ${brand}`,
-    'Children’s Taekwondo in Bergen County — Tiny Tigers, Junior Tigers, and Teen Martial Arts build confidence, focus, and respect. Book a free trial class.',
+    `Children’s Martial Arts Classes | ${brand}`,
+    `Children’s martial arts at United Black Belt Academy — Tiny Tigers, Junior Tigers, and Teen Martial Arts in ${formatVisibleLocationList({ style: 'and', withState: true })}. Schedule a free introductory class.`,
   ),
   '/programs/adult': meta(
     `Adult Martial Arts Classes in Allendale & Midland Park, NJ | ${brand}`,
@@ -110,7 +120,7 @@ export const SEO: Record<string, SeoMeta> = {
   ),
   '/contact': meta(
     `Contact & Free Class Request | ${brand}`,
-    'Contact United Black Belt Academy in Allendale or Midland Park, NJ. Request a free class, ask about programs, or get directions to a location near you.',
+    `Contact United Black Belt Academy in ${formatVisibleLocationList({ style: 'or', withState: true })}. Request a free class, ask about programs, or get directions to a location near you.`,
   ),
   '/locations/allendale': meta(
     `Taekwondo & Martial Arts in Allendale, NJ | ${brand}`,

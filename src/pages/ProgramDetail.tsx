@@ -12,6 +12,8 @@ import {
   FAQS,
   SITE,
   LOCATIONS,
+  childrenFreeClassHref,
+  getVisibleLocations,
   imageDimensionsFor,
   imageSrcSetFor,
 } from '../data/site'
@@ -30,6 +32,13 @@ export default function ProgramDetail() {
     .map((s) => getProgram(s))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
   const locationPages = LOCATIONS.filter((loc) => loc.page)
+  const visibleLocations = getVisibleLocations()
+  const freeClassTo = isChildren
+    ? childrenFreeClassHref({ program: program.slug })
+    : '/contact'
+  const freeClassLabel = isChildren
+    ? `Try ${program.name}`
+    : SITE.primaryCta
 
   return (
     <>
@@ -47,7 +56,15 @@ export default function ProgramDetail() {
             {program.ages ? ` ${program.ages}.` : ''}
           </>
         }
-      />
+      >
+        {isChildren ? (
+          <div className="flex-actions">
+            <Link to={freeClassTo} className="btn btn--blue">
+              Schedule a Free Class <span className="btn__arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+        ) : null}
+      </PageHero>
 
       <SectionSeam from="dark" to="off-white" variant="angle" />
 
@@ -83,8 +100,8 @@ export default function ProgramDetail() {
                   <li key={l}>{l}</li>
                 ))}
               </ul>
-              <Link to="/contact" className="btn btn--blue mt">
-                {SITE.primaryCta} <span className="btn__arrow">→</span>
+              <Link to={freeClassTo} className="btn btn--blue mt">
+                {freeClassLabel} <span className="btn__arrow" aria-hidden="true">→</span>
               </Link>
             </div>
           </Reveal>
@@ -106,15 +123,24 @@ export default function ProgramDetail() {
             <p className="section-lead" style={{ marginTop: '1rem' }}>
               Ready to try it? Request a free introductory class and we&apos;ll help you
               choose a time at{' '}
-              {locationPages.map((loc, i) => (
+              {(isChildren ? visibleLocations : locationPages).map((loc, i, arr) => (
                 <span key={loc.id}>
-                  {i > 0 && (i === locationPages.length - 1 ? ', or ' : ', ')}
-                  <Link
-                    to={`/locations/${loc.id}`}
-                    style={{ color: 'var(--blue-soft)', fontWeight: 600 }}
-                  >
-                    {loc.name}
-                  </Link>
+                  {i > 0 && (i === arr.length - 1 ? ', or ' : ', ')}
+                  {loc.page ? (
+                    <Link
+                      to={`/locations/${loc.id}`}
+                      style={{ color: 'var(--blue-soft)', fontWeight: 600 }}
+                    >
+                      {loc.name}
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/contact"
+                      style={{ color: 'var(--blue-soft)', fontWeight: 600 }}
+                    >
+                      {loc.name}
+                    </Link>
+                  )}
                 </span>
               ))}
               .
@@ -144,8 +170,14 @@ export default function ProgramDetail() {
                       text={p.tagline}
                       ages={p.ages}
                       image={p.image}
-                      to={`/programs/${p.slug}`}
-                      ctaLabel="Learn more"
+                      to={
+                        p.category === 'Children'
+                          ? childrenFreeClassHref({ program: p.slug })
+                          : `/programs/${p.slug}`
+                      }
+                      ctaLabel={
+                        p.category === 'Children' ? `Try ${p.name}` : 'View program'
+                      }
                       wrapLink
                     />
                   </Reveal>
@@ -156,8 +188,8 @@ export default function ProgramDetail() {
                   <Link to={categoryTo} className="btn btn--outline">
                     All {categoryLabel}
                   </Link>
-                  <Link to="/contact" className="btn btn--outline">
-                    Contact &amp; free class
+                  <Link to={freeClassTo} className="btn btn--outline">
+                    Schedule a Free Class
                   </Link>
                 </div>
               </Reveal>
@@ -185,6 +217,10 @@ export default function ProgramDetail() {
       <CtaBanner
         title={`Try ${program.name} for free`}
         text="Book a free introductory class — no experience required, beginners always welcome."
+        primaryTo={freeClassTo}
+        primaryLabel={isChildren ? 'Schedule a Free Class' : SITE.primaryCta}
+        secondaryTo={categoryTo}
+        secondaryLabel={`All ${categoryLabel}`}
       />
     </>
   )
