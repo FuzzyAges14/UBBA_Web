@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import HeroMedia from '../../components/HeroMedia'
 import { fadeUp, staticFade } from '../../lib/motion'
-import { SITE } from '../../data/site'
+import { SITE, formatVisibleLocationList } from '../../data/site'
 
 export default function HeroSection() {
   const reduceMotion = useReducedMotion()
   const heroMotion = reduceMotion ? staticFade : fadeUp
+  const locationList = formatVisibleLocationList({ style: 'ampersand' })
 
   return (
     <section className="hero" aria-labelledby="home-hero-title">
@@ -31,7 +32,7 @@ export default function HeroSection() {
           custom={1}
           variants={heroMotion}
         >
-          Confidence Building Martial Arts Classes in Allendale &amp; Midland Park
+          Confidence Building Martial Arts Classes in {locationList}
         </motion.h2>
         <motion.p
           className="hero__sub"

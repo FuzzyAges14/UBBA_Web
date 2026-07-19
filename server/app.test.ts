@@ -29,7 +29,7 @@ const validLead = {
   email: 'jane@example.com',
   phone: '2015550123',
   location: 'Allendale',
-  program: 'Adult Martial Arts',
+  program: 'Adult Martial Arts (Ages 18+)',
   source: '/',
 }
 

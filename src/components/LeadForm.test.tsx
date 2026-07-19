@@ -166,4 +166,41 @@ describe('LeadForm', () => {
       expect(screen.getByRole('alert')).toHaveTextContent(/could not reach the server/i)
     })
   })
+
+  it('preselects program and location from the query string', () => {
+    render(
+      <MemoryRouter
+        initialEntries={['/programs/children?program=tiny-tigers&location=glen-rock']}
+      >
+        <LeadForm />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByLabelText(/program/i)).toHaveValue('Tiny Tigers (Ages 3-5)')
+    expect(screen.getByLabelText(/location/i)).toHaveValue('Glen Rock')
+  })
+
+  it('ignores invalid program query values without breaking the form', () => {
+    render(
+      <MemoryRouter initialEntries={['/contact?program=not-a-real-program']}>
+        <LeadForm />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByLabelText(/program/i)).toHaveValue('')
+    expect(screen.getByRole('button', { name: /try a class for free/i })).toBeEnabled()
+  })
+
+  it('accepts a defaultProgram prop over an empty query string', () => {
+    render(
+      <MemoryRouter initialEntries={['/programs/children']}>
+        <LeadForm defaultProgram="junior-tigers" submitLabel="Schedule a Free Class" />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByLabelText(/program/i)).toHaveValue('Junior Tigers (Ages 6-10)')
+    expect(
+      screen.getByRole('button', { name: /schedule a free class/i }),
+    ).toBeInTheDocument()
+  })
 })
