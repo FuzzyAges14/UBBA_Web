@@ -460,6 +460,7 @@
 
 @media (max-width: 960px) {
   .j4k-will,
+  .j4k-tiles,
   .j4k-pack,
   .j4k-form-layout,
   .j4k-signup {
@@ -486,12 +487,6 @@
   .fun-sticker--wave {
     width: 5.2rem;
     height: 3.5rem;
-  }
-}
-
-@media (max-width: 620px) {
-  .j4k-tiles {
-    grid-template-columns: 1fr;
   }
 }
 

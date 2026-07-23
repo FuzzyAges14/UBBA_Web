@@ -301,8 +301,10 @@
 }
 /*
   Medium widths: 2 columns for even counts (4/6 items).
-  Exactly 3 items stay in a row on tablet/desktop so menus and location
-  cards read side-by-side; they only stack at the mobile breakpoint below.
+  Exactly 3 items stay side-by-side on desktop/tablet widths; phone /
+  restricted view (≤620px) restores the previous single-column stack.
+  The :has() override must be repeated at the phone breakpoint — otherwise
+  its higher specificity keeps three columns on mobile.
 */
 @media (max-width: 1100px) {
   .grid--3,
@@ -317,6 +319,10 @@
   .grid--2,
   .grid--3,
   .grid--4 {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+  }
+  .grid--3:has(> :nth-child(3):last-child) {
     grid-template-columns: minmax(0, 1fr);
     justify-items: stretch;
   }
