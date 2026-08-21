@@ -198,7 +198,7 @@ test.describe('Interaction QA', () => {
       /student\.nextkick\.ai\/form\//,
     )
     await shot(page, 'contact-nextkick-portal-390')
-    await page.getByRole('button', { name: /close allendale form/i }).click()
+    await dialog.getByRole('button', { name: /close allendale form/i }).click()
     await expect(dialog).toBeHidden()
   })
 

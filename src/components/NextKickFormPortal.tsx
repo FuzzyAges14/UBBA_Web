@@ -124,12 +124,12 @@ export default function NextKickFormPortal({
 
   return createPortal(
     <div className="form-portal" role="presentation">
-      <button
-        type="button"
-        className="form-portal__backdrop"
-        aria-label={closeLabel}
-        onClick={onClose}
-      />
+          <button
+            type="button"
+            className="form-portal__backdrop"
+            aria-label="Dismiss form portal"
+            onClick={onClose}
+          />
       <div
         ref={dialogRef}
         className={[

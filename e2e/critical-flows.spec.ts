@@ -69,7 +69,9 @@ test.describe('Critical marketing flows', () => {
         name: /^locations$/i,
       }).click()
       await expect(page.locator('#locations')).toBeVisible()
-      await page.getByRole('link', { name: /allendale/i }).first().click()
+      const allendalePage = page.getByRole('link', { name: /visit allendale page/i })
+      await allendalePage.scrollIntoViewIfNeeded()
+      await allendalePage.click()
     } else {
       await page.goto('/locations/allendale')
     }
