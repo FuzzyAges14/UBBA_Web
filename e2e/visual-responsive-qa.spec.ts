@@ -192,12 +192,13 @@ test.describe('Interaction QA', () => {
     await page.getByRole('button', { name: /try a class for free/i }).last().click()
     const dialog = page.getByRole('dialog', { name: /1 free time trial/i })
     await expect(dialog).toBeVisible()
-    await expect(dialog.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+    await dialog.getByText('Allendale').click()
+    await expect(dialog.getByTitle(/1 free time trial — allendale form/i)).toHaveAttribute(
       'src',
       /student\.nextkick\.ai\/form\//,
     )
     await shot(page, 'contact-nextkick-portal-390')
-    await page.getByRole('button', { name: /close trial form/i }).last().click()
+    await page.getByRole('button', { name: /close allendale form/i }).click()
     await expect(dialog).toBeHidden()
   })
 

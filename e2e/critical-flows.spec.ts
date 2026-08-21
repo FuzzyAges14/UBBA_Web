@@ -1,7 +1,14 @@
 import { expect, test } from '@playwright/test'
 
-const NEXTKICK_FORM =
-  'https://student.nextkick.ai/form/6fbe8b2c-2e75-45ab-9d92-994135c06e17'
+const TRIAL_ALLENDALE =
+  'https://student.nextkick.ai/form/0318c4be-65de-4c00-b554-192c0e1d65eb'
+const BIRTHDAY_ALLENDALE =
+  'https://student.nextkick.ai/form/8e4e23d6-da04-4d94-818e-06c71baf3de6'
+
+async function pickAllendaleInPortal(page: import('@playwright/test').Page) {
+  const dialog = page.getByRole('dialog').filter({ hasText: /allendale|midland|glen rock/i })
+  await dialog.getByText('Allendale').click()
+}
 
 test.describe('Critical marketing flows', () => {
   test('homepage free-class CTA opens the NextKick trial portal', async ({ page }) => {
@@ -16,9 +23,10 @@ test.describe('Critical marketing flows', () => {
 
     const dialog = page.getByRole('dialog', { name: /1 free time trial/i })
     await expect(dialog).toBeVisible()
-    await expect(dialog.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+    await pickAllendaleInPortal(page)
+    await expect(dialog.getByTitle(/1 free time trial — allendale form/i)).toHaveAttribute(
       'src',
-      NEXTKICK_FORM,
+      TRIAL_ALLENDALE,
     )
   })
 
@@ -27,13 +35,14 @@ test.describe('Critical marketing flows', () => {
     await page.getByRole('button', { name: /try a class for free/i }).last().click()
     const dialog = page.getByRole('dialog', { name: /1 free time trial/i })
     await expect(dialog).toBeVisible()
-    await expect(dialog.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+    await pickAllendaleInPortal(page)
+    await expect(dialog.getByTitle(/1 free time trial — allendale form/i)).toHaveAttribute(
       'src',
-      NEXTKICK_FORM,
+      TRIAL_ALLENDALE,
     )
     await expect(page.getByRole('link', { name: /open it in a new tab/i })).toHaveAttribute(
       'href',
-      NEXTKICK_FORM,
+      TRIAL_ALLENDALE,
     )
   })
 
@@ -76,10 +85,21 @@ test.describe('Critical marketing flows', () => {
     ).toBeVisible()
   })
 
-  test('event inquiry form submits with mocked API', async ({ page }) => {
+  test('birthday page opens the birthday NextKick portal', async ({ page }) => {
+    await page.goto('/just-4-kids/birthday-parties')
+    await page.getByRole('button', { name: /schedule my party/i }).click()
+    const dialog = page.getByRole('dialog', { name: /schedule a birthday party/i })
+    await expect(dialog).toBeVisible()
+    await pickAllendaleInPortal(page)
+    await expect(
+      dialog.getByTitle(/schedule a birthday party — allendale form/i),
+    ).toHaveAttribute('src', BIRTHDAY_ALLENDALE)
+  })
+
+  test('Parents Night Out form submits with mocked API', async ({ page }) => {
     await page.route('**/api/leads', async (route) => {
       const body = route.request().postDataJSON() as { intent?: string }
-      expect(body.intent).toBe('birthday')
+      expect(body.intent).toBe('parents-night-out')
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -87,12 +107,12 @@ test.describe('Critical marketing flows', () => {
       })
     })
 
-    await page.goto('/just-4-kids/birthday-parties')
+    await page.goto('/just-4-kids/parents-night-out')
     await page.getByLabel(/parent \/ guardian name/i).fill('Sam Parent')
     await page.getByLabel(/^email/i).fill('sam@example.com')
     await page.getByLabel(/^phone/i).fill('2015559999')
-    await page.getByRole('button', { name: /schedule my party/i }).click()
-    await expect(page.getByText(/party request sent/i)).toBeVisible()
+    await page.getByRole('button', { name: /save a spot/i }).click()
+    await expect(page.getByText(/you.?re on the list/i)).toBeVisible()
   })
 
   test('keyboard-only path opens the NextKick trial portal', async ({ page }, testInfo) => {

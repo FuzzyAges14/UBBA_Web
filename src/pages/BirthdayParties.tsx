@@ -3,13 +3,16 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
-import EventInquiryForm from '../components/EventInquiryForm'
+import TrialCta from '../components/TrialCta'
 import SectionSeam from '../components/SectionSeam'
+import { getNextKickForm, getNextKickFormHref } from '../data/contact'
 import { getJust4KidsDetail, IMAGES } from '../data/site'
 
 export default function BirthdayParties() {
   const detail = getJust4KidsDetail('birthday-parties')!
   const formId = 'birthday-inquiry'
+  const nextKick = getNextKickForm('birthday')
+  const fallbackHref = getNextKickFormHref('birthday', 'allendale')
 
   return (
     <>
@@ -152,9 +155,9 @@ export default function BirthdayParties() {
               <span className="eyebrow">Getting Started Is Easy</span>
               <h2 className="section-title">Tell us the date — we do the rest</h2>
               <p className="section-lead" style={{ marginTop: '0.75rem' }}>
-                Use the form to share your preferred date, guest range, and school interest.
-                It is an inquiry — not a final reservation — until our team confirms
-                availability and details.
+                Choose your school, then complete the NextKick birthday party form for
+                that location. It is an inquiry — not a final reservation — until our
+                team confirms availability and details.
               </p>
               <ol className="j4k-easy">
                 <li>
@@ -185,7 +188,32 @@ export default function BirthdayParties() {
           </Reveal>
           <Reveal delay={100}>
             <div className="j4k-signup__form">
-              <EventInquiryForm intent="birthday" />
+              <div className="leadform leadform--event">
+                <div className="leadform__head">
+                  <span className="eyebrow">{nextKick.eyebrow}</span>
+                </div>
+                <p className="form-instructions">{nextKick.pickerLede}</p>
+                <div className="leadform__steps" aria-hidden="true">
+                  <i className="on" />
+                  <i className="on" />
+                  <i className="on" />
+                </div>
+                <TrialCta kind="birthday" className="btn btn--lg btn--block" arrow>
+                  {detail.ctaLabel}{' '}
+                  <span className="btn__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </TrialCta>
+                <p className="form-reassure">
+                  No experience needed · We handle the party flow · Pick your school,
+                  then finish on NextKick
+                </p>
+                <p className="form-portal-fallback">
+                  <a href={fallbackHref} target="_blank" rel="noreferrer">
+                    Open the Allendale birthday form in a new tab
+                  </a>
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>

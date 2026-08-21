@@ -153,7 +153,8 @@ describe('Accessibility: lead form', () => {
 
     const dialog = screen.getByRole('dialog', { name: /1 free time trial/i })
     expect(dialog).toHaveAttribute('aria-modal', 'true')
-    expect(screen.getByTitle(/1 free time trial form/i)).toBeInTheDocument()
+    await user.click(within(dialog).getByText('Allendale'))
+    expect(screen.getByTitle(/1 free time trial — allendale form/i)).toBeInTheDocument()
   })
 })
 

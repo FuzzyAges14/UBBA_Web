@@ -46,6 +46,7 @@ describe('Page-level accessibility checks', () => {
     await user.click(submit)
     const dialog = await screen.findByRole('dialog', { name: /1 free time trial/i })
     expect(dialog).toHaveAttribute('aria-modal', 'true')
-    expect(within(dialog).getByTitle(/1 free time trial form/i)).toBeInTheDocument()
+    await user.click(within(dialog).getByText('Allendale'))
+    expect(within(dialog).getByTitle(/1 free time trial — allendale form/i)).toBeInTheDocument()
   })
 })

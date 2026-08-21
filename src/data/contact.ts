@@ -3,8 +3,8 @@
  * CONTACT & SOCIAL — edit this file to wire up email + Instagram / Facebook
  * =============================================================================
  *
- * Free-class CTAs open the NextKick trial form in a lightbox portal
- * (`NEXTKICK_TRIAL_FORM`). Birthday / camp / Parents' Night Out still email
+ * Trial, birthday, and summer-camp CTAs open a location-picker lightbox, then
+ * the matching NextKick form (`NEXTKICK_FORMS`). Parents' Night Out still emails
  * `CONTACT.notifyEmails` via `/api/leads`. Instagram / Facebook profile links
  * come from `SOCIAL_PROFILES`.
  *
@@ -50,24 +50,148 @@ export type InquiryTypeConfig = {
 }
 
 /* ---------------------------------------------------------------------------
- * NextKick trial form (free-class CTAs)
+ * NextKick hosted forms (trial + birthday + summer camp)
+ * Flow: CTA → themed location picker → iframe for that school's form URL.
  * ------------------------------------------------------------------------- */
-/**
- * Public NextKick student form for free-class / trial signups.
- * The live academy site opens conversion surfaces in a lightbox; we reuse
- * that pattern and load this hosted form in the overlay iframe.
- *
- * This UUID belongs to the "1 Free Time Trial" form on the UBBA Allendale
- * NextKick account. Swap `href` if the school publishes a new form.
- */
+
+/** Portal kinds that use NextKick (not Parents' Night Out email). */
+export type NextKickFormKind = 'trial' | 'birthday' | 'summer-camp'
+
+/** Location keys matching school pages / SITE location ids. */
+export type NextKickLocationId = 'allendale' | 'midland-park' | 'glen-rock'
+
+export type NextKickLocationForm = {
+  name: string
+  href: string
+  /** Short line under the school name in the picker */
+  blurb: string
+}
+
+export type NextKickFormConfig = {
+  kind: NextKickFormKind
+  /** Small red eyebrow above the title */
+  eyebrow: string
+  /** Dialog H2 */
+  title: string
+  /** Short supporting copy on the location-picker step */
+  pickerLede: string
+  /** Supporting copy once a school form is open */
+  formLede: string
+  /** CSS modifier for themed chrome: trial | birthday | summer-camp */
+  theme: NextKickFormKind
+  locations: Record<NextKickLocationId, NextKickLocationForm>
+}
+
+export const NEXTKICK_LOCATION_ORDER: NextKickLocationId[] = [
+  'allendale',
+  'midland-park',
+  'glen-rock',
+]
+
+export const NEXTKICK_FORMS: Record<NextKickFormKind, NextKickFormConfig> = {
+  trial: {
+    kind: 'trial',
+    eyebrow: 'Free Class Request',
+    title: '1 Free Time Trial',
+    pickerLede:
+      'Choose your school, then finish the academy’s NextKick trial form — no experience required.',
+    formLede:
+      'Complete the NextKick trial form for this school without leaving the page. You can also open it in a new tab.',
+    theme: 'trial',
+    locations: {
+      allendale: {
+        name: 'Allendale',
+        blurb: '240 W Crescent Ave',
+        href: 'https://student.nextkick.ai/form/0318c4be-65de-4c00-b554-192c0e1d65eb',
+      },
+      'midland-park': {
+        name: 'Midland Park',
+        blurb: '644 Godwin Ave',
+        href: 'https://student.nextkick.ai/form/9be0cbca-a014-4615-a52e-cd628d5858e1',
+      },
+      'glen-rock': {
+        name: 'Glen Rock',
+        blurb: 'New location',
+        href: 'https://student.nextkick.ai/form/d1fc7971-e2da-4c7b-9292-c003db5e528c',
+      },
+    },
+  },
+  birthday: {
+    kind: 'birthday',
+    eyebrow: 'Birthday Parties',
+    title: 'Schedule a Birthday Party',
+    pickerLede:
+      'Pick the school that fits your party plans, then complete the NextKick birthday form for that location.',
+    formLede:
+      'Finish the birthday party request for this school on NextKick. You can also open it in a new tab.',
+    theme: 'birthday',
+    locations: {
+      allendale: {
+        name: 'Allendale',
+        blurb: '240 W Crescent Ave',
+        href: 'https://student.nextkick.ai/form/8e4e23d6-da04-4d94-818e-06c71baf3de6',
+      },
+      'midland-park': {
+        name: 'Midland Park',
+        blurb: '644 Godwin Ave',
+        href: 'https://student.nextkick.ai/form/0e481c10-573f-4ef7-9ac5-fc66ac7ce6ba',
+      },
+      'glen-rock': {
+        name: 'Glen Rock',
+        blurb: 'New location',
+        href: 'https://student.nextkick.ai/form/47975a6b-a5e9-40c3-bb80-8e6456177303',
+      },
+    },
+  },
+  'summer-camp': {
+    kind: 'summer-camp',
+    eyebrow: 'Summer / Day Camp',
+    title: 'Reserve a Camp Spot',
+    pickerLede:
+      'Choose a school, then complete the NextKick summer camp form for that location.',
+    formLede:
+      'Finish the summer camp request for this school on NextKick. You can also open it in a new tab.',
+    theme: 'summer-camp',
+    locations: {
+      allendale: {
+        name: 'Allendale',
+        blurb: '240 W Crescent Ave',
+        href: 'https://student.nextkick.ai/form/772f14dd-3ba1-4e28-8ba9-4fc86868840c',
+      },
+      'midland-park': {
+        name: 'Midland Park',
+        blurb: '644 Godwin Ave',
+        href: 'https://student.nextkick.ai/form/97c21aa1-7764-40df-9cbe-ad0ac3fac9a1',
+      },
+      'glen-rock': {
+        name: 'Glen Rock',
+        blurb: 'New location',
+        href: 'https://student.nextkick.ai/form/00a70372-829d-4883-9ed1-272a21ac10cf',
+      },
+    },
+  },
+}
+
+export function getNextKickForm(kind: NextKickFormKind): NextKickFormConfig {
+  return NEXTKICK_FORMS[kind]
+}
+
+export function getNextKickFormHref(
+  kind: NextKickFormKind,
+  locationId: NextKickLocationId,
+): string {
+  return NEXTKICK_FORMS[kind].locations[locationId].href
+}
+
+/** @deprecated Prefer NEXTKICK_FORMS.trial — kept for transitional imports. */
 export const NEXTKICK_TRIAL_FORM = {
-  title: '1 Free Time Trial',
-  href: 'https://student.nextkick.ai/form/6fbe8b2c-2e75-45ab-9d92-994135c06e17',
+  title: NEXTKICK_FORMS.trial.title,
+  href: NEXTKICK_FORMS.trial.locations.allendale.href,
   club: 'UBBA Allendale',
 } as const
 
 /* ---------------------------------------------------------------------------
- * Where event-inquiry emails are delivered (birthday, camp, PNO)
+ * Where event-inquiry emails are delivered (Parents' Night Out still uses API)
  * ------------------------------------------------------------------------- */
 export const CONTACT = {
   /**

@@ -11,41 +11,34 @@ Everything you usually need to edit lives in **one file**:
 
 | I want to… | Edit |
 | --- | --- |
-| Change the NextKick trial form URL | `NEXTKICK_TRIAL_FORM.href` |
-| Change who receives event-form emails (default) | `CONTACT.notifyEmails` |
-| Send birthday / camp emails to a different inbox | `INQUIRY_TYPES.birthday.notifyEmails` or `INQUIRY_TYPES['summer-camp'].notifyEmails` |
-| Change email titles (“Birthday Party Inquiry”, etc.) | `INQUIRY_TYPES.*.label` |
+| Change a NextKick form URL (trial / birthday / camp, per school) | `NEXTKICK_FORMS` in `src/data/contact.ts` |
+| Change who receives Parents' Night Out emails (default) | `CONTACT.notifyEmails` |
 | Change the public mailto address | `CONTACT.publicEmail` |
 | Add / update Instagram or Facebook | `SOCIAL_PROFILES` → set `href`, `handle`, then `placeholder: false` |
 
 Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.example`](../.env.example). Never commit `.env`.
 
-## Free-class form (NextKick portal)
+## NextKick portal forms (trial, birthday, summer camp)
 
-Free-class CTAs (`Try A Class For Free!`, homepage/contact launcher, header, mobile bar)
-open a lightbox portal and load the hosted NextKick form:
+Trial, birthday, and summer-camp CTAs open a themed location picker, then load
+the matching per-school NextKick form in a lightbox iframe. All nine URLs live
+in [`NEXTKICK_FORMS`](../src/data/contact.ts) (`getNextKickFormHref`).
 
-[`NEXTKICK_TRIAL_FORM`](../src/data/contact.ts) → `https://student.nextkick.ai/form/...`
-
-Leads from that form land in the school's NextKick account, not `/api/leads`.
+Leads from those forms land in the school's NextKick account, not `/api/leads`.
 
 ## Forms that still email staff
 
 | Form | Page | Intent |
 | --- | --- | --- |
-| Birthday party signup | `/just-4-kids/birthday-parties` | `birthday` |
-| Summer camp signup | `/just-4-kids/summer-camp` | `summer-camp` |
 | Parents’ Night Out | `/just-4-kids/parents-night-out` | `parents-night-out` |
 
-## How an event request works
+## How a Parents’ Night Out request works
 
-1. Someone submits a Just 4 Kids form (`EventInquiryForm`).
+1. Someone submits the Just 4 Kids form (`EventInquiryForm`).
 2. The browser `POST`s to `/api/leads` with an `intent` plus the filled fields.
 3. The API validates, builds a detailed HTML + plain-text email, and sends it to the right inbox(es).
-4. Birthday emails include child name/age, preferred date, and guest count as their own rows.
-5. Summer camp emails include child name/age and preferred weeks as their own rows.
-6. **Reply-To** is the visitor’s email so staff can hit Reply.
-7. Configured Instagram / Facebook profile links are included at the bottom.
+4. **Reply-To** is the visitor’s email so staff can hit Reply.
+5. Configured Instagram / Facebook profile links are included at the bottom.
 
 ## Run locally
 

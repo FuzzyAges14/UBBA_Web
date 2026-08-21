@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { TrialPortalProvider } from '../context/TrialPortalContext'
-import { NEXTKICK_TRIAL_FORM } from '../data/contact'
+import { getNextKickFormHref } from '../data/contact'
 import LeadForm from './LeadForm'
 
 function renderForm() {
@@ -17,16 +17,21 @@ function renderForm() {
 }
 
 describe('LeadForm', () => {
-  it('opens the NextKick trial portal with the hosted form iframe', async () => {
+  it('opens the NextKick trial portal, picks Allendale, and loads the hosted form iframe', async () => {
     const user = userEvent.setup()
     renderForm()
 
     await user.click(screen.getByRole('button', { name: /try a class for free/i }))
 
-    expect(screen.getByRole('dialog', { name: /1 free time trial/i })).toBeInTheDocument()
-    expect(screen.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+    const dialog = screen.getByRole('dialog', { name: /1 free time trial/i })
+    expect(dialog).toBeInTheDocument()
+    expect(screen.queryByTitle(/1 free time trial — allendale form/i)).not.toBeInTheDocument()
+
+    await user.click(within(dialog).getByText('Allendale'))
+
+    expect(screen.getByTitle(/1 free time trial — allendale form/i)).toHaveAttribute(
       'src',
-      NEXTKICK_TRIAL_FORM.href,
+      getNextKickFormHref('trial', 'allendale'),
     )
   })
 
@@ -48,16 +53,18 @@ describe('LeadForm', () => {
     renderForm()
 
     await user.click(screen.getByRole('button', { name: /try a class for free/i }))
-    const closeButtons = screen.getAllByRole('button', { name: /close trial form/i })
+    const closeButtons = screen.getAllByRole('button', { name: /close 1 free time trial/i })
     await user.click(closeButtons[closeButtons.length - 1])
 
     expect(screen.queryByRole('dialog', { name: /1 free time trial/i })).not.toBeInTheDocument()
   })
 
-  it('exposes a new-tab fallback to the NextKick form', () => {
+  it('exposes a new-tab fallback to the Allendale NextKick form', () => {
     renderForm()
-    const fallback = screen.getByRole('link', { name: /open the trial form in a new tab/i })
-    expect(fallback).toHaveAttribute('href', NEXTKICK_TRIAL_FORM.href)
+    const fallback = screen.getByRole('link', {
+      name: /open the allendale trial form in a new tab/i,
+    })
+    expect(fallback).toHaveAttribute('href', getNextKickFormHref('trial', 'allendale'))
     expect(fallback).toHaveAttribute('target', '_blank')
   })
 })
