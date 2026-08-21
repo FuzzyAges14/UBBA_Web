@@ -15,6 +15,23 @@ import NextKickLocationPicker, {
 const FOCUSABLE =
   'a[href], button:not([disabled]), textarea, input, select, iframe, [tabindex]:not([tabindex="-1"])'
 
+const NEW_TAB_MARKER = 'open it in a new tab'
+
+function renderFormLede(text: string, href: string) {
+  const markerIndex = text.indexOf(NEW_TAB_MARKER)
+  if (markerIndex === -1) return text
+
+  return (
+    <>
+      {text.slice(0, markerIndex)}
+      <a href={href} target="_blank" rel="noreferrer">
+        {NEW_TAB_MARKER}
+      </a>
+      {text.slice(markerIndex + NEW_TAB_MARKER.length)}
+    </>
+  )
+}
+
 type NextKickFormPortalProps = {
   open: boolean
   onClose: () => void
@@ -148,17 +165,7 @@ export default function NextKickFormPortal({
               {isPickerStep ? config.title : `${config.title} — ${activeLocation?.name}`}
             </h2>
             <p id={ledeId} className="form-portal__lede">
-              {lede}
-              {!isPickerStep && formHref && (
-                <>
-                  {' '}
-                  You can also{' '}
-                  <a href={formHref} target="_blank" rel="noreferrer">
-                    open it in a new tab
-                  </a>
-                  .
-                </>
-              )}
+              {isPickerStep || !formHref ? lede : renderFormLede(lede, formHref)}
             </p>
           </div>
           <button
