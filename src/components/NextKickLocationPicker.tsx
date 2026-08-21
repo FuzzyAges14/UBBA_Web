@@ -36,8 +36,8 @@ export default function NextKickLocationPicker({
             onClick={() => onSelect(loc.id)}
           >
             <span className="form-portal__loc-btn-inner">
-              <span id={nameId} className="form-portal__loc-name">
-                {loc.name}
+              <span className="form-portal__loc-name">
+                <span id={nameId}>{loc.name}</span>
                 {loc.isNew && <span className="form-portal__loc-badge">New</span>}
               </span>
               <span id={blurbId} className="form-portal__loc-blurb">{loc.blurb}</span>

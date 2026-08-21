@@ -18,13 +18,13 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Privacy Policy and Terms copy
 
 ## Forms & email delivery
-- [x] Free-class CTAs open the NextKick trial form in a lightbox portal
-      (`NEXTKICK_TRIAL_FORM` in `src/data/contact.ts`)
-- [x] Birthday + summer camp signups (`EventInquiryForm`) post to `/api/leads`
-- [x] Honeypot spam field on the event-inquiry forms
+- [x] Free-class, birthday, and summer-camp CTAs open a location-picker lightbox,
+      then the per-school NextKick form (`NEXTKICK_FORMS` in `src/data/contact.ts`)
+- [x] Parents' Night Out (`EventInquiryForm`) still posts to `/api/leads`
+- [x] Honeypot spam field on the Parents' Night Out form
 - [ ] Set real `CONTACT.notifyEmails` / `INQUIRY_TYPES` + `SOCIAL_PROFILES` in `src/data/contact.ts`
       (step-by-step: [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md))
-- [ ] Configure Resend or SMTP in `.env` so requests leave log-only mode
+- [ ] Configure Resend or SMTP in `.env` so PNO requests leave log-only mode
       (same owner setup guide)
 - [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 
