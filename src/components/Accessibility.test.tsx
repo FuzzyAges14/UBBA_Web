@@ -140,35 +140,20 @@ describe('Accessibility: mobile menu', () => {
 })
 
 describe('Accessibility: lead form', () => {
-  beforeEach(() => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        json: async () => ({ ok: true, delivered: true, mode: 'email' }),
-      }),
-    )
-  })
-
-  afterEach(() => {
-    vi.unstubAllGlobals()
-  })
-
-  it('associates errors with fields and shows an error summary', async () => {
+  it('opens a labelled modal portal for the NextKick trial form', async () => {
     const user = userEvent.setup()
     render(
       <MemoryRouter>
-        <LeadForm />
+        <App />
       </MemoryRouter>,
     )
 
-    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
+    const opener = (await screen.findAllByRole('button', { name: /try a class for free/i }))[0]
+    await user.click(opener)
 
-    const summary = screen.getByRole('alert')
-    expect(summary).toHaveTextContent(/please fix the following/i)
-    expect(screen.getByLabelText(/full name/i)).toHaveAttribute('aria-invalid', 'true')
-    expect(screen.getByLabelText(/email/i)).toHaveAttribute('aria-invalid', 'true')
-    expect(screen.getByLabelText(/phone/i)).toHaveAttribute('aria-invalid', 'true')
+    const dialog = screen.getByRole('dialog', { name: /1 free time trial/i })
+    expect(dialog).toHaveAttribute('aria-modal', 'true')
+    expect(screen.getByTitle(/1 free time trial form/i)).toBeInTheDocument()
   })
 })
 

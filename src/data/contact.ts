@@ -3,9 +3,10 @@
  * CONTACT & SOCIAL — edit this file to wire up email + Instagram / Facebook
  * =============================================================================
  *
- * Form submissions (free class, birthday parties, summer camp, etc.) are emailed
- * to the addresses below. Instagram / Facebook profile links come from
- * `SOCIAL_PROFILES`.
+ * Free-class CTAs open the NextKick trial form in a lightbox portal
+ * (`NEXTKICK_TRIAL_FORM`). Birthday / camp / Parents' Night Out still email
+ * `CONTACT.notifyEmails` via `/api/leads`. Instagram / Facebook profile links
+ * come from `SOCIAL_PROFILES`.
  *
  * After editing:
  *   1. Save this file
@@ -49,7 +50,24 @@ export type InquiryTypeConfig = {
 }
 
 /* ---------------------------------------------------------------------------
- * Where requests are delivered (default for every form)
+ * NextKick trial form (free-class CTAs)
+ * ------------------------------------------------------------------------- */
+/**
+ * Public NextKick student form for free-class / trial signups.
+ * The live academy site opens conversion surfaces in a lightbox; we reuse
+ * that pattern and load this hosted form in the overlay iframe.
+ *
+ * This UUID belongs to the "1 Free Time Trial" form on the UBBA Allendale
+ * NextKick account. Swap `href` if the school publishes a new form.
+ */
+export const NEXTKICK_TRIAL_FORM = {
+  title: '1 Free Time Trial',
+  href: 'https://student.nextkick.ai/form/6fbe8b2c-2e75-45ab-9d92-994135c06e17',
+  club: 'UBBA Allendale',
+} as const
+
+/* ---------------------------------------------------------------------------
+ * Where event-inquiry emails are delivered (birthday, camp, PNO)
  * ------------------------------------------------------------------------- */
 export const CONTACT = {
   /**

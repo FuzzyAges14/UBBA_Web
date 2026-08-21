@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type ImgHTMLAttributes } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { SITE, MEGA_MENU, JUST_4_KIDS_MENU } from '../data/site'
+import TrialCta from './TrialCta'
 
 /** Primary desktop links (logo covers Home; CTA covers the loud Contact path). */
 const TOP_NAV = [
@@ -280,9 +281,7 @@ export default function Header() {
           </nav>
 
           <div className="header__right">
-            <Link to="/contact" className="btn btn--blue btn--header">
-              {SITE.primaryCta}
-            </Link>
+            <TrialCta className="btn btn--blue btn--header" />
             <button
               ref={menuBtnRef}
               type="button"
@@ -388,9 +387,10 @@ export default function Header() {
           </nav>
         </div>
         <div className="mobile-nav__cta">
-          <Link to="/contact" className="btn btn--blue btn--block mobile-nav__cta-btn">
-            {SITE.primaryCta}
-          </Link>
+          <TrialCta
+            className="btn btn--blue btn--block mobile-nav__cta-btn"
+            onClick={() => setMenuOpen(false)}
+          />
         </div>
       </div>
     </>

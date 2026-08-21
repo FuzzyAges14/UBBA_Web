@@ -7,6 +7,7 @@ import MobileCtaBar from './MobileCtaBar'
 import Seo from './Seo'
 import SkipLink from './SkipLink'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
+import { TrialPortalProvider } from '../context/TrialPortalContext'
 
 function scrollToTop(instant: boolean) {
   try {
@@ -49,15 +50,17 @@ function ScrollManager() {
 export default function Layout() {
   return (
     <MotionConfig reducedMotion="user">
-      <SkipLink />
-      <Seo />
-      <ScrollManager />
-      <Header />
-      <main id="main" tabIndex={-1}>
-        <Outlet />
-      </main>
-      <Footer />
-      <MobileCtaBar />
+      <TrialPortalProvider>
+        <SkipLink />
+        <Seo />
+        <ScrollManager />
+        <Header />
+        <main id="main" tabIndex={-1}>
+          <Outlet />
+        </main>
+        <Footer />
+        <MobileCtaBar />
+      </TrialPortalProvider>
     </MotionConfig>
   )
 }

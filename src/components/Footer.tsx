@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { CONTACT, SOCIAL_PROFILES } from '../data/contact'
 import { FOOTER_LINKS, LOCATIONS, SITE } from '../data/site'
 import Taegeuk from './Taegeuk'
+import TrialCta from './TrialCta'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -119,9 +120,7 @@ export default function Footer() {
                   )}
                 </div>
               ))}
-              <Link to="/contact" className="btn btn--blue mt-sm">
-                {SITE.primaryCta}
-              </Link>
+              <TrialCta className="btn btn--blue mt-sm" />
             </div>
           </div>
         </div>

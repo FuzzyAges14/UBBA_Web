@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import TrialCta from './TrialCta'
 
 export default function MobileCtaBar() {
   return (
@@ -11,10 +12,10 @@ export default function MobileCtaBar() {
         <span className="ic" aria-hidden="true">📍</span>
         Locations
       </Link>
-      <Link to="/contact" className="primary">
+      <TrialCta className="primary">
         <span className="ic" aria-hidden="true">🥋</span>
         Free Trial
-      </Link>
+      </TrialCta>
     </nav>
   )
 }

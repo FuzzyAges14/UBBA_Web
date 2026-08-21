@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
-import { SITE } from '../../data/site'
+import TrialCta from '../../components/TrialCta'
 
 /**
  * Homepage final CTA — full-bleed red band (shared `.cta-band` chrome with `CtaBanner`).
@@ -18,9 +18,7 @@ export default function FinalCtaSection() {
               class in Allendale or Midland Park. The first step is simple.
             </p>
             <div className="flex-actions cta-band__actions">
-              <Link to="/contact" className="btn btn--blue btn--lg">
-                {SITE.primaryCta} <span className="btn__arrow">→</span>
-              </Link>
+              <TrialCta className="btn btn--blue btn--lg" arrow />
               <Link to="/locations/allendale" className="btn btn--ghost btn--lg">
                 Allendale school
               </Link>

@@ -117,7 +117,7 @@ export default function Contact() {
             <span className="eyebrow">Send A Message</span>
             <h2 className="section-title">Let's get you on the mat</h2>
             <p className="section-lead">
-              Fill out the form and we'll be in touch to schedule your free class.
+              Open the academy&apos;s NextKick trial form to schedule your free class.
               Prefer to talk? Call our Allendale school at{' '}
               <a href="tel:2019622922">201-962-2922</a>.
             </p>

@@ -11,7 +11,8 @@ Everything you usually need to edit lives in **one file**:
 
 | I want to… | Edit |
 | --- | --- |
-| Change who receives form emails (default) | `CONTACT.notifyEmails` |
+| Change the NextKick trial form URL | `NEXTKICK_TRIAL_FORM.href` |
+| Change who receives event-form emails (default) | `CONTACT.notifyEmails` |
 | Send birthday / camp emails to a different inbox | `INQUIRY_TYPES.birthday.notifyEmails` or `INQUIRY_TYPES['summer-camp'].notifyEmails` |
 | Change email titles (“Birthday Party Inquiry”, etc.) | `INQUIRY_TYPES.*.label` |
 | Change the public mailto address | `CONTACT.publicEmail` |
@@ -19,18 +20,26 @@ Everything you usually need to edit lives in **one file**:
 
 Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.example`](../.env.example). Never commit `.env`.
 
-## Forms that email staff
+## Free-class form (NextKick portal)
+
+Free-class CTAs (`Try A Class For Free!`, homepage/contact launcher, header, mobile bar)
+open a lightbox portal and load the hosted NextKick form:
+
+[`NEXTKICK_TRIAL_FORM`](../src/data/contact.ts) → `https://student.nextkick.ai/form/...`
+
+Leads from that form land in the school's NextKick account, not `/api/leads`.
+
+## Forms that still email staff
 
 | Form | Page | Intent |
 | --- | --- | --- |
-| Free class (`LeadForm`) | Home, Contact | `free-class` |
 | Birthday party signup | `/just-4-kids/birthday-parties` | `birthday` |
 | Summer camp signup | `/just-4-kids/summer-camp` | `summer-camp` |
 | Parents’ Night Out | `/just-4-kids/parents-night-out` | `parents-night-out` |
 
-## How a request works
+## How an event request works
 
-1. Someone submits a form (`LeadForm` or Just 4 Kids `EventInquiryForm`).
+1. Someone submits a Just 4 Kids form (`EventInquiryForm`).
 2. The browser `POST`s to `/api/leads` with an `intent` plus the filled fields.
 3. The API validates, builds a detailed HTML + plain-text email, and sends it to the right inbox(es).
 4. Birthday emails include child name/age, preferred date, and guest count as their own rows.

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import OptimizedImage from '../components/OptimizedImage'
 import CtaBanner from '../components/CtaBanner'
+import TrialCta from '../components/TrialCta'
 import PageHero from '../components/PageHero'
 import Faq from '../components/Faq'
 import ProgramCard from '../components/ProgramCard'
@@ -13,7 +14,6 @@ import {
   IMAGE_DIMENSIONS,
   IMAGES,
   PROGRAM_GLYPHS,
-  SITE,
 } from '../data/site'
 
 const LEARN = [
@@ -77,9 +77,7 @@ export default function ChildrenPrograms() {
               ))}
             </ul>
             <div className="flex-actions mt">
-              <Link to="/contact" className="btn btn--blue">
-                {SITE.primaryCta} <span className="btn__arrow">→</span>
-              </Link>
+              <TrialCta className="btn btn--blue" arrow />
               <Link to="/locations/allendale" className="btn btn--outline">
                 Allendale
               </Link>

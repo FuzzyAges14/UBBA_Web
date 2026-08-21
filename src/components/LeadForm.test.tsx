@@ -1,169 +1,63 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
+import { TrialPortalProvider } from '../context/TrialPortalContext'
+import { NEXTKICK_TRIAL_FORM } from '../data/contact'
 import LeadForm from './LeadForm'
 
 function renderForm() {
   return render(
     <MemoryRouter>
-      <LeadForm />
+      <TrialPortalProvider>
+        <LeadForm />
+      </TrialPortalProvider>
     </MemoryRouter>,
   )
 }
 
 describe('LeadForm', () => {
-  beforeEach(() => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: true,
-        json: async () => ({ ok: true, delivered: true, mode: 'email' }),
-      }),
+  it('opens the NextKick trial portal with the hosted form iframe', async () => {
+    const user = userEvent.setup()
+    renderForm()
+
+    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
+
+    expect(screen.getByRole('dialog', { name: /1 free time trial/i })).toBeInTheDocument()
+    expect(screen.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+      'src',
+      NEXTKICK_TRIAL_FORM.href,
     )
   })
 
-  afterEach(() => {
-    vi.unstubAllGlobals()
-  })
-
-  it('shows validation errors when submitted empty', async () => {
+  it('closes the portal on Escape and restores focus to the opener', async () => {
     const user = userEvent.setup()
     renderForm()
+
+    const opener = screen.getByRole('button', { name: /try a class for free/i })
+    await user.click(opener)
+    expect(screen.getByRole('dialog', { name: /1 free time trial/i })).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog', { name: /1 free time trial/i })).not.toBeInTheDocument()
+    expect(opener).toHaveFocus()
+  })
+
+  it('closes the portal from the close button', async () => {
+    const user = userEvent.setup()
+    renderForm()
+
     await user.click(screen.getByRole('button', { name: /try a class for free/i }))
+    const closeButtons = screen.getAllByRole('button', { name: /close trial form/i })
+    await user.click(closeButtons[closeButtons.length - 1])
 
-    expect(screen.getByText(/please enter your full name/i)).toBeInTheDocument()
-    expect(screen.getByText(/please enter your email/i)).toBeInTheDocument()
-    expect(screen.getByText(/please enter a phone number/i)).toBeInTheDocument()
-    expect(fetch).not.toHaveBeenCalled()
+    expect(screen.queryByRole('dialog', { name: /1 free time trial/i })).not.toBeInTheDocument()
   })
 
-  it('rejects an invalid email', async () => {
-    const user = userEvent.setup()
+  it('exposes a new-tab fallback to the NextKick form', () => {
     renderForm()
-
-    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
-    await user.type(screen.getByLabelText(/email/i), 'not-an-email')
-    await user.type(screen.getByLabelText(/phone/i), '2015550123')
-    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
-
-    expect(screen.getByText(/valid email/i)).toBeInTheDocument()
-    expect(fetch).not.toHaveBeenCalled()
-  })
-
-  it('posts to the API and shows success on valid submission', async () => {
-    const user = userEvent.setup()
-    renderForm()
-
-    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
-    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
-    await user.type(screen.getByLabelText(/phone/i), '2015550123')
-    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
-
-    await waitFor(() => {
-      expect(screen.getByText(/you're all set/i)).toBeInTheDocument()
-    })
-
-    expect(fetch).toHaveBeenCalledWith(
-      '/api/leads',
-      expect.objectContaining({
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      }),
-    )
-    const body = JSON.parse((fetch as ReturnType<typeof vi.fn>).mock.calls[0][1].body as string)
-    expect(body).toMatchObject({
-      intent: 'free-class',
-      name: 'Jane Doe',
-      email: 'jane@example.com',
-      phone: '2015550123',
-    })
-  })
-
-  it('shows an error when the API fails', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn().mockResolvedValue({
-        ok: false,
-        json: async () => ({ ok: false, error: 'Could not send your request.' }),
-      }),
-    )
-    const user = userEvent.setup()
-    renderForm()
-
-    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
-    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
-    await user.type(screen.getByLabelText(/phone/i), '2015550123')
-    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
-
-    await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent(/could not send/i)
-    })
-    expect(screen.queryByText(/you're all set/i)).not.toBeInTheDocument()
-  })
-
-  it('shows a loading state and prevents duplicate submits while sending', async () => {
-    let resolveFetch: ((value: unknown) => void) | undefined
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(
-        () =>
-          new Promise((resolve) => {
-            resolveFetch = resolve
-          }),
-      ),
-    )
-    const user = userEvent.setup()
-    renderForm()
-
-    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
-    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
-    await user.type(screen.getByLabelText(/phone/i), '2015550123')
-    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
-
-    const sendingButton = screen.getByRole('button', { name: /sending/i })
-    expect(sendingButton).toBeDisabled()
-    expect(fetch).toHaveBeenCalledTimes(1)
-
-    await user.click(sendingButton)
-    expect(fetch).toHaveBeenCalledTimes(1)
-
-    resolveFetch?.({
-      ok: true,
-      json: async () => ({ ok: true, delivered: true, mode: 'email' }),
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText(/you're all set/i)).toBeInTheDocument()
-    })
-  })
-
-  it('submits via keyboard Enter from a text field', async () => {
-    const user = userEvent.setup()
-    renderForm()
-
-    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
-    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
-    await user.type(screen.getByLabelText(/phone/i), '2015550123{Enter}')
-
-    await waitFor(() => {
-      expect(screen.getByText(/you're all set/i)).toBeInTheDocument()
-    })
-    expect(fetch).toHaveBeenCalledTimes(1)
-  })
-
-  it('shows a network error when fetch throws', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network down')))
-    const user = userEvent.setup()
-    renderForm()
-
-    await user.type(screen.getByLabelText(/full name/i), 'Jane Doe')
-    await user.type(screen.getByLabelText(/email/i), 'jane@example.com')
-    await user.type(screen.getByLabelText(/phone/i), '2015550123')
-    await user.click(screen.getByRole('button', { name: /try a class for free/i }))
-
-    await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent(/could not reach the server/i)
-    })
+    const fallback = screen.getByRole('link', { name: /open the trial form in a new tab/i })
+    expect(fallback).toHaveAttribute('href', NEXTKICK_TRIAL_FORM.href)
+    expect(fallback).toHaveAttribute('target', '_blank')
   })
 })

@@ -18,9 +18,10 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Privacy Policy and Terms copy
 
 ## Forms & email delivery
-- [x] `LeadForm` (free class) posts to `/api/leads` (see `docs/BACKEND.md`)
+- [x] Free-class CTAs open the NextKick trial form in a lightbox portal
+      (`NEXTKICK_TRIAL_FORM` in `src/data/contact.ts`)
 - [x] Birthday + summer camp signups (`EventInquiryForm`) post to `/api/leads`
-- [x] Honeypot spam field on the forms
+- [x] Honeypot spam field on the event-inquiry forms
 - [ ] Set real `CONTACT.notifyEmails` / `INQUIRY_TYPES` + `SOCIAL_PROFILES` in `src/data/contact.ts`
       (step-by-step: [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md))
 - [ ] Configure Resend or SMTP in `.env` so requests leave log-only mode

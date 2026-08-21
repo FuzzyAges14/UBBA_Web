@@ -3,8 +3,9 @@
 ## Cursor Cloud specific instructions
 
 UBBA_Web is a Vite + React + TypeScript marketing site plus a small Express API
-(`server/`) that emails free-class requests. Standard commands live in `README.md`
-and `package.json` scripts; refer to those rather than duplicating them.
+(`server/`) that emails Just 4 Kids event inquiries. Free-class CTAs open the
+hosted NextKick trial form in a lightbox portal. Standard commands live in
+`README.md` and `package.json` scripts; refer to those rather than duplicating them.
 
 - **Run the app (dev):** `pnpm dev` serves at `http://localhost:5173` with hot
   module reload. The server is configured with `host: true`, so it also binds to
@@ -27,15 +28,17 @@ and `package.json` scripts; refer to those rather than duplicating them.
   in JSX. Components that render tests-visible text (e.g. `Placeholder`) duplicate
   labels, so use `getAllByText` in tests when a term appears in both a heading and a
   placeholder.
-- **Forms + API:** `LeadForm` POSTs to `/api/leads` (`src/lib/submitLead.ts`).
-  The Express API in `server/` emails a detailed HTML/text message to
-  `CONTACT.notifyEmails`. Edit emails and Instagram/Facebook URLs in
-  `src/data/contact.ts`; mail secrets in `.env` (see `.env.example` and
-  `docs/BACKEND.md`). Without SMTP/Resend the API logs the email and still
-  returns success. `jsdom` has no `IntersectionObserver`, so the
-  `Reveal`/`StatCounter` components fall back to their final state immediately
-  in tests — that is expected. `jsdom` also lacks `window.scrollTo`/`matchMedia`;
-  those are guarded, do not "fix" them.
+- **Forms + API:** Free-class CTAs (`TrialCta` / `LeadForm`) open
+  `NEXTKICK_TRIAL_FORM` from `src/data/contact.ts` in `NextKickFormPortal`.
+  Just 4 Kids `EventInquiryForm` still POSTs to `/api/leads`
+  (`src/lib/submitLead.ts`). The Express API in `server/` emails a detailed
+  HTML/text message to `CONTACT.notifyEmails`. Edit the NextKick form URL,
+  emails, and Instagram/Facebook URLs in `src/data/contact.ts`; mail secrets in
+  `.env` (see `.env.example` and `docs/BACKEND.md`). Without SMTP/Resend the API
+  logs the email and still returns success. `jsdom` has no
+  `IntersectionObserver`, so the `Reveal`/`StatCounter` components fall back to
+  their final state immediately in tests — that is expected. `jsdom` also lacks
+  `window.scrollTo`/`matchMedia`; those are guarded, do not "fix" them.
 - **Design system:** premium brand palette + Sora/Inter typography live in
   `src/index.css`; motion uses `framer-motion` (hero) plus the CSS `Reveal`
   wrapper. Signature motifs are components: `Taegeuk`, `Marquee`, plus the

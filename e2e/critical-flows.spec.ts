@@ -1,37 +1,40 @@
 import { expect, test } from '@playwright/test'
 
+const NEXTKICK_FORM =
+  'https://student.nextkick.ai/form/6fbe8b2c-2e75-45ab-9d92-994135c06e17'
+
 test.describe('Critical marketing flows', () => {
-  test('homepage exposes free-class CTA and form path', async ({ page }) => {
+  test('homepage free-class CTA opens the NextKick trial portal', async ({ page }) => {
     await page.goto('/')
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
       /united\s+black\s+belt\s+academy/i,
     )
 
-    const cta = page.getByRole('link', { name: /try a class for free/i }).first()
+    const cta = page.getByRole('button', { name: /try a class for free/i }).first()
     await expect(cta).toBeVisible()
     await cta.click()
-    await expect(page).toHaveURL(/\/contact/)
-    await expect(page.getByLabel(/full name/i)).toBeVisible()
-    await expect(page.getByRole('button', { name: /try a class for free/i })).toBeVisible()
+
+    const dialog = page.getByRole('dialog', { name: /1 free time trial/i })
+    await expect(dialog).toBeVisible()
+    await expect(dialog.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+      'src',
+      NEXTKICK_FORM,
+    )
   })
 
-  test('homepage free-class form validates and can submit against mocked API', async ({
-    page,
-  }) => {
-    await page.route('**/api/leads', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ ok: true, delivered: false, mode: 'log' }),
-      })
-    })
-
+  test('contact page launcher opens the same NextKick form iframe', async ({ page }) => {
     await page.goto('/contact')
-    await page.getByLabel(/full name/i).fill('E2E Parent')
-    await page.getByLabel(/^email/i).fill('e2e@example.com')
-    await page.getByLabel(/^phone/i).fill('2015550100')
-    await page.getByRole('button', { name: /try a class for free/i }).click()
-    await expect(page.getByText(/you.?re all set/i)).toBeVisible()
+    await page.getByRole('button', { name: /try a class for free/i }).last().click()
+    const dialog = page.getByRole('dialog', { name: /1 free time trial/i })
+    await expect(dialog).toBeVisible()
+    await expect(dialog.getByTitle(/1 free time trial form/i)).toHaveAttribute(
+      'src',
+      NEXTKICK_FORM,
+    )
+    await expect(page.getByRole('link', { name: /open it in a new tab/i })).toHaveAttribute(
+      'href',
+      NEXTKICK_FORM,
+    )
   })
 
   test('mobile navigation reaches a program page', async ({ page }, testInfo) => {
@@ -92,7 +95,7 @@ test.describe('Critical marketing flows', () => {
     await expect(page.getByText(/party request sent/i)).toBeVisible()
   })
 
-  test('keyboard-only path reaches contact form', async ({ page }, testInfo) => {
+  test('keyboard-only path opens the NextKick trial portal', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name === 'mobile-chrome', 'Desktop keyboard flow')
 
     await page.goto('/')
@@ -112,7 +115,6 @@ test.describe('Critical marketing flows', () => {
       }
     }
 
-    await expect(page).toHaveURL(/\/contact/)
-    await expect(page.getByLabel(/full name/i)).toBeVisible()
+    await expect(page.getByRole('dialog', { name: /1 free time trial/i })).toBeVisible()
   })
 })
