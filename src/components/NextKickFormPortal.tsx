@@ -1,6 +1,16 @@
 import { useEffect, useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { NEXTKICK_TRIAL_FORM } from '../data/contact'
+import {
+  getNextKickForm,
+  getNextKickFormHref,
+  NEXTKICK_LOCATION_ORDER,
+  type NextKickFormKind,
+  type NextKickLocationId,
+} from '../data/contact'
+import { SITE } from '../data/site'
+import NextKickLocationPicker, {
+  type NextKickPickerLocation,
+} from './NextKickLocationPicker'
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), textarea, input, select, iframe, [tabindex]:not([tabindex="-1"])'
@@ -8,13 +18,42 @@ const FOCUSABLE =
 type NextKickFormPortalProps = {
   open: boolean
   onClose: () => void
+  kind: NextKickFormKind | null
+  locationId: NextKickLocationId | null
+  onSelectLocation: (id: NextKickLocationId) => void
+  onBackToPicker: () => void
 }
 
-export default function NextKickFormPortal({ open, onClose }: NextKickFormPortalProps) {
+export default function NextKickFormPortal({
+  open,
+  onClose,
+  kind,
+  locationId,
+  onSelectLocation,
+  onBackToPicker,
+}: NextKickFormPortalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
   const titleId = useId()
-  const frameTitleId = useId()
+  const ledeId = useId()
+
+  const isPickerStep = !locationId
+  const config = kind ? getNextKickForm(kind) : null
+  const formHref =
+    kind && locationId ? getNextKickFormHref(kind, locationId) : null
+  const activeLocation =
+    config && locationId ? config.locations[locationId] : null
+
+  const pickerLocations: NextKickPickerLocation[] = config
+    ? NEXTKICK_LOCATION_ORDER.filter(
+        (id) => id !== 'glen-rock' || SITE.showGlenRock,
+      ).map((id) => ({
+        id,
+        name: config.locations[id].name,
+        blurb: config.locations[id].blurb,
+        isNew: id === 'glen-rock',
+      }))
+    : []
 
   useEffect(() => {
     if (!open) return
@@ -24,7 +63,7 @@ export default function NextKickFormPortal({ open, onClose }: NextKickFormPortal
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [open])
+  }, [open, isPickerStep])
 
   useEffect(() => {
     if (!open) return
@@ -59,59 +98,98 @@ export default function NextKickFormPortal({ open, onClose }: NextKickFormPortal
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [open, onClose])
 
-  if (!open || typeof document === 'undefined') return null
+  if (!open || !kind || !config || typeof document === 'undefined') return null
+
+  const lede = isPickerStep ? config.pickerLede : config.formLede
+  const closeLabel = isPickerStep
+    ? `Close ${config.title}`
+    : `Close ${activeLocation?.name ?? 'school'} form`
 
   return createPortal(
     <div className="form-portal" role="presentation">
       <button
         type="button"
         className="form-portal__backdrop"
-        aria-label="Close trial form"
+        aria-label={closeLabel}
         onClick={onClose}
       />
       <div
         ref={dialogRef}
-        className="form-portal__dialog"
+        className={[
+          'form-portal__dialog',
+          `form-portal__dialog--${config.theme}`,
+          isPickerStep ? 'form-portal__dialog--picker' : 'form-portal__dialog--form',
+        ].join(' ')}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        aria-describedby={frameTitleId}
+        aria-describedby={ledeId}
       >
+        <div className="belt-bar form-portal__belt" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+
         <div className="form-portal__chrome">
           <div className="form-portal__heading">
-            <span className="eyebrow">Free Class Request</span>
-            <h2 id={titleId}>{NEXTKICK_TRIAL_FORM.title}</h2>
-            <p id={frameTitleId} className="form-portal__lede">
-              Complete the academy&apos;s NextKick trial form without leaving this page.
-              You can also{' '}
-              <a
-                href={NEXTKICK_TRIAL_FORM.href}
-                target="_blank"
-                rel="noreferrer"
+            {!isPickerStep && (
+              <button
+                type="button"
+                className="form-portal__back"
+                onClick={onBackToPicker}
               >
-                open it in a new tab
-              </a>
-              .
+                ← All schools
+              </button>
+            )}
+            <span className="eyebrow">{config.eyebrow}</span>
+            <h2 id={titleId}>
+              {isPickerStep ? config.title : `${config.title} — ${activeLocation?.name}`}
+            </h2>
+            <p id={ledeId} className="form-portal__lede">
+              {lede}
+              {!isPickerStep && formHref && (
+                <>
+                  {' '}
+                  You can also{' '}
+                  <a href={formHref} target="_blank" rel="noreferrer">
+                    open it in a new tab
+                  </a>
+                  .
+                </>
+              )}
             </p>
           </div>
           <button
             ref={closeBtnRef}
             type="button"
             className="form-portal__close"
-            aria-label="Close trial form"
+            aria-label={closeLabel}
             onClick={onClose}
           >
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div className="form-portal__frame">
-          <iframe
-            title={`${NEXTKICK_TRIAL_FORM.title} form`}
-            src={NEXTKICK_TRIAL_FORM.href}
-            referrerPolicy="no-referrer-when-downgrade"
-            allow="payment; clipboard-write"
-          />
-        </div>
+
+        {isPickerStep ? (
+          <div className="form-portal__body form-portal__body--picker">
+            <div className="dojang dojang--light" aria-hidden="true" />
+            <NextKickLocationPicker
+              locations={pickerLocations}
+              onSelect={onSelectLocation}
+            />
+          </div>
+        ) : (
+          <div className="form-portal__frame">
+            <iframe
+              title={`${config.title} — ${activeLocation?.name ?? 'school'} form`}
+              src={formHref ?? undefined}
+              referrerPolicy="no-referrer-when-downgrade"
+              allow="payment; clipboard-write"
+            />
+          </div>
+        )}
       </div>
     </div>,
     document.body,
