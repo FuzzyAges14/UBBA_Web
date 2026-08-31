@@ -731,6 +731,19 @@ export function getVisibleLocations(): Location[] {
   return SITE.showGlenRock ? [...LOCATIONS, GLEN_ROCK] : LOCATIONS
 }
 
+/** Human-readable list of visible school names, e.g. "Allendale, Midland Park & Glen Rock". */
+export function getLocationAreaLabel(options?: { withState?: boolean }): string {
+  const names = getVisibleLocations().map((l) => l.name)
+  if (names.length === 0) return options?.withState ? 'Bergen County, NJ' : 'Bergen County'
+  if (names.length === 1) {
+    return options?.withState ? `${names[0]}, NJ` : names[0]
+  }
+  const last = names[names.length - 1]
+  const rest = names.slice(0, -1)
+  const joined = `${rest.join(', ')} & ${last}`
+  return options?.withState ? `${joined}, NJ` : joined
+}
+
 export const PROGRAM_OPTIONS = [
   'Tiny Tigers (Ages 3-5)',
   'Junior Tigers (Ages 6-10)',

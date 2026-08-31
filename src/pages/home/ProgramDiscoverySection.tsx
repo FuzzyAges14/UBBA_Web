@@ -1,7 +1,7 @@
 import Reveal from '../../components/Reveal'
 import SectionHeading from '../../components/SectionHeading'
 import ProgramCard from '../../components/ProgramCard'
-import { HOME_PROGRAM_CARDS, PROGRAM_GLYPHS } from '../../data/site'
+import { getLocationAreaLabel, HOME_PROGRAM_CARDS, PROGRAM_GLYPHS } from '../../data/site'
 
 export default function ProgramDiscoverySection() {
   return (
@@ -11,7 +11,7 @@ export default function ProgramDiscoverySection() {
           <SectionHeading
             eyebrow="Find Your Path"
             title={<>Programs for every age &amp; stage</>}
-            lead="From Tiny Tigers to adult martial arts, choose an age-specific path — then try a free class in Allendale or Midland Park."
+            lead={`From Tiny Tigers to adult martial arts, choose an age-specific path — then try a free class in ${getLocationAreaLabel()}.`}
           />
         </Reveal>
 

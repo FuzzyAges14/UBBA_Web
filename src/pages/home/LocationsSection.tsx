@@ -1,7 +1,7 @@
 import Reveal from '../../components/Reveal'
 import LocationCard from '../../components/LocationCard'
 import SectionHeading from '../../components/SectionHeading'
-import { getVisibleLocations } from '../../data/site'
+import { getLocationAreaLabel, getVisibleLocations } from '../../data/site'
 
 export default function LocationsSection() {
   const locations = getVisibleLocations()
@@ -12,7 +12,7 @@ export default function LocationsSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Our Schools"
-            title="Train in Allendale & Midland Park"
+            title={`Train in ${getLocationAreaLabel()}`}
             lead={`${locations.length} Bergen County schools — pick the campus that fits your commute, then request a free class at the location you prefer.`}
           />
         </Reveal>

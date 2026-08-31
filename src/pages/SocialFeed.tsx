@@ -44,20 +44,21 @@ export default function SocialFeed() {
               </p>
             )}
             <div className="mt" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-              <a
-                href={network.href}
-                className="btn btn--blue"
-                title={
-                  network.placeholder
-                    ? `${network.label} profile (link pending)`
-                    : `Open ${network.label}`
-                }
-                {...(network.href !== '#'
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
-              >
-                Visit {network.label} Profile <span className="btn__arrow">→</span>
-              </a>
+              {network.placeholder || network.href === '#' ? (
+                <span className="btn btn--blue" aria-disabled="true" title={`${network.label} profile (link pending)`}>
+                  Visit {network.label} Profile <span className="btn__arrow">→</span>
+                </span>
+              ) : (
+                <a
+                  href={network.href}
+                  className="btn btn--blue"
+                  title={`Open ${network.label}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit {network.label} Profile <span className="btn__arrow">→</span>
+                </a>
+              )}
               <Link to="/follow-us" className="btn btn--outline">
                 Back to Follow Us
               </Link>
@@ -79,32 +80,41 @@ export default function SocialFeed() {
           <ul className="social-feed">
             {network.recentPosts.map((post, i) => (
               <Reveal as="li" key={post.id} delay={i * 70}>
-                <a
-                  href={post.href}
-                  className="social-feed__post"
-                  title={
-                    post.placeholder
-                      ? `${network.label} post (placeholder)`
-                      : post.caption
-                  }
-                  {...(post.href !== '#'
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                >
-                  <span className="social-feed__thumb" aria-hidden="true">
-                    <span className="social-feed__mark">{mark}</span>
-                  </span>
-                  <span className="social-feed__body">
-                    <span className="social-feed__caption">{post.caption}</span>
-                    <span className="social-feed__meta">
-                      {post.placeholder ? 'Placeholder · ' : ''}
-                      {post.dateLabel}
+                {post.placeholder || post.href === '#' ? (
+                  <div className="social-feed__post social-feed__post--pending" aria-disabled="true">
+                    <span className="social-feed__thumb" aria-hidden="true">
+                      <span className="social-feed__mark">{mark}</span>
                     </span>
-                    <span className="social-feed__link">
-                      Open post <span aria-hidden="true">→</span>
+                    <span className="social-feed__body">
+                      <span className="social-feed__caption">{post.caption}</span>
+                      <span className="social-feed__meta">
+                        Placeholder · {post.dateLabel}
+                      </span>
+                      <span className="social-feed__link">
+                        Link pending <span aria-hidden="true">→</span>
+                      </span>
                     </span>
-                  </span>
-                </a>
+                  </div>
+                ) : (
+                  <a
+                    href={post.href}
+                    className="social-feed__post"
+                    title={post.caption}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="social-feed__thumb" aria-hidden="true">
+                      <span className="social-feed__mark">{mark}</span>
+                    </span>
+                    <span className="social-feed__body">
+                      <span className="social-feed__caption">{post.caption}</span>
+                      <span className="social-feed__meta">{post.dateLabel}</span>
+                      <span className="social-feed__link">
+                        Open post <span aria-hidden="true">→</span>
+                      </span>
+                    </span>
+                  </a>
+                )}
               </Reveal>
             ))}
           </ul>

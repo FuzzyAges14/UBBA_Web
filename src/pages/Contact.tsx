@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal'
 import LeadForm from '../components/LeadForm'
 import PageHero from '../components/PageHero'
 import SectionSeam from '../components/SectionSeam'
-import { LOCATIONS, GLEN_ROCK, SITE } from '../data/site'
+import { getLocationAreaLabel, LOCATIONS, GLEN_ROCK, SITE } from '../data/site'
 import type { Location } from '../data/site'
 
 function mapSrc(query: string) {
@@ -93,7 +93,7 @@ export default function Contact() {
         center
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
         title="Try A Class For Free!"
-        intro="Ready to start Taekwondo or martial arts in Allendale or Midland Park? Tell us about your family and we’ll help you pick a program — then schedule your complimentary introductory class."
+        intro={`Ready to start Taekwondo or martial arts in ${getLocationAreaLabel()}? Tell us about your family and we’ll help you pick a program — then schedule your complimentary introductory class.`}
       />
 
       <SectionSeam from="dark" to="off-white" variant="fade" />

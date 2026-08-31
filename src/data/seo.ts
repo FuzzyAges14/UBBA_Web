@@ -1,5 +1,5 @@
 import { absoluteAssetUrl, absoluteUrl, DEFAULT_OG_IMAGE_PATH } from '../config/siteUrl'
-import { getProgram, PROGRAM_DETAILS, SITE, type ProgramDetail } from './site'
+import { getLocationAreaLabel, getProgram, PROGRAM_DETAILS, SITE, type ProgramDetail } from './site'
 
 export type OgType = 'website' | 'article'
 export type TwitterCard = 'summary' | 'summary_large_image'
@@ -45,6 +45,8 @@ export type ResolvedSeo = {
 }
 
 const brand = SITE.name
+const marketArea = getLocationAreaLabel({ withState: true })
+const marketAreaPlain = getLocationAreaLabel()
 
 function meta(
   title: string,
@@ -56,12 +58,11 @@ function meta(
 
 function programSeo(program: ProgramDetail): SeoMeta {
   const ages = program.ages ? ` (${program.ages})` : ''
-  const locale = 'Allendale & Midland Park, NJ'
   const snippet = program.description.length > 140
     ? `${program.description.slice(0, 137).trim()}…`
     : program.description
   return meta(
-    `${program.name}${ages} in ${locale} | ${brand}`,
+    `${program.name}${ages} in ${marketArea} | ${brand}`,
     `${program.tagline} ${snippet} Request a free class at ${brand}.`,
   )
 }
@@ -69,23 +70,23 @@ function programSeo(program: ProgramDetail): SeoMeta {
 /** Static route metadata (unique title + description per public page). */
 export const SEO: Record<string, SeoMeta> = {
   '/': meta(
-    `${brand} | Martial Arts & Taekwondo in Allendale & Midland Park, NJ`,
-    'Confidence-building Taekwondo and martial arts for kids, teens, and adults in Allendale and Midland Park, NJ. Try a class for free at United Black Belt Academy.',
+    `${brand} | Martial Arts & Taekwondo in ${marketArea}`,
+    `Confidence-building Taekwondo and martial arts for kids, teens, and adults in ${marketAreaPlain}, NJ. Try a class for free at United Black Belt Academy.`,
   ),
   '/programs/children': meta(
-    `Kids Martial Arts Classes in Allendale & Midland Park, NJ | ${brand}`,
+    `Kids Martial Arts Classes in ${marketArea} | ${brand}`,
     'Children’s Taekwondo in Bergen County — Tiny Tigers, Junior Tigers, and Teen Martial Arts build confidence, focus, and respect. Book a free trial class.',
   ),
   '/programs/adult': meta(
-    `Adult Martial Arts Classes in Allendale & Midland Park, NJ | ${brand}`,
-    'Adult Taekwondo, family training, Olympic sparring, and self-defense in Allendale and Midland Park, NJ. Fitness, focus, and a welcoming community — try a free class.',
+    `Adult Martial Arts Classes in ${marketArea} | ${brand}`,
+    `Adult Taekwondo, family training, Olympic sparring, and self-defense in ${marketAreaPlain}, NJ. Fitness, focus, and a welcoming community — try a free class.`,
   ),
   '/just-4-kids': meta(
     `Kids Birthday Parties, Summer Camp & Parents’ Night Out | ${brand}`,
     'Martial arts birthday parties, summer camp, and Parents’ Night Out for families in Bergen County, NJ. Fun, supervised activities beyond regular classes.',
   ),
   '/just-4-kids/birthday-parties': meta(
-    `Martial Arts Birthday Parties in Allendale & Midland Park, NJ | ${brand}`,
+    `Martial Arts Birthday Parties in ${marketArea} | ${brand}`,
     'Host a martial arts birthday party with games, board breaking, and stress-free fun. Inquire about availability at United Black Belt Academy in Bergen County, NJ.',
   ),
   '/just-4-kids/summer-camp': meta(
@@ -93,7 +94,7 @@ export const SEO: Record<string, SeoMeta> = {
     'Action-packed martial arts summer camp for kids — themes, games, and confidence-building fun. Ask about dates and enrollment at United Black Belt Academy.',
   ),
   '/just-4-kids/parents-night-out': meta(
-    `Parents’ Night Out in Allendale & Midland Park, NJ | ${brand}`,
+    `Parents’ Night Out in ${marketArea} | ${brand}`,
     'Supervised Friday night fun for kids while parents enjoy a night out. Inquire about upcoming Parents’ Night Out dates at United Black Belt Academy.',
   ),
   '/follow-us': meta(
@@ -106,11 +107,11 @@ export const SEO: Record<string, SeoMeta> = {
   ),
   '/follow-us/facebook': meta(
     `Facebook | ${brand}`,
-    'See recent Facebook updates from United Black Belt Academy — events, camp news, and community highlights from Allendale and Midland Park, NJ.',
+    `See recent Facebook updates from United Black Belt Academy — events, camp news, and community highlights from ${marketAreaPlain}, NJ.`,
   ),
   '/contact': meta(
     `Contact & Free Class Request | ${brand}`,
-    'Contact United Black Belt Academy in Allendale or Midland Park, NJ. Request a free class, ask about programs, or get directions to a location near you.',
+    `Contact United Black Belt Academy in ${marketAreaPlain}, NJ. Request a free class, ask about programs, or get directions to a location near you.`,
   ),
   '/locations/allendale': meta(
     `Taekwondo & Martial Arts in Allendale, NJ | ${brand}`,

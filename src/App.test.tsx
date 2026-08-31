@@ -135,11 +135,12 @@ describe('App routing', () => {
     expect(screen.queryByText(/youtube/i)).not.toBeInTheDocument()
   })
 
-  it('renders an Instagram feed page with post links', async () => {
+  it('renders an Instagram feed page with placeholder profile and posts', async () => {
     renderAt('/follow-us/instagram')
     expect(await screen.findByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
     expect(screen.getByText(/evening class energy on the mat/i)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /visit instagram profile/i })).toBeInTheDocument()
+    expect(screen.getByText(/visit instagram profile/i)).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /visit instagram profile/i })).not.toBeInTheDocument()
   })
 
   it('shows a 404 for an unknown social network', async () => {
