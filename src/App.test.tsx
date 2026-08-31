@@ -135,12 +135,15 @@ describe('App routing', () => {
     expect(screen.queryByText(/youtube/i)).not.toBeInTheDocument()
   })
 
-  it('renders an Instagram feed page with placeholder profile and posts', async () => {
+  it('renders an Instagram feed page with profile link and recent posts', async () => {
     renderAt('/follow-us/instagram')
     expect(await screen.findByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
-    expect(screen.getByText(/evening class energy on the mat/i)).toBeInTheDocument()
-    expect(screen.getByText(/visit instagram profile/i)).toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: /visit instagram profile/i })).not.toBeInTheDocument()
+    expect(screen.getByText(/back-to-school special/i)).toBeInTheDocument()
+    const profileLink = screen.getByRole('link', { name: /visit instagram profile/i })
+    expect(profileLink).toHaveAttribute('href', 'https://www.instagram.com/ubbatkd/')
+    expect(profileLink).toHaveAttribute('target', '_blank')
+    const postLinks = screen.getAllByRole('link', { name: /open post/i })
+    expect(postLinks[0]).toHaveAttribute('href', 'https://www.instagram.com/p/DcQ3NEmH08s/')
   })
 
   it('shows a 404 for an unknown social network', async () => {

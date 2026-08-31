@@ -104,20 +104,20 @@ export const SOCIAL_PROFILES: SocialProfile[] = [
   {
     slug: 'instagram',
     label: 'Instagram',
-    href: '#', // e.g. 'https://www.instagram.com/unitedblackbelt'
-    handle: '@unitedblackbelt',
+    href: 'https://www.instagram.com/ubbatkd/',
+    handle: '@ubbatkd',
     blurb:
-      'Class moments, belt promotions, and academy life — see what is happening on the mat.',
-    placeholder: true,
+      'Class moments, belt promotions, summer camp, and academy life — follow United Black Belt Academy on the mat.',
+    placeholder: false,
   },
   {
     slug: 'facebook',
     label: 'Facebook',
-    href: '#', // e.g. 'https://www.facebook.com/unitedblackbelt'
+    href: 'https://www.facebook.com/ubbaad/',
     handle: 'United Black Belt Academy',
     blurb:
-      'Events, camp updates, and community news for families across Bergen County.',
-    placeholder: true,
+      'Events, camp updates, and community news for families across Allendale, Midland Park, and Glen Rock.',
+    placeholder: false,
   },
 ]
 

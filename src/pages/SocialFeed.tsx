@@ -37,28 +37,16 @@ export default function SocialFeed() {
               Profile overview
             </h2>
             <p className="section-lead">{network.blurb}</p>
-            {network.placeholder && (
-              <p className="ph-note mt-sm">
-                Profile link pending — paste the {network.label} URL into{' '}
-                <code>SOCIAL_PROFILES</code> in <code>src/data/contact.ts</code> before launch.
-              </p>
-            )}
             <div className="mt" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-              {network.placeholder || network.href === '#' ? (
-                <span className="btn btn--blue" aria-disabled="true" title={`${network.label} profile (link pending)`}>
-                  Visit {network.label} Profile <span className="btn__arrow">→</span>
-                </span>
-              ) : (
-                <a
-                  href={network.href}
-                  className="btn btn--blue"
-                  title={`Open ${network.label}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit {network.label} Profile <span className="btn__arrow">→</span>
-                </a>
-              )}
+              <a
+                href={network.href}
+                className="btn btn--blue"
+                title={`Open ${network.label}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit {network.label} Profile <span className="btn__arrow">→</span>
+              </a>
               <Link to="/follow-us" className="btn btn--outline">
                 Back to Follow Us
               </Link>
@@ -73,7 +61,8 @@ export default function SocialFeed() {
             <span className="eyebrow">Latest Posts</span>
             <h2 className="section-title">Most recent on {network.label}</h2>
             <p className="section-lead">
-              Placeholder posts for now — each card links out once real post URLs are added.
+              Tap a post to open it on {network.label} — class updates, camp highlights, and
+              promotions from our Bergen County schools.
             </p>
           </Reveal>
 

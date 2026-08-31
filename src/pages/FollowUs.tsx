@@ -20,10 +20,6 @@ export default function FollowUs() {
 
       <section className="section">
         <div className="container">
-          <p className="ph-note" style={{ marginBottom: '1.4rem' }}>
-            Profile links and posts are placeholders — paste real Instagram and Facebook
-            URLs into <code>SOCIAL_PROFILES</code> in <code>src/data/contact.ts</code> before launch.
-          </p>
           <div className="grid grid--2">
             {SOCIAL.map((network, i) => (
               <Reveal as="article" key={network.slug} delay={i * 90}>
