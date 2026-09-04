@@ -23,6 +23,9 @@ Encoding targets: [`docs/PERFORMANCE.md`](../../docs/PERFORMANCE.md).
 | `birthday-party.*` | Yes | Just 4 Kids birthday |
 | `summer-camp.*` | Yes | Just 4 Kids camp |
 | `parents-night-out.*` | Yes | Just 4 Kids PNO |
+| `social/instagram-profile.jpg` | Yes | Instagram profile avatar (Follow Us) |
+| `social/facebook-profile.jpg` | Yes | Facebook Page avatar from Graph (Follow Us) |
+| `social/*-post-*.jpg` | Yes | Curated post preview thumbs (fallback when Meta live feed is off) |
 
 Responsive widths: `*-640`, `*-960`, `*-1280` (and `*-1920` where applicable), each as JPEG + WebP.
 

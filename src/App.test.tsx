@@ -135,10 +135,13 @@ describe('App routing', () => {
     expect(screen.queryByText(/youtube/i)).not.toBeInTheDocument()
   })
 
-  it('renders an Instagram feed page with profile link and recent posts', async () => {
+  it('renders an Instagram feed page with profile photo, link, and recent posts', async () => {
     renderAt('/follow-us/instagram')
     expect(await screen.findByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
     expect(screen.getByText(/back-to-school special/i)).toBeInTheDocument()
+    expect(
+      screen.getByRole('img', { name: /instagram profile photo/i }),
+    ).toHaveAttribute('src', '/media/social/instagram-profile.jpg')
     const profileLink = screen.getByRole('link', { name: /visit instagram profile/i })
     expect(profileLink).toHaveAttribute('href', 'https://www.instagram.com/ubbatkd/')
     expect(profileLink).toHaveAttribute('target', '_blank')

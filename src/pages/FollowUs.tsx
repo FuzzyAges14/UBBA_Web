@@ -29,6 +29,7 @@ export default function FollowUs() {
                   ages={network.handle}
                   glyph={MARK[network.slug]}
                   glyphClassName="social-card__mark"
+                  image={network.avatarSrc}
                   to={`/follow-us/${network.slug}`}
                   ctaLabel="See Recent Posts"
                   titleAs="h2"

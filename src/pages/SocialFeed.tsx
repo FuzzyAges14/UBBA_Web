@@ -1,14 +1,35 @@
 import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import PageHero from '../components/PageHero'
-import Placeholder from '../components/Placeholder'
 import Reveal from '../components/Reveal'
 import CtaBanner from '../components/CtaBanner'
 import NotFound from './NotFound'
-import { getSocial, SITE } from '../data/site'
+import { getSocial, SITE, type SocialPost } from '../data/site'
+import { fetchSocialFeed } from '../lib/fetchSocialFeed'
 
 export default function SocialFeed() {
   const { network: networkSlug } = useParams()
   const network = getSocial(networkSlug)
+
+  const [posts, setPosts] = useState<SocialPost[]>(network?.recentPosts ?? [])
+  const [avatarSrc, setAvatarSrc] = useState(network?.avatarSrc ?? '/logo.png')
+  const [source, setSource] = useState<'live' | 'fallback' | 'static'>('static')
+
+  useEffect(() => {
+    if (!network) return
+    setPosts(network.recentPosts)
+    setAvatarSrc(network.avatarSrc)
+    setSource('static')
+
+    const controller = new AbortController()
+    fetchSocialFeed(network.slug, controller.signal).then((feed) => {
+      if (!feed) return
+      setPosts(feed.posts)
+      setAvatarSrc(feed.avatarSrc || network.avatarSrc)
+      setSource(feed.source)
+    })
+    return () => controller.abort()
+  }, [network])
 
   if (!network) return <NotFound />
 
@@ -29,7 +50,20 @@ export default function SocialFeed() {
       <section className="section">
         <div className="container split">
           <Reveal>
-            <Placeholder label={`${network.label} profile`} icon="🥋" variant="tall" />
+            <figure className="social-profile-frame">
+              <img
+                className="social-profile-frame__img"
+                src={avatarSrc}
+                alt={`${network.label} profile photo for ${SITE.name}`}
+                width={640}
+                height={800}
+                loading="eager"
+                decoding="async"
+              />
+              <figcaption className="social-profile-frame__caption">
+                {network.handle}
+              </figcaption>
+            </figure>
           </Reveal>
           <Reveal delay={100}>
             <span className="card__ages">{network.handle}</span>
@@ -63,16 +97,21 @@ export default function SocialFeed() {
             <p className="section-lead">
               Tap a post to open it on {network.label} — class updates, camp highlights, and
               promotions from our Bergen County schools.
+              {source === 'live' ? ' Feed refreshes automatically from the academy account.' : null}
             </p>
           </Reveal>
 
           <ul className="social-feed">
-            {network.recentPosts.map((post, i) => (
+            {posts.map((post, i) => (
               <Reveal as="li" key={post.id} delay={i * 70}>
                 {post.placeholder || post.href === '#' ? (
                   <div className="social-feed__post social-feed__post--pending" aria-disabled="true">
                     <span className="social-feed__thumb" aria-hidden="true">
-                      <span className="social-feed__mark">{mark}</span>
+                      {post.image ? (
+                        <img src={post.image} alt="" width={72} height={72} loading="lazy" />
+                      ) : (
+                        <span className="social-feed__mark">{mark}</span>
+                      )}
                     </span>
                     <span className="social-feed__body">
                       <span className="social-feed__caption">{post.caption}</span>
@@ -93,7 +132,11 @@ export default function SocialFeed() {
                     rel="noopener noreferrer"
                   >
                     <span className="social-feed__thumb" aria-hidden="true">
-                      <span className="social-feed__mark">{mark}</span>
+                      {post.image ? (
+                        <img src={post.image} alt="" width={72} height={72} loading="lazy" />
+                      ) : (
+                        <span className="social-feed__mark">{mark}</span>
+                      )}
                     </span>
                     <span className="social-feed__body">
                       <span className="social-feed__caption">{post.caption}</span>

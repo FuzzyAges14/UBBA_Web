@@ -4,6 +4,7 @@ import { rateLimit } from 'express-rate-limit'
 import helmet from 'helmet'
 import { serverConfig } from './config.ts'
 import { submitLead } from './leads.ts'
+import { getSocialFeed, isSocialNetwork } from './social.ts'
 
 export type AppOptions = {
   corsOrigins?: string[]
@@ -101,6 +102,20 @@ export function createApp(options: AppOptions = {}) {
       mail: serverConfig.transport.kind,
       notifyCount: serverConfig.notifyEmails.length,
     })
+  })
+
+  app.get('/api/social/:network', async (req, res, next) => {
+    try {
+      const network = String(req.params.network || '').toLowerCase()
+      if (!isSocialNetwork(network)) {
+        return res.status(404).json({ ok: false, error: 'Unknown social network.' })
+      }
+      const feed = await getSocialFeed(network, { limit: 3 })
+      res.setHeader('Cache-Control', 'public, max-age=60')
+      return res.status(200).json(feed)
+    } catch (err) {
+      return next(err)
+    }
   })
 
   app.post('/api/leads', enforceLeadOrigin, leadLimiter, async (req, res, next) => {

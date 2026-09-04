@@ -26,6 +26,8 @@ export type SocialProfile = {
   /** Display handle, e.g. @unitedblackbelt */
   handle: string
   blurb: string
+  /** Self-hosted profile picture shown on Follow Us + feed pages */
+  avatarSrc: string
   /** Keep true until the real URL is pasted in */
   placeholder?: boolean
 }
@@ -108,6 +110,7 @@ export const SOCIAL_PROFILES: SocialProfile[] = [
     handle: '@ubbatkd',
     blurb:
       'Class moments, belt promotions, summer camp, and academy life — follow United Black Belt Academy on the mat.',
+    avatarSrc: '/media/social/instagram-profile.jpg',
     placeholder: false,
   },
   {
@@ -117,6 +120,7 @@ export const SOCIAL_PROFILES: SocialProfile[] = [
     handle: 'United Black Belt Academy',
     blurb:
       'Events, camp updates, and community news for families across Allendale, Midland Park, and Glen Rock.',
+    avatarSrc: '/media/social/facebook-profile.jpg',
     placeholder: false,
   },
 ]

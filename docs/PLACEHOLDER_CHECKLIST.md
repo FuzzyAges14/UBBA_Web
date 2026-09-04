@@ -13,8 +13,10 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Testimonials with real, owner-approved reviews (no fabricated names/quotes)
 - [ ] Stats: "Students Trained", "Years Serving", "Average Parent Rating"
 - [ ] Midland Park phone & hours
-- [ ] Social media profile URLs in `src/data/contact.ts` (`SOCIAL_PROFILES`) + recent
-      posts on `/follow-us` / `/follow-us/:network` (Instagram & Facebook only; no YouTube)
+- [x] Social media profile URLs in `src/data/contact.ts` (`SOCIAL_PROFILES`) + recent
+      posts on `/follow-us` / `/follow-us/:network` (Instagram `@ubbatkd` & Facebook
+      `ubbaad`). Optional live auto-refresh via Meta Graph tokens in `.env`
+      (`META_PAGE_ACCESS_TOKEN`, `FACEBOOK_PAGE_ID`, `INSTAGRAM_BUSINESS_ACCOUNT_ID`)
 - [ ] Privacy Policy and Terms copy
 
 ## Forms & email delivery

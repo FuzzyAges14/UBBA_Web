@@ -134,6 +134,19 @@ export const serverConfig = {
       process.env.CAPTCHA_VERIFY_URL?.trim() ||
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
   },
+  /**
+   * Meta Graph API for live Instagram / Facebook posts on Follow Us pages.
+   * Without these, `/api/social/:network` returns curated fallback posts.
+   * Setup: Facebook Developer app → Page access token with pages_read_engagement
+   * + Instagram Business account linked to the Page.
+   */
+  meta: {
+    pageAccessToken: process.env.META_PAGE_ACCESS_TOKEN?.trim() || '',
+    facebookPageId: process.env.FACEBOOK_PAGE_ID?.trim() || 'ubbaad',
+    instagramBusinessAccountId: process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID?.trim() || '',
+    /** How long to cache live feed responses (default 15 minutes). */
+    cacheTtlMs: parsePositiveInt(process.env.SOCIAL_CACHE_TTL_MS, 15 * 60 * 1000),
+  },
 }
 
 /** Log operational warnings once at process start (never prints secrets). */
