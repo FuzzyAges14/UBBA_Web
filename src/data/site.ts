@@ -1,5 +1,14 @@
 import { SOCIAL_PROFILES, type SocialProfileSlug } from './contact'
 import { heroVideoMp4, heroVideoWebm } from '../lib/mediaEnv'
+import {
+  ANNOUNCEMENT_FALL_SCHEDULE,
+  AUTHENTIC_DIMENSIONS,
+  KIDS_BOARD_BREAK_SOCIAL,
+  PROMO_BACK_TO_SCHOOL,
+  SUMMER_CAMP_FEATURE,
+  SUMMER_CAMP_TILE,
+  authenticSrcSetFor,
+} from './authenticMedia'
 
 export const SITE = {
   name: 'United Black Belt Academy',
@@ -30,7 +39,10 @@ export const IMAGES = {
   beltTest: '/media/respect-bow.jpg',
   ogDefault: '/media/og-default.jpg',
   birthday: '/media/birthday-party.jpg',
-  summerCamp: '/media/summer-camp.jpg',
+  /** Caption-matched @ubbatkd camp still (training + Summer Camp). */
+  summerCamp: SUMMER_CAMP_FEATURE.src,
+  /** Hub tile — week kickoff smiles (caption-matched). */
+  summerCampTile: SUMMER_CAMP_TILE.src,
   parentsNightOut: '/media/parents-night-out.jpg',
 } as const
 
@@ -58,7 +70,8 @@ export const IMAGE_DIMENSIONS = {
   instructorPortrait: { width: 1080, height: 1920 },
   ogDefault: { width: 1200, height: 630 },
   birthday: { width: 1280, height: 720 },
-  summerCamp: { width: 1280, height: 720 },
+  summerCamp: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_FEATURE.src] ?? { width: 1080, height: 1921 },
+  summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 720, height: 1280 },
   parentsNightOut: { width: 1280, height: 720 },
   logo: { width: 300, height: 282 },
 } as const
@@ -79,8 +92,8 @@ export const IMAGE_SRCSETS = {
     '/media/hero-poster-960.jpg 960w, /media/hero-poster-1280.jpg 1280w, /media/hero-poster.jpg 1920w',
   birthday:
     '/media/birthday-party-640.jpg 640w, /media/birthday-party-960.jpg 960w, /media/birthday-party-1280.jpg 1280w',
-  summerCamp:
-    '/media/summer-camp-640.jpg 640w, /media/summer-camp-960.jpg 960w, /media/summer-camp-1280.jpg 1280w',
+  summerCamp: authenticSrcSetFor(SUMMER_CAMP_FEATURE.src)!,
+  summerCampTile: authenticSrcSetFor(SUMMER_CAMP_TILE.src)!,
   parentsNightOut:
     '/media/parents-night-out-640.jpg 640w, /media/parents-night-out-960.jpg 960w, /media/parents-night-out-1280.jpg 1280w',
 } as const
@@ -107,9 +120,14 @@ export function imageDimensionsFor(src: string): { width: number; height: number
       return IMAGE_DIMENSIONS.birthday
     case IMAGES.summerCamp:
       return IMAGE_DIMENSIONS.summerCamp
+    case IMAGES.summerCampTile:
+      return IMAGE_DIMENSIONS.summerCampTile
     case IMAGES.parentsNightOut:
       return IMAGE_DIMENSIONS.parentsNightOut
     default:
+      if (src in AUTHENTIC_DIMENSIONS) {
+        return AUTHENTIC_DIMENSIONS[src]
+      }
       if (src.startsWith('/media/social/') && src.includes('profile')) {
         return { width: 200, height: 200 }
       }
@@ -138,10 +156,12 @@ export function imageSrcSetFor(src: string): string | undefined {
       return IMAGE_SRCSETS.birthday
     case IMAGES.summerCamp:
       return IMAGE_SRCSETS.summerCamp
+    case IMAGES.summerCampTile:
+      return IMAGE_SRCSETS.summerCampTile
     case IMAGES.parentsNightOut:
       return IMAGE_SRCSETS.parentsNightOut
     default:
-      return undefined
+      return authenticSrcSetFor(src)
   }
 }
 
@@ -335,6 +355,9 @@ export type Just4KidsOffering = {
   to: string
   icon: string
   ctaLabel: string
+  /** Only set when a caption-matched authentic photo exists for this offering. */
+  image?: string
+  imageAlt?: string
 }
 
 /** Hub tiles for the Just 4 Kids overview page. */
@@ -358,6 +381,8 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/summer-camp',
     icon: '☀️',
     ctaLabel: 'Reserve a Spot',
+    image: IMAGES.summerCampTile,
+    imageAlt: SUMMER_CAMP_TILE.alt,
   },
   {
     id: 'parents-night-out',
@@ -885,42 +910,62 @@ export type SocialLink = {
 export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
   instagram: [
     {
-      id: 'ig-1',
+      id: 'ig-bts',
       caption: 'Back-to-School Special — 1 month free, free uniform, no registration fee',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.instagram.com/p/DcQ3NEmH08s/',
+      image: PROMO_BACK_TO_SCHOOL.src,
     },
     {
-      id: 'ig-2',
-      caption: 'Summer Camp week kicks off with big energy, smiles, and fun on the mat',
-      dateLabel: 'Aug 10, 2026',
-      href: 'https://www.instagram.com/p/DboXjn0nRZU/',
+      id: 'ig-schedule',
+      caption: 'Fall schedule in effect — weekly theme training for special classes',
+      dateLabel: 'Aug 19, 2026',
+      href: 'https://www.instagram.com/p/Db84LxLnwZu/',
+      image: ANNOUNCEMENT_FALL_SCHEDULE.src,
     },
     {
-      id: 'ig-3',
-      caption: 'Another fun-filled day at UBBA Summer Camp',
-      dateLabel: 'Aug 2, 2026',
-      href: 'https://www.instagram.com/p/DbPrmMnHXJc/',
+      id: 'ig-zoo',
+      caption: 'Zoo day at UBBA Summer Camp — animals, playground, and carousel fun',
+      dateLabel: 'Aug 18, 2026',
+      href: 'https://www.instagram.com/p/DcPpMxqACgX/',
+      image: '/media/authentic/summer-camp-zoo-trip.jpg',
+    },
+    {
+      id: 'ig-water',
+      caption: 'Summer Camp water games, crafts, and group activities',
+      dateLabel: 'Aug 17, 2026',
+      href: 'https://www.instagram.com/p/DcNH2aGAVOr/',
+      image: '/media/authentic/summer-camp-crafts-water.jpg',
+    },
+    {
+      id: 'ig-bday-shout',
+      caption: 'Happy Birthday shout-out — celebrating a student (board-break photo)',
+      dateLabel: 'Aug 15, 2026',
+      href: 'https://www.instagram.com/p/DcE5gENlP5d/',
+      image: KIDS_BOARD_BREAK_SOCIAL.src,
     },
   ],
   facebook: [
     {
-      id: 'fb-1',
+      id: 'fb-bts',
       caption: 'Back-to-School Special at UBBA — free trial class, sibling promotion',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.facebook.com/ubbaad/posts/pfbid02mrtHteEdZiDitYSqMsJdAeagUyQkr4sJi7wpKTUZCDpJjLbqpvwYyB1TXDp9LtdPl',
+      image: PROMO_BACK_TO_SCHOOL.src,
     },
     {
-      id: 'fb-2',
+      id: 'fb-zoo',
       caption: 'Zoo day at UBBA Summer Camp — animals, playground, and adventure',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.facebook.com/photo/?fbid=1808931984574578&set=pb.100063733803318.-2207520000',
+      image: '/media/authentic/summer-camp-zoo-trip.jpg',
     },
     {
-      id: 'fb-3',
-      caption: 'Summer Camp water games, pinwheels, and group activities',
+      id: 'fb-water',
+      caption: 'Summer Camp water games, crafts, and group activities',
       dateLabel: 'Aug 19, 2026',
       href: 'https://www.facebook.com/photo/?fbid=1808931981241245&set=pb.100063733803318.-2207520000',
+      image: '/media/authentic/summer-camp-crafts-water.jpg',
     },
   ],
 }

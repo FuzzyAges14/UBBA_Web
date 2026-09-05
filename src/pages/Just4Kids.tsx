@@ -139,9 +139,10 @@ export default function Just4Kids() {
               <Reveal key={prog.id} delay={i * 80}>
                 <article className="j4k-tile">
                   <MediaFrame
+                    src={prog.image}
+                    alt={prog.imageAlt ?? `${prog.title} at United Black Belt Academy`}
                     label={prog.title}
                     icon={prog.icon}
-                    alt={`${prog.title} at United Black Belt Academy`}
                     stickers={TILE_STICKERS[prog.id] ?? []}
                     ownerRequired
                   />

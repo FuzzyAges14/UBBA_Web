@@ -6,7 +6,13 @@ import MediaFrame from '../components/MediaFrame'
 import TrialCta from '../components/TrialCta'
 import SectionSeam from '../components/SectionSeam'
 import { getNextKickForm, getNextKickFormHref } from '../data/contact'
-import { getJust4KidsDetail } from '../data/site'
+import { getJust4KidsDetail, imageDimensionsFor, imageSrcSetFor } from '../data/site'
+import {
+  SUMMER_CAMP_FEATURE,
+  SUMMER_CAMP_STILLS,
+  SUMMER_CAMP_VIDEOS,
+} from '../data/authenticMedia'
+import OptimizedImage from '../components/OptimizedImage'
 
 export default function SummerCamp() {
   const detail = getJust4KidsDetail('summer-camp')!
@@ -66,6 +72,8 @@ export default function SummerCamp() {
         <div className="container split">
           <Reveal>
             <MediaFrame
+              src={SUMMER_CAMP_FEATURE.src}
+              alt={SUMMER_CAMP_FEATURE.alt}
               ownerRequired
               label="Summer camp at United Black Belt Academy"
               icon={detail.mediaIcon}
@@ -97,7 +105,73 @@ export default function SummerCamp() {
         </div>
       </section>
 
-      <section className="section section--offwhite">
+      
+      <section className="section section--offwhite" aria-labelledby="camp-gallery-heading">
+        <div className="container">
+          <Reveal>
+            <span className="eyebrow">From Our Camps</span>
+            <h2 id="camp-gallery-heading" className="section-title">
+              Real days at UBBA Summer Camp
+            </h2>
+            <p className="section-lead">
+              Photos and clips from our Instagram — zoo trips, crafts, fitness, playgrounds, and
+              training on the mat. Each image matches a camp post caption.
+            </p>
+          </Reveal>
+          <div className="camp-gallery mt">
+            {SUMMER_CAMP_STILLS.filter((shot) => shot.src !== SUMMER_CAMP_FEATURE.src).map(
+              (shot, i) => {
+                const dims = imageDimensionsFor(shot.src)
+                return (
+                  <Reveal key={shot.shortcode} delay={i * 60}>
+                    <figure className="camp-gallery__item">
+                      <OptimizedImage
+                        src={shot.src}
+                        alt={shot.alt}
+                        width={dims.width}
+                        height={dims.height}
+                        srcSet={imageSrcSetFor(shot.src)}
+                        sizes="(max-width: 700px) 100vw, 33vw"
+                        loading="lazy"
+                      />
+                      <figcaption>
+                        <a href={shot.permalink} target="_blank" rel="noopener noreferrer">
+                          {shot.alt}
+                        </a>
+                      </figcaption>
+                    </figure>
+                  </Reveal>
+                )
+              },
+            )}
+          </div>
+          <div className="camp-videos mt">
+            {SUMMER_CAMP_VIDEOS.map((clip, i) => (
+              <Reveal key={clip.shortcode} delay={i * 70}>
+                <figure className="camp-videos__item">
+                  <video
+                    className="camp-videos__player"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    poster={clip.poster}
+                    aria-label={clip.title}
+                  >
+                    <source src={clip.src} type="video/mp4" />
+                  </video>
+                  <figcaption>
+                    <a href={clip.permalink} target="_blank" rel="noopener noreferrer">
+                      {clip.title}
+                    </a>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+<section className="section section--offwhite">
         <div className="container j4k-pack">
           <Reveal>
             <div>

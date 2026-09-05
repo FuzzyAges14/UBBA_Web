@@ -18,7 +18,7 @@ Per owner direction (**no stolen / paid-license stock on this rebuild**):
 | WebsiteDojo / stock program stills (adult kick, kids line, teen studio group, belt grip, birthday/camp/PNO stock, featured cutouts) | **Not wired in UI** — program cards, overview splits, detail covers, benefits media, and Just 4 Kids frames use text / placeholder layouts instead |
 | Master Lee / Sanghyun Lee portrait (`owner-portrait.jpg`) | **Allowed** — academy owner portrait from unitedbba.com about assets; shown with `object-fit: contain` so the full portrait is visible |
 | Brand logo (`/logo.png`) | **Allowed** — academy logo |
-| Social post thumbnails previously duplicated from stock stills | **Removed** from curated fallback posts (captions + links remain) |
+| Social post thumbnails | **Restored** with caption-matched authentic `@ubbatkd` stills (promo/schedule stay feed-only) |
 
 Files may still exist under `public/media/` for historical reference, but they
 must **not** be reconnected in the UI until replaced with authentic UBBA-owned
@@ -31,7 +31,7 @@ photos / video. Prefer a fresh owner shoot of class, family, and event moments.
 | Home hero video / poster | Brand panel only until owned footage exists |
 | Program overview + detail covers | Text-first / glyph cards until owned photos exist |
 | Benefits / adult & children story splits | Text-first layouts |
-| Just 4 Kids tiles & event pages | `MediaFrame` placeholders with “OWNER PHOTO REQUIRED” |
+| Just 4 Kids tiles & event pages | Summer Camp uses authentic camp photos/videos; birthday & parents’ night out still need owner photos |
 | Allendale / Midland Park exteriors & interiors | `OwnerMediaSlot` placeholders |
 | Testimonials | Text-only until owner-approved reviews |
 
@@ -58,3 +58,22 @@ photos / video. Prefer a fresh owner shoot of class, family, and event moments.
 6. Update this file whenever an integrated asset changes.
 7. When authentic photos arrive, assign **unique** images per page slot — avoid
    repeating the same photo on home, overview, and detail pages.
+
+
+## Authentic Instagram media (`public/media/authentic/`)
+
+Downloaded from the academy Instagram account `@ubbatkd`. Captions are recorded in
+`MANIFEST.json`. Placement is **caption-driven**:
+
+| Caption theme | Allowed | Not allowed |
+| --- | --- | --- |
+| Back-to-school promo flyers | Social feed / promo only | Program cards, Tiny Tigers, adult heroes, camp feature |
+| Fall schedule / BBC training announcement | Social feed only | Any program or camp photo slot |
+| Summer Camp zoo / crafts / animals / fitness / playground / field trip / group / smiles | Summer Camp page, Just 4 Kids camp tile (group/smiles), social feed | Adult programs, birthday package art |
+| Birthday shout-out with board-break photo | Social feed only | Birthday Parties page |
+
+Adult / self-defense / weapons program photography is still missing from this set —
+leave those slots text-first rather than borrowing camp photos.
+
+Web video clips (12s, ~540p) live under `public/media/authentic/videos/web/` and are
+used only on the Summer Camp page with matching camp captions.

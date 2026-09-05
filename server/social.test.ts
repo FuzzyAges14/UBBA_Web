@@ -21,7 +21,7 @@ describe('social feed helpers', () => {
     expect(feed.posts.length).toBeGreaterThan(0)
     expect(feed.avatarSrc).toContain('/media/social/')
     expect(feed.posts[0]?.href).toMatch(/^https:\/\//)
-    expect(feed.posts[0]?.image).toBeUndefined()
+    expect(feed.posts[0]?.image).toMatch(/^\/media\/authentic\//)
   })
 })
 
