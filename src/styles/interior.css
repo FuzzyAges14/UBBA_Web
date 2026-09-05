@@ -4,7 +4,7 @@
 /* ---------- Page-hero families (default / dark) ---------- */
 /* Brand wordmark above H1 — keep size in sync with .j4k-hero__brand */
 .page-hero__brand {
-  margin: 0 0 0.55rem;
+  margin: 0 0 0.7rem;
   font-family: var(--font-impact);
   font-size: clamp(1.05rem, 2.4vw, 1.45rem);
   letter-spacing: 0.04em;
@@ -46,7 +46,10 @@
 }
 
 .page-hero__actions {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+}
+.page-hero__actions .flex-actions {
+  gap: 1rem 1.2rem;
 }
 
 .page-hero--program .page-hero__bg {
@@ -298,11 +301,12 @@
 }
 
 .location-visit__meta {
-  margin-top: 0.6rem;
+  margin-top: 0.85rem;
+  line-height: 1.5;
 }
 
 .location-visit__phone {
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
 }
 
 .location-visit__phone a {
