@@ -110,6 +110,12 @@ export function imageDimensionsFor(src: string): { width: number; height: number
     case IMAGES.parentsNightOut:
       return IMAGE_DIMENSIONS.parentsNightOut
     default:
+      if (src.startsWith('/media/social/') && src.includes('profile')) {
+        return { width: 200, height: 200 }
+      }
+      if (src.startsWith('/media/social/')) {
+        return { width: 1280, height: 720 }
+      }
       return IMAGE_DIMENSIONS.heroPoster
   }
 }
@@ -731,6 +737,19 @@ export function getVisibleLocations(): Location[] {
   return SITE.showGlenRock ? [...LOCATIONS, GLEN_ROCK] : LOCATIONS
 }
 
+/** Human-readable list of visible school names, e.g. "Allendale, Midland Park & Glen Rock". */
+export function getLocationAreaLabel(options?: { withState?: boolean }): string {
+  const names = getVisibleLocations().map((l) => l.name)
+  if (names.length === 0) return options?.withState ? 'Bergen County, NJ' : 'Bergen County'
+  if (names.length === 1) {
+    return options?.withState ? `${names[0]}, NJ` : names[0]
+  }
+  const last = names[names.length - 1]
+  const rest = names.slice(0, -1)
+  const joined = `${rest.join(', ')} & ${last}`
+  return options?.withState ? `${joined}, NJ` : joined
+}
+
 export const PROGRAM_OPTIONS = [
   'Tiny Tigers (Ages 3-5)',
   'Junior Tigers (Ages 6-10)',
@@ -848,8 +867,9 @@ export const FAQS: Faq[] = [
   },
 ]
 
-// Social profiles: edit URLs/handles in `src/data/contact.ts` (SOCIAL_PROFILES).
-// Recent-post placeholders below can be swapped for live embeds/API later.
+// Social profiles: edit URLs/handles/avatars in `src/data/contact.ts` (SOCIAL_PROFILES).
+// Recent posts below are the offline fallback; when Meta Graph tokens are set on the
+// API (`META_PAGE_ACCESS_TOKEN` + page / IG IDs), `/api/social/:network` returns live posts.
 // YouTube is intentionally omitted (no channel yet).
 export type SocialSlug = SocialProfileSlug
 
@@ -858,6 +878,8 @@ export type SocialPost = {
   caption: string
   dateLabel: string
   href: string
+  /** Square / landscape preview shown in the feed list */
+  image?: string
   placeholder?: boolean
 }
 
@@ -867,55 +889,57 @@ export type SocialLink = {
   href: string
   handle: string
   blurb: string
+  avatarSrc: string
   placeholder?: boolean
   recentPosts: SocialPost[]
 }
 
-const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
+/** Curated fallback posts (used until Meta live feed is configured). */
+export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
   instagram: [
     {
       id: 'ig-1',
-      caption: 'Evening class energy on the mat',
-      dateLabel: 'Recent',
-      href: '#',
-      placeholder: true,
+      caption: 'Back-to-School Special — 1 month free, free uniform, no registration fee',
+      dateLabel: 'Aug 20, 2026',
+      href: 'https://www.instagram.com/p/DcQ3NEmH08s/',
+      image: '/media/social/instagram-post-1.jpg',
     },
     {
       id: 'ig-2',
-      caption: 'Tiny Tigers belt promotion day',
-      dateLabel: 'Recent',
-      href: '#',
-      placeholder: true,
+      caption: 'Summer Camp week kicks off with big energy, smiles, and fun on the mat',
+      dateLabel: 'Aug 10, 2026',
+      href: 'https://www.instagram.com/p/DboXjn0nRZU/',
+      image: '/media/social/instagram-post-2.jpg',
     },
     {
       id: 'ig-3',
-      caption: 'Junior Tigers sparring drills',
-      dateLabel: 'Recent',
-      href: '#',
-      placeholder: true,
+      caption: 'Another fun-filled day at UBBA Summer Camp',
+      dateLabel: 'Aug 2, 2026',
+      href: 'https://www.instagram.com/p/DbPrmMnHXJc/',
+      image: '/media/social/instagram-post-3.jpg',
     },
   ],
   facebook: [
     {
       id: 'fb-1',
-      caption: "Parents' Night Out this Friday",
-      dateLabel: 'Recent',
-      href: '#',
-      placeholder: true,
+      caption: 'Back-to-School Special at UBBA — free trial class, sibling promotion',
+      dateLabel: 'Aug 20, 2026',
+      href: 'https://www.facebook.com/ubbaad/posts/pfbid02mrtHteEdZiDitYSqMsJdAeagUyQkr4sJi7wpKTUZCDpJjLbqpvwYyB1TXDp9LtdPl',
+      image: '/media/social/facebook-post-1.jpg',
     },
     {
       id: 'fb-2',
-      caption: 'Summer camp registration is open',
-      dateLabel: 'Recent',
-      href: '#',
-      placeholder: true,
+      caption: 'Zoo day at UBBA Summer Camp — animals, playground, and adventure',
+      dateLabel: 'Aug 20, 2026',
+      href: 'https://www.facebook.com/photo/?fbid=1808931984574578&set=pb.100063733803318.-2207520000',
+      image: '/media/social/facebook-post-2.jpg',
     },
     {
       id: 'fb-3',
-      caption: 'Birthday party booking spots filling up',
-      dateLabel: 'Recent',
-      href: '#',
-      placeholder: true,
+      caption: 'Summer Camp water games, pinwheels, and group activities',
+      dateLabel: 'Aug 19, 2026',
+      href: 'https://www.facebook.com/photo/?fbid=1808931981241245&set=pb.100063733803318.-2207520000',
+      image: '/media/social/facebook-post-3.jpg',
     },
   ],
 }

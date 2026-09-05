@@ -6,15 +6,27 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: true,
+    // Bind all interfaces so Cursor / cloud port-forward can reach the process.
+    host: '0.0.0.0',
     port: 5173,
+    strictPort: true,
+    // Keep HMR on the same forwarded port (avoids client connecting to an
+    // unreachable internal host and resetting the Simple Browser session).
+    hmr: {
+      clientPort: 5173,
+    },
     proxy: {
       // Forward form submissions to the local API (`pnpm dev:api`).
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://127.0.0.1:3001',
         changeOrigin: true,
       },
     },
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 4173,
+    strictPort: true,
   },
   build: {
     // Separate long-lived vendor code from route chunks for better caching.
