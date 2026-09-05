@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { CONTACT, SOCIAL_PROFILES } from '../data/contact'
-import { FOOTER_LINKS, LOCATIONS, SITE } from '../data/site'
+import { FOOTER_LINKS, getVisibleLocations, SITE } from '../data/site'
 import Taegeuk from './Taegeuk'
 import TrialCta from './TrialCta'
 
@@ -97,7 +97,7 @@ export default function Footer() {
           <div>
             <h4>Our Schools</h4>
             <div className="footer__contact">
-              {LOCATIONS.map((loc) => (
+              {getVisibleLocations().map((loc) => (
                 <div key={loc.id} style={{ marginBottom: '0.9rem' }}>
                   <strong style={{ color: '#fff' }}>
                     {loc.page ? (

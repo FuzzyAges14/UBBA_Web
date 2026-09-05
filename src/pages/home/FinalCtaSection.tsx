@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
 import TrialCta from '../../components/TrialCta'
+import { getLocationAreaLabel } from '../../data/site'
 
 /**
  * Homepage final CTA — full-bleed red band (shared `.cta-band` chrome with `CtaBanner`).
+ * Primary CTA opens the NextKick portal; copy/links include all visible schools.
  */
 export default function FinalCtaSection() {
   return (
@@ -15,20 +17,24 @@ export default function FinalCtaSection() {
             <h2 id="home-final-cta-title">Confidence starts with one class</h2>
             <p>
               Beginners are welcome — kids, teens, and adults can start with a free
-              class in Allendale or Midland Park. The first step is simple.
+              class in {getLocationAreaLabel()}. The first step is simple.
             </p>
             <div className="flex-actions cta-band__actions">
               <TrialCta className="btn btn--blue btn--lg" arrow />
-              <Link to="/locations/allendale" className="btn btn--ghost btn--lg">
-                Allendale school
+              <Link to="/#locations" className="btn btn--ghost btn--lg">
+                Our schools
               </Link>
             </div>
             <p className="cta-band__secondary">
               Or visit our{' '}
-              <Link to="/locations/midland-park" className="text-link text-link--on-red">
-                Midland Park location
+              <Link to="/locations/allendale" className="text-link text-link--on-red">
+                Allendale
               </Link>
-              .
+              {' or '}
+              <Link to="/locations/midland-park" className="text-link text-link--on-red">
+                Midland Park
+              </Link>
+              {' location pages.'}
             </p>
           </div>
         </Reveal>
