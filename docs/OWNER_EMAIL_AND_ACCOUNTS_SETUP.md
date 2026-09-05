@@ -1,8 +1,9 @@
 # Owner Guide: Link Emails, Accounts & Organized Form Delivery
 
-**Who this is for:** the academy owner / staff who need website form requests
-(free class, birthday parties, summer camp, Parents’ Night Out) delivered to the
-correct inboxes, with Instagram and Facebook linked correctly.
+**Who this is for:** the academy owner / staff who need Parents’ Night Out
+website requests delivered to the correct inboxes, with Instagram and Facebook
+linked correctly. Free-class, birthday, and summer-camp requests now go to
+per-school NextKick forms (`NEXTKICK_FORMS` in `src/data/contact.ts`).
 
 **Goal:** every website signup produces a clear, labeled email in the right
 mailbox so staff can open it, see all the details in order, and hit **Reply** to
@@ -12,17 +13,19 @@ reach the family.
 
 ## What “organized backend retrieval” means on this site
 
-This website does **not** log into Gmail/Outlook as an email app. Instead:
+This website does **not** log into Gmail/Outlook as an email app. Free-class,
+birthday, and summer-camp signups go through per-school **NextKick forms**
+(location picker → lightbox iframe). Parents' Night Out still emails staff:
 
-1. A visitor fills out a form on the site.
+1. A visitor fills out the Parents' Night Out form.
 2. The small backend API packages their answers into a **structured email**
    (name, phone, location, program, child info, dates, message, etc.).
 3. That email is sent to the academy inbox(es) you configure.
-4. Staff retrieve leads by reading those emails in their normal mail app
+4. Staff retrieve those leads by reading the emails in their normal mail app
    (Gmail, Outlook, phone Mail, etc.).
 
-Until the steps below are finished, forms may only **print** the email in a
-server log (useful for testing) and **not** arrive in a real inbox.
+Until the steps below are finished, Parents' Night Out forms may only **print**
+the email in a server log (useful for testing) and **not** arrive in a real inbox.
 
 ---
 

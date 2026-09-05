@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import HeroMedia from '../../components/HeroMedia'
+import TrialCta from '../../components/TrialCta'
 import { fadeUp, staticFade } from '../../lib/motion'
-import { SITE } from '../../data/site'
 
 export default function HeroSection() {
   const reduceMotion = useReducedMotion()
@@ -51,12 +50,7 @@ export default function HeroSection() {
           custom={3}
           variants={heroMotion}
         >
-          <Link to="/contact" className="btn btn--lg">
-            {SITE.primaryCta}{' '}
-            <span className="btn__arrow" aria-hidden="true">
-              →
-            </span>
-          </Link>
+          <TrialCta className="btn btn--lg" arrow />
           <a href="#programs" className="btn btn--ghost btn--lg">
             Explore Programs
           </a>

@@ -191,8 +191,10 @@ Launch-readiness documents live in [`docs/`](docs/):
 
 ### Notes
 
-- The site is a single-page app (client-side routing). Free-class forms `POST` to
-  `/api/leads`; run `pnpm dev:all` locally and configure mail in `.env` for real delivery.
+- The site is a single-page app (client-side routing). Free-class CTAs open the
+  NextKick trial form in a lightbox; Just 4 Kids event forms `POST` to
+  `/api/leads`. Run `pnpm dev:all` locally and configure mail in `.env` for real
+  event-inquiry delivery.
 - Photos are art-directed placeholders (labeled `PLACEHOLDER` in the UI) — swap the
   `Placeholder` components for real `<img>` assets when available.
 - Stats and testimonials are placeholders pending owner confirmation; do not

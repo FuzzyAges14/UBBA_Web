@@ -1,4 +1,5 @@
 import { cleanup, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it } from 'vitest'
 import { runAxe } from './test/axe'
 import { renderAppAt } from './test/render'
@@ -38,16 +39,14 @@ describe('Page-level accessibility checks', () => {
     expect(await screen.findAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
-  it('associates free-class form fields with visible labels', async () => {
+  it('opens the NextKick trial portal from the contact page CTA', async () => {
+    const user = userEvent.setup()
     renderAppAt('/contact')
-    const submit = await screen.findByRole('button', { name: /try a class for free/i })
-    const form = submit.closest('form')
-    expect(form).toBeTruthy()
-    const scoped = within(form as HTMLElement)
-    expect(scoped.getByLabelText(/full name/i)).toBeInTheDocument()
-    expect(scoped.getByLabelText(/^email/i)).toBeInTheDocument()
-    expect(scoped.getByLabelText(/^phone/i)).toBeInTheDocument()
-    expect(scoped.getByLabelText(/^location$/i)).toBeInTheDocument()
-    expect(scoped.getByLabelText(/^program$/i)).toBeInTheDocument()
+    const submit = (await screen.findAllByRole('button', { name: /try a class for free/i }))[0]
+    await user.click(submit)
+    const dialog = await screen.findByRole('dialog', { name: /1 free time trial/i })
+    expect(dialog).toHaveAttribute('aria-modal', 'true')
+    await user.click(within(dialog).getByText('Allendale'))
+    expect(within(dialog).getByTitle(/1 free time trial — allendale form/i)).toBeInTheDocument()
   })
 })

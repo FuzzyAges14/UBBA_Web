@@ -74,7 +74,7 @@ test.describe('Visual / responsive matrix — viewport screenshots', () => {
       ).toBe(false)
 
       // Primary free-class CTA must remain findable in the first viewport path.
-      const cta = page.getByRole('link', { name: /try a class for free/i }).first()
+      const cta = page.getByRole('button', { name: /try a class for free/i }).first()
       await expect(cta).toBeVisible()
     })
   }
@@ -178,7 +178,7 @@ test.describe('Interaction QA', () => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/')
-    await expect(page.getByRole('link', { name: /try a class for free/i }).first()).toBeVisible()
+    await expect(page.getByRole('button', { name: /try a class for free/i }).first()).toBeVisible()
     const scrollCue = page.locator('.hero__scroll')
     if ((await scrollCue.count()) > 0) {
       await expect(scrollCue).toBeHidden()
@@ -186,33 +186,27 @@ test.describe('Interaction QA', () => {
     await shot(page, 'home-reduced-motion-1440')
   })
 
-  test('contact form validation + success messaging', async ({ page }) => {
-    await page.route('**/api/leads', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ ok: true, delivered: false, mode: 'log' }),
-      })
-    })
+  test('contact trial launcher opens the NextKick portal', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/contact')
-    await page.getByRole('button', { name: /try a class for free/i }).click()
-    await expect(page.getByRole('alert').or(page.locator('.form-error-summary'))).toBeVisible()
-    await shot(page, 'contact-validation-390')
-
-    await page.getByLabel(/full name/i).fill('QA Parent')
-    await page.getByLabel(/^email/i).fill('qa@example.com')
-    await page.getByLabel(/^phone/i).fill('2015550100')
-    await page.getByRole('button', { name: /try a class for free/i }).click()
-    await expect(page.getByText(/you.?re all set/i)).toBeVisible()
-    await shot(page, 'contact-success-390')
+    await page.getByRole('button', { name: /try a class for free/i }).last().click()
+    const dialog = page.getByRole('dialog', { name: /1 free time trial/i })
+    await expect(dialog).toBeVisible()
+    await dialog.getByText('Allendale').click()
+    await expect(dialog.getByTitle(/1 free time trial — allendale form/i)).toHaveAttribute(
+      'src',
+      /student\.nextkick\.ai\/form\//,
+    )
+    await shot(page, 'contact-nextkick-portal-390')
+    await dialog.getByRole('button', { name: /close allendale form/i }).click()
+    await expect(dialog).toBeHidden()
   })
 
   test('button focus-visible ring is present', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name === 'mobile-chrome', 'Desktop focus ring check')
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/')
-    const cta = page.getByRole('link', { name: /try a class for free/i }).first()
+    const cta = page.getByRole('button', { name: /try a class for free/i }).first()
     await cta.focus()
     await expect(cta).toBeFocused()
     await shot(page, 'cta-focus-visible-1440')
@@ -237,7 +231,7 @@ test.describe('Interaction QA', () => {
       document.documentElement.style.zoom = '2'
     })
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-    await expect(page.getByRole('link', { name: /try a class for free/i }).first()).toBeVisible()
+    await expect(page.getByRole('button', { name: /try a class for free/i }).first()).toBeVisible()
     await shot(page, 'home-zoom-200-1280')
     await page.evaluate(() => {
       document.documentElement.style.zoom = ''
@@ -250,7 +244,7 @@ test.describe('Interaction QA', () => {
     await page.evaluate(() => {
       document.documentElement.style.zoom = '4'
     })
-    await expect(page.getByLabel(/full name/i)).toBeVisible()
+    await expect(page.getByRole('button', { name: /try a class for free/i }).last()).toBeVisible()
     await shot(page, 'contact-zoom-400-1280')
     await page.evaluate(() => {
       document.documentElement.style.zoom = ''

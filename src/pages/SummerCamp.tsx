@@ -3,13 +3,16 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
-import EventInquiryForm from '../components/EventInquiryForm'
+import TrialCta from '../components/TrialCta'
 import SectionSeam from '../components/SectionSeam'
+import { getNextKickForm, getNextKickFormHref } from '../data/contact'
 import { getJust4KidsDetail, IMAGES } from '../data/site'
 
 export default function SummerCamp() {
   const detail = getJust4KidsDetail('summer-camp')!
   const formId = 'camp-inquiry'
+  const nextKick = getNextKickForm('summer-camp')
+  const fallbackHref = getNextKickFormHref('summer-camp', 'allendale')
 
   return (
     <>
@@ -152,9 +155,9 @@ export default function SummerCamp() {
               <span className="eyebrow">Getting Started Is Easy</span>
               <h2 className="section-title">Ask about this summer’s camp</h2>
               <p className="section-lead" style={{ marginTop: '0.75rem' }}>
-                The form is an inquiry for dates, location preference, and openings. We
-                confirm the seasonal schedule and pricing before enrollment — those details
-                are not finalized on this page.
+                Choose your school, then complete the NextKick summer camp form for that
+                location. We confirm the seasonal schedule and pricing before enrollment
+                — those details are not finalized on this page.
               </p>
               <ol className="j4k-easy">
                 <li>
@@ -185,7 +188,32 @@ export default function SummerCamp() {
           </Reveal>
           <Reveal delay={100}>
             <div className="j4k-signup__form">
-              <EventInquiryForm intent="summer-camp" />
+              <div className="leadform leadform--event">
+                <div className="leadform__head">
+                  <span className="eyebrow">{nextKick.eyebrow}</span>
+                </div>
+                <p className="form-instructions">{nextKick.pickerLede}</p>
+                <div className="leadform__steps" aria-hidden="true">
+                  <i className="on" />
+                  <i className="on" />
+                  <i className="on" />
+                </div>
+                <TrialCta kind="summer-camp" className="btn btn--lg btn--block" arrow>
+                  {detail.ctaLabel}{' '}
+                  <span className="btn__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </TrialCta>
+                <p className="form-reassure">
+                  Ages 3–12 · No martial arts experience required · Pick your school,
+                  then finish on NextKick
+                </p>
+                <p className="form-portal-fallback">
+                  <a href={fallbackHref} target="_blank" rel="noreferrer">
+                    Open the Allendale camp form in a new tab
+                  </a>
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>

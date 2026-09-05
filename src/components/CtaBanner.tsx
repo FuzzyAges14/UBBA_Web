@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { SITE } from '../data/site'
 import Reveal from './Reveal'
+import TrialCta from './TrialCta'
 
 type CtaBannerProps = {
   title?: string
   text?: string
-  primaryTo?: string
   primaryLabel?: string
   secondaryTo?: string
   secondaryLabel?: string
@@ -15,7 +15,6 @@ type CtaBannerProps = {
 export default function CtaBanner({
   title = 'Ready To Get Started?',
   text = 'Your first class is on us. Come see why families across Bergen County choose United Black Belt Academy.',
-  primaryTo = '/contact',
   primaryLabel = SITE.primaryCta,
   secondaryTo = '/programs/children',
   secondaryLabel = 'Explore Programs',
@@ -29,9 +28,9 @@ export default function CtaBanner({
             <h2 id="cta-band-title">{title}</h2>
             <p>{text}</p>
             <div className="flex-actions cta-band__actions">
-              <Link to={primaryTo} className="btn btn--blue btn--lg">
+              <TrialCta className="btn btn--blue btn--lg" arrow>
                 {primaryLabel} <span className="btn__arrow" aria-hidden="true">→</span>
-              </Link>
+              </TrialCta>
               <Link to={secondaryTo} className="btn btn--ghost btn--lg">
                 {secondaryLabel}
               </Link>

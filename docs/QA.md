@@ -11,7 +11,7 @@ United Black Belt Academy (UBBA) quality gates for the marketing site and lead A
 | API | Vitest + Supertest | `/api/leads` validation, honeypot, CORS, payload size, delivery failure |
 | End-to-end | Playwright | Homepage → free class, mobile nav → program, locations, event inquiry, keyboard path |
 
-**Priorities:** conversion flows (free-class + event inquiry), routing/navigation, SEO title updates, form failure states. Avoid large page snapshots and live email providers.
+**Priorities:** conversion flows (NextKick free-class portal + event inquiry), routing/navigation, SEO title updates, form failure states. Avoid large page snapshots and live email providers.
 
 ## Commands
 
@@ -47,7 +47,7 @@ E2E mocks `/api/leads` in the browser — no SMTP/Resend credentials required.
 - Route matrix: every public page H1 + document title; all `PROGRAM_DETAILS` slugs; 404
 - Nav: Programs mega → Tiny Tigers; Contact link; mobile open/close; Escape + focus restore; accordion; skip link
 - SEO: title/description updates, no duplicate meta description tags, program fallback
-- LeadForm: validation, invalid email, success, API failure, network failure, loading/duplicate submit, keyboard Enter
+- LeadForm / NextKick portal: CTA opens dialog, iframe src, Escape close, new-tab fallback
 - EventInquiryForm: birthday/camp/PNO success, empty validation, invalid email, API failure
 - Accessibility: axe on major routes; form label associations; single homepage H1
 - API HTTP: valid lead, missing fields, invalid email, honeypot, oversized body, CORS allow/deny, email failure, health

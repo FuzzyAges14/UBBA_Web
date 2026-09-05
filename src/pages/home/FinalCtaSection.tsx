@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
-import { getLocationAreaLabel, SITE } from '../../data/site'
+import TrialCta from '../../components/TrialCta'
+import { getLocationAreaLabel } from '../../data/site'
 
 /**
  * Homepage final CTA — full-bleed red band (shared `.cta-band` chrome with `CtaBanner`).
+ * Primary CTA opens the NextKick portal; copy/links include all visible schools.
  */
 export default function FinalCtaSection() {
   return (
@@ -18,9 +20,7 @@ export default function FinalCtaSection() {
               class in {getLocationAreaLabel()}. The first step is simple.
             </p>
             <div className="flex-actions cta-band__actions">
-              <Link to="/contact" className="btn btn--blue btn--lg">
-                {SITE.primaryCta} <span className="btn__arrow">→</span>
-              </Link>
+              <TrialCta className="btn btn--blue btn--lg" arrow />
               <Link to="/#locations" className="btn btn--ghost btn--lg">
                 Our schools
               </Link>

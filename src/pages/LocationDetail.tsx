@@ -3,6 +3,7 @@ import PageHero from '../components/PageHero'
 import OwnerMediaSlot from '../components/OwnerMediaSlot'
 import Reveal from '../components/Reveal'
 import CtaBanner from '../components/CtaBanner'
+import TrialCta from '../components/TrialCta'
 import ProgramCard from '../components/ProgramCard'
 import SectionSeam from '../components/SectionSeam'
 import NotFound from './NotFound'
@@ -11,7 +12,6 @@ import {
   CHILDREN_PROGRAMS,
   ADULT_PROGRAMS,
   PROGRAM_GLYPHS,
-  SITE,
 } from '../data/site'
 
 function mapSrc(query: string) {
@@ -45,9 +45,7 @@ export default function LocationDetail() {
         intro={page.headline}
       >
         <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
-          <Link to="/contact" className="btn btn--blue btn--lg">
-            {SITE.primaryCta} <span className="btn__arrow">→</span>
-          </Link>
+          <TrialCta className="btn btn--blue btn--lg" arrow />
           {loc.phone && (
             <a
               href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
@@ -158,9 +156,7 @@ export default function LocationDetail() {
               >
                 Get Directions
               </a>
-              <Link to="/contact" className="btn btn--blue">
-                Request a Free Class
-              </Link>
+              <TrialCta className="btn btn--blue">Request a Free Class</TrialCta>
             </div>
           </Reveal>
         </div>

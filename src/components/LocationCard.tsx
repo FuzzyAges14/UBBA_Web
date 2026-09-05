@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Location } from '../data/site'
+import TrialCta from './TrialCta'
 
 function mapSrc(query: string) {
   return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`
@@ -47,9 +48,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
           <Link to={detailTo} className="btn btn--outline">
             {loc.page ? `Visit ${loc.name} Page` : 'View Contact Page'}
           </Link>
-          <Link to="/contact" className="btn btn--dark">
-            Free Class
-          </Link>
+          <TrialCta className="btn btn--dark">Free Class</TrialCta>
         </div>
       </div>
     </div>
