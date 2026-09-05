@@ -25,7 +25,7 @@ export default function ProgramDetail() {
   const isChildren = program.category === 'Children'
   const categoryLabel = isChildren ? "Children's Programs" : 'Adult & Family Programs'
   const categoryTo = isChildren ? '/programs/children' : '/programs/adult'
-  const dims = imageDimensionsFor(program.image)
+  const dims = program.image ? imageDimensionsFor(program.image) : null
   const related = program.relatedSlugs
     .map((s) => getProgram(s))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
@@ -52,21 +52,23 @@ export default function ProgramDetail() {
       <SectionSeam from="dark" to="off-white" variant="angle" />
 
       <section className="section">
-        <div className="container split">
-          <Reveal>
-            <div className="photo photo--tall program-detail__photo">
-              <OptimizedImage
-                src={program.image}
-                alt=""
-                width={dims.width}
-                height={dims.height}
-                srcSet={imageSrcSetFor(program.image)}
-                loading="lazy"
-                sizes="(max-width: 900px) 100vw, 42vw"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
+        <div className={`container ${program.image ? 'split' : 'narrow-prose program-detail--text'}`}>
+          {program.image && dims ? (
+            <Reveal>
+              <div className="photo photo--tall program-detail__photo">
+                <OptimizedImage
+                  src={program.image}
+                  alt=""
+                  width={dims.width}
+                  height={dims.height}
+                  srcSet={imageSrcSetFor(program.image)}
+                  loading="lazy"
+                  sizes="(max-width: 900px) 100vw, 42vw"
+                />
+              </div>
+            </Reveal>
+          ) : null}
+          <Reveal delay={program.image ? 100 : 0}>
             <div className="program-detail__copy">
               {program.ages && <span className="card__ages">{program.ages}</span>}
               <h2 className="section-title" style={{ marginTop: '0.6rem' }}>

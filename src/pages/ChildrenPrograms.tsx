@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import OptimizedImage from '../components/OptimizedImage'
 import CtaBanner from '../components/CtaBanner'
 import TrialCta from '../components/TrialCta'
 import PageHero from '../components/PageHero'
@@ -11,8 +10,6 @@ import SectionSeam from '../components/SectionSeam'
 import {
   CHILDREN_PROGRAMS,
   FAQS,
-  IMAGE_DIMENSIONS,
-  IMAGES,
   PROGRAM_GLYPHS,
 } from '../data/site'
 
@@ -46,7 +43,6 @@ export default function ChildrenPrograms() {
                   title={p.title}
                   text={p.blurb}
                   ages={p.ages}
-                  image={p.image}
                   glyph={PROGRAM_GLYPHS[p.id]}
                   to={`/programs/${p.slug}`}
                   ctaLabel="Learn How It Works"
@@ -62,7 +58,7 @@ export default function ChildrenPrograms() {
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container split interior-split">
+        <div className="container narrow-prose">
           <Reveal>
             <SectionHeading
               eyebrow="What Students Learn"
@@ -85,19 +81,6 @@ export default function ChildrenPrograms() {
                 Midland Park
               </Link>
             </div>
-          </Reveal>
-          <Reveal delay={120}>
-            <figure className="interior-media interior-media--wide interior-media--focus-center">
-              <div className="interior-media__veil" aria-hidden="true" />
-              <OptimizedImage
-                src={IMAGES.kidsGroup}
-                alt="Young martial arts students practicing punches together in class"
-                width={IMAGE_DIMENSIONS.kidsGroup.width}
-                height={IMAGE_DIMENSIONS.kidsGroup.height}
-                loading="lazy"
-                sizes="(max-width: 900px) 100vw, 42vw"
-              />
-            </figure>
           </Reveal>
         </div>
       </section>

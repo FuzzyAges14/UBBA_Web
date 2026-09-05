@@ -1,8 +1,6 @@
 import Reveal from '../../components/Reveal'
-import OptimizedImage from '../../components/OptimizedImage'
 import SectionHeading from '../../components/SectionHeading'
 import Taegeuk from '../../components/Taegeuk'
-import { IMAGE_DIMENSIONS, IMAGES } from '../../data/site'
 
 const BENEFIT_POINTS = [
   'Confidence that shows up at school, work, and home',
@@ -40,19 +38,17 @@ export default function BenefitsSection() {
           </ul>
         </Reveal>
         <Reveal delay={120}>
-          <div className="home-benefits__media">
+          <div className="home-benefits__media home-benefits__media--brand">
             <div className="accent-orb" aria-hidden="true">
               <Taegeuk size={88} spin />
             </div>
-            <figure className="photo photo--tall photo--zoom">
-              <OptimizedImage
-                src={IMAGES.action}
-                alt="Martial arts training in a dojang"
-                {...IMAGE_DIMENSIONS.action}
-                loading="lazy"
-                sizes="(max-width: 900px) 100vw, 45vw"
-              />
-            </figure>
+            <div className="home-benefits__panel" aria-hidden="true">
+              <span className="home-benefits__panel-kicker">On The Mat</span>
+              <p className="home-benefits__panel-copy">
+                Discipline. Respect. Confidence.
+              </p>
+              <div className="home-benefits__panel-belt" />
+            </div>
           </div>
         </Reveal>
       </div>

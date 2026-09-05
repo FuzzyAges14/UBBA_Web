@@ -222,7 +222,6 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     slug: 'tiny-tigers',
     title: 'Tiny Tigers',
     ages: 'Ages 3-5',
-    image: IMAGES.kidsKicks,
     blurb:
       'A playful first step into martial arts that builds focus, listening skills, and confidence through age-appropriate games and drills.',
   },
@@ -231,7 +230,6 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     slug: 'junior-tigers',
     title: 'Junior Tigers',
     ages: 'Ages 6-10',
-    image: IMAGES.kidsGroup,
     blurb:
       'Structured classes where kids sharpen coordination, discipline, and self-control while making new friends and earning belts.',
   },
@@ -240,7 +238,6 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
     ages: 'Ages 11-17',
-    image: IMAGES.teenSpar,
     blurb:
       'A positive outlet that channels energy into fitness, resilience, and leadership as teens build real self-defense skills.',
   },
@@ -249,7 +246,6 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     slug: 'adult-program',
     title: 'Adult Martial Arts',
     ages: 'Ages 18+',
-    image: IMAGES.action,
     blurb:
       'Get in the best shape of your life while learning practical self-defense in a welcoming, no-ego training environment.',
   },
@@ -261,7 +257,6 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     slug: 'tiny-tigers',
     title: 'Tiny Tigers',
     ages: 'Ages 3-5',
-    image: IMAGES.kidsKicks,
     blurb:
       'Our youngest students develop focus, balance, and confidence through fun, high-energy drills designed for little movers.',
   },
@@ -270,7 +265,6 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     slug: 'junior-tigers',
     title: 'Junior Tigers',
     ages: 'Ages 6-10',
-    image: IMAGES.kidsGroup,
     blurb:
       'Kids build discipline, respect, and coordination while progressing through a clear belt curriculum that rewards effort.',
   },
@@ -279,7 +273,6 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
     ages: 'Ages 11-17',
-    image: IMAGES.teenSpar,
     blurb:
       'Teens grow stronger and more confident, learning practical self-defense and leadership that carries into everyday life.',
   },
@@ -290,7 +283,6 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'adult-program',
     slug: 'adult-program',
     title: 'Adult Program',
-    image: IMAGES.action,
     blurb:
       'A full-body workout and practical martial arts training for every fitness level, with zero intimidation and plenty of support.',
   },
@@ -298,7 +290,6 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'family-programs',
     slug: 'family-programs',
     title: 'Family Programs',
-    image: IMAGES.kidsGroup,
     blurb:
       'Train together and grow together. Parents and kids share the mat, build healthy habits, and cheer each other on.',
   },
@@ -306,7 +297,6 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'olympic-sparring',
     slug: 'olympic-sparring',
     title: 'Olympic Sparring',
-    image: IMAGES.teenSpar,
     blurb:
       'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete and level up.',
   },
@@ -314,7 +304,6 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'swat-team',
     slug: 'swat-team',
     title: 'SWAT Team',
-    image: IMAGES.action,
     blurb:
       'Our elite training group for dedicated students ready to push their skills, conditioning, and technique to the next level.',
   },
@@ -322,7 +311,6 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'self-defense',
     slug: 'self-defense',
     title: 'Self Defense',
-    image: IMAGES.beltTest,
     blurb:
       'Real-world, practical techniques that help you stay aware, stay calm, and protect yourself and your loved ones.',
   },
@@ -330,7 +318,6 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'weapons-class',
     slug: 'weapons-class',
     title: 'Weapons Class',
-    image: IMAGES.beltTest,
     blurb:
       'Traditional weapons training that builds precision, discipline, and focus while adding an exciting new challenge.',
   },
@@ -902,21 +889,18 @@ export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
       caption: 'Back-to-School Special — 1 month free, free uniform, no registration fee',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.instagram.com/p/DcQ3NEmH08s/',
-      image: '/media/social/instagram-post-1.jpg',
     },
     {
       id: 'ig-2',
       caption: 'Summer Camp week kicks off with big energy, smiles, and fun on the mat',
       dateLabel: 'Aug 10, 2026',
       href: 'https://www.instagram.com/p/DboXjn0nRZU/',
-      image: '/media/social/instagram-post-2.jpg',
     },
     {
       id: 'ig-3',
       caption: 'Another fun-filled day at UBBA Summer Camp',
       dateLabel: 'Aug 2, 2026',
       href: 'https://www.instagram.com/p/DbPrmMnHXJc/',
-      image: '/media/social/instagram-post-3.jpg',
     },
   ],
   facebook: [
@@ -925,21 +909,18 @@ export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
       caption: 'Back-to-School Special at UBBA — free trial class, sibling promotion',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.facebook.com/ubbaad/posts/pfbid02mrtHteEdZiDitYSqMsJdAeagUyQkr4sJi7wpKTUZCDpJjLbqpvwYyB1TXDp9LtdPl',
-      image: '/media/social/facebook-post-1.jpg',
     },
     {
       id: 'fb-2',
       caption: 'Zoo day at UBBA Summer Camp — animals, playground, and adventure',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.facebook.com/photo/?fbid=1808931984574578&set=pb.100063733803318.-2207520000',
-      image: '/media/social/facebook-post-2.jpg',
     },
     {
       id: 'fb-3',
       caption: 'Summer Camp water games, pinwheels, and group activities',
       dateLabel: 'Aug 19, 2026',
       href: 'https://www.facebook.com/photo/?fbid=1808931981241245&set=pb.100063733803318.-2207520000',
-      image: '/media/social/facebook-post-3.jpg',
     },
   ],
 }
@@ -1001,7 +982,8 @@ export type ProgramDetail = {
   ages?: string
   /** Who the program is designed for */
   audience: string
-  image: string
+  /** Optional — only set when an authentic UBBA-owned photo exists */
+  image?: string
   tagline: string
   description: string
   /** Core benefits students work toward (not outcome guarantees) */
@@ -1020,7 +1002,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ages: 'Ages 3-5',
     audience:
       'Preschoolers and early elementary kids who are ready for a playful, structured first class — perfect for families in Allendale, Midland Park, and nearby Bergen County towns.',
-    image: IMAGES.kidsKicks,
     tagline: 'A playful, confidence-first introduction to Taekwondo.',
     description:
       'Tiny Tigers gives our youngest students a joyful first taste of martial arts. Short, high-energy classes build listening skills, balance, and the confidence to try new things — without pressure or intimidation.',
@@ -1041,7 +1022,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ages: 'Ages 6-10',
     audience:
       'School-age kids who thrive with clear goals, active friends, and a positive place to grow focus and self-control.',
-    image: IMAGES.kidsGroup,
     tagline: 'Discipline, focus, and leadership through the belt journey.',
     description:
       'Junior Tigers helps kids channel energy into discipline and focus. Students progress through a clear belt curriculum that rewards effort and consistency while building friendships on the mat.',
@@ -1062,7 +1042,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ages: 'Ages 11-17',
     audience:
       'Tweens and teens who want fitness, resilience, and practical self-defense in a supportive peer group — beginners welcome.',
-    image: IMAGES.teenSpar,
     tagline: 'Strength, resilience, and real self-defense for teens.',
     description:
       'A positive, high-energy outlet where teens build fitness, resilience, and leadership while learning practical self-defense. Classes challenge students without ego or judgment.',
@@ -1083,7 +1062,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     ages: 'Ages 18+',
     audience:
       'Adults of any fitness level — from complete beginners to returning athletes — who want a purposeful workout and practical martial arts skills.',
-    image: IMAGES.action,
     tagline: 'Get fit and learn to protect yourself — no experience needed.',
     description:
       'A full-body workout and practical martial arts training for every fitness level. Zero intimidation, plenty of support, and a welcoming community at our New Jersey schools.',
@@ -1103,7 +1081,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     category: 'Adult & Family',
     audience:
       'Parents and kids who want to train together and share a healthy habit as a family.',
-    image: IMAGES.kidsGroup,
     tagline: 'Train together, grow together.',
     description:
       'Parents and kids share the mat, build healthy habits, and cheer each other on. A meaningful activity the whole family can enjoy at United Black Belt Academy.',
@@ -1123,7 +1100,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     category: 'Adult & Family',
     audience:
       'Students ready for sport-focused Taekwondo who want to sharpen speed, timing, and strategy. Availability and requirements — confirm with the school.',
-    image: IMAGES.teenSpar,
     tagline: 'Sport Taekwondo: speed, timing, and strategy.',
     description:
       'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete or level up their game in a coached setting.',
@@ -1143,7 +1119,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     category: 'Adult & Family',
     audience:
       'Dedicated students invited or approved by instructors for higher-intensity, advanced training. Ask the school about readiness and openings.',
-    image: IMAGES.action,
     tagline: 'Our elite training group for dedicated students.',
     description:
       'An advanced training group for committed students ready to push their skills, conditioning, and technique. This is a step up from regular class — not a beginner track.',
@@ -1163,7 +1138,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     category: 'Adult & Family',
     audience:
       'Teens and adults who want practical awareness and defense skills without a sport-competition focus.',
-    image: IMAGES.beltTest,
     tagline: 'Practical skills for awareness and personal safety.',
     description:
       'Practical techniques that help you stay aware, stay calm, and respond thoughtfully under pressure. Training emphasizes habits and skills — not guarantees about real-world outcomes.',
@@ -1183,7 +1157,6 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     category: 'Adult & Family',
     audience:
       'Students looking for an advanced traditional challenge. Equipment needs and eligibility are confirmed at enrollment.',
-    image: IMAGES.beltTest,
     tagline: 'Precision, discipline, and focus through traditional weapons.',
     description:
       'Traditional weapons training that builds precision, discipline, and focus while adding a new challenge to your practice. Safety and proper handling come first.',

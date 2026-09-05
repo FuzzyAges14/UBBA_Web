@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { axe } from 'jest-axe'
 import App from '../App'
 import Faq from './Faq'
@@ -9,22 +9,6 @@ import HeroMedia from './HeroMedia'
 import LeadForm from './LeadForm'
 import SkipLink from './SkipLink'
 
-function mockMatchMedia(reduced: boolean) {
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    configurable: true,
-    value: (query: string) => ({
-      matches: reduced && query.includes('prefers-reduced-motion'),
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }),
-  })
-}
 
 describe('Accessibility: skip link', () => {
   it('renders a skip link targeting main content', () => {
@@ -44,39 +28,12 @@ describe('Accessibility: skip link', () => {
   })
 })
 
-describe('Accessibility: hero video', () => {
-  beforeEach(() => {
-    mockMatchMedia(false)
-    HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined)
-    HTMLMediaElement.prototype.pause = vi.fn()
-  })
-
-  afterEach(() => {
-    vi.restoreAllMocks()
-    mockMatchMedia(false)
-  })
-
-  it('exposes a keyboard-operable pause/play control', async () => {
-    const user = userEvent.setup()
-    render(<HeroMedia />)
-
-    const toggle = screen.getByRole('button', {
-      name: /play background video|pause background video/i,
-    })
-    expect(toggle).toBeInTheDocument()
-
-    await user.click(toggle)
-    expect(toggle).toHaveAttribute('aria-pressed')
-  })
-
-  it('does not autoplay when reduced motion is preferred', () => {
-    mockMatchMedia(true)
-    const play = vi.fn().mockResolvedValue(undefined)
-    HTMLMediaElement.prototype.play = play
-
-    render(<HeroMedia />)
-    expect(screen.getByRole('button', { name: /play background video/i })).toBeInTheDocument()
-    expect(play).not.toHaveBeenCalled()
+describe('Accessibility: hero media', () => {
+  it('uses a brand atmosphere panel without stock video controls', () => {
+    const { container } = render(<HeroMedia />)
+    expect(container.querySelector('.hero__brand-media')).toBeTruthy()
+    expect(container.querySelector('video')).toBeNull()
+    expect(screen.queryByRole('button', { name: /background video/i })).toBeNull()
   })
 })
 

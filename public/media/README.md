@@ -35,3 +35,10 @@ Responsive widths: `*-640`, `*-960`, `*-1280` (and `*-1920` where applicable), e
 VITE_HERO_VIDEO_MP4=/media/hero.mp4
 VITE_HERO_VIDEO_WEBM=/media/hero.webm
 ```
+
+## Licensing note (2026-09-05)
+
+UI no longer mounts WebsiteDojo / Vimeo stock hero video or stock program stills.
+Only the Master Lee owner portrait is treated as an authentic academy likeness for
+display. Other files under this folder are quarantined until replaced with
+UBBA-owned photography — see `docs/IMAGE_SOURCES.md`.

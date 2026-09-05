@@ -4,13 +4,7 @@ import Reveal from '../components/Reveal'
 import MediaFrame from '../components/MediaFrame'
 import SectionSeam from '../components/SectionSeam'
 import type { FunStickerKind } from '../components/FunSticker'
-import { IMAGES, JUST_4_KIDS, SITE } from '../data/site'
-
-const TILE_IMAGES: Record<string, string> = {
-  'birthday-parties': IMAGES.birthday,
-  'summer-camp': IMAGES.summerCamp,
-  'parents-night-out': IMAGES.parentsNightOut,
-}
+import { JUST_4_KIDS, SITE } from '../data/site'
 
 const STEPS = [
   { t: 'Select Program', d: 'Pick a birthday bash, summer camp, or parents’ night out.' },
@@ -147,9 +141,9 @@ export default function Just4Kids() {
                   <MediaFrame
                     label={prog.title}
                     icon={prog.icon}
-                    src={TILE_IMAGES[prog.id]}
                     alt={`${prog.title} at United Black Belt Academy`}
                     stickers={TILE_STICKERS[prog.id] ?? []}
+                    ownerRequired
                   />
                   <div className="j4k-tile__body">
                     <span className="card__ages">{prog.tag}</span>

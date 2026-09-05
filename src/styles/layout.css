@@ -7,6 +7,15 @@
   padding: 0 clamp(1.25rem, 5vw, 2.4rem);
 }
 
+/* Text-first layouts used when authentic photography is unavailable. */
+.narrow-prose {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+.program-detail--text .program-detail__copy {
+  max-width: 46rem;
+}
+
 .section {
   position: relative;
   padding: clamp(4rem, 9vw, 7.5rem) 0;
