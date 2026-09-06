@@ -75,8 +75,8 @@ export const IMAGE_DIMENSIONS = {
   instructorPortrait: { width: 1080, height: 1920 },
   ogDefault: { width: 1200, height: 630 },
   birthday: AUTHENTIC_DIMENSIONS[BIRTHDAY_PARTY_FEATURE.src] ?? { width: 960, height: 720 },
-  summerCamp: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_FEATURE.src] ?? { width: 1920, height: 1440 },
-  summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 1920, height: 1440 },
+  summerCamp: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_FEATURE.src] ?? { width: 1600, height: 1200 },
+  summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 1600, height: 1200 },
   parentsNightOut: AUTHENTIC_DIMENSIONS[PARENTS_NIGHT_OUT_FEATURE.src] ?? { width: 960, height: 720 },
   logo: { width: 300, height: 282 },
 } as const

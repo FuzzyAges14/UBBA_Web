@@ -97,10 +97,13 @@ albums are **not** used. Wired via `HERO_SLIDES` in `src/data/authenticMedia.ts`
 
 ## Page-slot landscape photos (`public/media/authentic/page-slots/`)
 
-Recent (2025) facebook.com/ubbamp & ubbaad landscape stills for program cards,
-Just 4 Kids tiles, birthday / Parents’ Night Out features, and Summer Camp
-feature + gallery. Vertical Instagram camp stills were removed from 16:9 frames
-to avoid letterboxing in restricted viewports. See each file’s entry in
+Recent (2024–2026 / Sanghyun Lee ownership) facebook.com/ubbamp & ubbaad
+landscape stills for program cards, Just 4 Kids tiles, birthday / Parents’
+Night Out features, plus landscape crops of authentic Summer Camp Instagram
+stills for camp feature/gallery (so 16:9 MediaFrames stay filled — no vertical
+letterboxing in restricted viewports). Each slot uses a **unique** photo matched
+to theme (Tiny Tigers ≠ birthday foam-sword shot; Adult ≠ duplicated leadership
+lineup; Summer Camp ≠ Winter Camp crafts). See `MANIFEST.json` and
 `src/data/authenticMedia.ts` (`PROGRAM_SLOT_IMAGES`, `BIRTHDAY_PARTY_*`,
 `PARENTS_NIGHT_OUT_*`, `SUMMER_CAMP_LANDSCAPE_*`).
 

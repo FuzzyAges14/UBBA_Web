@@ -166,21 +166,21 @@ export const AUTHENTIC_DIMENSIONS: Record<string, { width: number; height: numbe
   '/media/authentic/summer-camp-playground.jpg': { width: 1080, height: 1921 },
   '/media/authentic/summer-camp-field-trip.jpg': { width: 1080, height: 1921 },
   '/media/authentic/page-slots/birthday-party-feature.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/birthday-party-tile.jpg': { width: 960, height: 720 },
+  '/media/authentic/page-slots/birthday-party-tile.jpg': { width: 958, height: 718 },
   '/media/authentic/page-slots/parents-night-out-feature.jpg': { width: 960, height: 720 },
   '/media/authentic/page-slots/parents-night-out-tile.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/summer-camp-feature.jpg': { width: 1920, height: 1440 },
-  '/media/authentic/page-slots/summer-camp-tile.jpg': { width: 1920, height: 1440 },
-  '/media/authentic/page-slots/summer-camp-gallery-01.jpg': { width: 1920, height: 1440 },
-  '/media/authentic/page-slots/summer-camp-gallery-02.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/summer-camp-gallery-03.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/summer-camp-gallery-04.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/program-tiny-tigers.jpg': { width: 960, height: 720 },
+  '/media/authentic/page-slots/summer-camp-feature.jpg': { width: 1600, height: 1200 },
+  '/media/authentic/page-slots/summer-camp-tile.jpg': { width: 1600, height: 1200 },
+  '/media/authentic/page-slots/summer-camp-gallery-01.jpg': { width: 1280, height: 960 },
+  '/media/authentic/page-slots/summer-camp-gallery-02.jpg': { width: 1280, height: 960 },
+  '/media/authentic/page-slots/summer-camp-gallery-03.jpg': { width: 1600, height: 1200 },
+  '/media/authentic/page-slots/summer-camp-gallery-04.jpg': { width: 1600, height: 1200 },
+  '/media/authentic/page-slots/program-tiny-tigers.jpg': { width: 1440, height: 1080 },
   '/media/authentic/page-slots/program-junior-tigers.jpg': { width: 1920, height: 1440 },
-  '/media/authentic/page-slots/program-teen.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/program-adult.jpg': { width: 1920, height: 1440 },
+  '/media/authentic/page-slots/program-teen.jpg': { width: 1440, height: 1080 },
+  '/media/authentic/page-slots/program-adult.jpg': { width: 1440, height: 1080 },
   '/media/authentic/page-slots/program-family.jpg': { width: 1920, height: 1440 },
-  '/media/authentic/page-slots/program-olympic.jpg': { width: 1920, height: 1441 },
+  '/media/authentic/page-slots/program-olympic.jpg': { width: 1440, height: 1080 },
   '/media/authentic/page-slots/program-swat.jpg': { width: 1920, height: 1440 },
 }
 
@@ -318,19 +318,19 @@ export const BIRTHDAY_PARTY_TILE: PageSlotStill = {
   src: '/media/authentic/page-slots/birthday-party-tile.jpg',
   alt: 'Birthday party guests lined up with boards at United Black Belt Academy',
   placement: ['birthday-page', 'just-4-kids-birthday-tile'],
-  source: "facebook.com/ubbamp Brodie's Birthday Party album (2025)",
+  source: "facebook.com/ubbamp Steve's Birthday Party album (2025)",
 }
 
 export const PARENTS_NIGHT_OUT_FEATURE: PageSlotStill = {
   src: '/media/authentic/page-slots/parents-night-out-feature.jpg',
-  alt: 'Students and instructors gathered for an evening party at United Black Belt Academy',
+  alt: 'Students and instructors gathered for an evening Parents’ Night Out style party at United Black Belt Academy',
   placement: ['parents-night-out-page', 'just-4-kids-pno-tile'],
   source: "facebook.com/ubbamp 2025 Valentine's Day Party album",
 }
 
 export const PARENTS_NIGHT_OUT_TILE: PageSlotStill = {
   src: '/media/authentic/page-slots/parents-night-out-tile.jpg',
-  alt: 'Kids enjoying an evening event together at United Black Belt Academy',
+  alt: 'Kids enjoying a Friday evening party at United Black Belt Academy',
   placement: ['parents-night-out-page', 'just-4-kids-pno-tile'],
   source: "facebook.com/ubbamp 2025 Valentine's Day Party album",
 }
@@ -338,43 +338,43 @@ export const PARENTS_NIGHT_OUT_TILE: PageSlotStill = {
 /** Landscape camp feature — replaces vertical IG stills in 16:9 frames. */
 export const SUMMER_CAMP_LANDSCAPE_FEATURE: PageSlotStill = {
   src: '/media/authentic/page-slots/summer-camp-feature.jpg',
-  alt: 'Camp students posing together in the United Black Belt Academy dojang',
+  alt: 'Summer Camp students stretching together on the mats at United Black Belt Academy',
   placement: ['summer-camp-page', 'just-4-kids-camp-tile'],
-  source: 'facebook.com/ubbamp 2025 Winter Camp album (landscape group)',
+  source: '@ubbatkd Summer Camp fitness still (landscape crop from authentic vertical)',
 }
 
 export const SUMMER_CAMP_LANDSCAPE_TILE: PageSlotStill = {
   src: '/media/authentic/page-slots/summer-camp-tile.jpg',
-  alt: 'Camp friends smiling together at United Black Belt Academy',
+  alt: 'Summer Camp kids playing outdoors at the playground',
   placement: ['summer-camp-page', 'just-4-kids-camp-tile'],
-  source: 'facebook.com/ubbamp 2025 Winter Camp album (landscape group)',
+  source: '@ubbatkd Summer Camp playground still (landscape crop from authentic vertical)',
 }
 
 /** Landscape-only camp gallery stills (no vertical letterboxing in restricted viewports). */
 export const SUMMER_CAMP_LANDSCAPE_GALLERY: PageSlotStill[] = [
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-01.jpg',
-    alt: 'Camp kids lined up under the United Black Belt Academy logo',
+    alt: 'Summer Camp group posing in the dojang in matching camp shirts',
     placement: ['summer-camp-page'],
-    source: 'facebook.com/ubbamp 2025 Winter Camp album',
+    source: '@ubbatkd Summer Camp group still (landscape crop)',
   },
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-02.jpg',
-    alt: 'Campers showing crafts together in the dojang',
+    alt: 'Summer Camp zoo field-trip group in Summer Tigers shirts',
     placement: ['summer-camp-page'],
-    source: 'facebook.com/ubbamp 2025 Winter Camp album',
+    source: '@ubbatkd Summer Camp zoo trip still (landscape crop)',
   },
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-03.jpg',
-    alt: 'Camp group posing with paper crafts at United Black Belt Academy',
+    alt: 'Summer Camp water games and crafts',
     placement: ['summer-camp-page'],
-    source: 'facebook.com/ubbamp 2025 Winter Camp album',
+    source: '@ubbatkd Summer Camp crafts/water still (landscape crop)',
   },
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-04.jpg',
-    alt: 'Camp students gathered for a group photo on the mats',
+    alt: 'Summer Camp animal experience day',
     placement: ['summer-camp-page'],
-    source: 'facebook.com/ubbamp 2025 Winter Camp album',
+    source: '@ubbatkd Summer Camp animals still (landscape crop)',
   },
 ]
 
@@ -385,7 +385,7 @@ export const SUMMER_CAMP_TILE = SUMMER_CAMP_LANDSCAPE_TILE
 export const PROGRAM_SLOT_IMAGES = {
   'tiny-tigers': {
     src: '/media/authentic/page-slots/program-tiny-tigers.jpg',
-    alt: 'Young children playing martial-arts party games at United Black Belt Academy',
+    alt: 'Young student in dobok focusing during class at United Black Belt Academy',
   },
   'junior-tigers': {
     src: '/media/authentic/page-slots/program-junior-tigers.jpg',
@@ -393,23 +393,23 @@ export const PROGRAM_SLOT_IMAGES = {
   },
   'teen-martial-arts': {
     src: '/media/authentic/page-slots/program-teen.jpg',
-    alt: 'Teens and instructors together at a United Black Belt Academy event',
+    alt: 'Teen students and instructor posing together at United Black Belt Academy',
   },
   'adult-program': {
     src: '/media/authentic/page-slots/program-adult.jpg',
-    alt: 'Leadership students and instructors at United Black Belt Academy',
+    alt: 'Master Lee coaching students on the mats at United Black Belt Academy',
   },
   'family-programs': {
     src: '/media/authentic/page-slots/program-family.jpg',
-    alt: 'Families training and celebrating together at United Black Belt Academy',
+    alt: 'Parents and kids training together in partner exercises at United Black Belt Academy',
   },
   'olympic-sparring': {
     src: '/media/authentic/page-slots/program-olympic.jpg',
-    alt: 'Students and parents training in partner drills at United Black Belt Academy',
+    alt: 'Students practicing kicks to handheld targets at United Black Belt Academy',
   },
   'swat-team': {
     src: '/media/authentic/page-slots/program-swat.jpg',
-    alt: 'Advanced leadership students posing at United Black Belt Academy',
+    alt: 'Leadership students posing under the United Black Belt Academy logo',
   },
 } as const
 
