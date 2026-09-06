@@ -337,8 +337,8 @@ take precedence over the dynamic `:slug` route.
 ### Site-wide features
 
 - **NextKick form portal** — location picker lightbox → per-school iframe for
-  trial, birthday, summer camp, and Parents' Night Out (`TrialCta` +
-  `NextKickFormPortal` + trial portal context).
+  trial, birthday, and summer camp (`TrialCta` + `NextKickFormPortal` + trial
+  portal context). Parents' Night Out is reserved by phone.
 - **SEO** — per-route `<title>` / meta / Open Graph via `Seo` + site/SEO data;
   sitemap & robots generated on build (`pnpm sitemap` / part of `pnpm build`).
 - **Design system** — CSS variables in `src/index.css`; Reveal scroll motion;
@@ -351,7 +351,6 @@ take precedence over the dynamic `:slug` route.
   used by live marketing CTAs after the NextKick migration.
 
 ---
-
 ## Available scripts
 
 | Command | Description |
