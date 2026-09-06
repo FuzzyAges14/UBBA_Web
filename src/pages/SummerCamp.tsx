@@ -9,7 +9,7 @@ import { getNextKickForm, getNextKickFormHref } from '../data/contact'
 import { getJust4KidsDetail, imageDimensionsFor, imageSrcSetFor } from '../data/site'
 import {
   SUMMER_CAMP_FEATURE,
-  SUMMER_CAMP_STILLS,
+  SUMMER_CAMP_LANDSCAPE_GALLERY,
   SUMMER_CAMP_VIDEOS,
 } from '../data/authenticMedia'
 import OptimizedImage from '../components/OptimizedImage'
@@ -114,16 +114,15 @@ export default function SummerCamp() {
               Real days at UBBA Summer Camp
             </h2>
             <p className="section-lead">
-              Photos and clips from our Instagram — zoo trips, crafts, fitness, playgrounds, and
-              training on the mat. Each image matches a camp post caption.
+              Landscape photos from recent United Black Belt Academy camps — group days on the mats,
+              crafts, and friends. Chosen so they stay clear in wide frames and on phones.
             </p>
           </Reveal>
           <div className="camp-gallery mt">
-            {SUMMER_CAMP_STILLS.filter((shot) => shot.src !== SUMMER_CAMP_FEATURE.src).map(
-              (shot, i) => {
+            {SUMMER_CAMP_LANDSCAPE_GALLERY.map((shot, i) => {
                 const dims = imageDimensionsFor(shot.src)
                 return (
-                  <Reveal key={shot.shortcode} delay={i * 60}>
+                  <Reveal key={shot.src} delay={i * 60}>
                     <figure className="camp-gallery__item">
                       <OptimizedImage
                         src={shot.src}
@@ -134,16 +133,11 @@ export default function SummerCamp() {
                         sizes="(max-width: 700px) 100vw, 33vw"
                         loading="lazy"
                       />
-                      <figcaption>
-                        <a href={shot.permalink} target="_blank" rel="noopener noreferrer">
-                          {shot.alt}
-                        </a>
-                      </figcaption>
+                      <figcaption>{shot.alt}</figcaption>
                     </figure>
                   </Reveal>
                 )
-              },
-            )}
+              })}
           </div>
           <div className="camp-videos mt">
             {SUMMER_CAMP_VIDEOS.map((clip, i) => (

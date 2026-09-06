@@ -7,6 +7,11 @@ import {
   PROMO_BACK_TO_SCHOOL,
   SUMMER_CAMP_FEATURE,
   SUMMER_CAMP_TILE,
+  BIRTHDAY_PARTY_FEATURE,
+  BIRTHDAY_PARTY_TILE,
+  PARENTS_NIGHT_OUT_FEATURE,
+  PARENTS_NIGHT_OUT_TILE,
+  PROGRAM_SLOT_IMAGES,
   authenticSrcSetFor,
 } from './authenticMedia'
 
@@ -38,12 +43,12 @@ export const IMAGES = {
   teenSpar: '/media/teen-training.jpg',
   beltTest: '/media/respect-bow.jpg',
   ogDefault: '/media/og-default.jpg',
-  birthday: '/media/birthday-party.jpg',
+  birthday: BIRTHDAY_PARTY_FEATURE.src,
   /** Caption-matched @ubbatkd camp still (training + Summer Camp). */
   summerCamp: SUMMER_CAMP_FEATURE.src,
   /** Hub tile — week kickoff smiles (caption-matched). */
   summerCampTile: SUMMER_CAMP_TILE.src,
-  parentsNightOut: '/media/parents-night-out.jpg',
+  parentsNightOut: PARENTS_NIGHT_OUT_FEATURE.src,
 } as const
 
 /** Structured hero sources for WebM + MP4 delivery and poster LCP. */
@@ -69,10 +74,10 @@ export const IMAGE_DIMENSIONS = {
   beltTest: { width: 1920, height: 1080 },
   instructorPortrait: { width: 1080, height: 1920 },
   ogDefault: { width: 1200, height: 630 },
-  birthday: { width: 1280, height: 720 },
-  summerCamp: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_FEATURE.src] ?? { width: 1080, height: 1921 },
-  summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 720, height: 1280 },
-  parentsNightOut: { width: 1280, height: 720 },
+  birthday: AUTHENTIC_DIMENSIONS[BIRTHDAY_PARTY_FEATURE.src] ?? { width: 960, height: 720 },
+  summerCamp: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_FEATURE.src] ?? { width: 1920, height: 1440 },
+  summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 1920, height: 1440 },
+  parentsNightOut: AUTHENTIC_DIMENSIONS[PARENTS_NIGHT_OUT_FEATURE.src] ?? { width: 960, height: 720 },
   logo: { width: 300, height: 282 },
 } as const
 
@@ -90,12 +95,10 @@ export const IMAGE_SRCSETS = {
     '/media/respect-bow-640.jpg 640w, /media/respect-bow-960.jpg 960w, /media/respect-bow-1280.jpg 1280w, /media/respect-bow-1920.jpg 1920w',
   heroPoster:
     '/media/hero-poster-960.jpg 960w, /media/hero-poster-1280.jpg 1280w, /media/hero-poster.jpg 1920w',
-  birthday:
-    '/media/birthday-party-640.jpg 640w, /media/birthday-party-960.jpg 960w, /media/birthday-party-1280.jpg 1280w',
+  birthday: authenticSrcSetFor(BIRTHDAY_PARTY_FEATURE.src)!,
   summerCamp: authenticSrcSetFor(SUMMER_CAMP_FEATURE.src)!,
   summerCampTile: authenticSrcSetFor(SUMMER_CAMP_TILE.src)!,
-  parentsNightOut:
-    '/media/parents-night-out-640.jpg 640w, /media/parents-night-out-960.jpg 960w, /media/parents-night-out-1280.jpg 1280w',
+  parentsNightOut: authenticSrcSetFor(PARENTS_NIGHT_OUT_FEATURE.src)!,
 } as const
 
 export function imageDimensionsFor(src: string): { width: number; height: number } {
@@ -244,6 +247,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     ages: 'Ages 3-5',
     blurb:
       'A playful first step into martial arts that builds focus, listening skills, and confidence through age-appropriate games and drills.',
+    image: PROGRAM_SLOT_IMAGES['tiny-tigers'].src,
   },
   {
     id: 'junior-tigers',
@@ -252,6 +256,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     ages: 'Ages 6-10',
     blurb:
       'Structured classes where kids sharpen coordination, discipline, and self-control while making new friends and earning belts.',
+    image: PROGRAM_SLOT_IMAGES['junior-tigers'].src,
   },
   {
     id: 'teen-martial-arts',
@@ -260,6 +265,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     ages: 'Ages 11-17',
     blurb:
       'A positive outlet that channels energy into fitness, resilience, and leadership as teens build real self-defense skills.',
+    image: PROGRAM_SLOT_IMAGES['teen-martial-arts'].src,
   },
   {
     id: 'adult-martial-arts',
@@ -268,6 +274,7 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     ages: 'Ages 18+',
     blurb:
       'Get in the best shape of your life while learning practical self-defense in a welcoming, no-ego training environment.',
+    image: PROGRAM_SLOT_IMAGES['adult-program'].src,
   },
 ]
 
@@ -279,6 +286,7 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     ages: 'Ages 3-5',
     blurb:
       'Our youngest students develop focus, balance, and confidence through fun, high-energy drills designed for little movers.',
+    image: PROGRAM_SLOT_IMAGES['tiny-tigers'].src,
   },
   {
     id: 'junior-tigers',
@@ -287,6 +295,7 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     ages: 'Ages 6-10',
     blurb:
       'Kids build discipline, respect, and coordination while progressing through a clear belt curriculum that rewards effort.',
+    image: PROGRAM_SLOT_IMAGES['junior-tigers'].src,
   },
   {
     id: 'teen-martial-arts',
@@ -295,6 +304,7 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     ages: 'Ages 11-17',
     blurb:
       'Teens grow stronger and more confident, learning practical self-defense and leadership that carries into everyday life.',
+    image: PROGRAM_SLOT_IMAGES['teen-martial-arts'].src,
   },
 ]
 
@@ -305,6 +315,7 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     title: 'Adult Program',
     blurb:
       'A full-body workout and practical martial arts training for every fitness level, with zero intimidation and plenty of support.',
+    image: PROGRAM_SLOT_IMAGES['adult-program'].src,
   },
   {
     id: 'family-programs',
@@ -312,6 +323,7 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     title: 'Family Programs',
     blurb:
       'Train together and grow together. Parents and kids share the mat, build healthy habits, and cheer each other on.',
+    image: PROGRAM_SLOT_IMAGES['family-programs'].src,
   },
   {
     id: 'olympic-sparring',
@@ -319,6 +331,7 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     title: 'Olympic Sparring',
     blurb:
       'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete and level up.',
+    image: PROGRAM_SLOT_IMAGES['olympic-sparring'].src,
   },
   {
     id: 'swat-team',
@@ -326,6 +339,7 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     title: 'SWAT Team',
     blurb:
       'Our elite training group for dedicated students ready to push their skills, conditioning, and technique to the next level.',
+    image: PROGRAM_SLOT_IMAGES['swat-team'].src,
   },
   {
     id: 'self-defense',
@@ -371,6 +385,8 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/birthday-parties',
     icon: '🎂',
     ctaLabel: 'Plan a Party',
+    image: BIRTHDAY_PARTY_TILE.src,
+    imageAlt: BIRTHDAY_PARTY_TILE.alt,
   },
   {
     id: 'summer-camp',
@@ -381,7 +397,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/summer-camp',
     icon: '☀️',
     ctaLabel: 'Reserve a Spot',
-    image: IMAGES.summerCampTile,
+    image: SUMMER_CAMP_TILE.src,
     imageAlt: SUMMER_CAMP_TILE.alt,
   },
   {
@@ -393,6 +409,8 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/parents-night-out',
     icon: '🍕',
     ctaLabel: 'Save a Spot',
+    image: PARENTS_NIGHT_OUT_TILE.src,
+    imageAlt: PARENTS_NIGHT_OUT_TILE.alt,
   },
 ]
 

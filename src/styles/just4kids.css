@@ -310,10 +310,10 @@
 .media-frame > img {
   width: 100%;
   height: auto;
-  /* Keep the natural 16:9 frame without re-cropping faces at the edges */
+  /* Landscape authentic stills fill the 16:9 frame (no letterboxing). */
   aspect-ratio: 16 / 9;
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: center 40%;
   display: block;
   border-radius: inherit;
   border: 2px solid rgba(10, 10, 10, 0.08);
@@ -522,9 +522,9 @@
 .camp-gallery__item img {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 38%;
   display: block;
   border-radius: calc(var(--radius) + 2px);
   border: 2px solid rgba(10, 10, 10, 0.08);

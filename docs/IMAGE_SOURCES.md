@@ -95,3 +95,12 @@ albums are **not** used. Wired via `HERO_SLIDES` in `src/data/authenticMedia.ts`
 | Motion | Fade every ~5.5s; `prefers-reduced-motion` locks to the first slide |
 | Provenance | See `public/media/authentic/hero-slides/MANIFEST.json` |
 
+## Page-slot landscape photos (`public/media/authentic/page-slots/`)
+
+Recent (2025) facebook.com/ubbamp & ubbaad landscape stills for program cards,
+Just 4 Kids tiles, birthday / Parents’ Night Out features, and Summer Camp
+feature + gallery. Vertical Instagram camp stills were removed from 16:9 frames
+to avoid letterboxing in restricted viewports. See each file’s entry in
+`src/data/authenticMedia.ts` (`PROGRAM_SLOT_IMAGES`, `BIRTHDAY_PARTY_*`,
+`PARENTS_NIGHT_OUT_*`, `SUMMER_CAMP_LANDSCAPE_*`).
+

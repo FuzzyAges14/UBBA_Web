@@ -55,7 +55,7 @@ export default function ProgramDetail() {
         <div className={`container ${program.image ? 'split' : 'narrow-prose program-detail--text'}`}>
           {program.image && dims ? (
             <Reveal>
-              <div className="photo photo--tall program-detail__photo">
+              <div className="photo photo--wide program-detail__photo">
                 <OptimizedImage
                   src={program.image}
                   alt=""

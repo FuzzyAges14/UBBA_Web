@@ -7,6 +7,7 @@ import TrialCta from '../components/TrialCta'
 import SectionSeam from '../components/SectionSeam'
 import { getNextKickForm, getNextKickFormHref } from '../data/contact'
 import { getJust4KidsDetail } from '../data/site'
+import { BIRTHDAY_PARTY_FEATURE } from '../data/authenticMedia'
 
 export default function BirthdayParties() {
   const detail = getJust4KidsDetail('birthday-parties')!
@@ -66,6 +67,8 @@ export default function BirthdayParties() {
         <div className="container split">
           <Reveal>
             <MediaFrame
+              src={BIRTHDAY_PARTY_FEATURE.src}
+              alt={BIRTHDAY_PARTY_FEATURE.alt}
               ownerRequired
               label="Birthday party at United Black Belt Academy"
               icon={detail.mediaIcon}
