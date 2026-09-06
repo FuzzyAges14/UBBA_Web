@@ -166,7 +166,7 @@ export const AUTHENTIC_DIMENSIONS: Record<string, { width: number; height: numbe
   '/media/authentic/summer-camp-playground.jpg': { width: 1080, height: 1921 },
   '/media/authentic/summer-camp-field-trip.jpg': { width: 1080, height: 1921 },
   '/media/authentic/page-slots/birthday-party-feature.jpg': { width: 960, height: 720 },
-  '/media/authentic/page-slots/birthday-party-tile.jpg': { width: 958, height: 718 },
+  '/media/authentic/page-slots/birthday-party-tile.jpg': { width: 960, height: 720 },
   '/media/authentic/page-slots/parents-night-out-feature.jpg': { width: 960, height: 720 },
   '/media/authentic/page-slots/parents-night-out-tile.jpg': { width: 960, height: 720 },
   '/media/authentic/page-slots/summer-camp-feature.jpg': { width: 1600, height: 1200 },
@@ -316,9 +316,9 @@ export const BIRTHDAY_PARTY_FEATURE: PageSlotStill = {
 
 export const BIRTHDAY_PARTY_TILE: PageSlotStill = {
   src: '/media/authentic/page-slots/birthday-party-tile.jpg',
-  alt: 'Birthday party guests lined up with boards at United Black Belt Academy',
+  alt: 'Birthday party kids lined up for foam-sword games at United Black Belt Academy',
   placement: ['birthday-page', 'just-4-kids-birthday-tile'],
-  source: "facebook.com/ubbamp Steve's Birthday Party album (2025)",
+  source: "facebook.com/ubbamp Brodie's Birthday Party album (2025)",
 }
 
 export const PARENTS_NIGHT_OUT_FEATURE: PageSlotStill = {
@@ -330,7 +330,7 @@ export const PARENTS_NIGHT_OUT_FEATURE: PageSlotStill = {
 
 export const PARENTS_NIGHT_OUT_TILE: PageSlotStill = {
   src: '/media/authentic/page-slots/parents-night-out-tile.jpg',
-  alt: 'Kids enjoying a Friday evening party at United Black Belt Academy',
+  alt: 'Kids at an evening party with inflatables at United Black Belt Academy',
   placement: ['parents-night-out-page', 'just-4-kids-pno-tile'],
   source: "facebook.com/ubbamp 2025 Valentine's Day Party album",
 }
