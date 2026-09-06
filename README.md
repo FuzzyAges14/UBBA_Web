@@ -53,142 +53,235 @@ cp .env.example .env   # only if you need mail secrets, Meta tokens, or VITE_SIT
 
 ## 🚀 Launching your website
 
-Follow these steps in order. After `pnpm build`, the site is static files in
-`dist/` (HTML/CSS/JS). Signups load NextKick in the browser — you do **not** need
-to deploy Gmail or the Node mail API for free-class, birthday, camp, or PNO.
+This section is for whoever will put the site on the academy’s real web address
+(for example `www.youracademy.com`) — even if they are not a developer.
 
-### Step A — Wire NextKick form URLs (required before real signups)
+**Big picture (4 ideas):**
 
-Most visitor signup CTAs use per-school NextKick share links in one file (Parents' Night Out is phone-only):
+1. **Prepare** — paste the real signup links and check phone numbers / hours.
+2. **Build** — turn the project into a finished website folder named `dist`.
+3. **Publish** — upload that folder to a free host (Netlify or Vercel).
+4. **Connect your domain** — point the customer’s purchased domain at that host.
 
-**[`src/data/contact.ts`](src/data/contact.ts)** → `NEXTKICK_FORMS`
+You do **not** need Gmail setup for free-class, birthday, summer camp, or
+Parents' Night Out. Free class / birthday / camp use NextKick. Parents' Night
+Out is reserved by calling the school.
 
-| Form kind | Used on | Location keys |
+---
+
+### Step 1 — Paste the real signup links (before people start signing up)
+
+Open this one file in the project:
+
+**[`src/data/contact.ts`](src/data/contact.ts)**
+
+Look for `NEXTKICK_FORMS`. That block holds the “share link” for each school’s
+signup form.
+
+| What visitors sign up for | Where they click it on the site | Schools |
 | --- | --- | --- |
-| `trial` | Home, Contact, program & location CTAs (“Try A Class For Free!” / free trial) | `allendale`, `midland-park`, `glen-rock` |
-| `birthday` | `/just-4-kids/birthday-parties` | same three schools |
-| `summer-camp` | `/just-4-kids/summer-camp` | same three schools |
-| *(Parents' Night Out)* | `/just-4-kids/parents-night-out` | **Call to reserve** — no NextKick form |
+| Free trial class | Home, Contact, program & location pages | Allendale, Midland Park, Glen Rock |
+| Birthday party | Just 4 Kids → Birthday Parties | same three schools |
+| Summer / day camp | Just 4 Kids → Summer Camp | same three schools |
+| Parents' Night Out | Just 4 Kids → Parents' Night Out | **Call the school** — no online form |
 
-**How to update a URL:**
+**How to paste a NextKick link:**
 
-1. In NextKick admin, open the form → copy the **student share link**
-   (looks like `https://student.nextkick.ai/form/<uuid>`).
-2. Paste it into the matching `href` under `NEXTKICK_FORMS` for that kind + school.
-3. Save. With `pnpm dev` running, the site hot-reloads.
+1. Log into NextKick (the academy’s class/signup system).
+2. Open the form you want (trial, birthday, or camp) for one school.
+3. Copy the **student share link** (a long web address that usually includes
+   `/form/` and a code).
+4. In `src/data/contact.ts`, find that form + school and paste the link where
+   it says `href: '...'`.
+5. Save the file.
 
-**Parents' Night Out:** the three school `href`s may still be placeholders until
-you paste the real share links. Until then, the portal opens NextKick but will not
-collect live PNO submissions for those schools.
+Also in the same file, under `SOCIAL_PROFILES`, paste the real Instagram and
+Facebook page links.
 
-Also set Instagram / Facebook in the same file under `SOCIAL_PROFILES`
-(`href`, `handle`, then `placeholder: false` when live).
+**Parents' Night Out:** do not look for a NextKick form. That page already tells
+families to call. Make sure the phone numbers in [`src/data/site.ts`](src/data/site.ts)
+are correct.
 
-### Step B — Owner content checklist (before a public launch)
+---
 
-| Priority | What | Where |
+### Step 2 — Quick content check (before the public goes live)
+
+| Must do | What to check | Where to edit |
 | --- | --- | --- |
-| High | Real NextKick URLs for all four form kinds × three schools | `src/data/contact.ts` → `NEXTKICK_FORMS` |
-| High | Location phones, hours, Glen Rock details | `LOCATIONS` / `GLEN_ROCK` in `src/data/site.ts` |
-| High | Privacy Policy & Terms copy | `/privacy`, `/terms` |
-| Medium | Location exterior photos | still placeholders in places — see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) |
-| Medium | Owner-approved testimonials & stats | `TESTIMONIALS`, stats in `site.ts` |
-| Medium | Canonical site URL for SEO | `VITE_SITE_URL` in `.env` / host env (see [`docs/SEO.md`](docs/SEO.md)) |
-| Low | Optional Meta Graph tokens for live social feeds | `.env` — see [`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md) |
+| Yes | Free-class, birthday, and camp NextKick links are the real ones | `src/data/contact.ts` |
+| Yes | Phone numbers and class hours for each school | `src/data/site.ts` |
+| Yes | Privacy Policy and Terms pages have real wording | `/privacy` and `/terms` pages |
+| Recommended | Photos of school exteriors look good | see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) |
+| Recommended | Reviews and stats are owner-approved | `src/data/site.ts` |
+| Recommended | The “official” website address is set (for Google) | `VITE_SITE_URL` — explained in Step 5 |
 
-Also review:
+Checklists:
 
 - [`docs/PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md)
 - [`docs/OWNER_APPROVAL_CHECKLIST.md`](docs/OWNER_APPROVAL_CHECKLIST.md)
 
-### Step C — Build the production site
+---
+
+### Step 3 — Build the finished website folder
+
+On a computer with Node.js and pnpm installed (see Prerequisites at the top),
+open a terminal in this project folder and run:
 
 ```bash
-pnpm install     # first time / after dependency changes
-pnpm build       # regenerates sitemap, type-checks, writes dist/
+pnpm install     # downloads tools the site needs (first time, and after updates)
+pnpm build       # creates the finished website in a folder named dist
 ```
 
-Preview locally what visitors will see:
+When that finishes, you will see a folder called **`dist`**. That folder *is*
+the website — plain files a host can show to visitors.
+
+Optional: see it on your own computer first:
 
 ```bash
-pnpm preview     # serves the contents of dist/
+pnpm preview     # opens a local preview of the finished site
 ```
 
-Optional quality gates before publish:
+---
 
-```bash
-pnpm lint
-pnpm test
-pnpm test:ci     # lint + unit tests + production build
-```
+### Step 4 — Put the site on the internet (pick ONE)
 
-### Step D — Publish (pick ONE host)
+You need a place that stores and serves the `dist` folder. Free options that work
+well: **Netlify** or **Vercel**.
 
-The publish output is the **`dist/`** folder.
+#### Option A — Fastest test (Netlify drag & drop)
 
-#### Option 1 — Netlify (drag & drop, fastest smoke test)
+Good for a quick “is it live?” check. Less ideal for ongoing updates.
 
-1. Run `pnpm build`.
-2. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
-3. Drag the entire `dist/` folder onto the page.
-4. Netlify gives you a live URL.
+1. Run `pnpm build` (Step 3).
+2. Open [app.netlify.com/drop](https://app.netlify.com/drop) and sign in / create
+   a free account.
+3. Drag the whole **`dist`** folder onto that page.
+4. Netlify gives you a temporary web address (something like
+   `https://random-name.netlify.app`). Open it and check the site.
 
-This repo includes [`public/_redirects`](public/_redirects) so SPA routes
-(e.g. `/contact`) work on refresh after deploy.
+#### Option B — Best for real use (Netlify or Vercel + GitHub)
 
-#### Option 2 — Netlify or Vercel connected to GitHub (recommended for ongoing updates)
+After this is set up once, every time you update the project on GitHub, the live
+site can update automatically.
 
-1. Create an account at [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
-2. **Add new site** → import this GitHub repository.
-3. Build settings:
+1. Create a free account at [Netlify](https://www.netlify.com) **or**
+   [Vercel](https://vercel.com).
+2. Click **Add new site** / **Import project** and connect the GitHub account
+   that has this repository.
+3. Choose this project. When asked for build settings, use:
 
-   | Setting | Value |
+   | Question they ask | What to type |
    | --- | --- |
-   | **Build command** | `pnpm build` |
-   | **Publish / output directory** | `dist` |
-   | **Node version** | 22 (set in host UI or `NODE_VERSION=22`) |
+   | Build command | `pnpm build` |
+   | Publish folder / Output directory | `dist` |
+   | Node version (if asked) | `22` |
 
-4. Set environment variables in the host dashboard if needed:
-   - `VITE_SITE_URL=https://www.unitedbba.com` (or your real canonical domain)
-   - Optional Meta tokens for social feed refresh (see `.env.example`)
-5. After merge to `main`, the host rebuilds and republishes automatically.
+4. In the host’s settings, add a site variable named `VITE_SITE_URL` and set it
+   to the academy’s real address once you know it
+   (example: `https://www.youracademy.com`). You can add this after Step 5.
+5. Click deploy. Wait until it says the site is live. Open the temporary URL
+   they give you and check it.
 
-#### Option 3 — Any static host / traditional web host
+#### Option C — Other web hosts
 
-Upload the **contents** of `dist/` to the host’s public web root. Enable an
-**SPA fallback**: rewrite all unknown paths to `index.html` (HTTP 200), not a 404.
+If the academy already pays for web hosting, upload **everything inside** the
+`dist` folder to the public website folder (sometimes called `public_html` or
+`www`). Ask the host how to make “every page address load the main site file”
+(needed so links like `/contact` work when someone refreshes the page). On
+Netlify this is already handled for you.
 
-### Step E — SPA routing (critical)
+---
 
-This is a single-page app. Deep links and browser refresh must serve `index.html`.
+### Step 5 — Connect the customer’s own domain (important)
 
-| Host | What to do |
+A **domain** is the address people type, like `youracademy.com`. The customer
+usually buys this from a company such as GoDaddy, Namecheap, Google Domains, or
+Cloudflare. Publishing on Netlify/Vercel alone gives a temporary address; this
+step makes **their** address show the new site.
+
+Do this after Step 4 (the site must already be live on Netlify or Vercel).
+
+**On Netlify or Vercel:**
+
+1. Open your site in the Netlify or Vercel dashboard.
+2. Find **Domain settings** / **Domains**.
+3. Click **Add custom domain** (wording varies slightly).
+4. Type the academy’s domain, for example:
+   - `youracademy.com`
+   - and/or `www.youracademy.com`
+5. The host will show **DNS instructions** — usually one or two lines that look
+   like “create a record of type A” or “create a record of type CNAME.”
+   Copy those exactly. You will paste them at the domain company next.
+
+**At the company where the domain was bought (GoDaddy, Namecheap, etc.):**
+
+1. Log in and open the domain’s **DNS** settings (sometimes called “Manage DNS”
+   or “DNS records”).
+2. Add or edit the records exactly as Netlify/Vercel showed you.
+   - Do not invent values — use the host’s numbers/names.
+   - If the host says to remove an old “parking page” or old website record,
+     remove or replace that old record so it does not fight the new one.
+3. Save.
+
+**Wait:** DNS changes can take from a few minutes up to about 24–48 hours.
+Meanwhile the temporary Netlify/Vercel address still works.
+
+**When the custom domain works in a browser:**
+
+1. Back in Netlify/Vercel, confirm the domain shows as active / HTTPS (secure
+   padlock). Free HTTPS certificates are usually automatic.
+2. Set `VITE_SITE_URL` to that live address, for example
+   `https://www.youracademy.com` (include `https://`, no slash at the end).
+3. Trigger one more deploy / rebuild so Google-facing details (sitemap, page
+   titles) use the real address.
+
+**If something fails:**
+
+- Double-check the DNS records match the host’s instructions character for
+  character.
+- Make sure you are editing DNS for the correct domain.
+- Wait longer — DNS is often the slow part, not the website files.
+- Netlify and Vercel both have “custom domain” help pages with screenshots.
+
+---
+
+### Step 6 — Make sure inside pages still work
+
+This website has many pages (`/contact`, `/programs/...`, and so on). When
+someone refreshes those pages, the host must still show the site (not a “page
+not found” error).
+
+| If you publish on… | What you need to do |
 | --- | --- |
-| **Netlify** | `public/_redirects` is already included (`/* /index.html 200`) and copies into `dist/` on build |
-| **Vercel** | Usually automatic for Vite/React; add a `vercel.json` rewrite if refreshes 404 |
-| **Other** | Enable “SPA fallback” / rewrite all routes to `index.html` |
+| **Netlify** | Nothing extra — this project already includes the needed setting file |
+| **Vercel** | Usually works automatically |
+| **Other host** | Ask them to send all unknown paths to `index.html` |
 
-Without this, the home page works but `/programs/tiny-tigers` etc. may 404 on refresh.
+Quick check: open `https://your-domain/contact`, then press refresh. The Contact
+page should still appear.
 
-### Step F — Custom domain
+---
 
-In Netlify or Vercel: **Domain settings** → add `unitedbba.com` / `www` → follow DNS
-prompts (A/CNAME records at your registrar). After DNS propagates, set
-`VITE_SITE_URL` to the live HTTPS origin and rebuild so sitemap/canonical tags match.
+### Step 7 — Final checklist after the domain is live
 
-### Step G — After go-live smoke test
+1. Open the home page on the **customer’s domain** (not only the temporary host
+   URL).
+2. Click the free-class button → pick a school → confirm the NextKick signup
+   form appears.
+3. On Birthday Parties and Summer Camp pages, confirm the same kind of signup
+   flow works.
+4. On Parents' Night Out, confirm it says to **call** and shows school phone
+   numbers (no online form).
+5. Open each location page; confirm address, phone, and hours look right.
+6. Open Follow Us; confirm Instagram and Facebook go to the real pages.
+7. Open Privacy and Terms; confirm the wording is ready.
+8. Optional: in [Google Search Console](https://search.google.com/search-console),
+   add the site and submit `https://your-domain/sitemap.xml` so Google can find
+   the pages.
 
-1. Open the home page and confirm the hero + free-class CTA opens the **school
-   picker** → picking Allendale loads the NextKick trial iframe.
-2. Repeat for Birthday Parties, Summer Camp, and Parents' Night Out pages.
-3. Open Allendale / Midland Park location pages; confirm phone/hours look right.
-4. Open `/follow-us` and confirm Instagram/Facebook links.
-5. Spot-check `/privacy` and `/terms`.
-6. In Google Search Console (optional), submit `https://your-domain/sitemap.xml`.
-
-You do **not** need to deploy the Express `server/` package for these NextKick
-flows. The optional email API is documented in [`docs/BACKEND.md`](docs/BACKEND.md)
-for legacy / custom lead posting only.
+You do **not** need a separate email server for the main marketing signups.
+Extra backend notes (only if someone later wants custom email forms) are in
+[`docs/BACKEND.md`](docs/BACKEND.md).
 
 ---
 
