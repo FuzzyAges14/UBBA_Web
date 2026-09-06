@@ -2,10 +2,11 @@
 
 ## Cursor Cloud specific instructions
 
-UBBA_Web is a Vite + React + TypeScript marketing site plus a small Express API
-(`server/`) that emails Parents' Night Out inquiries. Trial, birthday, and
-summer-camp CTAs open a NextKick location-picker portal. Standard commands live in
-`README.md` and `package.json` scripts; refer to those rather than duplicating them.
+UBBA_Web is a Vite + React + TypeScript marketing site plus an optional Express
+API (`server/`) for legacy `/api/leads` email. Trial, birthday, summer-camp, and
+Parents' Night Out CTAs all open a NextKick location-picker portal. Standard
+commands live in `README.md` and `package.json` scripts; refer to those rather
+than duplicating them.
 
 - **Run the app (dev):** `pnpm dev` serves at `http://localhost:5173` with hot
   module reload. The server is configured with `host: true`, so it also binds to
@@ -28,16 +29,15 @@ summer-camp CTAs open a NextKick location-picker portal. Standard commands live 
   in JSX. Components that render tests-visible text (e.g. `Placeholder`) duplicate
   labels, so use `getAllByText` in tests when a term appears in both a heading and a
   placeholder.
-- **Forms + API:** Trial, birthday, and summer-camp CTAs (`TrialCta` /
-  `LeadForm` / Just 4 Kids launchers) open `NextKickFormPortal` via
-  `TrialPortalContext` — pick a school, then load the matching URL from
-  `NEXTKICK_FORMS` in `src/data/contact.ts`. Parents' Night Out
-  `EventInquiryForm` still POSTs to `/api/leads` (`src/lib/submitLead.ts`).
-  The Express API emails a detailed HTML/text message to
-  `CONTACT.notifyEmails`. Edit NextKick URLs, emails, and Instagram/Facebook
-  URLs in `src/data/contact.ts`; mail secrets in `.env` (see `.env.example` and
-  `docs/BACKEND.md`). Without SMTP/Resend the API logs the email and still
-  returns success. `jsdom` has no
+- **Forms + API:** Trial, birthday, and summer-camp CTAs
+  (`TrialCta` / `LeadForm` / Just 4 Kids launchers) open `NextKickFormPortal`
+  via `TrialPortalContext` — pick a school, then load the matching URL from
+  `NEXTKICK_FORMS` in `src/data/contact.ts`. Parents' Night Out is reserved by phone (no online form).
+  Live marketing CTAs do not use Gmail or `POST /api/leads`. The Express API remains available for legacy /
+  custom lead posting and emails `CONTACT.notifyEmails` when configured. Edit
+  NextKick URLs and Instagram/Facebook in `src/data/contact.ts`; optional mail
+  secrets in `.env` (see `.env.example` and `docs/BACKEND.md`). Without
+  SMTP/Resend the API logs the email and still returns success. `jsdom` has no
   `IntersectionObserver`, so the `Reveal`/`StatCounter` components fall back to
   their final state immediately in tests — that is expected. `jsdom` also lacks
   `window.scrollTo`/`matchMedia`; those are guarded, do not "fix" them.
@@ -60,7 +60,6 @@ summer-camp CTAs open a NextKick location-picker portal. Standard commands live 
   routes `/programs/children` and `/programs/adult` are category overviews and take
   precedence over the dynamic slug route. Add a program by adding to
   `PROGRAM_DETAILS` + the relevant program array — no new page/route needed.
-- **Fonts:** the home hero title uses `Ocean Rush` (self-hosted at
-  `public/fonts/OceanRush.otf`, `@font-face` in `src/index.css`) — this is a
-  personal-use DEMO font, license before commercial launch. Other headings use
-  `Teko`/`Anton`; body is `Inter` (Google Fonts, loaded in `index.html`).
+- **Fonts:** hero/impact titles use `Anton`; other headings use `Teko`; body is
+  `Inter` (Google Fonts, loaded in `index.html`). The Ocean Rush DEMO font was
+  removed and must not be reintroduced without a commercial license.

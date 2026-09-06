@@ -58,7 +58,7 @@ describe('App routing', () => {
     )
   })
 
-  it('renders the birthday parties detail page with inquiry form', async () => {
+  it('renders the birthday parties detail page with call-to-reserve', async () => {
     renderAt('/just-4-kids/birthday-parties')
     expect(
       await screen.findByRole('heading', { name: /most exciting birthday party ever/i, level: 1 }),
@@ -79,13 +79,16 @@ describe('App routing', () => {
     expect(screen.getByText(/what to bring/i)).toBeInTheDocument()
   })
 
-  it("renders the Parents' Night Out detail page with inquiry form", async () => {
+  it("renders the Parents' Night Out detail page with call-to-reserve", async () => {
     renderAt('/just-4-kids/parents-night-out')
     expect(
       await screen.findByRole('heading', { name: /fun for kids\. relaxation for you/i, level: 1 }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /save a spot/i })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /^spots fill fast$/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /spots fill fast/i })).toBeInTheDocument()
+    expect(screen.getAllByText(/there is no online form/i).length).toBeGreaterThan(0)
+    const callLinks = screen.getAllByRole('link', { name: /call allendale/i })
+    expect(callLinks.length).toBeGreaterThan(0)
+    expect(callLinks[0]).toHaveAttribute('href', expect.stringMatching(/tel:2019622922/))
   })
 
   it('keeps Just 4 Kids as its own nav item separate from Programs', async () => {

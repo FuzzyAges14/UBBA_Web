@@ -1,9 +1,9 @@
-# Backend: form emails & social links
+# Backend: NextKick forms, social links & legacy email API
 
-> **Owner-friendly walkthrough:** for a full checklist of which emails to use,
-> what to edit, how to connect Resend/Gmail/SMTP, and how to deploy so live
-> forms deliver — see
+> **Owner-friendly walkthrough:** for NextKick URL wiring, Instagram/Facebook,
+> and the optional legacy mail API — see
 > [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md).
+> Full launch steps: [`README.md`](../README.md).
 
 Everything you usually need to edit lives in **one file**:
 
@@ -11,34 +11,33 @@ Everything you usually need to edit lives in **one file**:
 
 | I want to… | Edit |
 | --- | --- |
-| Change a NextKick form URL (trial / birthday / camp, per school) | `NEXTKICK_FORMS` in `src/data/contact.ts` |
-| Change who receives Parents' Night Out emails (default) | `CONTACT.notifyEmails` |
+| Change a NextKick form URL (trial / birthday / camp / PNO, per school) | `NEXTKICK_FORMS` in `src/data/contact.ts` |
 | Change the public mailto address | `CONTACT.publicEmail` |
 | Add / update Instagram or Facebook | `SOCIAL_PROFILES` → set `href`, `handle`, then `placeholder: false` |
+| Legacy `/api/leads` notify inbox (optional) | `CONTACT.notifyEmails` |
 
-Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.example`](../.env.example). Never commit `.env`.
+Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.example`](../.env.example). Never commit `.env`. They are **not** required for live marketing CTAs.
 
-## NextKick portal forms (trial, birthday, summer camp)
+## NextKick portal forms (all live CTAs)
 
-Trial, birthday, and summer-camp CTAs open a themed location picker, then load
-the matching per-school NextKick form in a lightbox iframe. All nine URLs live
-in [`NEXTKICK_FORMS`](../src/data/contact.ts) (`getNextKickFormHref`).
+Trial, birthday, and summer-camp CTAs open a themed location
+picker, then load the matching per-school NextKick form in a lightbox iframe.
+URLs live in [`NEXTKICK_FORMS`](../src/data/contact.ts) (`getNextKickFormHref`).
 
-Leads from those forms land in the school's NextKick account, not `/api/leads`.
-
-## Forms that still email staff
-
-| Form | Page | Intent |
+| Form | Page / CTA | Kind key |
 | --- | --- | --- |
-| Parents’ Night Out | `/just-4-kids/parents-night-out` | `parents-night-out` |
+| Free class / trial | Home, Contact, programs, locations | `trial` |
+| Birthday parties | `/just-4-kids/birthday-parties` | `birthday` |
+| Summer camp | `/just-4-kids/summer-camp` | `summer-camp` |
+| Parents’ Night Out | `/just-4-kids/parents-night-out` | Call to reserve (no NextKick / no `/api/leads`) |
 
-## How a Parents’ Night Out request works
+Leads from those forms land in the school's **NextKick** account, not Gmail and
+not `/api/leads`.
 
-1. Someone submits the Just 4 Kids form (`EventInquiryForm`).
-2. The browser `POST`s to `/api/leads` with an `intent` plus the filled fields.
-3. The API validates, builds a detailed HTML + plain-text email, and sends it to the right inbox(es).
-4. **Reply-To** is the visitor’s email so staff can hit Reply.
-5. Configured Instagram / Facebook profile links are included at the bottom.
+## Legacy email API (optional)
+
+`POST /api/leads` still exists for custom / transitional use. No live marketing
+page posts to it after the Parents' Night Out → NextKick migration.
 
 ## Run locally
 
@@ -109,4 +108,5 @@ The API also sets Helmet security headers, validates/length-limits every lead fi
 
 1. Add a key to `INQUIRY_TYPES` in `src/data/contact.ts`.
 2. Extend `InquiryIntent` in the same file (+ `VALID_INTENTS` in `server/leads.ts`).
-3. Point a form at `/api/leads` with that `intent` (see `EventInquiryForm`).
+3. Point a custom form at `/api/leads` with that `intent` (legacy path only —
+   live marketing CTAs should use `NEXTKICK_FORMS` instead).

@@ -410,7 +410,7 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
       'Supervised games, laughter, and pizza on a monthly Friday. Open to non-students — inquire for the next date at your school.',
     to: '/just-4-kids/parents-night-out',
     icon: '🍕',
-    ctaLabel: 'Save a Spot',
+    ctaLabel: 'Call to Reserve',
     image: PARENTS_NIGHT_OUT_TILE.src,
     imageAlt: PARENTS_NIGHT_OUT_TILE.alt,
   },
@@ -585,19 +585,19 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
     faqs: [
       {
         q: 'Who can attend Parents’ Night Out?',
-        a: 'It’s open to students and non-students. Friends are welcome — reserve a spot so we can plan pizza and activities.',
+        a: 'It’s open to students and non-students. Friends are welcome — call to reserve a spot so we can plan pizza and activities.',
       },
       {
         q: 'Why would a parent choose this?',
-        a: 'You get a planned, supervised Friday night for the kids — games and pizza included in the event concept — while you enjoy dinner, errands, or downtime. Exact timing and fees are confirmed when you inquire.',
+        a: 'You get a planned, supervised Friday night for the kids — games and pizza included in the event concept — while you enjoy dinner, errands, or downtime. Exact timing and fees are confirmed when you call.',
       },
       {
-        q: 'What is the inquiry form for?',
-        a: 'Tell us how many kids are coming, which school you prefer, and how to reach you. We reply with the next available Friday, capacity, and current details — the form itself is not a final reservation until confirmed.',
+        q: 'How do I reserve a spot?',
+        a: 'Call your preferred school. Tell us how many kids are coming, their ages, and how to reach you. Staff confirm the next Friday, capacity, and details over the phone — there is no online form for this event.',
       },
       {
         q: 'When is the next Parents’ Night Out?',
-        a: 'We host it monthly on a Friday. Dates, drop-off times, and pricing need seasonal confirmation — send an inquiry or call and we’ll share what’s next for your preferred location.',
+        a: 'We host it monthly on a Friday. Dates, drop-off times, and pricing need seasonal confirmation — call and we’ll share what’s next for your preferred location.',
       },
       {
         q: 'What should kids bring?',
@@ -605,7 +605,7 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
       },
     ],
     formIntent: 'parents-night-out',
-    ctaLabel: 'Save a Spot',
+    ctaLabel: 'Call to Reserve',
     mediaIcon: '🍕',
   },
 }

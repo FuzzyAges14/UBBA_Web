@@ -1,17 +1,15 @@
 /**
  * =============================================================================
- * CONTACT & SOCIAL — edit this file to wire up email + Instagram / Facebook
+ * CONTACT & SOCIAL — edit this file to wire up NextKick forms + Instagram / Facebook
  * =============================================================================
  *
- * Trial, birthday, and summer-camp CTAs open a location-picker lightbox, then
- * the matching NextKick form (`NEXTKICK_FORMS`). Parents' Night Out still emails
- * `CONTACT.notifyEmails` via `/api/leads`. Instagram / Facebook profile links
- * come from `SOCIAL_PROFILES`.
+ * Trial, birthday, and summer-camp CTAs open a location-picker
+ * lightbox, then the matching NextKick form (`NEXTKICK_FORMS`). Parents' Night Out
+ * is reserved by phone (see the PNO page). Instagram / Facebook
+ * profile links come from `SOCIAL_PROFILES`.
  *
- * After editing:
- *   1. Save this file
- *   2. Restart the API server if it is already running (`pnpm dev:api`)
- *   3. Set SMTP (or Resend) secrets in `.env` — see `.env.example`
+ * After editing NextKick URLs or social links, save this file — `pnpm dev` hot-reloads.
+ * The Express `/api/leads` mailer is unused by live marketing CTAs (legacy only).
  *
  * Tip: leave a profile `href` as '#' until you have the real URL, then paste it
  * in and set `placeholder: false`.
@@ -56,7 +54,7 @@ export type InquiryTypeConfig = {
  * Flow: CTA → themed location picker → iframe for that school's form URL.
  * ------------------------------------------------------------------------- */
 
-/** Portal kinds that use NextKick (not Parents' Night Out email). */
+/** Portal kinds that use NextKick hosted forms. */
 export type NextKickFormKind = 'trial' | 'birthday' | 'summer-camp'
 
 /** Location keys matching school pages / SITE location ids. */
@@ -193,7 +191,7 @@ export const NEXTKICK_TRIAL_FORM = {
 } as const
 
 /* ---------------------------------------------------------------------------
- * Where event-inquiry emails are delivered (Parents' Night Out still uses API)
+ * Optional notify emails (legacy /api/leads only — live CTAs use NextKick)
  * ------------------------------------------------------------------------- */
 export const CONTACT = {
   /**

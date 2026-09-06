@@ -19,15 +19,14 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
       (`META_PAGE_ACCESS_TOKEN`, `FACEBOOK_PAGE_ID`, `INSTAGRAM_BUSINESS_ACCOUNT_ID`)
 - [ ] Privacy Policy and Terms copy
 
-## Forms & email delivery
+## Forms & delivery
 - [x] Free-class, birthday, and summer-camp CTAs open a location-picker lightbox,
       then the per-school NextKick form (`NEXTKICK_FORMS` in `src/data/contact.ts`)
-- [x] Parents' Night Out (`EventInquiryForm`) still posts to `/api/leads`
-- [x] Honeypot spam field on the Parents' Night Out form
-- [ ] Set real `CONTACT.notifyEmails` / `INQUIRY_TYPES` + `SOCIAL_PROFILES` in `src/data/contact.ts`
-      (step-by-step: [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md))
-- [ ] Configure Resend or SMTP in `.env` so PNO requests leave log-only mode
-      (same owner setup guide)
+- [x] Parents' Night Out uses call-to-reserve (no NextKick form, no Gmail/`/api/leads`)
+- [ ] Confirm trial / birthday / summer-camp NextKick URLs match NextKick admin
+- [x] Instagram / Facebook profile URLs in `SOCIAL_PROFILES` (confirm handles stay current)
+- [ ] Optional legacy: configure Resend/SMTP only if you still use `/api/leads`
+      ([`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](OWNER_EMAIL_AND_ACCOUNTS_SETUP.md))
 - [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 
 ## Fonts

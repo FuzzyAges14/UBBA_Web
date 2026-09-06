@@ -48,7 +48,7 @@ E2E mocks `/api/leads` in the browser — no SMTP/Resend credentials required.
 - Nav: Programs mega → Tiny Tigers; Contact link; mobile open/close; Escape + focus restore; accordion; skip link
 - SEO: title/description updates, no duplicate meta description tags, program fallback
 - LeadForm / NextKick portal: CTA opens dialog, iframe src, Escape close, new-tab fallback
-- EventInquiryForm: birthday/camp/PNO success, empty validation, invalid email, API failure
+- NextKick portals: trial / birthday / camp / PNO open picker → school iframe
 - Accessibility: axe on major routes; form label associations; single homepage H1
 - API HTTP: valid lead, missing fields, invalid email, honeypot, oversized body, CORS allow/deny, email failure, health
 - E2E: five critical flows (see `e2e/critical-flows.spec.ts`)

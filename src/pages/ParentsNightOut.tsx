@@ -3,14 +3,19 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
-import EventInquiryForm from '../components/EventInquiryForm'
 import SectionSeam from '../components/SectionSeam'
-import { getJust4KidsDetail } from '../data/site'
+import { getJust4KidsDetail, getVisibleLocations } from '../data/site'
 import { PARENTS_NIGHT_OUT_FEATURE } from '../data/authenticMedia'
+
+function telHref(phone: string) {
+  return `tel:${phone.replace(/[^0-9+]/g, '')}`
+}
 
 export default function ParentsNightOut() {
   const detail = getJust4KidsDetail('parents-night-out')!
-  const formId = 'pno-inquiry'
+  const callId = 'pno-call'
+  const schools = getVisibleLocations().filter((loc) => Boolean(loc.phone))
+  const allendale = schools.find((loc) => loc.id === 'allendale')
 
   return (
     <>
@@ -25,7 +30,7 @@ export default function ParentsNightOut() {
         intro={detail.heroIntro}
       >
         <div className="flex-actions" style={{ justifyContent: 'flex-start' }}>
-          <a href={`#${formId}`} className="btn btn--blue btn--lg">
+          <a href={`#${callId}`} className="btn btn--blue btn--lg">
             {detail.ctaLabel} <span className="btn__arrow">→</span>
           </a>
           <Link to="/just-4-kids" className="btn btn--outline btn--lg">
@@ -107,8 +112,8 @@ export default function ParentsNightOut() {
               ))}
             </ul>
             <p className="ph-note mt-sm">
-              Next date &amp; pricing — pending owner confirmation. Inquire to get the upcoming
-              Friday details.
+              Next date &amp; pricing — pending owner confirmation. Call your school
+              to get the upcoming Friday details and reserve a spot.
             </p>
           </Reveal>
         </div>
@@ -128,29 +133,29 @@ export default function ParentsNightOut() {
         </div>
       </section>
 
-      <section className="section section--offwhite" id={formId}>
+      <section className="section section--offwhite" id={callId}>
         <div className="container j4k-signup">
           <Reveal>
             <div className="j4k-signup__intro">
-              <span className="eyebrow">Reserve Early</span>
-              <h2 className="section-title">Spots fill fast</h2>
+              <span className="eyebrow">Reserve by Phone</span>
+              <h2 className="section-title">Spots fill fast — call to save yours</h2>
               <p className="section-lead" style={{ marginTop: '0.75rem' }}>
-                Submit an inquiry with how many kids are coming and which school you prefer.
-                We reply with the next Friday date, capacity, and current details — dates and
-                fees still need owner confirmation each season.
+                There is no online form for Parents&apos; Night Out. Call the school
+                you prefer, and we will confirm the next Friday date, capacity, and
+                pricing. Have this ready when you call:
               </p>
               <ol className="j4k-easy">
                 <li>
-                  <strong>Tell us who&apos;s coming</strong>
-                  <span>How many kids — and which location.</span>
+                  <strong>Your name &amp; phone</strong>
+                  <span>So we can confirm details with you.</span>
                 </li>
                 <li>
-                  <strong>We confirm the Friday</strong>
-                  <span>You’ll get the next date and details.</span>
+                  <strong>How many kids</strong>
+                  <span>Ages help us plan games and pizza.</span>
                 </li>
                 <li>
-                  <strong>Drop off &amp; unwind</strong>
-                  <span>Pizza, games, and supervised fun await.</span>
+                  <strong>Preferred school</strong>
+                  <span>Allendale, Midland Park, or Glen Rock.</span>
                 </li>
               </ol>
               <div className="flex-actions mt">
@@ -168,7 +173,48 @@ export default function ParentsNightOut() {
           </Reveal>
           <Reveal delay={100}>
             <div className="j4k-signup__form">
-              <EventInquiryForm intent="parents-night-out" />
+              <div className="leadform leadform--event">
+                <div className="leadform__head">
+                  <span className="eyebrow">Call to Reserve</span>
+                </div>
+                <p className="form-instructions">
+                  Tap a school number below to call. Staff will take your information
+                  and lock in the next available Friday night.
+                </p>
+                <div className="leadform__steps" aria-hidden="true">
+                  <i className="on" />
+                  <i className="on" />
+                  <i className="on" />
+                </div>
+                <ul className="checklist" style={{ marginBottom: '1.25rem' }}>
+                  {schools.map((loc) => (
+                    <li key={loc.id}>
+                      <strong>{loc.name}</strong>
+                      {' — '}
+                      <a href={telHref(loc.phone!)}>{loc.phone}</a>
+                    </li>
+                  ))}
+                </ul>
+                {allendale ? (
+                  <a
+                    href={telHref(allendale.phone!)}
+                    className="btn btn--lg btn--block"
+                  >
+                    Call Allendale {allendale.phone}{' '}
+                    <span className="btn__arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </a>
+                ) : null}
+                <p className="form-reassure">
+                  Open to non-students · Call your preferred school · Spots confirmed
+                  by phone
+                </p>
+                <p className="form-portal-fallback">
+                  Prefer email? Reach us through the{' '}
+                  <Link to="/contact">contact page</Link>.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
