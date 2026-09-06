@@ -32,7 +32,7 @@ photos / video. Prefer a fresh owner shoot of class, family, and event moments.
 | Program overview + detail covers | Text-first / glyph cards until owned photos exist |
 | Benefits / adult & children story splits | Text-first layouts |
 | Just 4 Kids tiles & event pages | Summer Camp uses authentic camp photos/videos; birthday & parents’ night out still need owner photos |
-| Allendale / Midland Park exteriors & interiors | `OwnerMediaSlot` placeholders |
+| Allendale / Midland Park / Glen Rock exteriors & interiors | Temporary Google Maps / Street View photos under `public/media/locations/` — replace with owner photography |
 | Testimonials | Text-only until owner-approved reviews |
 
 ## Brand logo
@@ -106,3 +106,16 @@ lineup; Summer Camp ≠ Winter Camp crafts). See `MANIFEST.json` and
 `src/data/authenticMedia.ts` (`PROGRAM_SLOT_IMAGES`, `BIRTHDAY_PARTY_*`,
 `PARENTS_NIGHT_OUT_*`, `SUMMER_CAMP_LANDSCAPE_*`).
 
+
+
+## Temporary Google location photos (`public/media/locations/`)
+
+| File | Location | Source | Notes |
+| --- | --- | --- | --- |
+| `allendale-interior.jpg` | Allendale | Google Maps place photo | Temporary until owner shoot |
+| `allendale-exterior.jpg` | Allendale | Google Street View near 240 W Crescent Ave | Older Holmgren’s signage may appear |
+| `midland-park-exterior.jpg` | Midland Park | Google Maps place photo of 644 Godwin Ave storefront | Temporary |
+| `midland-park-street.jpg` | Midland Park | Google Street View | Visit Us section |
+| `glen-rock-exterior.jpg` | Glen Rock | Google Street View near 201 Rock Rd | Temporary; suite signage may show prior tenant |
+
+Do not hotlink Google; files are self-hosted. Swap for academy-owned photos when available.
