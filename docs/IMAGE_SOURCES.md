@@ -30,7 +30,7 @@ photos / video. Prefer a fresh owner shoot of class, family, and event moments.
 | --- | --- |
 | Home hero video / poster | **Group-photo fade slideshow** from recent (2024–2026) facebook.com/ubbaad & ubbamp landscape stills (`public/media/authentic/hero-slides/`); stock Vimeo loop stays disabled |
 | Program overview + detail covers | Text-first / glyph cards until owned photos exist |
-| Benefits / adult & children story splits | Text-first layouts |
+| Benefits / adult & children story splits | Benefits uses authentic class-partners still (`hero-slides/03-group-class-partners`); adult/children overview splits still text-first |
 | Just 4 Kids tiles & event pages | Summer Camp uses authentic camp photos/videos; birthday & parents’ night out still need owner photos |
 | Allendale / Midland Park / Glen Rock exteriors & interiors | Temporary Google Maps / Street View photos under `public/media/locations/` — replace with owner photography |
 | Testimonials | Text-only until owner-approved reviews |
