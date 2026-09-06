@@ -4,9 +4,6 @@ const TRIAL_ALLENDALE =
   'https://student.nextkick.ai/form/0318c4be-65de-4c00-b554-192c0e1d65eb'
 const BIRTHDAY_ALLENDALE =
   'https://student.nextkick.ai/form/8e4e23d6-da04-4d94-818e-06c71baf3de6'
-const PNO_ALLENDALE =
-  'https://student.nextkick.ai/form/a0000001-1111-4111-8111-000000000001'
-
 async function pickAllendaleInPortal(page: import('@playwright/test').Page) {
   const dialog = page.getByRole('dialog').filter({ hasText: /allendale|midland|glen rock/i })
   await dialog.getByText('Allendale').click()
@@ -100,16 +97,13 @@ test.describe('Critical marketing flows', () => {
     ).toHaveAttribute('src', BIRTHDAY_ALLENDALE)
   })
 
-  test('Parents Night Out page opens the NextKick portal', async ({ page }) => {
+  test('Parents Night Out page directs visitors to call', async ({ page }) => {
     await page.goto('/just-4-kids/parents-night-out')
-    await page.getByRole('button', { name: /save a spot/i }).click()
-    const dialog = page.getByRole('dialog', { name: /save a spot/i })
-    await expect(dialog).toBeVisible()
-    await pickAllendaleInPortal(page)
-    await expect(dialog.getByTitle(/save a spot — allendale form/i)).toHaveAttribute(
-      'src',
-      PNO_ALLENDALE,
-    )
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await expect(page.getByText(/there is no online form/i).first()).toBeVisible()
+    const callCta = page.getByRole('link', { name: /call allendale/i })
+    await expect(callCta).toBeVisible()
+    await expect(callCta).toHaveAttribute('href', /tel:2019622922/)
   })
 
   test('keyboard-only path opens the NextKick trial portal', async ({ page }, testInfo) => {

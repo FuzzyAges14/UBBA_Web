@@ -20,7 +20,7 @@ Mail **secrets** (SMTP password / Resend API key) go in `.env` — see [`.env.ex
 
 ## NextKick portal forms (all live CTAs)
 
-Trial, birthday, summer-camp, and Parents' Night Out CTAs open a themed location
+Trial, birthday, and summer-camp CTAs open a themed location
 picker, then load the matching per-school NextKick form in a lightbox iframe.
 URLs live in [`NEXTKICK_FORMS`](../src/data/contact.ts) (`getNextKickFormHref`).
 
@@ -29,7 +29,7 @@ URLs live in [`NEXTKICK_FORMS`](../src/data/contact.ts) (`getNextKickFormHref`).
 | Free class / trial | Home, Contact, programs, locations | `trial` |
 | Birthday parties | `/just-4-kids/birthday-parties` | `birthday` |
 | Summer camp | `/just-4-kids/summer-camp` | `summer-camp` |
-| Parents’ Night Out | `/just-4-kids/parents-night-out` | `parents-night-out` |
+| Parents’ Night Out | `/just-4-kids/parents-night-out` | Call to reserve (no NextKick / no `/api/leads`) |
 
 Leads from those forms land in the school's **NextKick** account, not Gmail and
 not `/api/leads`.

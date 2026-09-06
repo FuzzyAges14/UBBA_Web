@@ -3,8 +3,9 @@
  * CONTACT & SOCIAL — edit this file to wire up NextKick forms + Instagram / Facebook
  * =============================================================================
  *
- * Trial, birthday, summer-camp, and Parents' Night Out CTAs open a location-picker
- * lightbox, then the matching NextKick form (`NEXTKICK_FORMS`). Instagram / Facebook
+ * Trial, birthday, and summer-camp CTAs open a location-picker
+ * lightbox, then the matching NextKick form (`NEXTKICK_FORMS`). Parents' Night Out
+ * is reserved by phone (see the PNO page). Instagram / Facebook
  * profile links come from `SOCIAL_PROFILES`.
  *
  * After editing NextKick URLs or social links, save this file — `pnpm dev` hot-reloads.
@@ -53,8 +54,8 @@ export type InquiryTypeConfig = {
  * Flow: CTA → themed location picker → iframe for that school's form URL.
  * ------------------------------------------------------------------------- */
 
-/** Portal kinds that use NextKick (not Parents' Night Out email). */
-export type NextKickFormKind = 'trial' | 'birthday' | 'summer-camp' | 'parents-night-out'
+/** Portal kinds that use NextKick hosted forms. */
+export type NextKickFormKind = 'trial' | 'birthday' | 'summer-camp'
 
 /** Location keys matching school pages / SITE location ids. */
 export type NextKickLocationId = 'allendale' | 'midland-park' | 'glen-rock'
@@ -76,7 +77,7 @@ export type NextKickFormConfig = {
   pickerLede: string
   /** Supporting copy once a school form is open */
   formLede: string
-  /** CSS modifier for themed chrome: trial | birthday | summer-camp | parents-night-out */
+  /** CSS modifier for themed chrome: trial | birthday | summer-camp */
   theme: NextKickFormKind
   locations: Record<NextKickLocationId, NextKickLocationForm>
 }
@@ -166,36 +167,6 @@ export const NEXTKICK_FORMS: Record<NextKickFormKind, NextKickFormConfig> = {
         name: 'Glen Rock',
         blurb: 'New location',
         href: 'https://student.nextkick.ai/form/00a70372-829d-4883-9ed1-272a21ac10cf',
-      },
-    },
-  },
-
-  'parents-night-out': {
-    kind: 'parents-night-out',
-    eyebrow: "Parents' Night Out",
-    title: 'Save a Spot',
-    pickerLede:
-      "Choose your school, then complete the NextKick Parents' Night Out form for that location.",
-    formLede:
-      "Finish the Parents' Night Out request for this school on NextKick. You can also open it in a new tab.",
-    theme: 'parents-night-out',
-    locations: {
-      // TODO(owner): replace these three hrefs with the real NextKick form share
-      // links for Parents' Night Out (NextKick admin → Forms → Share link).
-      allendale: {
-        name: 'Allendale',
-        blurb: '240 W Crescent Ave',
-        href: 'https://student.nextkick.ai/form/a0000001-1111-4111-8111-000000000001',
-      },
-      'midland-park': {
-        name: 'Midland Park',
-        blurb: '644 Godwin Ave',
-        href: 'https://student.nextkick.ai/form/a0000001-2222-4222-8222-000000000002',
-      },
-      'glen-rock': {
-        name: 'Glen Rock',
-        blurb: 'New location',
-        href: 'https://student.nextkick.ai/form/a0000001-3333-4333-8333-000000000003',
       },
     },
   },

@@ -104,17 +104,6 @@
   );
 }
 
-.form-portal__dialog--parents-night-out {
-  --portal-accent: #0d9488;
-  --portal-accent-soft: rgba(13, 148, 136, 0.12);
-  --portal-accent-glow: rgba(13, 148, 136, 0.14);
-  --portal-chrome-bg: linear-gradient(
-    165deg,
-    #fff 0%,
-    rgba(13, 148, 136, 0.06) 45%,
-    rgba(37, 99, 235, 0.04) 100%
-  );
-}
 
 .form-portal__belt span:nth-child(1) {
   background: #f4f4f4;

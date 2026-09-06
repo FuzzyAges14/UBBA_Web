@@ -59,7 +59,7 @@ to deploy Gmail or the Node mail API for free-class, birthday, camp, or PNO.
 
 ### Step A — Wire NextKick form URLs (required before real signups)
 
-All visitor signup CTAs use per-school NextKick share links in one file:
+Most visitor signup CTAs use per-school NextKick share links in one file (Parents' Night Out is phone-only):
 
 **[`src/data/contact.ts`](src/data/contact.ts)** → `NEXTKICK_FORMS`
 
@@ -68,7 +68,7 @@ All visitor signup CTAs use per-school NextKick share links in one file:
 | `trial` | Home, Contact, program & location CTAs (“Try A Class For Free!” / free trial) | `allendale`, `midland-park`, `glen-rock` |
 | `birthday` | `/just-4-kids/birthday-parties` | same three schools |
 | `summer-camp` | `/just-4-kids/summer-camp` | same three schools |
-| `parents-night-out` | `/just-4-kids/parents-night-out` | same three schools |
+| *(Parents' Night Out)* | `/just-4-kids/parents-night-out` | **Call to reserve** — no NextKick form |
 
 **How to update a URL:**
 
@@ -209,7 +209,7 @@ Routes are defined in [`src/App.tsx`](src/App.tsx). Editable copy lives mainly i
 | `/just-4-kids` | **Just 4 Kids hub** | Birthday parties, summer camp, and Parents' Night Out tiles |
 | `/just-4-kids/birthday-parties` | **Birthday parties** | Event story, inclusions, FAQs, NextKick birthday signup (pick school → form) |
 | `/just-4-kids/summer-camp` | **Summer / day camp** | Camp story, pack list, FAQs, NextKick camp signup |
-| `/just-4-kids/parents-night-out` | **Parents' Night Out** | Monthly Friday drop-off event story, FAQs, NextKick PNO signup (same portal pattern — **not** email/Gmail) |
+| `/just-4-kids/parents-night-out` | **Parents' Night Out** | Monthly Friday drop-off event story, FAQs, **call-to-reserve** directions (no online form) |
 | `/locations/allendale` | **Allendale** | Address, phone, hours, map/directions cues, free-class CTA |
 | `/locations/midland-park` | **Midland Park** | Same location template |
 | `/locations/glen-rock` | **Glen Rock** | Same template when Glen Rock is enabled in site data |
@@ -336,8 +336,7 @@ Provenance and replacement notes: [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.m
 
 ### Notes
 
-- Live CTAs use **NextKick** only (trial, birthday, summer camp, Parents' Night Out).
-  There is no Gmail-powered Parents' Night Out form on the site anymore.
+- Trial, birthday, and summer camp CTAs use **NextKick**. Parents' Night Out is reserved **by phone** (no online form, no Gmail).
 - Stats and some testimonials may still be marked pending owner confirmation —
   do not present unverified numbers as facts.
 - Hero/impact titles use **Anton**; other headings use Teko; body uses Inter

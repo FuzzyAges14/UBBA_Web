@@ -29,11 +29,11 @@ than duplicating them.
   in JSX. Components that render tests-visible text (e.g. `Placeholder`) duplicate
   labels, so use `getAllByText` in tests when a term appears in both a heading and a
   placeholder.
-- **Forms + API:** Trial, birthday, summer-camp, and Parents' Night Out CTAs
+- **Forms + API:** Trial, birthday, and summer-camp CTAs
   (`TrialCta` / `LeadForm` / Just 4 Kids launchers) open `NextKickFormPortal`
   via `TrialPortalContext` — pick a school, then load the matching URL from
-  `NEXTKICK_FORMS` in `src/data/contact.ts`. Live marketing CTAs do not use
-  Gmail or `POST /api/leads`. The Express API remains available for legacy /
+  `NEXTKICK_FORMS` in `src/data/contact.ts`. Parents' Night Out is reserved by phone (no online form).
+  Live marketing CTAs do not use Gmail or `POST /api/leads`. The Express API remains available for legacy /
   custom lead posting and emails `CONTACT.notifyEmails` when configured. Edit
   NextKick URLs and Instagram/Facebook in `src/data/contact.ts`; optional mail
   secrets in `.env` (see `.env.example` and `docs/BACKEND.md`). Without
