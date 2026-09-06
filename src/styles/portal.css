@@ -219,7 +219,7 @@
 
 .form-portal__picker-grid {
   display: grid;
-  gap: 0.85rem;
+  gap: 1rem;
 }
 
 .form-portal__loc-btn {

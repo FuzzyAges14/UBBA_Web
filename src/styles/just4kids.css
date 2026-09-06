@@ -58,17 +58,22 @@
 .j4k-hero--splash h1 {
   margin-top: 1rem;
   padding-top: 0.12em;
-  font-family: 'Ocean Rush', var(--font-impact), sans-serif;
+  font-family: var(--font-impact), sans-serif;
   font-size: clamp(2.4rem, 6.4vw, 4rem);
   font-weight: 400;
   text-transform: none;
   max-width: 18ch;
 }
 .j4k-hero__lead {
-  margin: 1.2rem 0 0;
+  margin: 1.35rem 0 0;
   max-width: 34rem;
   font-size: 1.1rem;
   color: var(--muted);
+  line-height: 1.55;
+}
+.j4k-hero .flex-actions {
+  margin-top: 1.85rem;
+  gap: 1rem 1.2rem;
 }
 
 /* Heritage accent under brand — ties playful pages to main UBBA system */
@@ -151,7 +156,7 @@
 .j4k-will {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.4rem 1.8rem;
+  gap: 1.6rem 2rem;
 }
 .j4k-will__item {
   position: relative;
@@ -181,7 +186,7 @@
 .j4k-tiles {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.8rem 1.6rem;
+  gap: 2rem 1.75rem;
 }
 .j4k-tile {
   display: flex;
@@ -192,24 +197,25 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.15rem;
+  gap: 0.55rem;
   flex: 1;
 }
 .j4k-tile__body h3 {
-  margin: 0.35rem 0 0.45rem;
+  margin: 0.15rem 0 0;
   font-family: var(--font-display);
   font-size: 1.7rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 .j4k-tile__body p {
-  margin: 0 0 0.35rem;
+  margin: 0;
   color: var(--muted);
   flex: 1;
+  line-height: 1.5;
 }
 .j4k-tile__body .btn {
-  margin-top: auto;
+  margin-top: 0.55rem;
 }
 
 .j4k-pack {
@@ -249,14 +255,14 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.5rem;
   counter-reset: j4k;
 }
 .j4k-easy li {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 1rem;
-  row-gap: 0.25rem;
+  row-gap: 0.4rem;
   align-items: start;
   counter-increment: j4k;
 }
@@ -304,10 +310,10 @@
 .media-frame > img {
   width: 100%;
   height: auto;
-  /* Keep the natural 16:9 frame without re-cropping faces at the edges */
+  /* Landscape authentic stills fill the 16:9 frame (no letterboxing). */
   aspect-ratio: 16 / 9;
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: center 40%;
   display: block;
   border-radius: inherit;
   border: 2px solid rgba(10, 10, 10, 0.08);
@@ -315,9 +321,9 @@
 }
 .media-frame__note {
   position: absolute;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: 0.75rem;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
   z-index: 2;
   margin: 0;
   padding: 0.4rem 0.55rem;
@@ -497,5 +503,88 @@
   .fun-sticker__sun-bob,
   .fun-sticker__wave-line {
     animation: none;
+  }
+}
+
+
+/* Caption-matched authentic camp gallery */
+.camp-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem 1.4rem;
+}
+.camp-gallery__item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.camp-gallery__item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 38%;
+  display: block;
+  border-radius: calc(var(--radius) + 2px);
+  border: 2px solid rgba(10, 10, 10, 0.08);
+  background: linear-gradient(155deg, #fff7f0, #eef3ff 70%);
+}
+.camp-gallery__item figcaption {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--muted);
+  padding: 0 0.1rem 0.15rem;
+}
+.camp-gallery__item a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.camp-videos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem 1.4rem;
+  margin-top: 2.4rem;
+}
+.camp-videos__item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.camp-videos__player {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: calc(var(--radius) + 2px);
+  border: 2px solid rgba(10, 10, 10, 0.08);
+  background: #0a0a0a;
+  display: block;
+}
+.camp-videos__item figcaption {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--muted);
+  padding: 0 0.1rem 0.15rem;
+}
+.camp-videos__item a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+@media (max-width: 900px) {
+  .camp-gallery,
+  .camp-videos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .camp-gallery,
+  .camp-videos {
+    grid-template-columns: 1fr;
   }
 }

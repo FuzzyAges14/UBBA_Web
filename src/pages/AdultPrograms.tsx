@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import OptimizedImage from '../components/OptimizedImage'
 import CtaBanner from '../components/CtaBanner'
 import TrialCta from '../components/TrialCta'
 import PageHero from '../components/PageHero'
@@ -11,8 +10,6 @@ import SectionSeam from '../components/SectionSeam'
 import {
   ADULT_PROGRAMS,
   FAQS,
-  IMAGE_DIMENSIONS,
-  IMAGES,
   PROGRAM_GLYPHS,
 } from '../data/site'
 
@@ -58,26 +55,24 @@ export default function AdultPrograms() {
 
       <section className="section section--dark">
         <div className="dojang" aria-hidden="true" />
-        <div className="container split interior-split">
-          <Reveal delay={120}>
-            <figure className="interior-media interior-media--tall interior-media--focus-center">
-              <div className="interior-media__veil" aria-hidden="true" />
-              <OptimizedImage
-                src={IMAGES.action}
-                alt="Adult martial artist practicing a high kick in the dojang"
-                width={IMAGE_DIMENSIONS.action.width}
-                height={IMAGE_DIMENSIONS.action.height}
-                loading="lazy"
-                sizes="(max-width: 900px) 100vw, 42vw"
-              />
-            </figure>
-          </Reveal>
+        <div className="container narrow-prose">
           <Reveal>
             <SectionHeading
               eyebrow="Train Your Way"
               title={<>Fitness, focus &amp; real self-defense</>}
               lead="Whether you want a motivating alternative to the gym, a place to relieve stress, or practical self-defense skills, adult classes deliver a full-body workout in a supportive, no-ego environment — no prior martial arts background required."
             />
+            <ul className="checklist mt">
+              <li style={{ color: 'var(--muted-light)' }}>
+                Beginner-friendly pacing with room to push harder as you grow
+              </li>
+              <li style={{ color: 'var(--muted-light)' }}>
+                Practical striking, footwork, and awareness skills you can use
+              </li>
+              <li style={{ color: 'var(--muted-light)' }}>
+                A welcoming community — train solo, with a partner, or as a family
+              </li>
+            </ul>
             <div className="flex-actions mt">
               <TrialCta className="btn btn--blue" arrow />
               <Link to="/locations/allendale" className="btn btn--outline">

@@ -5,7 +5,8 @@ import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
 import EventInquiryForm from '../components/EventInquiryForm'
 import SectionSeam from '../components/SectionSeam'
-import { getJust4KidsDetail, IMAGES } from '../data/site'
+import { getJust4KidsDetail } from '../data/site'
+import { PARENTS_NIGHT_OUT_FEATURE } from '../data/authenticMedia'
 
 export default function ParentsNightOut() {
   const detail = getJust4KidsDetail('parents-night-out')!
@@ -63,10 +64,11 @@ export default function ParentsNightOut() {
         <div className="container split">
           <Reveal>
             <MediaFrame
+              src={PARENTS_NIGHT_OUT_FEATURE.src}
+              alt={PARENTS_NIGHT_OUT_FEATURE.alt}
+              ownerRequired
               label="Parents' Night Out at United Black Belt Academy"
               icon={detail.mediaIcon}
-              src={IMAGES.parentsNightOut}
-              alt="Kids enjoying pizza and games at Parents' Night Out"
               stickers={[
                 { kind: 'pizza', spot: 'tr', rotate: -10, delay: 0 },
                 { kind: 'glasses', spot: 'bl', rotate: 8, delay: 0.3 },

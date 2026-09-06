@@ -12,7 +12,7 @@ loading strategy and deployment-time measurement.
 | Vendor chunks | `react` / `react-dom` / `react-router` and `framer-motion` are split in `vite.config.ts` |
 | Hero media | Eager poster (`fetchpriority=high`); video loads only when conditions allow |
 | Images | `OptimizedImage` sets width/height, lazy-loads below-the-fold photos; `srcSet` from `IMAGE_SRCSETS` |
-| Fonts | Ocean Rush preloaded + `font-display: swap`; Google Fonts use `display=swap` |
+| Fonts | Anton/Teko/Inter via Google Fonts with `display=swap` (no self-hosted demo fonts) |
 
 ## Hero video loading rules
 
@@ -100,7 +100,7 @@ Notes:
 
 | Font | Notes |
 | --- | --- |
-| Ocean Rush | ~55 KB OTF, self-hosted, preloaded, `font-display: swap`. **Demo license — purchase before commercial launch.** |
+| Anton / Teko / Inter | Google Fonts, `display=swap`. OFL / Apache — commercial OK. |
 | Teko / Anton / Inter | Loaded from Google Fonts with `display=swap` and `preconnect`. |
 
 Avoid adding extra weights. Self-hosting Google Fonts later can shave a DNS

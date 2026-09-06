@@ -31,9 +31,7 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 
 ## Fonts
-- [ ] The hero title uses the **Ocean Rush DEMO** font (free for personal use
-      only). Purchase a commercial license before launch, or swap the
-      `@font-face` in `src/index.css` for a licensed alternative.
+- [x] Hero display titles use **Anton** (Google Fonts, OFL) via `--font-impact` — Ocean Rush DEMO removed.
 
 ## Optional
 - [ ] Glen Rock is enabled (`SITE.showGlenRock = true`) with confirmed address &

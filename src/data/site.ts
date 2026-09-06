@@ -1,5 +1,19 @@
 import { SOCIAL_PROFILES, type SocialProfileSlug } from './contact'
 import { heroVideoMp4, heroVideoWebm } from '../lib/mediaEnv'
+import {
+  ANNOUNCEMENT_FALL_SCHEDULE,
+  AUTHENTIC_DIMENSIONS,
+  KIDS_BOARD_BREAK_SOCIAL,
+  PROMO_BACK_TO_SCHOOL,
+  SUMMER_CAMP_FEATURE,
+  SUMMER_CAMP_TILE,
+  BIRTHDAY_PARTY_FEATURE,
+  BIRTHDAY_PARTY_TILE,
+  PARENTS_NIGHT_OUT_FEATURE,
+  PARENTS_NIGHT_OUT_TILE,
+  PROGRAM_SLOT_IMAGES,
+  authenticSrcSetFor,
+} from './authenticMedia'
 
 export const SITE = {
   name: 'United Black Belt Academy',
@@ -29,9 +43,12 @@ export const IMAGES = {
   teenSpar: '/media/teen-training.jpg',
   beltTest: '/media/respect-bow.jpg',
   ogDefault: '/media/og-default.jpg',
-  birthday: '/media/birthday-party.jpg',
-  summerCamp: '/media/summer-camp.jpg',
-  parentsNightOut: '/media/parents-night-out.jpg',
+  birthday: BIRTHDAY_PARTY_FEATURE.src,
+  /** Caption-matched @ubbatkd camp still (training + Summer Camp). */
+  summerCamp: SUMMER_CAMP_FEATURE.src,
+  /** Hub tile — week kickoff smiles (caption-matched). */
+  summerCampTile: SUMMER_CAMP_TILE.src,
+  parentsNightOut: PARENTS_NIGHT_OUT_FEATURE.src,
 } as const
 
 /** Structured hero sources for WebM + MP4 delivery and poster LCP. */
@@ -57,9 +74,10 @@ export const IMAGE_DIMENSIONS = {
   beltTest: { width: 1920, height: 1080 },
   instructorPortrait: { width: 1080, height: 1920 },
   ogDefault: { width: 1200, height: 630 },
-  birthday: { width: 1280, height: 720 },
-  summerCamp: { width: 1280, height: 720 },
-  parentsNightOut: { width: 1280, height: 720 },
+  birthday: AUTHENTIC_DIMENSIONS[BIRTHDAY_PARTY_FEATURE.src] ?? { width: 960, height: 720 },
+  summerCamp: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_FEATURE.src] ?? { width: 1600, height: 1200 },
+  summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 1600, height: 1200 },
+  parentsNightOut: AUTHENTIC_DIMENSIONS[PARENTS_NIGHT_OUT_FEATURE.src] ?? { width: 960, height: 720 },
   logo: { width: 300, height: 282 },
 } as const
 
@@ -77,12 +95,10 @@ export const IMAGE_SRCSETS = {
     '/media/respect-bow-640.jpg 640w, /media/respect-bow-960.jpg 960w, /media/respect-bow-1280.jpg 1280w, /media/respect-bow-1920.jpg 1920w',
   heroPoster:
     '/media/hero-poster-960.jpg 960w, /media/hero-poster-1280.jpg 1280w, /media/hero-poster.jpg 1920w',
-  birthday:
-    '/media/birthday-party-640.jpg 640w, /media/birthday-party-960.jpg 960w, /media/birthday-party-1280.jpg 1280w',
-  summerCamp:
-    '/media/summer-camp-640.jpg 640w, /media/summer-camp-960.jpg 960w, /media/summer-camp-1280.jpg 1280w',
-  parentsNightOut:
-    '/media/parents-night-out-640.jpg 640w, /media/parents-night-out-960.jpg 960w, /media/parents-night-out-1280.jpg 1280w',
+  birthday: authenticSrcSetFor(BIRTHDAY_PARTY_FEATURE.src)!,
+  summerCamp: authenticSrcSetFor(SUMMER_CAMP_FEATURE.src)!,
+  summerCampTile: authenticSrcSetFor(SUMMER_CAMP_TILE.src)!,
+  parentsNightOut: authenticSrcSetFor(PARENTS_NIGHT_OUT_FEATURE.src)!,
 } as const
 
 export function imageDimensionsFor(src: string): { width: number; height: number } {
@@ -107,9 +123,14 @@ export function imageDimensionsFor(src: string): { width: number; height: number
       return IMAGE_DIMENSIONS.birthday
     case IMAGES.summerCamp:
       return IMAGE_DIMENSIONS.summerCamp
+    case IMAGES.summerCampTile:
+      return IMAGE_DIMENSIONS.summerCampTile
     case IMAGES.parentsNightOut:
       return IMAGE_DIMENSIONS.parentsNightOut
     default:
+      if (src in AUTHENTIC_DIMENSIONS) {
+        return AUTHENTIC_DIMENSIONS[src]
+      }
       if (src.startsWith('/media/social/') && src.includes('profile')) {
         return { width: 200, height: 200 }
       }
@@ -138,10 +159,12 @@ export function imageSrcSetFor(src: string): string | undefined {
       return IMAGE_SRCSETS.birthday
     case IMAGES.summerCamp:
       return IMAGE_SRCSETS.summerCamp
+    case IMAGES.summerCampTile:
+      return IMAGE_SRCSETS.summerCampTile
     case IMAGES.parentsNightOut:
       return IMAGE_SRCSETS.parentsNightOut
     default:
-      return undefined
+      return authenticSrcSetFor(src)
   }
 }
 
@@ -222,36 +245,36 @@ export const HOME_PROGRAM_CARDS: ProgramCard[] = [
     slug: 'tiny-tigers',
     title: 'Tiny Tigers',
     ages: 'Ages 3-5',
-    image: IMAGES.kidsKicks,
     blurb:
       'A playful first step into martial arts that builds focus, listening skills, and confidence through age-appropriate games and drills.',
+    image: PROGRAM_SLOT_IMAGES['tiny-tigers'].src,
   },
   {
     id: 'junior-tigers',
     slug: 'junior-tigers',
     title: 'Junior Tigers',
     ages: 'Ages 6-10',
-    image: IMAGES.kidsGroup,
     blurb:
       'Structured classes where kids sharpen coordination, discipline, and self-control while making new friends and earning belts.',
+    image: PROGRAM_SLOT_IMAGES['junior-tigers'].src,
   },
   {
     id: 'teen-martial-arts',
     slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
     ages: 'Ages 11-17',
-    image: IMAGES.teenSpar,
     blurb:
       'A positive outlet that channels energy into fitness, resilience, and leadership as teens build real self-defense skills.',
+    image: PROGRAM_SLOT_IMAGES['teen-martial-arts'].src,
   },
   {
     id: 'adult-martial-arts',
     slug: 'adult-program',
     title: 'Adult Martial Arts',
     ages: 'Ages 18+',
-    image: IMAGES.action,
     blurb:
       'Get in the best shape of your life while learning practical self-defense in a welcoming, no-ego training environment.',
+    image: PROGRAM_SLOT_IMAGES['adult-program'].src,
   },
 ]
 
@@ -261,27 +284,27 @@ export const CHILDREN_PROGRAMS: ProgramCard[] = [
     slug: 'tiny-tigers',
     title: 'Tiny Tigers',
     ages: 'Ages 3-5',
-    image: IMAGES.kidsKicks,
     blurb:
       'Our youngest students develop focus, balance, and confidence through fun, high-energy drills designed for little movers.',
+    image: PROGRAM_SLOT_IMAGES['tiny-tigers'].src,
   },
   {
     id: 'junior-tigers',
     slug: 'junior-tigers',
     title: 'Junior Tigers',
     ages: 'Ages 6-10',
-    image: IMAGES.kidsGroup,
     blurb:
       'Kids build discipline, respect, and coordination while progressing through a clear belt curriculum that rewards effort.',
+    image: PROGRAM_SLOT_IMAGES['junior-tigers'].src,
   },
   {
     id: 'teen-martial-arts',
     slug: 'teen-martial-arts',
     title: 'Teen Martial Arts',
     ages: 'Ages 11-17',
-    image: IMAGES.teenSpar,
     blurb:
       'Teens grow stronger and more confident, learning practical self-defense and leadership that carries into everyday life.',
+    image: PROGRAM_SLOT_IMAGES['teen-martial-arts'].src,
   },
 ]
 
@@ -290,49 +313,49 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     id: 'adult-program',
     slug: 'adult-program',
     title: 'Adult Program',
-    image: IMAGES.action,
     blurb:
       'A full-body workout and practical martial arts training for every fitness level, with zero intimidation and plenty of support.',
+    image: PROGRAM_SLOT_IMAGES['adult-program'].src,
   },
   {
     id: 'family-programs',
     slug: 'family-programs',
     title: 'Family Programs',
-    image: IMAGES.kidsGroup,
     blurb:
       'Train together and grow together. Parents and kids share the mat, build healthy habits, and cheer each other on.',
+    image: PROGRAM_SLOT_IMAGES['family-programs'].src,
   },
   {
     id: 'olympic-sparring',
     slug: 'olympic-sparring',
     title: 'Olympic Sparring',
-    image: IMAGES.teenSpar,
     blurb:
       'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete and level up.',
+    image: PROGRAM_SLOT_IMAGES['olympic-sparring'].src,
   },
   {
     id: 'swat-team',
     slug: 'swat-team',
     title: 'SWAT Team',
-    image: IMAGES.action,
     blurb:
       'Our elite training group for dedicated students ready to push their skills, conditioning, and technique to the next level.',
+    image: PROGRAM_SLOT_IMAGES['swat-team'].src,
   },
   {
     id: 'self-defense',
     slug: 'self-defense',
     title: 'Self Defense',
-    image: IMAGES.beltTest,
     blurb:
       'Real-world, practical techniques that help you stay aware, stay calm, and protect yourself and your loved ones.',
+    image: PROGRAM_SLOT_IMAGES['self-defense'].src,
   },
   {
     id: 'weapons-class',
     slug: 'weapons-class',
     title: 'Weapons Class',
-    image: IMAGES.beltTest,
     blurb:
       'Traditional weapons training that builds precision, discipline, and focus while adding an exciting new challenge.',
+    image: PROGRAM_SLOT_IMAGES['weapons-class'].src,
   },
 ]
 
@@ -348,6 +371,9 @@ export type Just4KidsOffering = {
   to: string
   icon: string
   ctaLabel: string
+  /** Only set when a caption-matched authentic photo exists for this offering. */
+  image?: string
+  imageAlt?: string
 }
 
 /** Hub tiles for the Just 4 Kids overview page. */
@@ -361,6 +387,8 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/birthday-parties',
     icon: '🎂',
     ctaLabel: 'Plan a Party',
+    image: BIRTHDAY_PARTY_TILE.src,
+    imageAlt: BIRTHDAY_PARTY_TILE.alt,
   },
   {
     id: 'summer-camp',
@@ -371,6 +399,8 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/summer-camp',
     icon: '☀️',
     ctaLabel: 'Reserve a Spot',
+    image: SUMMER_CAMP_TILE.src,
+    imageAlt: SUMMER_CAMP_TILE.alt,
   },
   {
     id: 'parents-night-out',
@@ -381,6 +411,8 @@ export const JUST_4_KIDS: Just4KidsOffering[] = [
     to: '/just-4-kids/parents-night-out',
     icon: '🍕',
     ctaLabel: 'Save a Spot',
+    image: PARENTS_NIGHT_OUT_TILE.src,
+    imageAlt: PARENTS_NIGHT_OUT_TILE.alt,
   },
 ]
 
@@ -898,48 +930,62 @@ export type SocialLink = {
 export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
   instagram: [
     {
-      id: 'ig-1',
+      id: 'ig-bts',
       caption: 'Back-to-School Special — 1 month free, free uniform, no registration fee',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.instagram.com/p/DcQ3NEmH08s/',
-      image: '/media/social/instagram-post-1.jpg',
+      image: PROMO_BACK_TO_SCHOOL.src,
     },
     {
-      id: 'ig-2',
-      caption: 'Summer Camp week kicks off with big energy, smiles, and fun on the mat',
-      dateLabel: 'Aug 10, 2026',
-      href: 'https://www.instagram.com/p/DboXjn0nRZU/',
-      image: '/media/social/instagram-post-2.jpg',
+      id: 'ig-schedule',
+      caption: 'Fall schedule in effect — weekly theme training for special classes',
+      dateLabel: 'Aug 19, 2026',
+      href: 'https://www.instagram.com/p/Db84LxLnwZu/',
+      image: ANNOUNCEMENT_FALL_SCHEDULE.src,
     },
     {
-      id: 'ig-3',
-      caption: 'Another fun-filled day at UBBA Summer Camp',
-      dateLabel: 'Aug 2, 2026',
-      href: 'https://www.instagram.com/p/DbPrmMnHXJc/',
-      image: '/media/social/instagram-post-3.jpg',
+      id: 'ig-zoo',
+      caption: 'Zoo day at UBBA Summer Camp — animals, playground, and carousel fun',
+      dateLabel: 'Aug 18, 2026',
+      href: 'https://www.instagram.com/p/DcPpMxqACgX/',
+      image: '/media/authentic/summer-camp-zoo-trip.jpg',
+    },
+    {
+      id: 'ig-water',
+      caption: 'Summer Camp water games, crafts, and group activities',
+      dateLabel: 'Aug 17, 2026',
+      href: 'https://www.instagram.com/p/DcNH2aGAVOr/',
+      image: '/media/authentic/summer-camp-crafts-water.jpg',
+    },
+    {
+      id: 'ig-bday-shout',
+      caption: 'Happy Birthday shout-out — celebrating a student (board-break photo)',
+      dateLabel: 'Aug 15, 2026',
+      href: 'https://www.instagram.com/p/DcE5gENlP5d/',
+      image: KIDS_BOARD_BREAK_SOCIAL.src,
     },
   ],
   facebook: [
     {
-      id: 'fb-1',
+      id: 'fb-bts',
       caption: 'Back-to-School Special at UBBA — free trial class, sibling promotion',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.facebook.com/ubbaad/posts/pfbid02mrtHteEdZiDitYSqMsJdAeagUyQkr4sJi7wpKTUZCDpJjLbqpvwYyB1TXDp9LtdPl',
-      image: '/media/social/facebook-post-1.jpg',
+      image: PROMO_BACK_TO_SCHOOL.src,
     },
     {
-      id: 'fb-2',
+      id: 'fb-zoo',
       caption: 'Zoo day at UBBA Summer Camp — animals, playground, and adventure',
       dateLabel: 'Aug 20, 2026',
       href: 'https://www.facebook.com/photo/?fbid=1808931984574578&set=pb.100063733803318.-2207520000',
-      image: '/media/social/facebook-post-2.jpg',
+      image: '/media/authentic/summer-camp-zoo-trip.jpg',
     },
     {
-      id: 'fb-3',
-      caption: 'Summer Camp water games, pinwheels, and group activities',
+      id: 'fb-water',
+      caption: 'Summer Camp water games, crafts, and group activities',
       dateLabel: 'Aug 19, 2026',
       href: 'https://www.facebook.com/photo/?fbid=1808931981241245&set=pb.100063733803318.-2207520000',
-      image: '/media/social/facebook-post-3.jpg',
+      image: '/media/authentic/summer-camp-crafts-water.jpg',
     },
   ],
 }
@@ -1001,7 +1047,8 @@ export type ProgramDetail = {
   ages?: string
   /** Who the program is designed for */
   audience: string
-  image: string
+  /** Optional — only set when an authentic UBBA-owned photo exists */
+  image?: string
   tagline: string
   description: string
   /** Core benefits students work toward (not outcome guarantees) */
@@ -1017,10 +1064,10 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'tiny-tigers',
     name: 'Tiny Tigers',
     category: 'Children',
+    image: PROGRAM_SLOT_IMAGES['tiny-tigers'].src,
     ages: 'Ages 3-5',
     audience:
       'Preschoolers and early elementary kids who are ready for a playful, structured first class — perfect for families in Allendale, Midland Park, and nearby Bergen County towns.',
-    image: IMAGES.kidsKicks,
     tagline: 'A playful, confidence-first introduction to Taekwondo.',
     description:
       'Tiny Tigers gives our youngest students a joyful first taste of martial arts. Short, high-energy classes build listening skills, balance, and the confidence to try new things — without pressure or intimidation.',
@@ -1038,10 +1085,10 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'junior-tigers',
     name: 'Junior Tigers',
     category: 'Children',
+    image: PROGRAM_SLOT_IMAGES['junior-tigers'].src,
     ages: 'Ages 6-10',
     audience:
       'School-age kids who thrive with clear goals, active friends, and a positive place to grow focus and self-control.',
-    image: IMAGES.kidsGroup,
     tagline: 'Discipline, focus, and leadership through the belt journey.',
     description:
       'Junior Tigers helps kids channel energy into discipline and focus. Students progress through a clear belt curriculum that rewards effort and consistency while building friendships on the mat.',
@@ -1059,10 +1106,10 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'teen-martial-arts',
     name: 'Teen Martial Arts',
     category: 'Children',
+    image: PROGRAM_SLOT_IMAGES['teen-martial-arts'].src,
     ages: 'Ages 11-17',
     audience:
       'Tweens and teens who want fitness, resilience, and practical self-defense in a supportive peer group — beginners welcome.',
-    image: IMAGES.teenSpar,
     tagline: 'Strength, resilience, and real self-defense for teens.',
     description:
       'A positive, high-energy outlet where teens build fitness, resilience, and leadership while learning practical self-defense. Classes challenge students without ego or judgment.',
@@ -1080,10 +1127,10 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'adult-program',
     name: 'Adult Program',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['adult-program'].src,
     ages: 'Ages 18+',
     audience:
       'Adults of any fitness level — from complete beginners to returning athletes — who want a purposeful workout and practical martial arts skills.',
-    image: IMAGES.action,
     tagline: 'Get fit and learn to protect yourself — no experience needed.',
     description:
       'A full-body workout and practical martial arts training for every fitness level. Zero intimidation, plenty of support, and a welcoming community at our New Jersey schools.',
@@ -1101,9 +1148,9 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'family-programs',
     name: 'Family Programs',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['family-programs'].src,
     audience:
       'Parents and kids who want to train together and share a healthy habit as a family.',
-    image: IMAGES.kidsGroup,
     tagline: 'Train together, grow together.',
     description:
       'Parents and kids share the mat, build healthy habits, and cheer each other on. A meaningful activity the whole family can enjoy at United Black Belt Academy.',
@@ -1121,9 +1168,9 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'olympic-sparring',
     name: 'Olympic Sparring',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['olympic-sparring'].src,
     audience:
       'Students ready for sport-focused Taekwondo who want to sharpen speed, timing, and strategy. Availability and requirements — confirm with the school.',
-    image: IMAGES.teenSpar,
     tagline: 'Sport Taekwondo: speed, timing, and strategy.',
     description:
       'Sport-focused sparring that develops speed, timing, and strategy for students who want to compete or level up their game in a coached setting.',
@@ -1141,9 +1188,9 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'swat-team',
     name: 'SWAT Team',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['swat-team'].src,
     audience:
       'Dedicated students invited or approved by instructors for higher-intensity, advanced training. Ask the school about readiness and openings.',
-    image: IMAGES.action,
     tagline: 'Our elite training group for dedicated students.',
     description:
       'An advanced training group for committed students ready to push their skills, conditioning, and technique. This is a step up from regular class — not a beginner track.',
@@ -1161,9 +1208,9 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'self-defense',
     name: 'Self Defense',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['self-defense'].src,
     audience:
       'Teens and adults who want practical awareness and defense skills without a sport-competition focus.',
-    image: IMAGES.beltTest,
     tagline: 'Practical skills for awareness and personal safety.',
     description:
       'Practical techniques that help you stay aware, stay calm, and respond thoughtfully under pressure. Training emphasizes habits and skills — not guarantees about real-world outcomes.',
@@ -1181,9 +1228,9 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'weapons-class',
     name: 'Weapons Class',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['weapons-class'].src,
     audience:
       'Students looking for an advanced traditional challenge. Equipment needs and eligibility are confirmed at enrollment.',
-    image: IMAGES.beltTest,
     tagline: 'Precision, discipline, and focus through traditional weapons.',
     description:
       'Traditional weapons training that builds precision, discipline, and focus while adding a new challenge to your practice. Safety and proper handling come first.',

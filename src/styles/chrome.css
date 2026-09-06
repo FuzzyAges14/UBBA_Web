@@ -175,7 +175,7 @@
 @media (max-width: 1120px) {
   .mobile-cta {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.4fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr);
     position: fixed;
     bottom: 0;
     left: 0;
@@ -184,8 +184,8 @@
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--line-dark);
-    padding: 0.55rem;
-    gap: 0.45rem;
+    padding: 0.65rem 0.7rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.65rem;
   }
   .mobile-cta a,
   .mobile-cta button {
@@ -193,13 +193,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
-    padding: 0.55rem 0.4rem;
+    gap: 0.35rem;
+    padding: 0.65rem 0.55rem;
     border-radius: 12px;
     color: #fff;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.25;
     text-align: center;
     min-width: 0;
     width: 100%;
@@ -215,12 +215,13 @@
     white-space: normal;
     overflow-wrap: anywhere;
     hyphens: auto;
+    padding-inline: 0.7rem;
   }
   .mobile-cta a .ic,
   .mobile-cta button .ic {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
   body {
-    padding-bottom: 72px;
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   }
 }

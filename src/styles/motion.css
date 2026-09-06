@@ -68,6 +68,9 @@
   .hero__scroll {
     display: none;
   }
+  .hero__slide {
+    transition: none !important;
+  }
   .j4k-confetti,
   .fun-sticker,
   .fun-sticker__peel,

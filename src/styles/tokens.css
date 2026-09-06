@@ -1,13 +1,4 @@
 /* tokens.css — extracted from former src/index.css (lines 1-56) */
-/* Home hero display font (demo — personal use; license for commercial launch) */
-@font-face {
-  font-family: 'Ocean Rush';
-  src: url('/fonts/OceanRush.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* Brand palette */
   --black: #0a0a0a;

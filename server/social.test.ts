@@ -15,13 +15,13 @@ describe('social feed helpers', () => {
     expect(metaLiveConfigured('facebook')).toBe(false)
   })
 
-  it('returns curated fallback posts with preview images', async () => {
+  it('returns curated fallback posts with outbound links', async () => {
     const feed = await getSocialFeed('instagram')
     expect(feed.source).toBe('fallback')
     expect(feed.posts.length).toBeGreaterThan(0)
     expect(feed.avatarSrc).toContain('/media/social/')
-    expect(feed.posts[0]?.image).toBeTruthy()
     expect(feed.posts[0]?.href).toMatch(/^https:\/\//)
+    expect(feed.posts[0]?.image).toMatch(/^\/media\/authentic\//)
   })
 })
 
