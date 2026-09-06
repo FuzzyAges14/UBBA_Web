@@ -182,6 +182,8 @@ export const AUTHENTIC_DIMENSIONS: Record<string, { width: number; height: numbe
   '/media/authentic/page-slots/program-family.jpg': { width: 1920, height: 1440 },
   '/media/authentic/page-slots/program-olympic.jpg': { width: 1440, height: 1080 },
   '/media/authentic/page-slots/program-swat.jpg': { width: 1920, height: 1440 },
+  '/media/authentic/page-slots/program-self-defense.jpg': { width: 1440, height: 1080 },
+  '/media/authentic/page-slots/program-weapons.jpg': { width: 1440, height: 1080 },
 }
 
 export function authenticSrcSetFor(src: string): string | undefined {
@@ -225,16 +227,16 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
     height: 1440,
     alt: 'Leadership students and instructors posing at United Black Belt Academy',
   },
-  {
-    src: '/media/authentic/hero-slides/02-group-fathers-day.jpg',
-    webp: '/media/authentic/hero-slides/02-group-fathers-day.webp',
+    {
+    src: '/media/authentic/hero-slides/02-group-discipline.jpg',
+    webp: '/media/authentic/hero-slides/02-group-discipline.webp',
     srcSet:
-      '/media/authentic/hero-slides/02-group-fathers-day-1280.jpg 1280w, /media/authentic/hero-slides/02-group-fathers-day.jpg 1920w',
+      '/media/authentic/hero-slides/02-group-discipline-1280.jpg 1280w, /media/authentic/hero-slides/02-group-discipline.jpg 1920w',
     webpSrcSet:
-      '/media/authentic/hero-slides/02-group-fathers-day-1280.webp 1280w, /media/authentic/hero-slides/02-group-fathers-day.webp 1920w',
+      '/media/authentic/hero-slides/02-group-discipline-1280.webp 1280w, /media/authentic/hero-slides/02-group-discipline.webp 1920w',
     width: 1920,
     height: 1440,
-    alt: 'Families and students gathered for Father’s Day at United Black Belt Academy, 2025',
+    alt: 'Students and Master Lee under the Raise your standard motto — one student wears a DISCIPLINE shirt',
   },
   {
     src: '/media/authentic/hero-slides/03-group-class-partners.jpg',
@@ -410,6 +412,14 @@ export const PROGRAM_SLOT_IMAGES = {
   'swat-team': {
     src: '/media/authentic/page-slots/program-swat.jpg',
     alt: 'Leadership students posing under the United Black Belt Academy logo',
+  },
+  'self-defense': {
+    src: '/media/authentic/page-slots/program-self-defense.jpg',
+    alt: 'Students practicing partner pad drills during class at United Black Belt Academy',
+  },
+  'weapons-class': {
+    src: '/media/authentic/page-slots/program-weapons.jpg',
+    alt: 'Students standing in focused formation during precision training at United Black Belt Academy',
   },
 } as const
 

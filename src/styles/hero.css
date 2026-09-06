@@ -85,7 +85,7 @@
   padding: clamp(3rem, 8vw, 5.5rem) 0;
 }
 .hero h1 {
-  font-family: 'Ocean Rush', var(--font-impact);
+  font-family: var(--font-impact);
   text-transform: none;
   font-weight: 400;
   letter-spacing: 0.045em;

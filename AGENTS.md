@@ -41,7 +41,7 @@ summer-camp CTAs open a NextKick location-picker portal. Standard commands live 
   `IntersectionObserver`, so the `Reveal`/`StatCounter` components fall back to
   their final state immediately in tests — that is expected. `jsdom` also lacks
   `window.scrollTo`/`matchMedia`; those are guarded, do not "fix" them.
-- **Design system:** premium brand palette + Sora/Inter typography live in
+- **Design system:** premium brand palette + Teko/Anton/Inter typography live in
   `src/index.css`; motion uses `framer-motion` (hero) plus the CSS `Reveal`
   wrapper. Signature motifs are components: `Taegeuk`, `Marquee`, plus the
   `.dojang` grid and `.belt-bar` CSS utilities. Per-route `<title>`/meta is set by

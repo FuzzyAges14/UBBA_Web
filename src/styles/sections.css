@@ -420,7 +420,7 @@
   margin: 1.6rem 0;
 }
 .owner__sign {
-  font-family: 'Sora', cursive;
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.3rem;
   color: var(--blue-soft);

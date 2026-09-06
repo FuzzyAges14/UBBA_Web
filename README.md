@@ -6,7 +6,7 @@ arts classes for kids, teens, and adults in Allendale &amp; Midland Park, NJ.
 Built with [Vite](https://vitejs.dev/), [React](https://react.dev/),
 [React Router](https://reactrouter.com/), [Framer Motion](https://www.framer.com/motion/),
 and TypeScript. Premium, cinematic Taekwondo brand design with a custom design
-system (Ocean Rush hero title, Teko/Anton headings, Inter body; black/red/gold
+system (Anton hero/impact titles, Teko headings, Inter body; black/red/gold
 palette; Taegeuk + dojang-grid motifs).
 
 > **New here?** Jump to [Launching your website](#-launching-your-website) to put
@@ -96,7 +96,7 @@ dashboard under **Domain settings** — just follow their step-by-step prompts.
 ### Before a real public launch
 
 Check the [`docs/`](docs/) checklists — a few things still use placeholders:
-- Replace placeholder photos and the personal-use **Ocean Rush** font with
+- Replace placeholder photos with
   licensed versions.
 - Add Glen Rock's real class hours.
 - Set mail delivery in `.env` (Resend or SMTP) so free-class requests reach the

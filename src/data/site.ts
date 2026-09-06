@@ -347,6 +347,7 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     title: 'Self Defense',
     blurb:
       'Real-world, practical techniques that help you stay aware, stay calm, and protect yourself and your loved ones.',
+    image: PROGRAM_SLOT_IMAGES['self-defense'].src,
   },
   {
     id: 'weapons-class',
@@ -354,6 +355,7 @@ export const ADULT_PROGRAMS: ProgramCard[] = [
     title: 'Weapons Class',
     blurb:
       'Traditional weapons training that builds precision, discipline, and focus while adding an exciting new challenge.',
+    image: PROGRAM_SLOT_IMAGES['weapons-class'].src,
   },
 ]
 
@@ -1062,6 +1064,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'tiny-tigers',
     name: 'Tiny Tigers',
     category: 'Children',
+    image: PROGRAM_SLOT_IMAGES['tiny-tigers'].src,
     ages: 'Ages 3-5',
     audience:
       'Preschoolers and early elementary kids who are ready for a playful, structured first class — perfect for families in Allendale, Midland Park, and nearby Bergen County towns.',
@@ -1082,6 +1085,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'junior-tigers',
     name: 'Junior Tigers',
     category: 'Children',
+    image: PROGRAM_SLOT_IMAGES['junior-tigers'].src,
     ages: 'Ages 6-10',
     audience:
       'School-age kids who thrive with clear goals, active friends, and a positive place to grow focus and self-control.',
@@ -1102,6 +1106,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'teen-martial-arts',
     name: 'Teen Martial Arts',
     category: 'Children',
+    image: PROGRAM_SLOT_IMAGES['teen-martial-arts'].src,
     ages: 'Ages 11-17',
     audience:
       'Tweens and teens who want fitness, resilience, and practical self-defense in a supportive peer group — beginners welcome.',
@@ -1122,6 +1127,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'adult-program',
     name: 'Adult Program',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['adult-program'].src,
     ages: 'Ages 18+',
     audience:
       'Adults of any fitness level — from complete beginners to returning athletes — who want a purposeful workout and practical martial arts skills.',
@@ -1142,6 +1148,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'family-programs',
     name: 'Family Programs',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['family-programs'].src,
     audience:
       'Parents and kids who want to train together and share a healthy habit as a family.',
     tagline: 'Train together, grow together.',
@@ -1161,6 +1168,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'olympic-sparring',
     name: 'Olympic Sparring',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['olympic-sparring'].src,
     audience:
       'Students ready for sport-focused Taekwondo who want to sharpen speed, timing, and strategy. Availability and requirements — confirm with the school.',
     tagline: 'Sport Taekwondo: speed, timing, and strategy.',
@@ -1180,6 +1188,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'swat-team',
     name: 'SWAT Team',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['swat-team'].src,
     audience:
       'Dedicated students invited or approved by instructors for higher-intensity, advanced training. Ask the school about readiness and openings.',
     tagline: 'Our elite training group for dedicated students.',
@@ -1199,6 +1208,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'self-defense',
     name: 'Self Defense',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['self-defense'].src,
     audience:
       'Teens and adults who want practical awareness and defense skills without a sport-competition focus.',
     tagline: 'Practical skills for awareness and personal safety.',
@@ -1218,6 +1228,7 @@ export const PROGRAM_DETAILS: ProgramDetail[] = [
     slug: 'weapons-class',
     name: 'Weapons Class',
     category: 'Adult & Family',
+    image: PROGRAM_SLOT_IMAGES['weapons-class'].src,
     audience:
       'Students looking for an advanced traditional challenge. Equipment needs and eligibility are confirmed at enrollment.',
     tagline: 'Precision, discipline, and focus through traditional weapons.',

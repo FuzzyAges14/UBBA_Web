@@ -45,7 +45,7 @@ photos / video. Prefer a fresh owner shoot of class, family, and event moments.
 
 | Font | Usage | Source | License |
 | --- | --- | --- | --- |
-| Ocean Rush (DEMO) | Home hero title only (`public/fonts/OceanRush.otf`) | The Branded Quotes (dafont) | **Free for personal use only — purchase a commercial license before launch** |
+| Anton (via `--font-impact`) | Home hero + Just 4 Kids display titles | Google Fonts | SIL Open Font License (commercial OK) |
 | Teko / Anton / Inter | Headings & body | Google Fonts | Open Font License (free, commercial OK) |
 
 ## Rules
@@ -72,8 +72,7 @@ Downloaded from the academy Instagram account `@ubbatkd`. Captions are recorded 
 | Summer Camp zoo / crafts / animals / fitness / playground / field trip / group / smiles | Summer Camp page, Just 4 Kids camp tile (group/smiles), social feed | Adult programs, birthday package art |
 | Birthday shout-out with board-break photo | Social feed only | Birthday Parties page |
 
-Adult / self-defense / weapons program photography is still missing from this set —
-leave those slots text-first rather than borrowing camp photos.
+Self-defense and weapons program cards use authentic UBBA class photography (partner pad drills; precision formation). Dedicated weapons-demo stills can replace the formation shot when available.
 
 Web video clips (12s, ~540p) live under `public/media/authentic/videos/web/` and are
 used only on the Summer Camp page with matching camp captions.
@@ -83,7 +82,7 @@ used only on the Summer Camp page with matching camp captions.
 Seven **landscape-only** group photos from **recent (2024–2026)** United Black Belt
 Academy Facebook posts under current ownership (Sanghyun Lee) —
 [facebook.com/ubbaad](https://www.facebook.com/ubbaad/) and
-[facebook.com/ubbamp](https://www.facebook.com/ubbamp/) (2025 Father’s Day, Winter
+[facebook.com/ubbamp](https://www.facebook.com/ubbamp/) (2025 discipline-focused class photo, Winter
 Camp, class albums, plus the current UBBA-branded cover). Pre-2024 Holmgren-era
 albums are **not** used. Wired via `HERO_SLIDES` in `src/data/authenticMedia.ts`.
 
