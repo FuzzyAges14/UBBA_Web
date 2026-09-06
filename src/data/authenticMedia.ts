@@ -177,9 +177,9 @@ export function authenticSrcSetFor(src: string): string | undefined {
 
 /**
  * Landscape group photos for the home hero fade slideshow.
- * Sourced from facebook.com/ubbaad (United Black Belt Academy / former
- * Holmgren's Black Belt Academy at the Allendale dojang — Midland Park was
- * listed as Black Belt America). Vertical / portrait posts are excluded.
+ * Recent (2024–2026) United Black Belt Academy photos from facebook.com/ubbaad
+ * and facebook.com/ubbamp under current ownership (Sanghyun Lee). Pre-2024
+ * Holmgren-era albums are excluded. Vertical / portrait posts are excluded.
  */
 export type HeroSlide = {
   src: string
@@ -201,73 +201,73 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
       '/media/authentic/hero-slides/01-group-leadership-1280.webp 1280w, /media/authentic/hero-slides/01-group-leadership.webp 1920w',
     width: 1920,
     height: 1440,
-    alt: 'Leadership students and instructors posing in the United Black Belt Academy dojang',
+    alt: 'Leadership students and instructors posing at United Black Belt Academy',
   },
   {
-    src: '/media/authentic/hero-slides/02-group-testing-class.jpg',
-    webp: '/media/authentic/hero-slides/02-group-testing-class.webp',
+    src: '/media/authentic/hero-slides/02-group-fathers-day.jpg',
+    webp: '/media/authentic/hero-slides/02-group-fathers-day.webp',
     srcSet:
-      '/media/authentic/hero-slides/02-group-testing-class-1280.jpg 1280w, /media/authentic/hero-slides/02-group-testing-class.jpg 1920w',
+      '/media/authentic/hero-slides/02-group-fathers-day-1280.jpg 1280w, /media/authentic/hero-slides/02-group-fathers-day.jpg 1920w',
     webpSrcSet:
-      '/media/authentic/hero-slides/02-group-testing-class-1280.webp 1280w, /media/authentic/hero-slides/02-group-testing-class.webp 1920w',
+      '/media/authentic/hero-slides/02-group-fathers-day-1280.webp 1280w, /media/authentic/hero-slides/02-group-fathers-day.webp 1920w',
+    width: 1920,
+    height: 1440,
+    alt: 'Families and students gathered for Father’s Day at United Black Belt Academy, 2025',
+  },
+  {
+    src: '/media/authentic/hero-slides/03-group-class-partners.jpg',
+    webp: '/media/authentic/hero-slides/03-group-class-partners.webp',
+    srcSet:
+      '/media/authentic/hero-slides/03-group-class-partners-1280.jpg 1280w, /media/authentic/hero-slides/03-group-class-partners.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/03-group-class-partners-1280.webp 1280w, /media/authentic/hero-slides/03-group-class-partners.webp 1920w',
     width: 1920,
     height: 1441,
-    alt: 'Students and instructor posing together after class in the dojang',
+    alt: 'Students and parents training together in a partner exercise at UBBA, 2025',
   },
   {
-    src: '/media/authentic/hero-slides/03-group-fighting-stance.jpg',
-    webp: '/media/authentic/hero-slides/03-group-fighting-stance.webp',
+    src: '/media/authentic/hero-slides/04-group-winter-camp.jpg',
+    webp: '/media/authentic/hero-slides/04-group-winter-camp.webp',
     srcSet:
-      '/media/authentic/hero-slides/03-group-fighting-stance-1280.jpg 1280w, /media/authentic/hero-slides/03-group-fighting-stance.jpg 1920w',
+      '/media/authentic/hero-slides/04-group-winter-camp-1280.jpg 1280w, /media/authentic/hero-slides/04-group-winter-camp.jpg 1920w',
     webpSrcSet:
-      '/media/authentic/hero-slides/03-group-fighting-stance-1280.webp 1280w, /media/authentic/hero-slides/03-group-fighting-stance.webp 1920w',
+      '/media/authentic/hero-slides/04-group-winter-camp-1280.webp 1280w, /media/authentic/hero-slides/04-group-winter-camp.webp 1920w',
     width: 1920,
     height: 1440,
-    alt: 'Kids class lined up in fighting stance with their instructor',
+    alt: 'Winter Camp students posing together in the UBBA dojang, 2025',
   },
   {
-    src: '/media/authentic/hero-slides/04-group-crossed-arms.jpg',
-    webp: '/media/authentic/hero-slides/04-group-crossed-arms.webp',
+    src: '/media/authentic/hero-slides/05-group-camp-line.jpg',
+    webp: '/media/authentic/hero-slides/05-group-camp-line.webp',
     srcSet:
-      '/media/authentic/hero-slides/04-group-crossed-arms-1280.jpg 1280w, /media/authentic/hero-slides/04-group-crossed-arms.jpg 1920w',
+      '/media/authentic/hero-slides/05-group-camp-line-1280.jpg 1280w, /media/authentic/hero-slides/05-group-camp-line.jpg 1920w',
     webpSrcSet:
-      '/media/authentic/hero-slides/04-group-crossed-arms-1280.webp 1280w, /media/authentic/hero-slides/04-group-crossed-arms.webp 1920w',
-    width: 1920,
-    height: 1439,
-    alt: 'Students and instructor posing with arms crossed on the mats',
-  },
-  {
-    src: '/media/authentic/hero-slides/05-group-belt-line.jpg',
-    webp: '/media/authentic/hero-slides/05-group-belt-line.webp',
-    srcSet:
-      '/media/authentic/hero-slides/05-group-belt-line-1280.jpg 1280w, /media/authentic/hero-slides/05-group-belt-line.jpg 1920w',
-    webpSrcSet:
-      '/media/authentic/hero-slides/05-group-belt-line-1280.webp 1280w, /media/authentic/hero-slides/05-group-belt-line.webp 1920w',
-    width: 1920,
-    height: 1439,
-    alt: 'Group of students posing in a line after belt testing',
-  },
-  {
-    src: '/media/authentic/hero-slides/06-group-junior-black-belts.jpg',
-    webp: '/media/authentic/hero-slides/06-group-junior-black-belts.webp',
-    srcSet:
-      '/media/authentic/hero-slides/06-group-junior-black-belts-1280.jpg 1280w, /media/authentic/hero-slides/06-group-junior-black-belts.jpg 1920w',
-    webpSrcSet:
-      '/media/authentic/hero-slides/06-group-junior-black-belts-1280.webp 1280w, /media/authentic/hero-slides/06-group-junior-black-belts.webp 1920w',
+      '/media/authentic/hero-slides/05-group-camp-line-1280.webp 1280w, /media/authentic/hero-slides/05-group-camp-line.webp 1920w',
     width: 1920,
     height: 1440,
-    alt: 'Junior black belt candidates posing together in the dojang',
+    alt: 'Winter Camp kids lined up under the United Black Belt Academy logo, 2025',
   },
   {
-    src: '/media/authentic/hero-slides/07-group-instructor-students.jpg',
-    webp: '/media/authentic/hero-slides/07-group-instructor-students.webp',
+    src: '/media/authentic/hero-slides/06-group-camp-friends.jpg',
+    webp: '/media/authentic/hero-slides/06-group-camp-friends.webp',
     srcSet:
-      '/media/authentic/hero-slides/07-group-instructor-students-1280.jpg 1280w, /media/authentic/hero-slides/07-group-instructor-students.jpg 1920w',
+      '/media/authentic/hero-slides/06-group-camp-friends-1280.jpg 1280w, /media/authentic/hero-slides/06-group-camp-friends.jpg 1920w',
     webpSrcSet:
-      '/media/authentic/hero-slides/07-group-instructor-students-1280.webp 1280w, /media/authentic/hero-slides/07-group-instructor-students.webp 1920w',
+      '/media/authentic/hero-slides/06-group-camp-friends-1280.webp 1280w, /media/authentic/hero-slides/06-group-camp-friends.webp 1920w',
     width: 1920,
-    height: 1438,
-    alt: 'Instructor with students posing after junior black belt testing',
+    height: 1440,
+    alt: 'Winter Camp students posing as a group in the dojang, 2025',
+  },
+  {
+    src: '/media/authentic/hero-slides/07-group-class-action.jpg',
+    webp: '/media/authentic/hero-slides/07-group-class-action.webp',
+    srcSet:
+      '/media/authentic/hero-slides/07-group-class-action-1280.jpg 1280w, /media/authentic/hero-slides/07-group-class-action.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/07-group-class-action-1280.webp 1280w, /media/authentic/hero-slides/07-group-class-action.webp 1920w',
+    width: 1920,
+    height: 1440,
+    alt: 'Kids class running drills together on the mats at United Black Belt Academy, 2025',
   },
 ]
 
