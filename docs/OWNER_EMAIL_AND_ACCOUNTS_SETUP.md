@@ -2,12 +2,13 @@
 
 **Who this is for:** the academy owner / staff launching or maintaining the site.
 
-**Goal:** every visitor signup (free class, birthday, summer camp, Parents' Night
-Out) reaches the academy through the correct **NextKick** form for that school,
-and Instagram / Facebook links on the site point to the real profiles.
+**Goal:** free-class, birthday, and summer-camp signups reach the academy through
+the correct **NextKick** form for that school; Parents' Night Out is reserved
+**by phone**; Instagram / Facebook links point to the real profiles.
 
 Live marketing CTAs do **not** use Gmail or the website’s `/api/leads` mailer.
-They open per-school NextKick forms (`NEXTKICK_FORMS` in `src/data/contact.ts`).
+Trial / birthday / summer camp open per-school NextKick forms (`NEXTKICK_FORMS`
+in `src/data/contact.ts`). Parents' Night Out shows call directions on its page.
 
 ---
 
@@ -15,14 +16,17 @@ They open per-school NextKick forms (`NEXTKICK_FORMS` in `src/data/contact.ts`).
 
 This website does **not** log into Gmail/Outlook as an email app for signups.
 
-1. A visitor clicks a CTA (free class, birthday, summer camp, or Parents' Night Out).
+1. A visitor clicks a free-class, birthday, or summer-camp CTA.
 2. A lightbox asks them to pick **Allendale**, **Midland Park**, or **Glen Rock**.
 3. The matching NextKick form loads in an iframe (or a new tab via the fallback link).
 4. Staff retrieve those leads inside **NextKick**, not from a website Gmail inbox.
 
+**Parents' Night Out:** there is no NextKick form. Visitors call the school and
+give name, phone, number of kids/ages, and preferred location.
+
 **Optional legacy path:** `POST /api/leads` can still email staff if you build a
 custom form later. That path needs Resend/SMTP in `.env` (steps below). It is
-**not** required for the live CTAs after the Parents' Night Out → NextKick migration.
+**not** required for live marketing CTAs.
 
 ---
 
