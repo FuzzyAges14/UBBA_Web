@@ -10,6 +10,8 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     strictPort: true,
+    // Cloudflare quick tunnels + Cursor port-forwards send a non-localhost Host.
+    allowedHosts: ['.trycloudflare.com', 'localhost', '127.0.0.1'],
     // Keep HMR on the same forwarded port (avoids client connecting to an
     // unreachable internal host and resetting the Simple Browser session).
     hmr: {
@@ -27,6 +29,8 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 4173,
     strictPort: true,
+    // Allow Cloudflare quick-tunnel hostnames used for shared previews.
+    allowedHosts: ['.trycloudflare.com', 'localhost', '127.0.0.1'],
   },
   build: {
     // Separate long-lived vendor code from route chunks for better caching.
