@@ -100,8 +100,16 @@ test.describe('Critical marketing flows', () => {
   test('Parents Night Out page directs visitors to call', async ({ page }) => {
     await page.goto('/just-4-kids/parents-night-out')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-    await expect(page.getByText(/there is no online form/i).first()).toBeVisible()
-    const callCta = page.getByRole('link', { name: /call allendale/i })
+
+    // Scope to the call-to-reserve section so we do not match the collapsed FAQ answer
+    // that also mentions “no online form” but stays hidden until opened.
+    const callSection = page.locator('#pno-call')
+    await expect(
+      callSection.getByRole('heading', { name: /spots fill fast/i }),
+    ).toBeVisible()
+    await expect(callSection.getByText(/there is no online form/i)).toBeVisible()
+
+    const callCta = callSection.getByRole('link', { name: /call allendale/i })
     await expect(callCta).toBeVisible()
     await expect(callCta).toHaveAttribute('href', /tel:2019622922/)
   })
