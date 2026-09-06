@@ -3,14 +3,17 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Faq from '../components/Faq'
 import MediaFrame from '../components/MediaFrame'
-import EventInquiryForm from '../components/EventInquiryForm'
+import TrialCta from '../components/TrialCta'
 import SectionSeam from '../components/SectionSeam'
+import { getNextKickForm, getNextKickFormHref } from '../data/contact'
 import { getJust4KidsDetail } from '../data/site'
 import { PARENTS_NIGHT_OUT_FEATURE } from '../data/authenticMedia'
 
 export default function ParentsNightOut() {
   const detail = getJust4KidsDetail('parents-night-out')!
   const formId = 'pno-inquiry'
+  const nextKick = getNextKickForm('parents-night-out')
+  const fallbackHref = getNextKickFormHref('parents-night-out', 'allendale')
 
   return (
     <>
@@ -107,8 +110,8 @@ export default function ParentsNightOut() {
               ))}
             </ul>
             <p className="ph-note mt-sm">
-              Next date &amp; pricing — pending owner confirmation. Inquire to get the upcoming
-              Friday details.
+              Next date &amp; pricing — pending owner confirmation. Reserve through
+              NextKick to get the upcoming Friday details.
             </p>
           </Reveal>
         </div>
@@ -135,18 +138,18 @@ export default function ParentsNightOut() {
               <span className="eyebrow">Reserve Early</span>
               <h2 className="section-title">Spots fill fast</h2>
               <p className="section-lead" style={{ marginTop: '0.75rem' }}>
-                Submit an inquiry with how many kids are coming and which school you prefer.
-                We reply with the next Friday date, capacity, and current details — dates and
-                fees still need owner confirmation each season.
+                Choose your school, then complete the NextKick Parents&apos; Night Out
+                form for that location. It is a request — not a final reservation —
+                until the academy confirms the Friday date, capacity, and details.
               </p>
               <ol className="j4k-easy">
                 <li>
-                  <strong>Tell us who&apos;s coming</strong>
-                  <span>How many kids — and which location.</span>
+                  <strong>Pick your school</strong>
+                  <span>Allendale, Midland Park, or Glen Rock.</span>
                 </li>
                 <li>
-                  <strong>We confirm the Friday</strong>
-                  <span>You’ll get the next date and details.</span>
+                  <strong>Finish on NextKick</strong>
+                  <span>Tell us who&apos;s coming and how to reach you.</span>
                 </li>
                 <li>
                   <strong>Drop off &amp; unwind</strong>
@@ -168,7 +171,32 @@ export default function ParentsNightOut() {
           </Reveal>
           <Reveal delay={100}>
             <div className="j4k-signup__form">
-              <EventInquiryForm intent="parents-night-out" />
+              <div className="leadform leadform--event">
+                <div className="leadform__head">
+                  <span className="eyebrow">{nextKick.eyebrow}</span>
+                </div>
+                <p className="form-instructions">{nextKick.pickerLede}</p>
+                <div className="leadform__steps" aria-hidden="true">
+                  <i className="on" />
+                  <i className="on" />
+                  <i className="on" />
+                </div>
+                <TrialCta kind="parents-night-out" className="btn btn--lg btn--block" arrow>
+                  {detail.ctaLabel}{' '}
+                  <span className="btn__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </TrialCta>
+                <p className="form-reassure">
+                  Open to non-students · Pick your school, then finish on NextKick ·
+                  Spots confirmed by the academy
+                </p>
+                <p className="form-portal-fallback">
+                  <a href={fallbackHref} target="_blank" rel="noreferrer">
+                    Open the Allendale Parents&apos; Night Out form in a new tab
+                  </a>
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>

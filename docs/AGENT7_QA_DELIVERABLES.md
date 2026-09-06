@@ -13,7 +13,7 @@ This branch is rebased onto current `main` (Agents 1–6 landed) so QA coverage 
 | Routes / H1 / titles | `src/routes.test.tsx`, `src/App.test.tsx` |
 | SEO metadata (canonical/OG/Twitter) | `src/components/Seo.test.tsx` (from main + kept) |
 | Header / mobile nav / skip link | `src/components/Header.test.tsx`, `Accessibility.test.tsx` |
-| Lead + event forms | `src/components/LeadForm.test.tsx`, `EventInquiryForm.test.tsx` |
+| Lead / NextKick launchers | `src/components/LeadForm.test.tsx` (trial portal CTA) |
 | Accessibility (axe) | `src/accessibility.test.tsx`, `src/test/axe.ts`, `Accessibility.test.tsx` |
 | API HTTP | `server/app.test.ts` (rate limit, CORS, headers from Agent 5) |
 | E2E | `e2e/critical-flows.spec.ts`, `playwright.config.ts` |

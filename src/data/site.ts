@@ -589,15 +589,15 @@ export const JUST_4_KIDS_DETAILS: Record<string, Just4KidsDetail> = {
       },
       {
         q: 'Why would a parent choose this?',
-        a: 'You get a planned, supervised Friday night for the kids — games and pizza included in the event concept — while you enjoy dinner, errands, or downtime. Exact timing and fees are confirmed when you inquire.',
+        a: 'You get a planned, supervised Friday night for the kids — games and pizza included in the event concept — while you enjoy dinner, errands, or downtime. Exact timing and fees are confirmed after you submit the NextKick form.',
       },
       {
-        q: 'What is the inquiry form for?',
-        a: 'Tell us how many kids are coming, which school you prefer, and how to reach you. We reply with the next available Friday, capacity, and current details — the form itself is not a final reservation until confirmed.',
+        q: 'How do I reserve a spot?',
+        a: 'Choose your school on this page, then complete the NextKick Parents’ Night Out form for that location. Tell us how many kids are coming and how to reach you. The academy confirms the next Friday, capacity, and details — the form is not a final reservation until confirmed.',
       },
       {
         q: 'When is the next Parents’ Night Out?',
-        a: 'We host it monthly on a Friday. Dates, drop-off times, and pricing need seasonal confirmation — send an inquiry or call and we’ll share what’s next for your preferred location.',
+        a: 'We host it monthly on a Friday. Dates, drop-off times, and pricing need seasonal confirmation — submit the NextKick form or call and we’ll share what’s next for your preferred location.',
       },
       {
         q: 'What should kids bring?',

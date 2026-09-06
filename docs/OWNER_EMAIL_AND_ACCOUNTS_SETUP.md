@@ -1,31 +1,28 @@
-# Owner Guide: Link Emails, Accounts & Organized Form Delivery
+# Owner Guide: NextKick Forms, Social Accounts & Optional Mail API
 
-**Who this is for:** the academy owner / staff who need Parents’ Night Out
-website requests delivered to the correct inboxes, with Instagram and Facebook
-linked correctly. Free-class, birthday, and summer-camp requests now go to
-per-school NextKick forms (`NEXTKICK_FORMS` in `src/data/contact.ts`).
+**Who this is for:** the academy owner / staff launching or maintaining the site.
 
-**Goal:** every website signup produces a clear, labeled email in the right
-mailbox so staff can open it, see all the details in order, and hit **Reply** to
-reach the family.
+**Goal:** every visitor signup (free class, birthday, summer camp, Parents' Night
+Out) reaches the academy through the correct **NextKick** form for that school,
+and Instagram / Facebook links on the site point to the real profiles.
+
+Live marketing CTAs do **not** use Gmail or the website’s `/api/leads` mailer.
+They open per-school NextKick forms (`NEXTKICK_FORMS` in `src/data/contact.ts`).
 
 ---
 
-## What “organized backend retrieval” means on this site
+## What “form delivery” means on this site
 
-This website does **not** log into Gmail/Outlook as an email app. Free-class,
-birthday, and summer-camp signups go through per-school **NextKick forms**
-(location picker → lightbox iframe). Parents' Night Out still emails staff:
+This website does **not** log into Gmail/Outlook as an email app for signups.
 
-1. A visitor fills out the Parents' Night Out form.
-2. The small backend API packages their answers into a **structured email**
-   (name, phone, location, program, child info, dates, message, etc.).
-3. That email is sent to the academy inbox(es) you configure.
-4. Staff retrieve those leads by reading the emails in their normal mail app
-   (Gmail, Outlook, phone Mail, etc.).
+1. A visitor clicks a CTA (free class, birthday, summer camp, or Parents' Night Out).
+2. A lightbox asks them to pick **Allendale**, **Midland Park**, or **Glen Rock**.
+3. The matching NextKick form loads in an iframe (or a new tab via the fallback link).
+4. Staff retrieve those leads inside **NextKick**, not from a website Gmail inbox.
 
-Until the steps below are finished, Parents' Night Out forms may only **print**
-the email in a server log (useful for testing) and **not** arrive in a real inbox.
+**Optional legacy path:** `POST /api/leads` can still email staff if you build a
+custom form later. That path needs Resend/SMTP in `.env` (steps below). It is
+**not** required for the live CTAs after the Parents' Night Out → NextKick migration.
 
 ---
 

@@ -4,6 +4,8 @@ const TRIAL_ALLENDALE =
   'https://student.nextkick.ai/form/0318c4be-65de-4c00-b554-192c0e1d65eb'
 const BIRTHDAY_ALLENDALE =
   'https://student.nextkick.ai/form/8e4e23d6-da04-4d94-818e-06c71baf3de6'
+const PNO_ALLENDALE =
+  'https://student.nextkick.ai/form/a0000001-1111-4111-8111-000000000001'
 
 async function pickAllendaleInPortal(page: import('@playwright/test').Page) {
   const dialog = page.getByRole('dialog').filter({ hasText: /allendale|midland|glen rock/i })
@@ -98,23 +100,16 @@ test.describe('Critical marketing flows', () => {
     ).toHaveAttribute('src', BIRTHDAY_ALLENDALE)
   })
 
-  test('Parents Night Out form submits with mocked API', async ({ page }) => {
-    await page.route('**/api/leads', async (route) => {
-      const body = route.request().postDataJSON() as { intent?: string }
-      expect(body.intent).toBe('parents-night-out')
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ ok: true, delivered: false, mode: 'log' }),
-      })
-    })
-
+  test('Parents Night Out page opens the NextKick portal', async ({ page }) => {
     await page.goto('/just-4-kids/parents-night-out')
-    await page.getByLabel(/parent \/ guardian name/i).fill('Sam Parent')
-    await page.getByLabel(/^email/i).fill('sam@example.com')
-    await page.getByLabel(/^phone/i).fill('2015559999')
     await page.getByRole('button', { name: /save a spot/i }).click()
-    await expect(page.getByText(/you.?re on the list/i)).toBeVisible()
+    const dialog = page.getByRole('dialog', { name: /save a spot/i })
+    await expect(dialog).toBeVisible()
+    await pickAllendaleInPortal(page)
+    await expect(dialog.getByTitle(/save a spot — allendale form/i)).toHaveAttribute(
+      'src',
+      PNO_ALLENDALE,
+    )
   })
 
   test('keyboard-only path opens the NextKick trial portal', async ({ page }, testInfo) => {

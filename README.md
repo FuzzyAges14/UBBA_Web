@@ -1,201 +1,344 @@
 # UBBA_Web
 
 Marketing website for **United Black Belt Academy** — confidence-building martial
-arts classes for kids, teens, and adults in Allendale &amp; Midland Park, NJ.
+arts for kids, teens, and adults in **Allendale**, **Midland Park**, and
+**Glen Rock**, NJ.
 
 Built with [Vite](https://vitejs.dev/), [React](https://react.dev/),
 [React Router](https://reactrouter.com/), [Framer Motion](https://www.framer.com/motion/),
-and TypeScript. Premium, cinematic Taekwondo brand design with a custom design
-system (Anton hero/impact titles, Teko headings, Inter body; black/red/gold
-palette; Taegeuk + dojang-grid motifs).
+and TypeScript. Premium Taekwondo brand design (Anton impact titles, Teko headings,
+Inter body; black / red / gold palette; Taegeuk + dojang-grid motifs).
 
-> **New here?** Jump to [Launching your website](#-launching-your-website) to put
-> the site online, or [Making quick text changes](#-making-quick-text-changes) to
-> edit wording, hours, or phone numbers — no coding experience needed.
+> **Putting the site online?** Start at [Launching your website](#-launching-your-website).
+> **Editing copy?** See [Making quick text changes](#-making-quick-text-changes).
+> **What pages exist?** See [Website map — pages & features](#-website-map--pages--features).
+
+---
 
 ## Prerequisites
 
-- Node.js 22+
-- [pnpm](https://pnpm.io/) 10+
-
-## Getting started
+- **Node.js 22+**
+- **[pnpm](https://pnpm.io/) 10+** (this repo commits a `pnpm-lock.yaml` — do not switch to npm/yarn)
 
 ```bash
-pnpm install      # install dependencies
-pnpm dev:all      # website (:5173) + API for free-class emails (:3001)
+corepack enable
+corepack prepare pnpm@latest --activate
 ```
 
-For the frontend only: `pnpm dev`. For the API only: `pnpm dev:api`.
+---
 
-Free-class form submissions are emailed by the small Node API — see
-[`docs/BACKEND.md`](docs/BACKEND.md). **Owner step-by-step:** how to link
-inboxes, Instagram/Facebook, and mail delivery is in
-[`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md).
-Edit recipient emails and social profile links in
-[`src/data/contact.ts`](src/data/contact.ts).
+## Getting started (local development)
+
+```bash
+pnpm install      # once, and again after lockfile changes
+pnpm dev          # website at http://localhost:5173 (hot reload)
+```
+
+Optional — also start the legacy Express API on port `3001` (Vite proxies `/api`):
+
+```bash
+pnpm dev:all
+```
+
+**Important:** live marketing signups (free class, birthday, summer camp, Parents'
+Night Out) use **NextKick** forms in a lightbox. They do **not** need Gmail, SMTP,
+or the Express API. Use `pnpm dev:all` only when testing the optional legacy
+`POST /api/leads` endpoint.
+
+```bash
+cp .env.example .env   # only if you need mail secrets, Meta tokens, or VITE_SITE_URL
+```
+
+---
 
 ## 🚀 Launching your website
 
-The site is a static website (plain HTML/CSS/JS after building), so it can be
-hosted almost anywhere. There are two steps: **build**, then **publish**.
+Follow these steps in order. After `pnpm build`, the site is static files in
+`dist/` (HTML/CSS/JS). Signups load NextKick in the browser — you do **not** need
+to deploy Gmail or the Node mail API for free-class, birthday, camp, or PNO.
 
-### 1. Build the site
+### Step A — Wire NextKick form URLs (required before real signups)
+
+All visitor signup CTAs use per-school NextKick share links in one file:
+
+**[`src/data/contact.ts`](src/data/contact.ts)** → `NEXTKICK_FORMS`
+
+| Form kind | Used on | Location keys |
+| --- | --- | --- |
+| `trial` | Home, Contact, program & location CTAs (“Try A Class For Free!” / free trial) | `allendale`, `midland-park`, `glen-rock` |
+| `birthday` | `/just-4-kids/birthday-parties` | same three schools |
+| `summer-camp` | `/just-4-kids/summer-camp` | same three schools |
+| `parents-night-out` | `/just-4-kids/parents-night-out` | same three schools |
+
+**How to update a URL:**
+
+1. In NextKick admin, open the form → copy the **student share link**
+   (looks like `https://student.nextkick.ai/form/<uuid>`).
+2. Paste it into the matching `href` under `NEXTKICK_FORMS` for that kind + school.
+3. Save. With `pnpm dev` running, the site hot-reloads.
+
+**Parents' Night Out:** the three school `href`s may still be placeholders until
+you paste the real share links. Until then, the portal opens NextKick but will not
+collect live PNO submissions for those schools.
+
+Also set Instagram / Facebook in the same file under `SOCIAL_PROFILES`
+(`href`, `handle`, then `placeholder: false` when live).
+
+### Step B — Owner content checklist (before a public launch)
+
+| Priority | What | Where |
+| --- | --- | --- |
+| High | Real NextKick URLs for all four form kinds × three schools | `src/data/contact.ts` → `NEXTKICK_FORMS` |
+| High | Location phones, hours, Glen Rock details | `LOCATIONS` / `GLEN_ROCK` in `src/data/site.ts` |
+| High | Privacy Policy & Terms copy | `/privacy`, `/terms` |
+| Medium | Location exterior photos | still placeholders in places — see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) |
+| Medium | Owner-approved testimonials & stats | `TESTIMONIALS`, stats in `site.ts` |
+| Medium | Canonical site URL for SEO | `VITE_SITE_URL` in `.env` / host env (see [`docs/SEO.md`](docs/SEO.md)) |
+| Low | Optional Meta Graph tokens for live social feeds | `.env` — see [`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md) |
+
+Also review:
+
+- [`docs/PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md)
+- [`docs/OWNER_APPROVAL_CHECKLIST.md`](docs/OWNER_APPROVAL_CHECKLIST.md)
+
+### Step C — Build the production site
 
 ```bash
-pnpm install     # first time only
-pnpm build       # creates a ready-to-publish "dist/" folder
+pnpm install     # first time / after dependency changes
+pnpm build       # regenerates sitemap, type-checks, writes dist/
 ```
 
-This produces a `dist/` folder containing everything the website needs.
-
-Want to preview exactly what visitors will see before publishing?
+Preview locally what visitors will see:
 
 ```bash
-pnpm preview     # serves the built site locally so you can check it
+pnpm preview     # serves the contents of dist/
 ```
 
-### 2. Publish it (pick ONE option)
+Optional quality gates before publish:
 
-**Option A — Netlify (easiest, drag & drop):**
-1. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
-2. Drag the whole `dist/` folder onto the page.
-3. It gives you a live URL. Done.
+```bash
+pnpm lint
+pnpm test
+pnpm test:ci     # lint + unit tests + production build
+```
 
-**Option B — Netlify or Vercel connected to GitHub (auto-publishes on every change):**
-1. Create a free account at [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
-2. "Add new site" → import this GitHub repo.
-3. Use these settings when asked:
-   - **Build command:** `pnpm build`
-   - **Publish/output directory:** `dist`
-4. After that, every time changes are merged into `main`, the live site updates
-   automatically.
+### Step D — Publish (pick ONE host)
 
-**Option C — any other web host:** upload the contents of the `dist/` folder to
-your host's public web directory.
+The publish output is the **`dist/`** folder.
 
-### ⚠️ One important setting for hosting
+#### Option 1 — Netlify (drag & drop, fastest smoke test)
 
-This site uses multiple pages handled in the browser (e.g. `/contact`,
-`/programs/tiny-tigers`). Most hosts need a small "redirect everything to
-`index.html`" rule so those pages load correctly when someone visits them directly
-or refreshes:
+1. Run `pnpm build`.
+2. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
+3. Drag the entire `dist/` folder onto the page.
+4. Netlify gives you a live URL.
 
-- **Netlify:** add a file named `public/_redirects` containing:
-  `/*    /index.html   200`
-- **Vercel:** it usually handles this automatically for Vite/React apps.
-- **Other hosts:** enable "SPA fallback" / "rewrite all routes to index.html".
+This repo includes [`public/_redirects`](public/_redirects) so SPA routes
+(e.g. `/contact`) work on refresh after deploy.
 
-Without this, the home page works but refreshing a sub-page may show a "404 Not
-Found". (Ask me and I can add the redirect file for whichever host you choose.)
+#### Option 2 — Netlify or Vercel connected to GitHub (recommended for ongoing updates)
 
-### Custom domain (e.g. unitedbba.com)
+1. Create an account at [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
+2. **Add new site** → import this GitHub repository.
+3. Build settings:
 
-Netlify and Vercel both let you connect a custom domain for free in their
-dashboard under **Domain settings** — just follow their step-by-step prompts.
+   | Setting | Value |
+   | --- | --- |
+   | **Build command** | `pnpm build` |
+   | **Publish / output directory** | `dist` |
+   | **Node version** | 22 (set in host UI or `NODE_VERSION=22`) |
 
-### Before a real public launch
+4. Set environment variables in the host dashboard if needed:
+   - `VITE_SITE_URL=https://www.unitedbba.com` (or your real canonical domain)
+   - Optional Meta tokens for social feed refresh (see `.env.example`)
+5. After merge to `main`, the host rebuilds and republishes automatically.
 
-Check the [`docs/`](docs/) checklists — a few things still use placeholders:
-- Replace placeholder photos with
-  licensed versions.
-- Add Glen Rock's real class hours.
-- Set mail delivery in `.env` (Resend or SMTP) so free-class requests reach the
-  inbox listed in `src/data/contact.ts` — follow
-  [`docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md)
-  (technical reference: [`docs/BACKEND.md`](docs/BACKEND.md)).
-- Confirm testimonials, stats, and owner details with the owner.
-- Set `VITE_SITE_URL` to the live canonical domain and review
-  [`docs/SEO.md`](docs/SEO.md) (metadata, sitemap, social share image).
+#### Option 3 — Any static host / traditional web host
+
+Upload the **contents** of `dist/` to the host’s public web root. Enable an
+**SPA fallback**: rewrite all unknown paths to `index.html` (HTTP 200), not a 404.
+
+### Step E — SPA routing (critical)
+
+This is a single-page app. Deep links and browser refresh must serve `index.html`.
+
+| Host | What to do |
+| --- | --- |
+| **Netlify** | `public/_redirects` is already included (`/* /index.html 200`) and copies into `dist/` on build |
+| **Vercel** | Usually automatic for Vite/React; add a `vercel.json` rewrite if refreshes 404 |
+| **Other** | Enable “SPA fallback” / rewrite all routes to `index.html` |
+
+Without this, the home page works but `/programs/tiny-tigers` etc. may 404 on refresh.
+
+### Step F — Custom domain
+
+In Netlify or Vercel: **Domain settings** → add `unitedbba.com` / `www` → follow DNS
+prompts (A/CNAME records at your registrar). After DNS propagates, set
+`VITE_SITE_URL` to the live HTTPS origin and rebuild so sitemap/canonical tags match.
+
+### Step G — After go-live smoke test
+
+1. Open the home page and confirm the hero + free-class CTA opens the **school
+   picker** → picking Allendale loads the NextKick trial iframe.
+2. Repeat for Birthday Parties, Summer Camp, and Parents' Night Out pages.
+3. Open Allendale / Midland Park location pages; confirm phone/hours look right.
+4. Open `/follow-us` and confirm Instagram/Facebook links.
+5. Spot-check `/privacy` and `/terms`.
+6. In Google Search Console (optional), submit `https://your-domain/sitemap.xml`.
+
+You do **not** need to deploy the Express `server/` package for these NextKick
+flows. The optional email API is documented in [`docs/BACKEND.md`](docs/BACKEND.md)
+for legacy / custom lead posting only.
+
+---
+
+## 🗺 Website map — pages & features
+
+Routes are defined in [`src/App.tsx`](src/App.tsx). Editable copy lives mainly in
+[`src/data/site.ts`](src/data/site.ts); forms & social in
+[`src/data/contact.ts`](src/data/contact.ts).
+
+### Marketing pages
+
+| URL | Page | What visitors get |
+| --- | --- | --- |
+| `/` | **Home** | Full-bleed hero (Ken Burns video / poster), brand title, primary free-class CTA, programs overview, values/marquee, locations teaser, owner story, testimonials, follow-us, trial section |
+| `/programs/children` | **Children’s programs** | Age-based kids program overview + links into each program detail |
+| `/programs/adult` | **Adult programs** | Adult / specialty program overview |
+| `/programs/:slug` | **Program detail** | Data-driven page per program (`PROGRAM_DETAILS`) — benefits, schedule notes, related programs, free-class CTA |
+| `/just-4-kids` | **Just 4 Kids hub** | Birthday parties, summer camp, and Parents' Night Out tiles |
+| `/just-4-kids/birthday-parties` | **Birthday parties** | Event story, inclusions, FAQs, NextKick birthday signup (pick school → form) |
+| `/just-4-kids/summer-camp` | **Summer / day camp** | Camp story, pack list, FAQs, NextKick camp signup |
+| `/just-4-kids/parents-night-out` | **Parents' Night Out** | Monthly Friday drop-off event story, FAQs, NextKick PNO signup (same portal pattern — **not** email/Gmail) |
+| `/locations/allendale` | **Allendale** | Address, phone, hours, map/directions cues, free-class CTA |
+| `/locations/midland-park` | **Midland Park** | Same location template |
+| `/locations/glen-rock` | **Glen Rock** | Same template when Glen Rock is enabled in site data |
+| `/contact` | **Contact** | School contacts + free-class NextKick launcher |
+| `/follow-us` | **Follow Us** | Instagram & Facebook profile cards |
+| `/follow-us/instagram` | **Instagram feed** | Curated / API-backed posts when configured |
+| `/follow-us/facebook` | **Facebook feed** | Same for Facebook |
+| `/privacy` | **Privacy Policy** | Legal copy (replace placeholders before launch) |
+| `/terms` | **Terms** | Legal copy (replace placeholders before launch) |
+| *(any other path)* | **404** | Not-found page |
+
+### Program detail slugs (`/programs/:slug`)
+
+Add or edit programs in `PROGRAM_DETAILS` (+ the children/adult arrays). No new
+route file is required.
+
+| Slug | Typical audience |
+| --- | --- |
+| `tiny-tigers` | Youngest kids |
+| `junior-tigers` | Elementary-age kids |
+| `teen-martial-arts` | Teens |
+| `adult-program` | Adults |
+| `family-programs` | Families training together |
+| `olympic-sparring` | Competitive sparring |
+| `swat-team` | Advanced / team track |
+| `self-defense` | Self-defense focus |
+| `weapons-class` | Weapons training |
+
+Note: `/programs/children` and `/programs/adult` are **static** category pages and
+take precedence over the dynamic `:slug` route.
+
+### Site-wide features
+
+- **NextKick form portal** — location picker lightbox → per-school iframe for
+  trial, birthday, summer camp, and Parents' Night Out (`TrialCta` +
+  `NextKickFormPortal` + trial portal context).
+- **SEO** — per-route `<title>` / meta / Open Graph via `Seo` + site/SEO data;
+  sitemap & robots generated on build (`pnpm sitemap` / part of `pnpm build`).
+- **Design system** — CSS variables in `src/index.css`; Reveal scroll motion;
+  Framer Motion on the home hero; belt-bar / dojang motifs.
+- **Authentic media** — self-hosted stills/video under `public/media/` referenced
+  from `IMAGES` / authentic media helpers (see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md)).
+- **Responsive layout** — mobile nav, stacked sections, Playwright visual matrix
+  in [`docs/RESPONSIVE_TEST_MATRIX.md`](docs/RESPONSIVE_TEST_MATRIX.md).
+- **Legacy Express API** (`server/`) — optional `POST /api/leads` mailer; **not**
+  used by live marketing CTAs after the NextKick migration.
+
+---
 
 ## Available scripts
 
 | Command | Description |
 | --- | --- |
-| `pnpm dev` | Start the Vite dev server with hot reload |
-| `pnpm dev:api` | Start the free-class email API on port 3001 |
-| `pnpm dev:all` | Run website + API together |
-| `pnpm start:api` | Run the API (same as `dev:api`; use in production) |
+| `pnpm dev` | Vite dev server with hot reload (`http://localhost:5173`) |
+| `pnpm dev:api` | Legacy leads email API on port 3001 |
+| `pnpm dev:all` | Website + API together |
+| `pnpm start:api` | Run the API (production-style entry) |
 | `pnpm sitemap` | Regenerate `public/sitemap.xml` and `public/robots.txt` |
-| `pnpm build` | Generate sitemap, type-check, and build for production into `dist/` |
-| `pnpm preview` | Preview the production build locally |
-| `pnpm lint` | Run ESLint over the project |
-| `pnpm test` | Run the Vitest test suite once |
-| `pnpm test:watch` | Run Vitest in watch mode |
-| `pnpm test:ci` | Lint, Vitest, and production build (CI default) |
-| `pnpm test:e2e` | Playwright end-to-end tests (runs against `pnpm preview`) |
+| `pnpm build` | Sitemap + TypeScript project build + Vite production bundle → `dist/` |
+| `pnpm preview` | Serve `dist/` locally |
+| `pnpm lint` | ESLint |
+| `pnpm test` | Vitest once (client + `server/**`) |
+| `pnpm test:watch` | Vitest watch mode |
+| `pnpm test:ci` | Lint + Vitest + production build |
+| `pnpm test:e2e` | Playwright E2E (against preview) |
 | `pnpm test:e2e:ui` | Playwright UI mode |
 
-Manual QA checklist and strategy: [`docs/QA.md`](docs/QA.md).
+Manual QA: [`docs/QA.md`](docs/QA.md).
+
+---
 
 ## Project structure
 
 ```
 src/
-  data/contact.ts     # Easy edits: notify emails + Instagram / Facebook profile URLs
-  data/site.ts        # All other editable content: programs, locations, testimonials, nav
-  data/seo.ts         # Per-route titles, descriptions, and social metadata
-  config/siteUrl.ts   # Canonical site origin helpers (VITE_SITE_URL)
-  components/         # Reusable UI (Header, Footer, LeadForm, LocationCard, Seo, ...)
-  pages/              # Routed pages (Home, Programs, Just 4 Kids, Contact, ...)
-server/               # Free-class request API (emails staff a detailed message)
+  data/contact.ts     # NextKick form URLs (all CTAs) + Instagram / Facebook + legacy notify emails
+  data/site.ts        # Programs, locations, Just 4 Kids copy, nav, testimonials, SEO helpers
+  data/authenticMedia.ts  # Provenance-aware media slots
+  components/         # Header, Footer, TrialCta, NextKickFormPortal, Seo, MediaFrame, …
+  pages/              # Routed pages (Home, Programs, Just 4 Kids, Locations, Contact, …)
+  styles/             # portal.css and other feature styles
+server/               # Optional Express API (legacy /api/leads email delivery)
+public/               # Static assets copied into dist/ (media, fonts, sitemap, _redirects)
+docs/                 # Launch, media, SEO, backend, and QA guides
 ```
+
+---
 
 ## ✍️ Making quick text changes
 
-Almost all wording lives in **two easy-edit files**:
-[`src/data/site.ts`](src/data/site.ts) (programs, locations, copy) and
-[`src/data/contact.ts`](src/data/contact.ts) (notify emails + Instagram / Facebook).
-Edit the text between the quotes without touching any layout or design. After
-saving, the site updates instantly while `pnpm dev` is running.
+Almost all wording lives in **two files**:
 
-**How to make an edit:**
+1. [`src/data/site.ts`](src/data/site.ts) — programs, locations, Just 4 Kids, nav, owner, testimonials
+2. [`src/data/contact.ts`](src/data/contact.ts) — NextKick URLs, social profiles, (legacy) notify emails
 
-1. Open `src/data/site.ts`.
-2. Find the text you want to change (it's grouped by section — see below).
-3. Change only the words **inside the quotes** (`'...'` or `"..."`). Don't remove
-   the quotes, commas, or brackets.
-4. Save the file.
+Edit only the text **inside quotes**. Keep commas, brackets, and quotes intact.
+With `pnpm dev` running, changes hot-reload.
 
-**Where common things live in `src/data/site.ts`:**
-
-| I want to change... | Look for |
+| I want to change… | Look for |
 | --- | --- |
-| Who gets free-class / birthday / camp emails | [`src/data/contact.ts`](src/data/contact.ts) → `CONTACT.notifyEmails` + `INQUIRY_TYPES` |
-| Instagram / Facebook profile links | [`src/data/contact.ts`](src/data/contact.ts) → `SOCIAL_PROFILES` |
-| Phone number, address, or hours | `LOCATIONS` (Allendale / Midland Park) and `GLEN_ROCK` |
-| Whether Glen Rock shows on the site | `SITE.showGlenRock` — set to `true` (show) or `false` (hide) |
-| Program names & descriptions | `HOME_PROGRAM_CARDS`, `CHILDREN_PROGRAMS`, `ADULT_PROGRAMS`, `PROGRAM_DETAILS` |
+| Free-class / birthday / camp / PNO NextKick URLs | `NEXTKICK_FORMS` in `contact.ts` |
+| Instagram / Facebook links | `SOCIAL_PROFILES` in `contact.ts` |
+| Phone, address, or hours | `LOCATIONS`, `GLEN_ROCK` in `site.ts` |
+| Show / hide Glen Rock | Glen Rock flag in `SITE` / location data |
+| Program names & blurbs | home program cards, children/adult arrays, `PROGRAM_DETAILS` |
+| Birthday / camp / PNO page copy & FAQs | `JUST_4_KIDS_DETAILS` |
 | Owner bio / quote | `OWNER` |
-| Reviews / testimonials | `TESTIMONIALS` |
-| The "Try A Class For Free!" button text | `SITE.primaryCta` |
-| Page titles for Google (SEO) | `SEO` |
-| Menu links | `NAV`, `FOOTER_LINKS`, `MEGA_MENU` |
+| Reviews | `TESTIMONIALS` |
+| Primary CTA button label | `SITE.primaryCta` (or equivalent site CTA field) |
+| Menu links | `NAV`, footer links, mega menu |
 
-**Tip:** change one thing at a time and check the site in your browser. If
-something looks broken after an edit, you probably removed a quote, comma, or
-bracket by accident — undo your last change (Ctrl/Cmd + Z) and try again.
-
-Photos are intentional placeholders (labeled `PLACEHOLDER` on screen). To use real
-photos later, see [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md).
+Photos and video paths are centralized in `IMAGES` / authentic media helpers.
+Provenance and replacement notes: [`docs/IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md).
 
 ### Deliverable docs
 
-Launch-readiness documents live in [`docs/`](docs/):
-
-- [`IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) — photo replacement + licensing log
-- [`PERFORMANCE.md`](docs/PERFORMANCE.md) — media encode targets, code splitting, bundle / Lighthouse checks
+- [`IMAGE_SOURCES.md`](docs/IMAGE_SOURCES.md) — photo/video provenance + licensing
+- [`PERFORMANCE.md`](docs/PERFORMANCE.md) — media encode targets, code splitting
 - [`OWNER_APPROVAL_CHECKLIST.md`](docs/OWNER_APPROVAL_CHECKLIST.md) — facts to confirm
-- [`PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md) — placeholders to replace
-- [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md) — owner steps to link emails, social accounts, and form delivery
-- [`BACKEND.md`](docs/BACKEND.md) — free-class emails, social links, API setup
+- [`PLACEHOLDER_CHECKLIST.md`](docs/PLACEHOLDER_CHECKLIST.md) — remaining placeholders
+- [`OWNER_EMAIL_AND_ACCOUNTS_SETUP.md`](docs/OWNER_EMAIL_AND_ACCOUNTS_SETUP.md) — social + optional mail API
+- [`BACKEND.md`](docs/BACKEND.md) — NextKick URL table + legacy API reference
+- [`SEO.md`](docs/SEO.md) — metadata, sitemap, canonical URL
 
 ### Notes
 
-- The site is a single-page app (client-side routing). Free-class CTAs open the
-  NextKick trial form in a lightbox; Just 4 Kids event forms `POST` to
-  `/api/leads`. Run `pnpm dev:all` locally and configure mail in `.env` for real
-  event-inquiry delivery.
-- Photos are art-directed placeholders (labeled `PLACEHOLDER` in the UI) — swap the
-  `Placeholder` components for real `<img>` assets when available.
-- Stats and testimonials are placeholders pending owner confirmation; do not
-  present them as verified facts.
+- Live CTAs use **NextKick** only (trial, birthday, summer camp, Parents' Night Out).
+  There is no Gmail-powered Parents' Night Out form on the site anymore.
+- Stats and some testimonials may still be marked pending owner confirmation —
+  do not present unverified numbers as facts.
+- Hero/impact titles use **Anton**; other headings use Teko; body uses Inter
+  (Google Fonts).

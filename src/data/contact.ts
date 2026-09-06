@@ -1,17 +1,14 @@
 /**
  * =============================================================================
- * CONTACT & SOCIAL — edit this file to wire up email + Instagram / Facebook
+ * CONTACT & SOCIAL — edit this file to wire up NextKick forms + Instagram / Facebook
  * =============================================================================
  *
- * Trial, birthday, and summer-camp CTAs open a location-picker lightbox, then
- * the matching NextKick form (`NEXTKICK_FORMS`). Parents' Night Out still emails
- * `CONTACT.notifyEmails` via `/api/leads`. Instagram / Facebook profile links
- * come from `SOCIAL_PROFILES`.
+ * Trial, birthday, summer-camp, and Parents' Night Out CTAs open a location-picker
+ * lightbox, then the matching NextKick form (`NEXTKICK_FORMS`). Instagram / Facebook
+ * profile links come from `SOCIAL_PROFILES`.
  *
- * After editing:
- *   1. Save this file
- *   2. Restart the API server if it is already running (`pnpm dev:api`)
- *   3. Set SMTP (or Resend) secrets in `.env` — see `.env.example`
+ * After editing NextKick URLs or social links, save this file — `pnpm dev` hot-reloads.
+ * The Express `/api/leads` mailer is unused by live marketing CTAs (legacy only).
  *
  * Tip: leave a profile `href` as '#' until you have the real URL, then paste it
  * in and set `placeholder: false`.
@@ -57,7 +54,7 @@ export type InquiryTypeConfig = {
  * ------------------------------------------------------------------------- */
 
 /** Portal kinds that use NextKick (not Parents' Night Out email). */
-export type NextKickFormKind = 'trial' | 'birthday' | 'summer-camp'
+export type NextKickFormKind = 'trial' | 'birthday' | 'summer-camp' | 'parents-night-out'
 
 /** Location keys matching school pages / SITE location ids. */
 export type NextKickLocationId = 'allendale' | 'midland-park' | 'glen-rock'
@@ -79,7 +76,7 @@ export type NextKickFormConfig = {
   pickerLede: string
   /** Supporting copy once a school form is open */
   formLede: string
-  /** CSS modifier for themed chrome: trial | birthday | summer-camp */
+  /** CSS modifier for themed chrome: trial | birthday | summer-camp | parents-night-out */
   theme: NextKickFormKind
   locations: Record<NextKickLocationId, NextKickLocationForm>
 }
@@ -172,6 +169,36 @@ export const NEXTKICK_FORMS: Record<NextKickFormKind, NextKickFormConfig> = {
       },
     },
   },
+
+  'parents-night-out': {
+    kind: 'parents-night-out',
+    eyebrow: "Parents' Night Out",
+    title: 'Save a Spot',
+    pickerLede:
+      "Choose your school, then complete the NextKick Parents' Night Out form for that location.",
+    formLede:
+      "Finish the Parents' Night Out request for this school on NextKick. You can also open it in a new tab.",
+    theme: 'parents-night-out',
+    locations: {
+      // TODO(owner): replace these three hrefs with the real NextKick form share
+      // links for Parents' Night Out (NextKick admin → Forms → Share link).
+      allendale: {
+        name: 'Allendale',
+        blurb: '240 W Crescent Ave',
+        href: 'https://student.nextkick.ai/form/a0000001-1111-4111-8111-000000000001',
+      },
+      'midland-park': {
+        name: 'Midland Park',
+        blurb: '644 Godwin Ave',
+        href: 'https://student.nextkick.ai/form/a0000001-2222-4222-8222-000000000002',
+      },
+      'glen-rock': {
+        name: 'Glen Rock',
+        blurb: 'New location',
+        href: 'https://student.nextkick.ai/form/a0000001-3333-4333-8333-000000000003',
+      },
+    },
+  },
 }
 
 export function getNextKickForm(kind: NextKickFormKind): NextKickFormConfig {
@@ -193,7 +220,7 @@ export const NEXTKICK_TRIAL_FORM = {
 } as const
 
 /* ---------------------------------------------------------------------------
- * Where event-inquiry emails are delivered (Parents' Night Out still uses API)
+ * Optional notify emails (legacy /api/leads only — live CTAs use NextKick)
  * ------------------------------------------------------------------------- */
 export const CONTACT = {
   /**
