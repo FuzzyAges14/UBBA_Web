@@ -174,3 +174,102 @@ export function authenticSrcSetFor(src: string): string | undefined {
   const fullW = dims?.width ?? 1080
   return `${stem}-640.jpg 640w, ${stem}-960.jpg 960w, ${src} ${fullW}w`
 }
+
+/**
+ * Landscape group photos for the home hero fade slideshow.
+ * Sourced from facebook.com/ubbaad (United Black Belt Academy / former
+ * Holmgren's Black Belt Academy at the Allendale dojang — Midland Park was
+ * listed as Black Belt America). Vertical / portrait posts are excluded.
+ */
+export type HeroSlide = {
+  src: string
+  webp: string
+  srcSet: string
+  webpSrcSet: string
+  width: number
+  height: number
+  alt: string
+}
+
+export const HERO_SLIDES: readonly HeroSlide[] = [
+  {
+    src: '/media/authentic/hero-slides/01-group-leadership.jpg',
+    webp: '/media/authentic/hero-slides/01-group-leadership.webp',
+    srcSet:
+      '/media/authentic/hero-slides/01-group-leadership-1280.jpg 1280w, /media/authentic/hero-slides/01-group-leadership.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/01-group-leadership-1280.webp 1280w, /media/authentic/hero-slides/01-group-leadership.webp 1920w',
+    width: 1920,
+    height: 1440,
+    alt: 'Leadership students and instructors posing in the United Black Belt Academy dojang',
+  },
+  {
+    src: '/media/authentic/hero-slides/02-group-testing-class.jpg',
+    webp: '/media/authentic/hero-slides/02-group-testing-class.webp',
+    srcSet:
+      '/media/authentic/hero-slides/02-group-testing-class-1280.jpg 1280w, /media/authentic/hero-slides/02-group-testing-class.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/02-group-testing-class-1280.webp 1280w, /media/authentic/hero-slides/02-group-testing-class.webp 1920w',
+    width: 1920,
+    height: 1441,
+    alt: 'Students and instructor posing together after class in the dojang',
+  },
+  {
+    src: '/media/authentic/hero-slides/03-group-fighting-stance.jpg',
+    webp: '/media/authentic/hero-slides/03-group-fighting-stance.webp',
+    srcSet:
+      '/media/authentic/hero-slides/03-group-fighting-stance-1280.jpg 1280w, /media/authentic/hero-slides/03-group-fighting-stance.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/03-group-fighting-stance-1280.webp 1280w, /media/authentic/hero-slides/03-group-fighting-stance.webp 1920w',
+    width: 1920,
+    height: 1440,
+    alt: 'Kids class lined up in fighting stance with their instructor',
+  },
+  {
+    src: '/media/authentic/hero-slides/04-group-crossed-arms.jpg',
+    webp: '/media/authentic/hero-slides/04-group-crossed-arms.webp',
+    srcSet:
+      '/media/authentic/hero-slides/04-group-crossed-arms-1280.jpg 1280w, /media/authentic/hero-slides/04-group-crossed-arms.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/04-group-crossed-arms-1280.webp 1280w, /media/authentic/hero-slides/04-group-crossed-arms.webp 1920w',
+    width: 1920,
+    height: 1439,
+    alt: 'Students and instructor posing with arms crossed on the mats',
+  },
+  {
+    src: '/media/authentic/hero-slides/05-group-belt-line.jpg',
+    webp: '/media/authentic/hero-slides/05-group-belt-line.webp',
+    srcSet:
+      '/media/authentic/hero-slides/05-group-belt-line-1280.jpg 1280w, /media/authentic/hero-slides/05-group-belt-line.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/05-group-belt-line-1280.webp 1280w, /media/authentic/hero-slides/05-group-belt-line.webp 1920w',
+    width: 1920,
+    height: 1439,
+    alt: 'Group of students posing in a line after belt testing',
+  },
+  {
+    src: '/media/authentic/hero-slides/06-group-junior-black-belts.jpg',
+    webp: '/media/authentic/hero-slides/06-group-junior-black-belts.webp',
+    srcSet:
+      '/media/authentic/hero-slides/06-group-junior-black-belts-1280.jpg 1280w, /media/authentic/hero-slides/06-group-junior-black-belts.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/06-group-junior-black-belts-1280.webp 1280w, /media/authentic/hero-slides/06-group-junior-black-belts.webp 1920w',
+    width: 1920,
+    height: 1440,
+    alt: 'Junior black belt candidates posing together in the dojang',
+  },
+  {
+    src: '/media/authentic/hero-slides/07-group-instructor-students.jpg',
+    webp: '/media/authentic/hero-slides/07-group-instructor-students.webp',
+    srcSet:
+      '/media/authentic/hero-slides/07-group-instructor-students-1280.jpg 1280w, /media/authentic/hero-slides/07-group-instructor-students.jpg 1920w',
+    webpSrcSet:
+      '/media/authentic/hero-slides/07-group-instructor-students-1280.webp 1280w, /media/authentic/hero-slides/07-group-instructor-students.webp 1920w',
+    width: 1920,
+    height: 1438,
+    alt: 'Instructor with students posing after junior black belt testing',
+  },
+]
+
+/** Hero slideshow interval (ms) between fade transitions. */
+export const HERO_SLIDE_INTERVAL_MS = 5500

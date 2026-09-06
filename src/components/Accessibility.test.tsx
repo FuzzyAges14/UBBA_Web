@@ -29,9 +29,10 @@ describe('Accessibility: skip link', () => {
 })
 
 describe('Accessibility: hero media', () => {
-  it('uses a brand atmosphere panel without stock video controls', () => {
+  it('uses a decorative group-photo slideshow without stock video controls', () => {
     const { container } = render(<HeroMedia />)
-    expect(container.querySelector('.hero__brand-media')).toBeTruthy()
+    expect(container.querySelector('.hero__slides')).toBeTruthy()
+    expect(container.querySelector('.hero__slides')).toHaveAttribute('aria-hidden', 'true')
     expect(container.querySelector('video')).toBeNull()
     expect(screen.queryByRole('button', { name: /background video/i })).toBeNull()
   })

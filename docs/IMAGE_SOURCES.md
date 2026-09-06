@@ -28,7 +28,7 @@ photos / video. Prefer a fresh owner shoot of class, family, and event moments.
 
 | Slot | Status |
 | --- | --- |
-| Home hero video / poster | Brand panel only until owned footage exists |
+| Home hero video / poster | **Group-photo fade slideshow** from facebook.com/ubbaad landscape stills (`public/media/authentic/hero-slides/`); stock Vimeo loop stays disabled |
 | Program overview + detail covers | Text-first / glyph cards until owned photos exist |
 | Benefits / adult & children story splits | Text-first layouts |
 | Just 4 Kids tiles & event pages | Summer Camp uses authentic camp photos/videos; birthday & parents’ night out still need owner photos |
@@ -77,3 +77,18 @@ leave those slots text-first rather than borrowing camp photos.
 
 Web video clips (12s, ~540p) live under `public/media/authentic/videos/web/` and are
 used only on the Summer Camp page with matching camp captions.
+
+## Authentic Facebook hero slides (`public/media/authentic/hero-slides/`)
+
+Seven **landscape-only** group photos from the academy Facebook page
+([facebook.com/ubbaad](https://www.facebook.com/ubbaad/) — United Black Belt Academy;
+Allendale dojang historically Holmgren's Black Belt Academy; Midland Park formerly
+listed as Black Belt America). Wired as the home hero fade slideshow via
+`HERO_SLIDES` in `src/data/authenticMedia.ts`.
+
+| Rule | Detail |
+| --- | --- |
+| Orientation | Width &gt; height only (≈4:3). Vertical / square IG crossposts are excluded |
+| Display | `object-fit: cover` + `object-position: center 38%` so the group stays framed on tall / narrow viewports |
+| Motion | Fade every ~5.5s; `prefers-reduced-motion` locks to the first slide |
+| Provenance | See `public/media/authentic/hero-slides/MANIFEST.json` |
