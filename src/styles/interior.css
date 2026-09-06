@@ -421,3 +421,21 @@
     transform: none;
   }
 }
+
+
+/* Location Visit Us photo (Google Maps link) */
+a.location-visit-photo {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+}
+a.location-visit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+a.location-visit-photo:hover img {
+  transform: scale(1.03);
+}

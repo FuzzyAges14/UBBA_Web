@@ -113,26 +113,26 @@ export default function LocationDetail() {
         <div className="dojang" aria-hidden="true" />
         <div className="container split interior-split">
           <Reveal>
-            <div className="loc-card" style={{ margin: 0 }}>
-              {loc.visitImageSrc || loc.imageSrc ? (
-                <a
-                  className="map-embed map-embed--photo"
-                  href={mapsPlaceHref(loc.mapQuery)}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open ${loc.name} in Google Maps`}
-                >
-                  <OptimizedImage
-                    src={(loc.visitImageSrc || loc.imageSrc)!}
-                    alt={`${loc.name} exterior — Google Maps photo`}
-                    width={imageDimensionsFor((loc.visitImageSrc || loc.imageSrc)!).width}
-                    height={imageDimensionsFor((loc.visitImageSrc || loc.imageSrc)!).height}
-                    sizes="(max-width: 900px) 100vw, 48vw"
-                    loading="lazy"
-                  />
-                  <span className="map-embed__badge">Google Maps</span>
-                </a>
-              ) : (
+            {loc.visitImageSrc || loc.imageSrc ? (
+              <a
+                className="interior-media interior-media--wide location-visit-photo"
+                href={mapsPlaceHref(loc.mapQuery)}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${loc.name} in Google Maps`}
+              >
+                <OptimizedImage
+                  src={(loc.visitImageSrc || loc.imageSrc)!}
+                  alt={`${loc.name} exterior — Google Maps photo`}
+                  width={imageDimensionsFor((loc.visitImageSrc || loc.imageSrc)!).width}
+                  height={imageDimensionsFor((loc.visitImageSrc || loc.imageSrc)!).height}
+                  sizes="(max-width: 900px) 100vw, 48vw"
+                  loading="lazy"
+                />
+                <span className="map-embed__badge">Google Maps</span>
+              </a>
+            ) : (
+              <div className="loc-card" style={{ margin: 0 }}>
                 <div className="map-embed">
                   <iframe
                     title={`Map of ${loc.name}`}
@@ -141,8 +141,8 @@ export default function LocationDetail() {
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </Reveal>
           <Reveal delay={100}>
             <span className="eyebrow">Visit Us</span>
