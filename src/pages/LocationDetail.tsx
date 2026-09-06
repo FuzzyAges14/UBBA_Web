@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import PageHero from '../components/PageHero'
 import OwnerMediaSlot from '../components/OwnerMediaSlot'
+import OptimizedImage from '../components/OptimizedImage'
 import Reveal from '../components/Reveal'
 import CtaBanner from '../components/CtaBanner'
 import TrialCta from '../components/TrialCta'
@@ -12,6 +13,7 @@ import {
   CHILDREN_PROGRAMS,
   ADULT_PROGRAMS,
   PROGRAM_GLYPHS,
+  imageDimensionsFor,
 } from '../data/site'
 
 function mapSrc(query: string) {
@@ -20,6 +22,10 @@ function mapSrc(query: string) {
 
 function directionsHref(query: string) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`
+}
+
+function mapsPlaceHref(query: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
 }
 
 export default function LocationDetail() {
@@ -62,7 +68,23 @@ export default function LocationDetail() {
       <section className="section">
         <div className="container split">
           <Reveal>
-            <OwnerMediaSlot label={page.imageLabel} icon="🏫" />
+            {loc.imageSrc ? (
+              <figure className="interior-media interior-media--wide">
+                <OptimizedImage
+                  src={loc.imageSrc}
+                  alt={`${loc.name} United Black Belt Academy — Google location photo`}
+                  width={imageDimensionsFor(loc.imageSrc).width}
+                  height={imageDimensionsFor(loc.imageSrc).height}
+                  sizes="(max-width: 900px) 100vw, 48vw"
+                  loading="lazy"
+                />
+                <figcaption className="interior-media__credit">
+                  Temporary Google photo — replace with academy photography
+                </figcaption>
+              </figure>
+            ) : (
+              <OwnerMediaSlot label={page.imageLabel} icon="🏫" />
+            )}
           </Reveal>
           <Reveal delay={100}>
             <span className="eyebrow">United Black Belt Academy</span>
@@ -91,16 +113,36 @@ export default function LocationDetail() {
         <div className="dojang" aria-hidden="true" />
         <div className="container split interior-split">
           <Reveal>
-            <div className="loc-card" style={{ margin: 0 }}>
-              <div className="map-embed">
-                <iframe
-                  title={`Map of ${loc.name}`}
-                  src={mapSrc(loc.mapQuery)}
+            {loc.visitImageSrc || loc.imageSrc ? (
+              <a
+                className="interior-media interior-media--wide location-visit-photo"
+                href={mapsPlaceHref(loc.mapQuery)}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${loc.name} in Google Maps`}
+              >
+                <OptimizedImage
+                  src={(loc.visitImageSrc || loc.imageSrc)!}
+                  alt={`${loc.name} exterior — Google Maps photo`}
+                  width={imageDimensionsFor((loc.visitImageSrc || loc.imageSrc)!).width}
+                  height={imageDimensionsFor((loc.visitImageSrc || loc.imageSrc)!).height}
+                  sizes="(max-width: 900px) 100vw, 48vw"
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
                 />
+                <span className="map-embed__badge">Google Maps</span>
+              </a>
+            ) : (
+              <div className="loc-card" style={{ margin: 0 }}>
+                <div className="map-embed">
+                  <iframe
+                    title={`Map of ${loc.name}`}
+                    src={mapSrc(loc.mapQuery)}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </Reveal>
           <Reveal delay={100}>
             <span className="eyebrow">Visit Us</span>

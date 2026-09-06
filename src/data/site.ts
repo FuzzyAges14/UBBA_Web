@@ -49,6 +49,12 @@ export const IMAGES = {
   /** Hub tile — week kickoff smiles (caption-matched). */
   summerCampTile: SUMMER_CAMP_TILE.src,
   parentsNightOut: PARENTS_NIGHT_OUT_FEATURE.src,
+  /** Temporary Google Maps / Street View location photos (replace with owner shoots). */
+  allendaleInterior: '/media/locations/allendale-interior.jpg',
+  allendaleExterior: '/media/locations/allendale-exterior.jpg',
+  midlandParkExterior: '/media/locations/midland-park-exterior.jpg',
+  midlandParkStreet: '/media/locations/midland-park-street.jpg',
+  glenRockExterior: '/media/locations/glen-rock-exterior.jpg',
 } as const
 
 /** Structured hero sources for WebM + MP4 delivery and poster LCP. */
@@ -79,6 +85,11 @@ export const IMAGE_DIMENSIONS = {
   summerCampTile: AUTHENTIC_DIMENSIONS[SUMMER_CAMP_TILE.src] ?? { width: 1600, height: 1200 },
   parentsNightOut: AUTHENTIC_DIMENSIONS[PARENTS_NIGHT_OUT_FEATURE.src] ?? { width: 960, height: 720 },
   logo: { width: 300, height: 282 },
+  allendaleInterior: { width: 1600, height: 900 },
+  allendaleExterior: { width: 1600, height: 900 },
+  midlandParkExterior: { width: 1600, height: 1200 },
+  midlandParkStreet: { width: 1600, height: 900 },
+  glenRockExterior: { width: 1600, height: 900 },
 } as const
 
 /** Responsive JPEG srcsets (WebP counterparts share the same widths). */
@@ -127,6 +138,16 @@ export function imageDimensionsFor(src: string): { width: number; height: number
       return IMAGE_DIMENSIONS.summerCampTile
     case IMAGES.parentsNightOut:
       return IMAGE_DIMENSIONS.parentsNightOut
+    case IMAGES.allendaleInterior:
+      return IMAGE_DIMENSIONS.allendaleInterior
+    case IMAGES.allendaleExterior:
+      return IMAGE_DIMENSIONS.allendaleExterior
+    case IMAGES.midlandParkExterior:
+      return IMAGE_DIMENSIONS.midlandParkExterior
+    case IMAGES.midlandParkStreet:
+      return IMAGE_DIMENSIONS.midlandParkStreet
+    case IMAGES.glenRockExterior:
+      return IMAGE_DIMENSIONS.glenRockExterior
     default:
       if (src in AUTHENTIC_DIMENSIONS) {
         return AUTHENTIC_DIMENSIONS[src]
@@ -680,6 +701,10 @@ export type Location = {
   detailsPending?: boolean
   /** Dedicated landing-page copy under /locations/:id */
   page?: LocationPageContent
+  /** Optional Google/location photo for cards + welcome section */
+  imageSrc?: string
+  /** Optional second photo for Visit Us (replaces broken map embed) */
+  visitImageSrc?: string
 }
 
 export const LOCATIONS: Location[] = [
@@ -690,6 +715,8 @@ export const LOCATIONS: Location[] = [
     city: 'Allendale, NJ 07401',
     phone: '201-962-2922',
     mapQuery: '240 W Crescent Ave, Allendale, NJ 07401',
+    imageSrc: IMAGES.allendaleInterior,
+    visitImageSrc: IMAGES.allendaleExterior,
     hours: [
       { day: 'Monday', time: '3:30pm - 8:00pm' },
       { day: 'Tuesday', time: '3:00pm - 8:15pm' },
@@ -713,7 +740,7 @@ export const LOCATIONS: Location[] = [
       ],
       programsBlurb:
         'Age-specific children’s Taekwondo, teen training, adult martial arts, family options, and Just 4 Kids events (birthday parties, summer camp, and Parents’ Night Out) are offered through our Bergen County schools. Ask which sessions run at Allendale when you book your free class.',
-      imageLabel: 'Allendale dojang photo — replace with school photography',
+      imageLabel: 'Allendale school — Google photo (temporary)',
     },
   },
   {
@@ -722,6 +749,8 @@ export const LOCATIONS: Location[] = [
     address: '644 Godwin Ave',
     city: 'Midland Park, NJ 07432',
     mapQuery: '644 Godwin Ave, Midland Park, NJ 07432',
+    imageSrc: IMAGES.midlandParkExterior,
+    visitImageSrc: IMAGES.midlandParkStreet,
     detailsPending: true,
     note: 'Phone number and weekly hours — pending owner confirmation.',
     page: {
@@ -738,7 +767,7 @@ export const LOCATIONS: Location[] = [
       ],
       programsBlurb:
         'Students can explore Tiny Tigers, Junior Tigers, teen and adult martial arts, plus family-friendly training and Just 4 Kids offerings. Availability can vary by school — tell us your preferred Midland Park schedule when you request a free trial.',
-      imageLabel: 'Midland Park dojang photo — replace with school photography',
+      imageLabel: 'Midland Park school — Google photo (temporary)',
     },
   },
 ]
@@ -759,6 +788,8 @@ export const GLEN_ROCK: Location = {
   city: 'Glen Rock, NJ 07452',
   phone: '201-551-8557',
   mapQuery: '201 Rock Rd Suite 116, Glen Rock, NJ 07452',
+  imageSrc: IMAGES.glenRockExterior,
+  visitImageSrc: IMAGES.glenRockExterior,
   isNew: true,
   // Class schedule for the new location is being finalized — confirm with owner.
   note: 'Now enrolling — class schedule coming soon. Call us to reserve your spot.',

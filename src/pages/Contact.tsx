@@ -5,6 +5,8 @@ import PageHero from '../components/PageHero'
 import SectionSeam from '../components/SectionSeam'
 import { getLocationAreaLabel, LOCATIONS, GLEN_ROCK, SITE } from '../data/site'
 import type { Location } from '../data/site'
+import { imageDimensionsFor } from '../data/site'
+import OptimizedImage from '../components/OptimizedImage'
 
 function mapSrc(query: string) {
   return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`
@@ -13,18 +15,42 @@ function directionsHref(query: string) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`
 }
 
+function mapsPlaceHref(query: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+}
+
 function LocationBlock({ loc }: { loc: Location }) {
   return (
     <div className="split" style={{ alignItems: 'stretch' }}>
       <div className="loc-card">
-        <div className="map-embed">
-          <iframe
-            title={`Map of ${loc.name}`}
-            src={mapSrc(loc.mapQuery)}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
+        {loc.imageSrc || loc.visitImageSrc ? (
+          <a
+            className="map-embed map-embed--photo"
+            href={mapsPlaceHref(loc.mapQuery)}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open ${loc.name} in Google Maps`}
+          >
+            <OptimizedImage
+              src={(loc.imageSrc || loc.visitImageSrc)!}
+              alt={`${loc.name} United Black Belt Academy — Google location photo`}
+              width={imageDimensionsFor((loc.imageSrc || loc.visitImageSrc)!).width}
+              height={imageDimensionsFor((loc.imageSrc || loc.visitImageSrc)!).height}
+              sizes="(max-width: 900px) 100vw, 48vw"
+              loading="lazy"
+            />
+            <span className="map-embed__badge">Google Maps</span>
+          </a>
+        ) : (
+          <div className="map-embed">
+            <iframe
+              title={`Map of ${loc.name}`}
+              src={mapSrc(loc.mapQuery)}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        )}
       </div>
       <div>
         <h2 className="section-title contact-loc__title">
