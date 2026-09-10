@@ -1,6 +1,6 @@
 import Reveal from '../../components/Reveal'
 import SectionHeading from '../../components/SectionHeading'
-import Taegeuk from '../../components/Taegeuk'
+import { BENEFITS_MEDIA } from '../../data/authenticMedia'
 
 const BENEFIT_POINTS = [
   'Confidence that shows up at school, work, and home',
@@ -38,18 +38,27 @@ export default function BenefitsSection() {
           </ul>
         </Reveal>
         <Reveal delay={120}>
-          <div className="home-benefits__media home-benefits__media--brand">
-            <div className="accent-orb" aria-hidden="true">
-              <Taegeuk size={88} spin />
-            </div>
-            <div className="home-benefits__panel" aria-hidden="true">
-              <span className="home-benefits__panel-kicker">On The Mat</span>
-              <p className="home-benefits__panel-copy">
+          <figure className="home-benefits__media">
+            <picture>
+              <source type="image/webp" srcSet={BENEFITS_MEDIA.webpSrcSet} sizes="(max-width: 900px) 100vw, 48vw" />
+              <img
+                src={BENEFITS_MEDIA.src}
+                srcSet={BENEFITS_MEDIA.srcSet}
+                sizes="(max-width: 900px) 100vw, 48vw"
+                alt={BENEFITS_MEDIA.alt}
+                width={BENEFITS_MEDIA.width}
+                height={BENEFITS_MEDIA.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <figcaption className="home-benefits__caption">
+              <span className="home-benefits__caption-kicker">On The Mat</span>
+              <span className="home-benefits__caption-copy">
                 Discipline. Respect. Confidence.
-              </p>
-              <div className="home-benefits__panel-belt" />
-            </div>
-          </div>
+              </span>
+            </figcaption>
+          </figure>
         </Reveal>
       </div>
     </section>

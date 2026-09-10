@@ -298,6 +298,15 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
 /** Hero slideshow interval (ms) between fade transitions. */
 export const HERO_SLIDE_INTERVAL_MS = 5500
 
+/**
+ * Home “Why It Matters” benefits media — parents + students on the mat.
+ * Distinct from the first hero slide so the home page doesn’t repeat the
+ * same leadership lineup in two adjacent sections.
+ */
+export const BENEFITS_MEDIA = HERO_SLIDES.find((s) =>
+  s.src.includes('03-group-class-partners'),
+) ?? HERO_SLIDES[0]
+
 /** Landscape Facebook stills for program cards, Just 4 Kids tiles, and feature frames.
  *  Wider-than-tall so 16:9 MediaFrame / card covers stay filled (no letterboxing).
  *  Provenance: facebook.com/ubbamp & ubbaad 2025 albums under Sanghyun Lee ownership.
