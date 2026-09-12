@@ -40,10 +40,10 @@ export default function FinalCtaSection() {
                       : ', '
                 }
                 return (
-                  <span key={loc.slug}>
+                  <span key={loc.id}>
                     {sep}
                     <Link
-                      to={`/locations/${loc.slug}`}
+                      to={`/locations/${loc.id}`}
                       className="text-link text-link--on-red"
                     >
                       {loc.name}
