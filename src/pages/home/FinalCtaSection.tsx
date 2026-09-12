@@ -1,14 +1,20 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
 import TrialCta from '../../components/TrialCta'
-import { getLocationAreaLabel, getVisibleLocations } from '../../data/site'
+import {
+  getLocationAreaLabel,
+  getLocationPageIds,
+  getVisibleLocations,
+} from '../../data/site'
 
 /**
  * Homepage final CTA — full-bleed red band (shared `.cta-band` chrome with `CtaBanner`).
  * Primary CTA opens the NextKick portal; copy/links include all visible schools.
+ * Schools without a dedicated landing page (e.g. Glen Rock) deep-link to #locations.
  */
 export default function FinalCtaSection() {
   const locations = getVisibleLocations()
+  const pageIds = new Set(getLocationPageIds())
 
   return (
     <section className="cta-band" aria-labelledby="home-final-cta-title">
@@ -39,13 +45,13 @@ export default function FinalCtaSection() {
                         : ', or '
                       : ', '
                 }
+                const to = pageIds.has(loc.id)
+                  ? `/locations/${loc.id}`
+                  : '/#locations'
                 return (
                   <span key={loc.id}>
                     {sep}
-                    <Link
-                      to={`/locations/${loc.id}`}
-                      className="text-link text-link--on-red"
-                    >
+                    <Link to={to} className="text-link text-link--on-red">
                       {loc.name}
                     </Link>
                   </span>
