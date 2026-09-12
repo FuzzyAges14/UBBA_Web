@@ -26,13 +26,13 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: clamp(0.55rem, 1.4vw, 0.95rem);
-  flex: 1 1 auto;
+  gap: clamp(0.65rem, 1.6vw, 1.1rem);
+  flex: 0 1 auto;
   min-width: 0;
-  max-width: min(100%, 34rem);
+  max-width: min(100%, 42rem);
 }
 .brand__logo {
-  width: clamp(3.25rem, 7.5vw, 4.75rem);
+  width: clamp(3.75rem, 9vw, 5.75rem);
   height: auto;
   display: block;
   object-fit: contain;
@@ -43,15 +43,15 @@
 .brand__text {
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 0.92;
   min-width: 0;
   color: #fff;
 }
 .brand__name {
   font-family: var(--font-impact);
   font-weight: 400;
-  letter-spacing: 0.02em;
-  font-size: clamp(1.55rem, 3.4vw, 2.35rem);
+  letter-spacing: 0.01em;
+  font-size: clamp(1.85rem, 4.2vw, 2.95rem);
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -59,11 +59,11 @@
 }
 .brand__sub {
   font-family: var(--font-impact);
-  font-size: clamp(0.95rem, 2.1vw, 1.35rem);
-  letter-spacing: 0.18em;
+  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
-  margin-top: 0.1rem;
+  margin-top: 0.05rem;
   white-space: nowrap;
 }
 
@@ -235,21 +235,21 @@
 /* Narrow / resized viewports: keep the white brand lockup readable */
 @media (max-width: 560px) {
   :root {
-    --header-h: 84px;
+    --header-h: 96px;
   }
   .brand {
     max-width: calc(100% - 3.5rem);
-    gap: 0.5rem;
+    gap: 0.55rem;
   }
   .brand__logo {
-    width: clamp(2.85rem, 12vw, 3.5rem);
+    width: clamp(3.35rem, 14vw, 4.25rem);
   }
   .brand__name {
-    font-size: clamp(1.35rem, 5.8vw, 1.75rem);
+    font-size: clamp(1.55rem, 6.4vw, 2rem);
   }
   .brand__sub {
-    font-size: clamp(0.85rem, 3.6vw, 1.05rem);
-    letter-spacing: 0.14em;
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+    letter-spacing: 0.12em;
   }
 }
 

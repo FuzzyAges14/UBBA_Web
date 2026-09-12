@@ -38,7 +38,7 @@
   --shadow-sm: 0 6px 20px rgba(10, 10, 10, 0.08);
   --shadow: 0 24px 60px rgba(10, 10, 10, 0.14);
   --shadow-lg: 0 40px 90px rgba(10, 10, 10, 0.3);
-  --header-h: 92px;
+  --header-h: 108px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   /* Button interaction timing (shared by buttons.css + reduced-motion) */
   --btn-duration: 0.55s;
