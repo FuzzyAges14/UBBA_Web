@@ -75,16 +75,26 @@ h3 + .checklist {
   margin-top: 2.5rem;
 }
 
-/* Hide Netlify deploy / “Deploys by Netlify” badge (host injects it; not in markup) */
+/* Hide Netlify deploy / “Deploys by Netlify” badge (host injects it; not in our markup) */
 a[href*="netlify.com"]:has(img),
 a[href*="netlify.app"]:has(img),
+a[href*="netlify.com"][target="_blank"]:has(img),
 img[alt*="Netlify" i],
 img[alt*="Deploys by Netlify" i],
+img[src*="netlify.com/v3/img"],
+img[src*="netlify.com/img"],
 iframe[src*="netlify"],
 #netlify-identity-widget,
+#nf-notif,
 [data-netlify-deploy-id],
 [data-netlify-badge],
+[data-nf-badge],
+body > a[href*="netlify.com"],
+body > a[href*="netlify.app"],
 body > a[href*="netlify.com"][style*="position"],
-body > div:has(> a[href*="netlify.com"] img) {
+body > div:has(> a[href*="netlify.com"] img),
+body > div:has(> a[href*="netlify.app"] img) {
   display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
