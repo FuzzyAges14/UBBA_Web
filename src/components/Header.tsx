@@ -164,8 +164,8 @@ export default function Header() {
               src="/logo.png"
               alt=""
               className="brand__logo"
-              width={46}
-              height={43}
+              width={76}
+              height={71}
               decoding="async"
               {...({ fetchpriority: 'high' } as ImgHTMLAttributes<HTMLImageElement>)}
             />

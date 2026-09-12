@@ -74,3 +74,17 @@ h2 + .checklist,
 h3 + .checklist {
   margin-top: 2.5rem;
 }
+
+/* Hide Netlify deploy / “Deploys by Netlify” badge (host injects it; not in markup) */
+a[href*="netlify.com"]:has(img),
+a[href*="netlify.app"]:has(img),
+img[alt*="Netlify" i],
+img[alt*="Deploys by Netlify" i],
+iframe[src*="netlify"],
+#netlify-identity-widget,
+[data-netlify-deploy-id],
+[data-netlify-badge],
+body > a[href*="netlify.com"][style*="position"],
+body > div:has(> a[href*="netlify.com"] img) {
+  display: none !important;
+}

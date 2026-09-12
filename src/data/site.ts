@@ -254,11 +254,13 @@ export type ProgramCard = {
 }
 
 /** Checklist bullets beside the homepage free-class form. */
-export const TRIAL_HIGHLIGHTS = [
-  'Kids, teens, and adult programs',
-  'Allendale & Midland Park locations',
-  'Beginners welcome — no experience required',
-] as const
+export function getTrialHighlights(): string[] {
+  return [
+    'Kids, teens, and adult programs',
+    `${getLocationAreaLabel()} locations`,
+    'Beginners welcome — no experience required',
+  ]
+}
 
 export const HOME_PROGRAM_CARDS: ProgramCard[] = [
   {

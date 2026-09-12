@@ -26,32 +26,45 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-shrink: 0;
+  gap: clamp(0.55rem, 1.4vw, 0.95rem);
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: min(100%, 34rem);
 }
 .brand__logo {
-  width: 46px;
+  width: clamp(3.25rem, 7.5vw, 4.75rem);
   height: auto;
   display: block;
   object-fit: contain;
+  flex-shrink: 0;
+  /* Official mark is dark; force an all-white lockup on dark chrome */
+  filter: brightness(0) invert(1);
 }
 .brand__text {
   display: flex;
   flex-direction: column;
   line-height: 1;
+  min-width: 0;
+  color: #fff;
 }
 .brand__name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  font-size: 0.95rem;
+  font-family: var(--font-impact);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.55rem, 3.4vw, 2.35rem);
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .brand__sub {
-  font-size: 0.58rem;
-  letter-spacing: 0.34em;
+  font-family: var(--font-impact);
+  font-size: clamp(0.95rem, 2.1vw, 1.35rem);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue);
-  margin-top: 4px;
+  color: #fff;
+  margin-top: 0.1rem;
+  white-space: nowrap;
 }
 
 .nav {
@@ -217,6 +230,27 @@
 }
 .hamburger.is-open span:nth-child(3) {
   transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Narrow / resized viewports: keep the white brand lockup readable */
+@media (max-width: 560px) {
+  :root {
+    --header-h: 84px;
+  }
+  .brand {
+    max-width: calc(100% - 3.5rem);
+    gap: 0.5rem;
+  }
+  .brand__logo {
+    width: clamp(2.85rem, 12vw, 3.5rem);
+  }
+  .brand__name {
+    font-size: clamp(1.35rem, 5.8vw, 1.75rem);
+  }
+  .brand__sub {
+    font-size: clamp(0.85rem, 3.6vw, 1.05rem);
+    letter-spacing: 0.14em;
+  }
 }
 
 .mobile-nav {

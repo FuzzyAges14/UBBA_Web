@@ -210,11 +210,13 @@
 }
 
 .section-title {
-  font-size: clamp(2.4rem, 5.2vw, 3.9rem);
-  font-weight: 600;
+  font-family: var(--font-impact);
+  font-size: clamp(2.6rem, 5.8vw, 4.25rem);
+  font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.08;
   margin-top: 1.1rem;
+  overflow-wrap: anywhere;
 }
 
 .section-lead {

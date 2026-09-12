@@ -88,17 +88,17 @@
   font-family: var(--font-impact);
   text-transform: none;
   font-weight: 400;
-  letter-spacing: 0.045em;
-  line-height: 1.28;
-  font-size: clamp(2.75rem, 6.4vw, 5rem);
+  letter-spacing: 0.02em;
+  line-height: 1.18;
+  /* Brush script reads smaller — bump the clamp so the title fills the field */
+  font-size: clamp(3.1rem, 8vw, 5.75rem);
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
-  max-width: 12em;
+  max-width: 14em;
+  color: #fff;
 }
-.hero h1 .accent {
-  color: var(--blue-soft);
-}
+.hero h1 .accent,
 .hero h1 .accent--red {
-  color: var(--red-2);
+  color: #fff;
 }
 .hero__tagline {
   margin-top: 1.35rem;
@@ -149,19 +149,20 @@
     padding-right: max(1.5rem, env(safe-area-inset-right, 0px) + 1.25rem);
   }
   .hero h1 {
-    font-size: clamp(1.95rem, 7.2vw, 2.75rem);
-    letter-spacing: 0.03em;
-    line-height: 1.28;
-    max-width: 10.5em;
+    font-size: clamp(2.35rem, 9.5vw, 3.4rem);
+    letter-spacing: 0.015em;
+    line-height: 1.16;
+    max-width: 12em;
+    overflow-wrap: anywhere;
   }
   .hero__tagline {
-    font-size: clamp(1.1rem, 4.2vw, 1.45rem);
-    line-height: 1.22;
-    max-width: 18ch;
+    font-size: clamp(1.05rem, 4.2vw, 1.4rem);
+    line-height: 1.25;
+    max-width: min(100%, 28ch);
   }
   .hero__sub {
-    font-size: 1.02rem;
-    max-width: 36ch;
+    font-size: clamp(0.98rem, 3.6vw, 1.05rem);
+    max-width: min(100%, 38ch);
   }
   .hero__actions {
     gap: 0.9rem 1rem;
@@ -171,13 +172,26 @@
     padding-right: 1.4rem;
   }
   .section-title {
-    font-size: clamp(1.85rem, 6.5vw, 2.45rem);
+    font-family: var(--font-impact);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 8.2vw, 3rem);
     line-height: 1.12;
-    max-width: 18ch;
+    max-width: min(100%, 16ch);
+    overflow-wrap: anywhere;
+  }
+  .owner__sign {
+    font-size: clamp(1.15rem, 4.4vw, 1.4rem);
+  }
+  .owner__quote {
+    font-size: clamp(1.25rem, 4.6vw, 1.7rem);
+    line-height: 1.28;
   }
   .page-hero h1 {
-    font-size: clamp(1.85rem, 6.6vw, 2.6rem);
+    font-family: var(--font-impact);
+    font-weight: 400;
+    font-size: clamp(2.15rem, 8vw, 3.1rem);
     line-height: 1.12;
+    overflow-wrap: anywhere;
   }
   .j4k-hero h1,
   .j4k-hero--splash h1 {
