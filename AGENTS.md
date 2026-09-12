@@ -41,7 +41,7 @@ than duplicating them.
   `IntersectionObserver`, so the `Reveal`/`StatCounter` components fall back to
   their final state immediately in tests — that is expected. `jsdom` also lacks
   `window.scrollTo`/`matchMedia`; those are guarded, do not "fix" them.
-- **Design system:** premium brand palette + Teko/Anton/Inter typography live in
+- **Design system:** premium brand palette + Teko/Nanum Brush Script/Inter typography live in
   `src/index.css`; motion uses `framer-motion` (hero) plus the CSS `Reveal`
   wrapper. Signature motifs are components: `Taegeuk`, `Marquee`, plus the
   `.dojang` grid and `.belt-bar` CSS utilities. Per-route `<title>`/meta is set by
@@ -60,6 +60,7 @@ than duplicating them.
   routes `/programs/children` and `/programs/adult` are category overviews and take
   precedence over the dynamic slug route. Add a program by adding to
   `PROGRAM_DETAILS` + the relevant program array — no new page/route needed.
-- **Fonts:** hero/impact titles use `Anton`; other headings use `Teko`; body is
+- **Fonts:** hero/impact titles use `Nanum Brush Script` (traditional ink brush);
+  other headings use `Teko`; body is
   `Inter` (Google Fonts, loaded in `index.html`). The Ocean Rush DEMO font was
   removed and must not be reintroduced without a commercial license.

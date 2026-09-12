@@ -30,7 +30,7 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Optional: privacy acknowledgement checkbox / CAPTCHA if spam becomes an issue
 
 ## Fonts
-- [x] Hero display titles use **Anton** (Google Fonts, OFL) via `--font-impact` — Ocean Rush DEMO removed.
+- [x] Hero display titles use **Nanum Brush Script** (Google Fonts, OFL) via `--font-impact` — traditional ink-brush title face; Ocean Rush DEMO removed.
 
 ## Optional
 - [ ] Glen Rock is enabled (`SITE.showGlenRock = true`) with confirmed address &

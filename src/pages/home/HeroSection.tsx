@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import HeroMedia from '../../components/HeroMedia'
 import TrialCta from '../../components/TrialCta'
+import { getLocationAreaLabel } from '../../data/site'
 import { fadeUp, staticFade } from '../../lib/motion'
 
 export default function HeroSection() {
@@ -30,7 +31,7 @@ export default function HeroSection() {
           custom={1}
           variants={heroMotion}
         >
-          Confidence Building Martial Arts Classes in Allendale &amp; Midland Park
+          Confidence Building Martial Arts Classes in {getLocationAreaLabel()}
         </motion.h2>
         <motion.p
           className="hero__sub"

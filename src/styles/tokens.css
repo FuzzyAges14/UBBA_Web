@@ -28,7 +28,8 @@
   /* Typography */
   --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-display: 'Teko', 'Inter', system-ui, sans-serif;
-  --font-impact: 'Anton', 'Teko', 'Inter', system-ui, sans-serif;
+  /* Traditional ink-brush display (Nanum Brush Script — OFL, Google Fonts) */
+  --font-impact: 'Nanum Brush Script', 'Teko', 'Inter', system-ui, cursive;
 
   /* Layout */
   --maxw: 1240px;
@@ -37,7 +38,7 @@
   --shadow-sm: 0 6px 20px rgba(10, 10, 10, 0.08);
   --shadow: 0 24px 60px rgba(10, 10, 10, 0.14);
   --shadow-lg: 0 40px 90px rgba(10, 10, 10, 0.3);
-  --header-h: 78px;
+  --header-h: 108px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   /* Button interaction timing (shared by buttons.css + reduced-motion) */
   --btn-duration: 0.55s;

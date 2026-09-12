@@ -26,32 +26,40 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-shrink: 0;
+  gap: clamp(0.65rem, 1.6vw, 1.1rem);
+  flex: 0 0 auto;
 }
 .brand__logo {
-  width: 46px;
+  width: clamp(3.75rem, 9vw, 5.75rem);
   height: auto;
   display: block;
   object-fit: contain;
+  flex-shrink: 0;
+  /* Official mark is dark; force an all-white lockup on dark chrome */
+  filter: brightness(0) invert(1);
 }
 .brand__text {
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 0.92;
+  color: #fff;
 }
 .brand__name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  font-size: 0.95rem;
+  font-family: var(--font-impact);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.85rem, 4.2vw, 2.95rem);
+  color: #fff;
+  white-space: nowrap;
 }
 .brand__sub {
-  font-size: 0.58rem;
-  letter-spacing: 0.34em;
+  font-family: var(--font-impact);
+  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blue);
-  margin-top: 4px;
+  color: #fff;
+  margin-top: 0.05rem;
+  white-space: nowrap;
 }
 
 .nav {
@@ -219,12 +227,35 @@
   transform: translateY(-8.5px) rotate(-45deg);
 }
 
+/* Narrow / resized viewports: keep the white brand lockup readable */
+@media (max-width: 560px) {
+  :root {
+    --header-h: 96px;
+  }
+  .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 3.5rem);
+    gap: 0.55rem;
+  }
+  .brand__logo {
+    width: clamp(3.35rem, 14vw, 4.25rem);
+  }
+  .brand__name {
+    font-size: clamp(1.45rem, 5.8vw, 1.9rem);
+  }
+  .brand__sub {
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+    letter-spacing: 0.12em;
+  }
+}
+
 .mobile-nav {
   display: none;
 }
 
 /* Switch to burger before the desktop nav + CTA get crushed */
-@media (max-width: 1120px) {
+@media (max-width: 1280px) {
   .nav,
   .header__right .btn {
     display: none;
@@ -355,7 +386,7 @@
   visibility: hidden;
   pointer-events: none;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1280px) {
   .mobile-nav.is-open {
     visibility: visible;
     pointer-events: auto;
