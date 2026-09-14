@@ -20,7 +20,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  /* Extra gap so the larger logo doesn’t collide with desktop nav */
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+/* Pull the brand toward the left edge; keep more space before the menu */
+.header .container.header__bar {
+  padding-left: clamp(0.75rem, 3.2vw, 1.5rem);
 }
 
 .brand {
@@ -28,6 +34,7 @@
   align-items: center;
   gap: clamp(0.65rem, 1.6vw, 1.1rem);
   flex: 0 0 auto;
+  margin-right: clamp(0.35rem, 1.2vw, 1rem);
 }
 .brand__logo {
   width: clamp(3.75rem, 9vw, 5.75rem);
@@ -35,8 +42,6 @@
   display: block;
   object-fit: contain;
   flex-shrink: 0;
-  /* Official mark is dark; force an all-white lockup on dark chrome */
-  filter: brightness(0) invert(1);
 }
 .brand__text {
   display: flex;
@@ -68,9 +73,9 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: clamp(1.25rem, 2vw, 2.1rem);
+  gap: clamp(1.1rem, 1.8vw, 1.85rem);
   min-width: 0;
-  padding-inline: 0.5rem;
+  padding-inline: 0.75rem 0.5rem;
 }
 .nav__link {
   font-size: 0.875rem;
@@ -228,16 +233,20 @@
   transform: translateY(-8.5px) rotate(-45deg);
 }
 
-/* Narrow / resized viewports: keep the white brand lockup readable */
+/* Narrow / resized viewports: keep the larger brand lockup readable */
 @media (max-width: 560px) {
   :root {
     --header-h: 96px;
+  }
+  .header .container.header__bar {
+    padding-left: clamp(0.85rem, 4vw, 1.25rem);
   }
   .brand {
     flex: 1 1 auto;
     min-width: 0;
     max-width: calc(100% - 3.5rem);
     gap: 0.55rem;
+    margin-right: 0;
   }
   .brand__logo {
     width: clamp(3.35rem, 14vw, 4.25rem);
