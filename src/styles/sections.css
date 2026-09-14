@@ -421,9 +421,9 @@
   overflow-wrap: anywhere;
 }
 .owner__sign {
-  font-family: var(--font-impact);
-  font-style: normal;
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
   color: var(--blue-soft);
   overflow-wrap: anywhere;
 }

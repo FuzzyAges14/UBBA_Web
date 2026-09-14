@@ -25,11 +25,10 @@
   --kr-red: #cd2e3a;
   --kr-blue: #0047a0;
 
-  /* Typography */
+  /* Typography — all Google Fonts, OFL/Apache (commercial website use OK) */
   --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-display: 'Teko', 'Inter', system-ui, sans-serif;
-  /* Traditional ink-brush display (Nanum Brush Script — OFL, Google Fonts) */
-  --font-impact: 'Nanum Brush Script', 'Teko', 'Inter', system-ui, cursive;
+  --font-impact: 'Anton', 'Teko', 'Inter', system-ui, sans-serif;
 
   /* Layout */
   --maxw: 1240px;

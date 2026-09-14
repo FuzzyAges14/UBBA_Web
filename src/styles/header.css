@@ -45,20 +45,21 @@
   color: #fff;
 }
 .brand__name {
-  font-family: var(--font-impact);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  font-size: clamp(1.85rem, 4.2vw, 2.95rem);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
   color: #fff;
   white-space: nowrap;
 }
 .brand__sub {
-  font-family: var(--font-impact);
-  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
-  letter-spacing: 0.14em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.72rem, 1.5vw, 0.95rem);
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #fff;
-  margin-top: 0.05rem;
+  margin-top: 0.15rem;
   white-space: nowrap;
 }
 
