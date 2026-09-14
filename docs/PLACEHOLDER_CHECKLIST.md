@@ -12,7 +12,7 @@ images, "pending confirmation" notes on stats/programs). Track replacements here
 - [ ] Location exterior / interior photos (Allendale, Midland Park, Glen Rock)
 - [ ] Testimonials with real, owner-approved reviews (no fabricated names/quotes)
 - [ ] Stats: "Students Trained", "Years Serving", "Average Parent Rating"
-- [ ] Midland Park phone & hours
+- [x] Midland Park phone & hours (`201-962-1529`; weekly windows from Facebook fall schedule flyer)
 - [x] Social media profile URLs in `src/data/contact.ts` (`SOCIAL_PROFILES`) + recent
       posts on `/follow-us` / `/follow-us/:network` (Instagram `@ubbatkd` & Facebook
       `ubbaad`). Optional live auto-refresh via Meta Graph tokens in `.env`
