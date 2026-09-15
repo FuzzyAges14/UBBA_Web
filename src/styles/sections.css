@@ -891,8 +891,12 @@
   margin: 0;
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: min(52vw, 28rem);
+  /* Width-driven frame: min-height + aspect-ratio was expanding past the
+     grid track (~597px at 1024) and causing document horizontal overflow. */
+  width: 100%;
+  max-width: 100%;
   aspect-ratio: 4 / 3;
+  min-height: 16rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: var(--graphite);
 }
