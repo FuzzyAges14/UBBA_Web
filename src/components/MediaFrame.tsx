@@ -23,7 +23,6 @@ export default function MediaFrame({
   stickers = [],
   className = '',
   variant = 'wide',
-  ownerRequired: _ownerRequired = false,
   src,
   alt,
 }: MediaFrameProps) {
