@@ -742,7 +742,7 @@ export const LOCATIONS: Location[] = [
       ],
       programsBlurb:
         'Age-specific children’s Taekwondo, teen training, adult martial arts, family options, and Just 4 Kids events (birthday parties, summer camp, and Parents’ Night Out) are offered through our Bergen County schools. Ask which sessions run at Allendale when you book your free class.',
-      imageLabel: 'Allendale school — Google photo (temporary)',
+      imageLabel: 'Allendale school',
     },
   },
   {
@@ -780,7 +780,7 @@ export const LOCATIONS: Location[] = [
       ],
       programsBlurb:
         'Students can explore Tiny Tigers, Junior Tigers, teen and adult martial arts, plus family-friendly training and Just 4 Kids offerings. Ask which Midland Park class times fit your family when you request a free trial.',
-      imageLabel: 'Midland Park school — Google photo (temporary)',
+      imageLabel: 'Midland Park school',
     },
   },
 ]

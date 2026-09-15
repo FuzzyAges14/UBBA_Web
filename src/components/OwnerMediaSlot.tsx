@@ -12,7 +12,7 @@ type OwnerMediaSlotProps = {
  */
 export default function OwnerMediaSlot({
   label,
-  note = 'OWNER PHOTO REQUIRED — DO NOT SUBSTITUTE WITH MISLEADING STOCK',
+  note,
   icon = '🏫',
   className = '',
 }: OwnerMediaSlotProps) {
@@ -20,13 +20,13 @@ export default function OwnerMediaSlot({
     <div
       className={`owner-slot ${className}`.trim()}
       role="img"
-      aria-label={`${label}. ${note}`}
+      aria-label={note ? `${label}. ${note}` : label}
     >
       <span className="owner-slot__mark" aria-hidden="true">
         {icon}
       </span>
       <p className="owner-slot__label">{label}</p>
-      <p className="owner-slot__note">{note}</p>
+      {note ? <p className="owner-slot__note">{note}</p> : null}
     </div>
   )
 }
