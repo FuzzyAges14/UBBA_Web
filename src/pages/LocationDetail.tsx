@@ -72,15 +72,12 @@ export default function LocationDetail() {
               <figure className="interior-media interior-media--wide">
                 <OptimizedImage
                   src={loc.imageSrc}
-                  alt={`${loc.name} United Black Belt Academy — Google location photo`}
+                  alt={`${loc.name} United Black Belt Academy`}
                   width={imageDimensionsFor(loc.imageSrc).width}
                   height={imageDimensionsFor(loc.imageSrc).height}
                   sizes="(max-width: 900px) 100vw, 48vw"
                   loading="lazy"
                 />
-                <figcaption className="interior-media__credit">
-                  Temporary Google photo — replace with academy photography
-                </figcaption>
               </figure>
             ) : (
               <OwnerMediaSlot label={page.imageLabel} icon="🏫" />

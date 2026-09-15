@@ -33,8 +33,8 @@ export default function Footer() {
                 src="/logo.png"
                 alt=""
                 className="brand__logo"
-                width={52}
-                height={49}
+                width={92}
+                height={86}
                 loading="lazy"
                 decoding="async"
               />

@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal'
 import TrialCta from '../../components/TrialCta'
-import { getLocationAreaLabel } from '../../data/site'
+import {
+  getLocationAreaLabel,
+  getLocationPageIds,
+  getVisibleLocations,
+} from '../../data/site'
 
 /**
  * Homepage final CTA — full-bleed red band (shared `.cta-band` chrome with `CtaBanner`).
  * Primary CTA opens the NextKick portal; copy/links include all visible schools.
+ * Schools without a dedicated landing page (e.g. Glen Rock) deep-link to #locations.
  */
 export default function FinalCtaSection() {
+  const locations = getVisibleLocations()
+  const pageIds = new Set(getLocationPageIds())
+
   return (
     <section className="cta-band" aria-labelledby="home-final-cta-title">
       <div className="dojang" aria-hidden="true" />
@@ -27,13 +35,28 @@ export default function FinalCtaSection() {
             </div>
             <p className="cta-band__secondary">
               Or visit our{' '}
-              <Link to="/locations/allendale" className="text-link text-link--on-red">
-                Allendale
-              </Link>
-              {' or '}
-              <Link to="/locations/midland-park" className="text-link text-link--on-red">
-                Midland Park
-              </Link>
+              {locations.map((loc, i) => {
+                let sep: string | null = null
+                if (i > 0) {
+                  sep =
+                    i === locations.length - 1
+                      ? locations.length === 2
+                        ? ' or '
+                        : ', or '
+                      : ', '
+                }
+                const to = pageIds.has(loc.id)
+                  ? `/locations/${loc.id}`
+                  : '/#locations'
+                return (
+                  <span key={loc.id}>
+                    {sep}
+                    <Link to={to} className="text-link text-link--on-red">
+                      {loc.name}
+                    </Link>
+                  </span>
+                )
+              })}
               {' location pages.'}
             </p>
           </div>

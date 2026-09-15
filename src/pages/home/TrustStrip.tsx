@@ -1,4 +1,4 @@
-import { getVisibleLocations } from '../../data/site'
+import { getLocationAreaLabel, getVisibleLocations } from '../../data/site'
 
 /**
  * Post-hero trust signals — kept out of the first viewport so the hero stays
@@ -26,7 +26,7 @@ export default function TrustStrip() {
         </span>
         <span className="home-trust__item home-trust__item--place">
           <span className="home-trust__dot" aria-hidden="true" />
-          Allendale &amp; Midland Park, NJ
+          {getLocationAreaLabel({ withState: true })}
         </span>
       </div>
     </aside>

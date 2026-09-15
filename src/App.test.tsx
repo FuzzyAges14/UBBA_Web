@@ -182,7 +182,7 @@ describe('App routing', () => {
     ).toHaveAttribute('href', '/locations/midland-park')
   })
 
-  it('renders the Midland Park location landing page with placeholders', async () => {
+  it('renders the Midland Park location landing page with phone and hours', async () => {
     renderAt('/locations/midland-park')
     expect(
       await screen.findByRole('heading', {
@@ -191,7 +191,8 @@ describe('App routing', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getAllByText(/644 Godwin Ave/i).length).toBeGreaterThan(0)
-    expect(screen.getAllByText(/pending owner confirmation/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('link', { name: /201-962-1529/ }).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/3:40pm - 8:00pm/i).length).toBeGreaterThan(0)
   })
 
   it('shows a 404 for an unknown location slug', async () => {

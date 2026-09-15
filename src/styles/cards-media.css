@@ -478,12 +478,6 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent);
   width: 100%;
 }
-.ph__label::before {
-  content: 'PLACEHOLDER · ';
-  color: var(--blue);
-  letter-spacing: 0.1em;
-  font-size: 0.66rem;
-}
 .ph--tall {
   min-height: 460px;
 }

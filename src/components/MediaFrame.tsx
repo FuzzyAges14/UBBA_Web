@@ -9,7 +9,7 @@ type MediaFrameProps = {
   stickers?: { kind: FunStickerKind; spot?: 'tl' | 'tr' | 'bl' | 'br'; rotate?: number; delay?: number }[]
   className?: string
   variant?: 'tall' | 'wide' | 'default'
-  /** When true and no `src`, show an explicit owner-photo-required caption */
+  /** @deprecated Kept for call-site compatibility; captions are no longer shown. */
   ownerRequired?: boolean
   /** Optional photo from the media registry (replaces the placeholder). */
   src?: string
@@ -23,7 +23,6 @@ export default function MediaFrame({
   stickers = [],
   className = '',
   variant = 'wide',
-  ownerRequired = false,
   src,
   alt,
 }: MediaFrameProps) {
@@ -44,11 +43,6 @@ export default function MediaFrame({
         />
       ) : (
         <Placeholder label={label} icon={icon} variant={variant} />
-      )}
-      {ownerRequired && !src && (
-        <p className="media-frame__note">
-          OWNER PHOTO REQUIRED — DO NOT SUBSTITUTE WITH MISLEADING STOCK
-        </p>
       )}
       {stickers.map((s) => (
         <FunSticker

@@ -20,38 +20,52 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  /* Extra gap so the larger logo doesn’t collide with desktop nav */
+  gap: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+/* Pull the brand toward the left edge; keep more space before the menu */
+.header .container.header__bar {
+  padding-left: clamp(0.75rem, 3.2vw, 1.5rem);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-shrink: 0;
+  gap: clamp(0.65rem, 1.6vw, 1.1rem);
+  flex: 0 0 auto;
+  margin-right: clamp(0.35rem, 1.2vw, 1rem);
 }
 .brand__logo {
-  width: 46px;
+  width: clamp(3.75rem, 9vw, 5.75rem);
   height: auto;
   display: block;
   object-fit: contain;
+  flex-shrink: 0;
 }
 .brand__text {
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 0.92;
+  color: #fff;
 }
 .brand__name {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.01em;
-  font-size: 0.95rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  color: #fff;
+  white-space: nowrap;
 }
 .brand__sub {
-  font-size: 0.58rem;
-  letter-spacing: 0.34em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.72rem, 1.5vw, 0.95rem);
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--blue);
-  margin-top: 4px;
+  color: #fff;
+  margin-top: 0.15rem;
+  white-space: nowrap;
 }
 
 .nav {
@@ -59,9 +73,9 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: clamp(1.25rem, 2vw, 2.1rem);
+  gap: clamp(1.1rem, 1.8vw, 1.85rem);
   min-width: 0;
-  padding-inline: 0.5rem;
+  padding-inline: 0.75rem 0.5rem;
 }
 .nav__link {
   font-size: 0.875rem;
@@ -219,12 +233,39 @@
   transform: translateY(-8.5px) rotate(-45deg);
 }
 
+/* Narrow / resized viewports: keep the larger brand lockup readable */
+@media (max-width: 560px) {
+  :root {
+    --header-h: 96px;
+  }
+  .header .container.header__bar {
+    padding-left: clamp(0.85rem, 4vw, 1.25rem);
+  }
+  .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 3.5rem);
+    gap: 0.55rem;
+    margin-right: 0;
+  }
+  .brand__logo {
+    width: clamp(3.35rem, 14vw, 4.25rem);
+  }
+  .brand__name {
+    font-size: clamp(1.45rem, 5.8vw, 1.9rem);
+  }
+  .brand__sub {
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+    letter-spacing: 0.12em;
+  }
+}
+
 .mobile-nav {
   display: none;
 }
 
 /* Switch to burger before the desktop nav + CTA get crushed */
-@media (max-width: 1120px) {
+@media (max-width: 1280px) {
   .nav,
   .header__right .btn {
     display: none;
@@ -355,7 +396,7 @@
   visibility: hidden;
   pointer-events: none;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1280px) {
   .mobile-nav.is-open {
     visibility: visible;
     pointer-events: auto;

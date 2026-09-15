@@ -60,6 +60,7 @@ than duplicating them.
   routes `/programs/children` and `/programs/adult` are category overviews and take
   precedence over the dynamic slug route. Add a program by adding to
   `PROGRAM_DETAILS` + the relevant program array — no new page/route needed.
-- **Fonts:** hero/impact titles use `Anton`; other headings use `Teko`; body is
-  `Inter` (Google Fonts, loaded in `index.html`). The Ocean Rush DEMO font was
-  removed and must not be reintroduced without a commercial license.
+- **Fonts:** hero/impact titles use `Anton` (sans); other headings use `Teko`;
+  body is `Inter` (Google Fonts, OFL/Apache — free for commercial website use).
+  The Ocean Rush DEMO font was removed and must not be reintroduced without a
+  commercial license.

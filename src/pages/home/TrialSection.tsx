@@ -1,7 +1,7 @@
 import Reveal from '../../components/Reveal'
 import LeadForm from '../../components/LeadForm'
 import SectionHeading from '../../components/SectionHeading'
-import { TRIAL_HIGHLIGHTS } from '../../data/site'
+import { getTrialHighlights } from '../../data/site'
 
 export default function TrialSection() {
   return (
@@ -15,7 +15,7 @@ export default function TrialSection() {
             lead="Tell us a little about your goals and preferred school. We'll help you choose a program and schedule a free introductory class — no pressure, just a welcoming first step onto the mat."
           />
           <ul className="checklist mt">
-            {TRIAL_HIGHLIGHTS.map((item) => (
+            {getTrialHighlights().map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>

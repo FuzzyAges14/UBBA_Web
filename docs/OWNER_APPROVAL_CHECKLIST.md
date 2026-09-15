@@ -9,8 +9,8 @@ approved. Configuration lives in `src/data/site.ts`.
 - [ ] Owner rank & certifications (`OWNER.credentials`)
 - [ ] Years of experience / academy history
 - [ ] Allendale hours still accurate (`LOCATIONS[allendale].hours`)
-- [ ] Midland Park phone number (`LOCATIONS[midland-park].phone`)
-- [ ] Midland Park hours (`LOCATIONS[midland-park].hours`)
+- [x] Midland Park phone number (`LOCATIONS[midland-park].phone` = `201-962-1529`)
+- [x] Midland Park hours (`LOCATIONS[midland-park].hours` — from Facebook fall schedule flyer; confirm if class times change)
 - [ ] Location landing-page photography for `/locations/allendale` and
       `/locations/midland-park` (currently labeled placeholders)
 - [ ] Nearby-communities lists on each location page (orientation only — edit if needed)

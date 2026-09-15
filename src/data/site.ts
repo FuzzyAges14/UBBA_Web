@@ -254,11 +254,13 @@ export type ProgramCard = {
 }
 
 /** Checklist bullets beside the homepage free-class form. */
-export const TRIAL_HIGHLIGHTS = [
-  'Kids, teens, and adult programs',
-  'Allendale & Midland Park locations',
-  'Beginners welcome — no experience required',
-] as const
+export function getTrialHighlights(): string[] {
+  return [
+    'Kids, teens, and adult programs',
+    `${getLocationAreaLabel()} locations`,
+    'Beginners welcome — no experience required',
+  ]
+}
 
 export const HOME_PROGRAM_CARDS: ProgramCard[] = [
   {
@@ -740,7 +742,7 @@ export const LOCATIONS: Location[] = [
       ],
       programsBlurb:
         'Age-specific children’s Taekwondo, teen training, adult martial arts, family options, and Just 4 Kids events (birthday parties, summer camp, and Parents’ Night Out) are offered through our Bergen County schools. Ask which sessions run at Allendale when you book your free class.',
-      imageLabel: 'Allendale school — Google photo (temporary)',
+      imageLabel: 'Allendale school',
     },
   },
   {
@@ -748,11 +750,22 @@ export const LOCATIONS: Location[] = [
     name: 'Midland Park',
     address: '644 Godwin Ave',
     city: 'Midland Park, NJ 07432',
+    phone: '201-962-1529',
     mapQuery: '644 Godwin Ave, Midland Park, NJ 07432',
     imageSrc: IMAGES.midlandParkExterior,
     visitImageSrc: IMAGES.midlandParkStreet,
-    detailsPending: true,
-    note: 'Phone number and weekly hours — pending owner confirmation.',
+    // Weekly windows from the Midland Park “New Fall Class Schedule”
+    // flyer posted on Facebook (effective 08/31/2026). Friday kids /
+    // BBC sessions on that flyer run at Allendale.
+    hours: [
+      { day: 'Monday', time: '3:40pm - 8:00pm' },
+      { day: 'Tuesday', time: '4:00pm - 7:35pm' },
+      { day: 'Wednesday', time: '3:40pm - 8:00pm' },
+      { day: 'Thursday', time: '3:40pm - 6:15pm' },
+      { day: 'Friday', time: 'Classes at Allendale' },
+      { day: 'Saturday', time: '9:00am - 11:45am' },
+      { day: 'Sunday', time: 'Closed' },
+    ],
     page: {
       headline: 'Family martial arts training in Midland Park, NJ',
       intro:
@@ -766,8 +779,8 @@ export const LOCATIONS: Location[] = [
         'Fair Lawn',
       ],
       programsBlurb:
-        'Students can explore Tiny Tigers, Junior Tigers, teen and adult martial arts, plus family-friendly training and Just 4 Kids offerings. Availability can vary by school — tell us your preferred Midland Park schedule when you request a free trial.',
-      imageLabel: 'Midland Park school — Google photo (temporary)',
+        'Students can explore Tiny Tigers, Junior Tigers, teen and adult martial arts, plus family-friendly training and Just 4 Kids offerings. Ask which Midland Park class times fit your family when you request a free trial.',
+      imageLabel: 'Midland Park school',
     },
   },
 ]
