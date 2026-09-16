@@ -26,6 +26,13 @@ function renderApp(path = '/') {
 }
 
 describe('Header navigation', () => {
+  it('renders a one-line academy lockup in the header brand', () => {
+    renderHeader()
+    const home = screen.getByRole('link', { name: /united black belt academy home/i })
+    expect(home).toHaveClass('brand--header')
+    expect(home).toHaveTextContent(/united black belt\s*academy/i)
+  })
+
   it('exposes mobile menu controls with dialog semantics when open', async () => {
     const user = userEvent.setup()
     renderHeader()

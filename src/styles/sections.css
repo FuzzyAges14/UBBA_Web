@@ -418,14 +418,15 @@
   border-left: 3px solid var(--blue);
   padding-left: 1.2rem;
   margin: 1.6rem 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 .owner__sign {
   font-family: var(--font-display);
   font-style: italic;
   font-size: clamp(1.2rem, 2.2vw, 1.5rem);
   color: var(--blue-soft);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* ---------- Testimonials ---------- */
@@ -435,6 +436,7 @@
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  text-wrap: pretty;
 }
 .quote {
   background: var(--graphite);
@@ -821,6 +823,7 @@
 .cta-banner h2 {
   font-size: clamp(1.9rem, 4.5vw, 3rem);
   position: relative;
+  text-wrap: balance;
 }
 .cta-banner p {
   margin: 1.05rem auto 2rem;

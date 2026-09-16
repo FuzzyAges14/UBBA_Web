@@ -25,7 +25,7 @@ export default function InstructorSection() {
         <Reveal delay={100} className="owner__copy">
           <SectionHeading
             eyebrow="Meet The Owner"
-            title={`Hi, my name is ${OWNER.name}`}
+            title={`Hi, my name is ${OWNER.name.replace(/ (?=\S+$)/, '\u00A0')}`}
             lead={OWNER.intro}
           />
           <blockquote className="owner__quote">"{OWNER.quote}"</blockquote>

@@ -813,10 +813,15 @@ export function getVisibleLocations(): Location[] {
   return SITE.showGlenRock ? [...LOCATIONS, GLEN_ROCK] : LOCATIONS
 }
 
+/** Keep multi-word place names (Glen Rock, Midland Park) on one line. */
+function glueWords(value: string) {
+  return value.replace(/ /g, '\u00A0')
+}
+
 /** Human-readable list of visible school names, e.g. "Allendale, Midland Park & Glen Rock". */
 export function getLocationAreaLabel(options?: { withState?: boolean }): string {
-  const names = getVisibleLocations().map((l) => l.name)
-  if (names.length === 0) return options?.withState ? 'Bergen County, NJ' : 'Bergen County'
+  const names = getVisibleLocations().map((l) => glueWords(l.name))
+  if (names.length === 0) return options?.withState ? 'Bergen\u00A0County, NJ' : 'Bergen\u00A0County'
   if (names.length === 1) {
     return options?.withState ? `${names[0]}, NJ` : names[0]
   }

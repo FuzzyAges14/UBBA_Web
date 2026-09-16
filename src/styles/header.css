@@ -21,12 +21,18 @@
   align-items: center;
   justify-content: space-between;
   /* Extra gap so the larger logo doesn’t collide with desktop nav */
-  gap: clamp(1.75rem, 3vw, 2.75rem);
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
 }
 
-/* Pull the brand toward the left edge; keep more space before the menu */
+/*
+ * Full-bleed header so the lockup can sit in the true top-left corner.
+ * Footer brand keeps the stacked lockup via default .brand rules.
+ */
 .header .container.header__bar {
-  padding-left: clamp(0.75rem, 3.2vw, 1.5rem);
+  max-width: none;
+  width: 100%;
+  padding-left: clamp(0.45rem, 1.2vw, 0.9rem);
+  padding-right: clamp(0.85rem, 2vw, 1.6rem);
 }
 
 .brand {
@@ -68,14 +74,49 @@
   white-space: nowrap;
 }
 
+/* Desktop / tablet header: one-line “United Black Belt Academy”, same size */
+.header .brand--header {
+  gap: 0.7rem;
+  margin-right: 0.35rem;
+}
+.header .brand--header .brand__text {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.32em;
+  line-height: 1;
+}
+.header .brand--header .brand__name,
+.header .brand--header .brand__sub {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.12rem, 1.7vw, 1.75rem);
+  letter-spacing: -0.01em;
+  text-transform: none;
+  margin-top: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Burger header still has room for a slightly larger one-line lockup */
+@media (max-width: 1280px) and (min-width: 561px) {
+  .header .brand--header {
+    gap: 0.75rem;
+  }
+  .header .brand--header .brand__name,
+  .header .brand--header .brand__sub {
+    font-size: clamp(1.28rem, 3.1vw, 1.75rem);
+  }
+}
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: clamp(1.1rem, 1.8vw, 1.85rem);
+  gap: clamp(0.85rem, 1.45vw, 1.55rem);
   min-width: 0;
-  padding-inline: 0.75rem 0.5rem;
+  padding-inline: 0.5rem 0.35rem;
 }
 .nav__link {
   font-size: 0.875rem;
@@ -233,14 +274,16 @@
   transform: translateY(-8.5px) rotate(-45deg);
 }
 
-/* Narrow / resized viewports: keep the larger brand lockup readable */
+/* Phone: keep the stacked lockup so the full name stays readable */
 @media (max-width: 560px) {
   :root {
     --header-h: 96px;
   }
   .header .container.header__bar {
-    padding-left: clamp(0.85rem, 4vw, 1.25rem);
+    padding-left: clamp(0.7rem, 3.5vw, 1.05rem);
+    padding-right: clamp(0.55rem, 3vw, 0.9rem);
   }
+  .header .brand--header,
   .brand {
     flex: 1 1 auto;
     min-width: 0;
@@ -248,15 +291,28 @@
     gap: 0.55rem;
     margin-right: 0;
   }
-  .brand__logo {
+  .header .brand--header .brand__text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    line-height: 0.92;
+  }
+  .brand__logo,
+  .header .brand--header .brand__logo {
     width: clamp(3.35rem, 14vw, 4.25rem);
   }
-  .brand__name {
+  .brand__name,
+  .header .brand--header .brand__name {
     font-size: clamp(1.45rem, 5.8vw, 1.9rem);
+    letter-spacing: -0.01em;
   }
-  .brand__sub {
+  .brand__sub,
+  .header .brand--header .brand__sub {
     font-size: clamp(0.95rem, 4vw, 1.2rem);
+    font-weight: 600;
     letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
   }
 }
 
