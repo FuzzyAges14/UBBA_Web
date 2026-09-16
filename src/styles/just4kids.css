@@ -44,6 +44,13 @@
   text-transform: uppercase;
   color: var(--red);
   line-height: 1.1;
+  text-wrap: balance;
+}
+
+@media (min-width: 720px) {
+  .j4k-hero__brand {
+    white-space: nowrap;
+  }
 }
 .j4k-hero h1 {
   margin: 1rem 0 0;
@@ -54,8 +61,9 @@
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--graphite);
-  max-width: 20ch;
-  overflow-wrap: anywhere;
+  max-width: min(100%, 24ch);
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 .j4k-hero--splash h1 {
   margin-top: 1rem;
@@ -64,7 +72,8 @@
   font-size: clamp(2.4rem, 6.4vw, 4rem);
   font-weight: 400;
   text-transform: none;
-  max-width: 18ch;
+  max-width: min(100%, 22ch);
+  text-wrap: balance;
 }
 .j4k-hero__lead {
   margin: 1.35rem 0 0;

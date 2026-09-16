@@ -12,6 +12,13 @@
   text-transform: uppercase;
   color: #fff;
   line-height: 1.1;
+  text-wrap: balance;
+}
+
+@media (min-width: 720px) {
+  .page-hero__brand {
+    white-space: nowrap;
+  }
 }
 
 .page-hero__accent {
@@ -85,8 +92,9 @@
 }
 
 .page-hero--legal h1 {
-  max-width: 22ch;
+  max-width: min(100%, 28ch);
   font-size: clamp(2rem, 4.5vw, 3.1rem);
+  text-wrap: balance;
 }
 
 /* ---------- Interior media (program / atmospheric stock) ---------- */
