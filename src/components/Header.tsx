@@ -159,7 +159,7 @@ export default function Header() {
           <span style={{ background: '#0a0a0a' }} />
         </div>
         <div className="container header__bar">
-          <Link to="/" className="brand" aria-label={`${SITE.name} home`}>
+          <Link to="/" className="brand brand--header" aria-label={`${SITE.name} home`}>
             <img
               src="/logo.png"
               alt=""

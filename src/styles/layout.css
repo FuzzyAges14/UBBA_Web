@@ -216,7 +216,16 @@
   letter-spacing: 0.01em;
   line-height: 1.08;
   margin-top: 1.1rem;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+/* Two-column copy: slightly smaller titles so phrases fill the column cleanly */
+@media (min-width: 961px) {
+  .split .section-title,
+  .owner .section-title {
+    font-size: clamp(2.1rem, 3.2vw, 3.2rem);
+  }
 }
 
 .section-lead {
@@ -225,6 +234,7 @@
   font-size: 1.08rem;
   margin-top: 1.2rem;
   line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .section--dark .section-lead,

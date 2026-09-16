@@ -94,10 +94,7 @@
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
   max-width: 12em;
   color: #fff;
-}
-.hero h1 .accent,
-.hero h1 .accent--red {
-  color: #fff;
+  text-wrap: balance;
 }
 .hero__tagline {
   margin-top: 1.35rem;
@@ -109,6 +106,7 @@
   color: #fff;
   max-width: 34ch;
   line-height: 1.12;
+  text-wrap: pretty;
 }
 .hero__sub {
   margin-top: 1rem;
@@ -116,6 +114,11 @@
   color: rgba(255, 255, 255, 0.82);
   max-width: 48ch;
   line-height: 1.55;
+  text-wrap: pretty;
+}
+.hero h1 .accent,
+.hero h1 .accent--red {
+  color: #fff;
 }
 .hero__actions {
   margin-top: 2.25rem;
@@ -139,6 +142,26 @@
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
+}
+
+/* Maximized / wide desktop: keep the academy name on a single line */
+@media (min-width: 1280px) {
+  .hero__inner {
+    max-width: min(68rem, 100%);
+  }
+  .hero h1 {
+    white-space: nowrap;
+    max-width: none;
+    font-size: clamp(3.05rem, 4.55vw, 4.65rem);
+    letter-spacing: 0.03em;
+    line-height: 1.12;
+  }
+  .hero__tagline {
+    max-width: min(100%, 46ch);
+  }
+  .hero__sub {
+    max-width: min(100%, 54ch);
+  }
 }
 
 /* Phone / narrow windows: keep titles & content inset from the side edges */
