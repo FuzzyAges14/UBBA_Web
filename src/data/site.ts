@@ -3,7 +3,6 @@ import { heroVideoMp4, heroVideoWebm } from '../lib/mediaEnv'
 import {
   ANNOUNCEMENT_FALL_SCHEDULE,
   AUTHENTIC_DIMENSIONS,
-  KIDS_BOARD_BREAK_SOCIAL,
   PROMO_BACK_TO_SCHOOL,
   SUMMER_CAMP_FEATURE,
   SUMMER_CAMP_TILE,
@@ -975,7 +974,13 @@ export type SocialLink = {
   recentPosts: SocialPost[]
 }
 
-/** Curated fallback posts (used until Meta live feed is configured). */
+/** How many posts each Follow Us network shows (live API + static fallback). */
+export const SOCIAL_FEED_LIMIT = 3
+
+/**
+ * Curated fallback posts (used until Meta live feed is configured).
+ * Keep exactly `SOCIAL_FEED_LIMIT` items per network, newest first.
+ */
 export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
   instagram: [
     {
@@ -998,20 +1003,6 @@ export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
       dateLabel: 'Aug 18, 2026',
       href: 'https://www.instagram.com/p/DcPpMxqACgX/',
       image: '/media/authentic/summer-camp-zoo-trip.jpg',
-    },
-    {
-      id: 'ig-water',
-      caption: 'Summer Camp water games, crafts, and group activities',
-      dateLabel: 'Aug 17, 2026',
-      href: 'https://www.instagram.com/p/DcNH2aGAVOr/',
-      image: '/media/authentic/summer-camp-crafts-water.jpg',
-    },
-    {
-      id: 'ig-bday-shout',
-      caption: 'Happy Birthday shout-out — celebrating a student (board-break photo)',
-      dateLabel: 'Aug 15, 2026',
-      href: 'https://www.instagram.com/p/DcE5gENlP5d/',
-      image: KIDS_BOARD_BREAK_SOCIAL.src,
     },
   ],
   facebook: [
@@ -1042,7 +1033,7 @@ export const SOCIAL_RECENT_POSTS: Record<SocialSlug, SocialPost[]> = {
 /** Profile links come from SOCIAL_PROFILES in contact.ts — edit URLs there. */
 export const SOCIAL: SocialLink[] = SOCIAL_PROFILES.map((profile) => ({
   ...profile,
-  recentPosts: SOCIAL_RECENT_POSTS[profile.slug],
+  recentPosts: (SOCIAL_RECENT_POSTS[profile.slug] ?? []).slice(0, SOCIAL_FEED_LIMIT),
 }))
 
 export function getSocial(slug: string | undefined): SocialLink | undefined {

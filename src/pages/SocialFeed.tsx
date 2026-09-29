@@ -4,27 +4,33 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import CtaBanner from '../components/CtaBanner'
 import NotFound from './NotFound'
-import { getSocial, SITE, type SocialPost } from '../data/site'
+import { getSocial, SITE, SOCIAL_FEED_LIMIT, type SocialPost } from '../data/site'
 import { fetchSocialFeed } from '../lib/fetchSocialFeed'
+
+function takeLatestPosts(posts: SocialPost[]): SocialPost[] {
+  return posts.slice(0, SOCIAL_FEED_LIMIT)
+}
 
 export default function SocialFeed() {
   const { network: networkSlug } = useParams()
   const network = getSocial(networkSlug)
 
-  const [posts, setPosts] = useState<SocialPost[]>(network?.recentPosts ?? [])
+  const [posts, setPosts] = useState<SocialPost[]>(() =>
+    takeLatestPosts(network?.recentPosts ?? []),
+  )
   const [avatarSrc, setAvatarSrc] = useState(network?.avatarSrc ?? '/logo.png')
   const [source, setSource] = useState<'live' | 'fallback' | 'static'>('static')
 
   useEffect(() => {
     if (!network) return
-    setPosts(network.recentPosts)
+    setPosts(takeLatestPosts(network.recentPosts))
     setAvatarSrc(network.avatarSrc)
     setSource('static')
 
     const controller = new AbortController()
     fetchSocialFeed(network.slug, controller.signal).then((feed) => {
       if (!feed) return
-      setPosts(feed.posts)
+      setPosts(takeLatestPosts(feed.posts))
       setAvatarSrc(feed.avatarSrc || network.avatarSrc)
       setSource(feed.source)
     })

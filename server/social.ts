@@ -1,5 +1,9 @@
 import { SOCIAL_PROFILES, type SocialProfileSlug } from '../src/data/contact.ts'
-import { SOCIAL_RECENT_POSTS, type SocialPost } from '../src/data/site.ts'
+import {
+  SOCIAL_FEED_LIMIT,
+  SOCIAL_RECENT_POSTS,
+  type SocialPost,
+} from '../src/data/site.ts'
 import { serverConfig } from './config.ts'
 
 export type SocialFeedResponse = {
@@ -31,14 +35,17 @@ function truncateCaption(text: string, max = 110): string {
   return `${cleaned.slice(0, max - 1).trim()}…`
 }
 
-function fallbackFeed(network: SocialProfileSlug): SocialFeedResponse {
+function fallbackFeed(
+  network: SocialProfileSlug,
+  limit = SOCIAL_FEED_LIMIT,
+): SocialFeedResponse {
   const profile = SOCIAL_PROFILES.find((p) => p.slug === network)
   return {
     ok: true,
     network,
     source: 'fallback',
     avatarSrc: profile?.avatarSrc ?? '/logo.png',
-    posts: SOCIAL_RECENT_POSTS[network] ?? [],
+    posts: (SOCIAL_RECENT_POSTS[network] ?? []).slice(0, limit),
   }
 }
 
@@ -143,17 +150,20 @@ export async function getSocialFeed(
   network: SocialProfileSlug,
   options: { limit?: number; bypassCache?: boolean } = {},
 ): Promise<SocialFeedResponse> {
-  const limit = options.limit ?? 3
+  const limit = Math.max(1, options.limit ?? SOCIAL_FEED_LIMIT)
   const profile = SOCIAL_PROFILES.find((p) => p.slug === network)
   const avatarSrc = profile?.avatarSrc ?? '/logo.png'
 
   if (!metaLiveConfigured(network)) {
-    return fallbackFeed(network)
+    return fallbackFeed(network, limit)
   }
 
   const cached = cache.get(network)
   if (!options.bypassCache && cached && cached.expiresAt > Date.now()) {
-    return cached.payload
+    return {
+      ...cached.payload,
+      posts: cached.payload.posts.slice(0, limit),
+    }
   }
 
   try {
@@ -163,7 +173,7 @@ export async function getSocialFeed(
         : await fetchFacebookLive(limit)
 
     if (posts.length === 0) {
-      return fallbackFeed(network)
+      return fallbackFeed(network, limit)
     }
 
     const payload: SocialFeedResponse = {
@@ -184,6 +194,6 @@ export async function getSocialFeed(
       network,
       reason: err instanceof Error ? err.message : 'unknown',
     })
-    return fallbackFeed(network)
+    return fallbackFeed(network, limit)
   }
 }
