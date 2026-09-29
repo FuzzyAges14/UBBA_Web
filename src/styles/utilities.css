@@ -75,26 +75,43 @@ h3 + .checklist {
   margin-top: 2.5rem;
 }
 
-/* Hide Netlify deploy / “Deploys by Netlify” badge (host injects it; not in our markup) */
-a[href*="netlify.com"]:has(img),
-a[href*="netlify.app"]:has(img),
-a[href*="netlify.com"][target="_blank"]:has(img),
-img[alt*="Netlify" i],
-img[alt*="Deploys by Netlify" i],
-img[src*="netlify.com/v3/img"],
-img[src*="netlify.com/img"],
-iframe[src*="netlify"],
+/*
+ * Hide Netlify “Powered by Netlify” / deploy badge.
+ * Production injects /.netlify/scripts/hud which mounts #nl-badge-frame
+ * (fixed bottom-right). Prefer turning the badge Off in the Netlify UI:
+ * Project configuration → General → Powered by Netlify badge.
+ * These rules are a client-side fallback for the outer iframe/shell only —
+ * cross-origin iframe contents cannot be styled from this page.
+ */
+#nl-badge-frame,
+.nl-badge,
+iframe#nl-badge-frame,
+iframe[id*='nl-badge'],
+iframe[src*='netlify'][src*='badge'],
+a[href*='netlify.com']:has(img),
+a[href*='netlify.app']:has(img),
+a[href*='netlify.com'][target='_blank']:has(img),
+img[alt*='Netlify' i],
+img[alt*='Deploys by Netlify' i],
+img[alt*='Powered by Netlify' i],
+img[src*='netlify.com/v3/img'],
+img[src*='netlify.com/img'],
+iframe[src*='netlify'],
 #netlify-identity-widget,
 #nf-notif,
 [data-netlify-deploy-id],
 [data-netlify-badge],
 [data-nf-badge],
-body > a[href*="netlify.com"],
-body > a[href*="netlify.app"],
-body > a[href*="netlify.com"][style*="position"],
-body > div:has(> a[href*="netlify.com"] img),
-body > div:has(> a[href*="netlify.app"] img) {
+body > a[href*='netlify.com'],
+body > a[href*='netlify.app'],
+body > a[href*='netlify.com'][style*='position'],
+body > div:has(> a[href*='netlify.com'] img),
+body > div:has(> a[href*='netlify.app'] img) {
   display: none !important;
   visibility: hidden !important;
+  opacity: 0 !important;
   pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
