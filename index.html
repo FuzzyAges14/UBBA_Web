@@ -44,6 +44,55 @@
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Free-tier Netlify injects /.netlify/scripts/hud → #nl-badge-frame
+      (“Powered by Netlify”). The dashboard toggle is often unavailable on
+      free plans; this early CSS+JS removes the badge with no paid upgrade.
+    -->
+    <style id="ubba-hide-netlify-badge">
+      #nl-badge-frame,
+      .nl-badge,
+      iframe#nl-badge-frame,
+      iframe[id*='nl-badge'],
+      iframe[src*='netlify'][src*='badge'],
+      iframe[src*='/.netlify/'] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        max-width: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        position: fixed !important;
+        bottom: -9999px !important;
+        right: -9999px !important;
+        z-index: -1 !important;
+      }
+    </style>
+    <script>
+      ;(function () {
+        var KILL =
+          '#nl-badge-frame,.nl-badge,iframe#nl-badge-frame,iframe[id*="nl-badge"],iframe[src*="netlify"][src*="badge"],script[src*="/.netlify/scripts/hud"],script[data-nf-variant],script[data-netlify-site-id]'
+        function scrub() {
+          try {
+            document.querySelectorAll(KILL).forEach(function (el) {
+              el.remove()
+            })
+          } catch (_) {}
+        }
+        scrub()
+        if (typeof MutationObserver === 'function') {
+          new MutationObserver(scrub).observe(document.documentElement, {
+            childList: true,
+            subtree: true,
+          })
+        }
+        document.addEventListener('DOMContentLoaded', scrub)
+        window.addEventListener('load', scrub)
+      })()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
