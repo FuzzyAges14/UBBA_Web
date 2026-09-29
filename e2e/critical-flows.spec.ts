@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 const TRIAL_ALLENDALE =
-  'https://student.nextkick.ai/form/0318c4be-65de-4c00-b554-192c0e1d65eb'
+  'https://student.nextkick.ai/form/63f6f7b0-75b2-429f-8e0a-5ceb3d56b7a0'
 const BIRTHDAY_ALLENDALE =
   'https://student.nextkick.ai/form/8e4e23d6-da04-4d94-818e-06c71baf3de6'
 async function pickAllendaleInPortal(page: import('@playwright/test').Page) {

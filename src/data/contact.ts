@@ -102,17 +102,17 @@ export const NEXTKICK_FORMS: Record<NextKickFormKind, NextKickFormConfig> = {
       allendale: {
         name: 'Allendale',
         blurb: '240 W Crescent Ave',
-        href: 'https://student.nextkick.ai/form/0318c4be-65de-4c00-b554-192c0e1d65eb',
+        href: 'https://student.nextkick.ai/form/63f6f7b0-75b2-429f-8e0a-5ceb3d56b7a0',
       },
       'midland-park': {
         name: 'Midland Park',
         blurb: '644 Godwin Ave',
-        href: 'https://student.nextkick.ai/form/9be0cbca-a014-4615-a52e-cd628d5858e1',
+        href: 'https://student.nextkick.ai/form/5695e188-fc78-4bca-bfb1-497e7735502d',
       },
       'glen-rock': {
         name: 'Glen Rock',
         blurb: 'New location',
-        href: 'https://student.nextkick.ai/form/d1fc7971-e2da-4c7b-9292-c003db5e528c',
+        href: 'https://student.nextkick.ai/form/6eecd5cc-bdd9-423d-af68-7859c9bf005b',
       },
     },
   },
