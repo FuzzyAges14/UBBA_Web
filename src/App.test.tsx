@@ -138,7 +138,7 @@ describe('App routing', () => {
     expect(screen.queryByText(/youtube/i)).not.toBeInTheDocument()
   })
 
-  it('renders an Instagram feed page with profile photo, link, and recent posts', async () => {
+  it('renders an Instagram feed page with profile photo, link, and three recent posts', async () => {
     renderAt('/follow-us/instagram')
     expect(await screen.findByRole('heading', { name: /^instagram$/i, level: 1 })).toBeInTheDocument()
     expect(screen.getByText(/back-to-school special/i)).toBeInTheDocument()
@@ -149,7 +149,15 @@ describe('App routing', () => {
     expect(profileLink).toHaveAttribute('href', 'https://www.instagram.com/ubbatkd/')
     expect(profileLink).toHaveAttribute('target', '_blank')
     const postLinks = screen.getAllByRole('link', { name: /open post/i })
+    expect(postLinks).toHaveLength(3)
     expect(postLinks[0]).toHaveAttribute('href', 'https://www.instagram.com/p/DcQ3NEmH08s/')
+  })
+
+  it('renders a Facebook feed page with exactly three recent posts', async () => {
+    renderAt('/follow-us/facebook')
+    expect(await screen.findByRole('heading', { name: /^facebook$/i, level: 1 })).toBeInTheDocument()
+    const postLinks = screen.getAllByRole('link', { name: /open post/i })
+    expect(postLinks).toHaveLength(3)
   })
 
   it('shows a 404 for an unknown social network', async () => {

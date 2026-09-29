@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import { serverConfig } from './config.ts'
 import { submitLead } from './leads.ts'
 import { getSocialFeed, isSocialNetwork } from './social.ts'
+import { SOCIAL_FEED_LIMIT } from '../src/data/site.ts'
 
 export type AppOptions = {
   corsOrigins?: string[]
@@ -110,7 +111,7 @@ export function createApp(options: AppOptions = {}) {
       if (!isSocialNetwork(network)) {
         return res.status(404).json({ ok: false, error: 'Unknown social network.' })
       }
-      const feed = await getSocialFeed(network, { limit: 3 })
+      const feed = await getSocialFeed(network, { limit: SOCIAL_FEED_LIMIT })
       res.setHeader('Cache-Control', 'public, max-age=60')
       return res.status(200).json(feed)
     } catch (err) {
