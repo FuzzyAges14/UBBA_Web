@@ -358,43 +358,43 @@ export const PARENTS_NIGHT_OUT_TILE: PageSlotStill = {
 /** Landscape camp feature — replaces vertical IG stills in 16:9 frames. */
 export const SUMMER_CAMP_LANDSCAPE_FEATURE: PageSlotStill = {
   src: '/media/authentic/page-slots/summer-camp-feature.jpg',
-  alt: 'Summer Camp students stretching together on the mats at United Black Belt Academy',
+  alt: 'Summer Camp students lined up under the UBBA logo during stretch and training',
   placement: ['summer-camp-page', 'just-4-kids-camp-tile'],
-  source: '@ubbatkd Summer Camp fitness still (landscape crop from authentic vertical)',
+  source: 'facebook.com/ubbamp 2025 Winter Camp / ubbaad Summer Camp albums',
 }
 
 export const SUMMER_CAMP_LANDSCAPE_TILE: PageSlotStill = {
   src: '/media/authentic/page-slots/summer-camp-tile.jpg',
-  alt: 'Summer Camp kids playing outdoors at the playground',
+  alt: 'Summer Camp kids playing on indoor inflatables in the dojang',
   placement: ['summer-camp-page', 'just-4-kids-camp-tile'],
-  source: '@ubbatkd Summer Camp playground still (landscape crop from authentic vertical)',
+  source: 'facebook.com/ubbamp 2025 Winter Camp album',
 }
 
 /** Landscape-only camp gallery stills (no vertical letterboxing in restricted viewports). */
 export const SUMMER_CAMP_LANDSCAPE_GALLERY: PageSlotStill[] = [
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-01.jpg',
-    alt: 'Summer Camp group posing in the dojang in matching camp shirts',
+    alt: 'Bounce house fun on the mats during UBBA camp',
     placement: ['summer-camp-page'],
-    source: '@ubbatkd Summer Camp group still (landscape crop)',
+    source: 'facebook.com/ubbamp 2025 Winter Camp album',
   },
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-02.jpg',
-    alt: 'Summer Camp zoo field-trip group in Summer Tigers shirts',
+    alt: 'Camp field-trip group on the rocks during an outdoor outing',
     placement: ['summer-camp-page'],
-    source: '@ubbatkd Summer Camp zoo trip still (landscape crop)',
+    source: 'facebook.com/ubbaad Summer Camp / ubbamp Winter Camp albums',
   },
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-03.jpg',
-    alt: 'Summer Camp water games and crafts',
+    alt: 'Campers at a dock and water outing during UBBA camp',
     placement: ['summer-camp-page'],
-    source: '@ubbatkd Summer Camp crafts/water still (landscape crop)',
+    source: 'facebook.com/ubbaad Summer Camp album',
   },
   {
     src: '/media/authentic/page-slots/summer-camp-gallery-04.jpg',
-    alt: 'Summer Camp animal experience day',
+    alt: 'Camp special-day group lined up with snacks under the UBBA logo',
     placement: ['summer-camp-page'],
-    source: '@ubbatkd Summer Camp animals still (landscape crop)',
+    source: 'facebook.com/ubbamp 2025 Winter Camp album',
   },
 ]
 
