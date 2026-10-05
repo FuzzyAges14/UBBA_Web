@@ -1,0 +1,5 @@
+# Security headers for all routes. Netlify badge removal is handled in
+# index.html + src/lib/scrubNetlifyBadge.ts (free-tier safe; no paid toggle).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
