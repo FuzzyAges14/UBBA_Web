@@ -1,4 +1,5 @@
 import type { SocialPost, SocialSlug } from '../data/site'
+import { SOCIAL_FEED_LIMIT } from '../data/site'
 
 export type SocialFeedPayload = {
   ok: true
@@ -12,6 +13,7 @@ export type SocialFeedPayload = {
 /**
  * Loads recent posts from the API (live Meta feed when configured, else curated
  * fallback). Returns null on network / parse failure so the UI can keep static data.
+ * Always caps to `SOCIAL_FEED_LIMIT` so a newer live post drops the oldest slot.
  */
 export async function fetchSocialFeed(
   network: SocialSlug,
@@ -22,7 +24,10 @@ export async function fetchSocialFeed(
     if (!res.ok) return null
     const data = (await res.json()) as SocialFeedPayload
     if (!data?.ok || !Array.isArray(data.posts)) return null
-    return data
+    return {
+      ...data,
+      posts: data.posts.slice(0, SOCIAL_FEED_LIMIT),
+    }
   } catch {
     return null
   }
