@@ -165,7 +165,7 @@ export const AUTHENTIC_DIMENSIONS: Record<string, { width: number; height: numbe
   '/media/authentic/summer-camp-fitness.jpg': { width: 1080, height: 1921 },
   '/media/authentic/summer-camp-playground.jpg': { width: 1080, height: 1921 },
   '/media/authentic/summer-camp-field-trip.jpg': { width: 1080, height: 1921 },
-  '/media/authentic/page-slots/birthday-party-feature.jpg': { width: 960, height: 720 },
+  '/media/authentic/page-slots/birthday-party-feature.jpg': { width: 1440, height: 1080 },
   '/media/authentic/page-slots/birthday-party-tile.jpg': { width: 960, height: 720 },
   '/media/authentic/page-slots/parents-night-out-feature.jpg': { width: 960, height: 720 },
   '/media/authentic/page-slots/parents-night-out-tile.jpg': { width: 960, height: 720 },
@@ -175,6 +175,7 @@ export const AUTHENTIC_DIMENSIONS: Record<string, { width: number; height: numbe
   '/media/authentic/page-slots/summer-camp-gallery-02.jpg': { width: 1280, height: 960 },
   '/media/authentic/page-slots/summer-camp-gallery-03.jpg': { width: 1600, height: 1200 },
   '/media/authentic/page-slots/summer-camp-gallery-04.jpg': { width: 1600, height: 1200 },
+  '/media/authentic/page-slots/home-benefits.jpg': { width: 1440, height: 1081 },
   '/media/authentic/page-slots/program-tiny-tigers.jpg': { width: 1440, height: 1080 },
   '/media/authentic/page-slots/program-junior-tigers.jpg': { width: 1920, height: 1440 },
   '/media/authentic/page-slots/program-teen.jpg': { width: 1440, height: 1080 },
@@ -242,55 +243,55 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
     src: '/media/authentic/hero-slides/03-group-class-partners.jpg',
     webp: '/media/authentic/hero-slides/03-group-class-partners.webp',
     srcSet:
-      '/media/authentic/hero-slides/03-group-class-partners-1280.jpg 1280w, /media/authentic/hero-slides/03-group-class-partners.jpg 1920w',
+      '/media/authentic/hero-slides/03-group-class-partners-1280.jpg 1280w, /media/authentic/hero-slides/03-group-class-partners.jpg 1440w',
     webpSrcSet:
-      '/media/authentic/hero-slides/03-group-class-partners-1280.webp 1280w, /media/authentic/hero-slides/03-group-class-partners.webp 1920w',
-    width: 1920,
-    height: 1441,
-    alt: 'Students and parents training together in a partner exercise at UBBA, 2025',
+      '/media/authentic/hero-slides/03-group-class-partners-1280.webp 1280w, /media/authentic/hero-slides/03-group-class-partners.webp 1440w',
+    width: 1440,
+    height: 1081,
+    alt: 'Adult mentor with young students during partner training at UBBA, 2025',
   },
   {
     src: '/media/authentic/hero-slides/04-group-winter-camp.jpg',
     webp: '/media/authentic/hero-slides/04-group-winter-camp.webp',
     srcSet:
-      '/media/authentic/hero-slides/04-group-winter-camp-1280.jpg 1280w, /media/authentic/hero-slides/04-group-winter-camp.jpg 1920w',
+      '/media/authentic/hero-slides/04-group-winter-camp-1280.jpg 1280w, /media/authentic/hero-slides/04-group-winter-camp.jpg 1440w',
     webpSrcSet:
-      '/media/authentic/hero-slides/04-group-winter-camp-1280.webp 1280w, /media/authentic/hero-slides/04-group-winter-camp.webp 1920w',
-    width: 1920,
-    height: 1440,
+      '/media/authentic/hero-slides/04-group-winter-camp-1280.webp 1280w, /media/authentic/hero-slides/04-group-winter-camp.webp 1440w',
+    width: 1440,
+    height: 1080,
     alt: 'Winter Camp students posing together in the UBBA dojang, 2025',
   },
   {
     src: '/media/authentic/hero-slides/05-group-camp-line.jpg',
     webp: '/media/authentic/hero-slides/05-group-camp-line.webp',
     srcSet:
-      '/media/authentic/hero-slides/05-group-camp-line-1280.jpg 1280w, /media/authentic/hero-slides/05-group-camp-line.jpg 1920w',
+      '/media/authentic/hero-slides/05-group-camp-line-1280.jpg 1280w, /media/authentic/hero-slides/05-group-camp-line.jpg 1440w',
     webpSrcSet:
-      '/media/authentic/hero-slides/05-group-camp-line-1280.webp 1280w, /media/authentic/hero-slides/05-group-camp-line.webp 1920w',
-    width: 1920,
-    height: 1440,
-    alt: 'Winter Camp kids lined up under the United Black Belt Academy logo, 2025',
+      '/media/authentic/hero-slides/05-group-camp-line-1280.webp 1280w, /media/authentic/hero-slides/05-group-camp-line.webp 1440w',
+    width: 1440,
+    height: 1080,
+    alt: 'Kids lined up under the United Black Belt Academy logo, 2025',
   },
   {
     src: '/media/authentic/hero-slides/06-group-camp-friends.jpg',
     webp: '/media/authentic/hero-slides/06-group-camp-friends.webp',
     srcSet:
-      '/media/authentic/hero-slides/06-group-camp-friends-1280.jpg 1280w, /media/authentic/hero-slides/06-group-camp-friends.jpg 1920w',
+      '/media/authentic/hero-slides/06-group-camp-friends-1280.jpg 1280w, /media/authentic/hero-slides/06-group-camp-friends.jpg 1440w',
     webpSrcSet:
-      '/media/authentic/hero-slides/06-group-camp-friends-1280.webp 1280w, /media/authentic/hero-slides/06-group-camp-friends.webp 1920w',
-    width: 1920,
-    height: 1440,
-    alt: 'Winter Camp students posing as a group in the dojang, 2025',
+      '/media/authentic/hero-slides/06-group-camp-friends-1280.webp 1280w, /media/authentic/hero-slides/06-group-camp-friends.webp 1440w',
+    width: 1440,
+    height: 1080,
+    alt: 'Camp friends crafting together at United Black Belt Academy, 2025',
   },
   {
     src: '/media/authentic/hero-slides/07-group-class-action.jpg',
     webp: '/media/authentic/hero-slides/07-group-class-action.webp',
     srcSet:
-      '/media/authentic/hero-slides/07-group-class-action-1280.jpg 1280w, /media/authentic/hero-slides/07-group-class-action.jpg 1920w',
+      '/media/authentic/hero-slides/07-group-class-action-1280.jpg 1280w, /media/authentic/hero-slides/07-group-class-action.jpg 1440w',
     webpSrcSet:
-      '/media/authentic/hero-slides/07-group-class-action-1280.webp 1280w, /media/authentic/hero-slides/07-group-class-action.webp 1920w',
-    width: 1920,
-    height: 1440,
+      '/media/authentic/hero-slides/07-group-class-action-1280.webp 1280w, /media/authentic/hero-slides/07-group-class-action.webp 1440w',
+    width: 1440,
+    height: 1081,
     alt: 'Kids class running drills together on the mats at United Black Belt Academy, 2025',
   },
 ]
@@ -300,12 +301,20 @@ export const HERO_SLIDE_INTERVAL_MS = 5500
 
 /**
  * Home “Why It Matters” benefits media — parents + students on the mat.
- * Distinct from the first hero slide so the home page doesn’t repeat the
- * same leadership lineup in two adjacent sections.
+ * Dedicated page-slot (not a hero slide) so the home page doesn’t repeat
+ * the same photo in adjacent sections.
  */
-export const BENEFITS_MEDIA = HERO_SLIDES.find((s) =>
-  s.src.includes('03-group-class-partners'),
-) ?? HERO_SLIDES[0]
+export const BENEFITS_MEDIA: HeroSlide = {
+  src: '/media/authentic/page-slots/home-benefits.jpg',
+  webp: '/media/authentic/page-slots/home-benefits.webp',
+  srcSet:
+    '/media/authentic/page-slots/home-benefits-960.jpg 960w, /media/authentic/page-slots/home-benefits-1280.jpg 1280w, /media/authentic/page-slots/home-benefits.jpg 1440w',
+  webpSrcSet:
+    '/media/authentic/page-slots/home-benefits-960.webp 960w, /media/authentic/page-slots/home-benefits-1280.webp 1280w, /media/authentic/page-slots/home-benefits.webp 1440w',
+  width: 1440,
+  height: 1081,
+  alt: 'Parent and child training together on the mats at United Black Belt Academy',
+}
 
 /** Landscape Facebook stills for program cards, Just 4 Kids tiles, and feature frames.
  *  Wider-than-tall so 16:9 MediaFrame / card covers stay filled (no letterboxing).
@@ -396,7 +405,7 @@ export const SUMMER_CAMP_TILE = SUMMER_CAMP_LANDSCAPE_TILE
 export const PROGRAM_SLOT_IMAGES = {
   'tiny-tigers': {
     src: '/media/authentic/page-slots/program-tiny-tigers.jpg',
-    alt: 'Young student in dobok focusing during class at United Black Belt Academy',
+    alt: 'Young students in ready stance during Tiny Tigers class at United Black Belt Academy',
   },
   'junior-tigers': {
     src: '/media/authentic/page-slots/program-junior-tigers.jpg',

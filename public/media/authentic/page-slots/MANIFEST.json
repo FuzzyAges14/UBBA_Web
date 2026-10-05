@@ -1,13 +1,13 @@
 [
   {
     "file": "birthday-party-feature.jpg",
-    "width": 960,
-    "height": 720,
+    "width": 1440,
+    "height": 1080,
     "aspectRatio": 1.333,
-    "alt": "Kids celebrating a birthday party with foam swords at United Black Belt Academy",
-    "source": "facebook.com/ubbamp Brodie\u2019s Birthday Party album (2025)",
+    "alt": "Kids with foam swords and boards at a UBBA birthday party",
+    "source": "facebook.com/ubbamp Brodie's Birthday Party album (2025)",
     "era": "2024\u20132026 United Black Belt Academy (Sanghyun Lee ownership)",
-    "note": "Landscape-only page slot; vertical IG frames avoided or center-cropped to 4:3 for cover fills."
+    "note": "Refreshed high-res event photo; landscape page slot."
   },
   {
     "file": "birthday-party-tile.jpg",
@@ -104,10 +104,10 @@
     "width": 1440,
     "height": 1080,
     "aspectRatio": 1.333,
-    "alt": "Young student in dobok focusing during class at United Black Belt Academy",
-    "source": "facebook.com/ubbamp 2025 Father\u2019s Day album \u2014 young yellow-belt student",
+    "alt": "Young students in ready stance during kids class at United Black Belt Academy",
+    "source": "facebook.com/ubbamp 2025 class / camp albums",
     "era": "2024\u20132026 United Black Belt Academy (Sanghyun Lee ownership)",
-    "note": "Landscape-only page slot; vertical IG frames avoided or center-cropped to 4:3 for cover fills."
+    "note": "Refreshed landscape program slot from recent UBBA Facebook photos."
   },
   {
     "file": "program-junior-tigers.jpg",
@@ -188,5 +188,15 @@
     "source": "facebook.com/ubbamp Teen / karaoke class album (2025)",
     "era": "2024\u20132026 United Black Belt Academy (Sanghyun Lee ownership)",
     "note": "Landscape page slot for Weapons Class \u2014 authentic precision/formation training (no dedicated weapons-demo album available yet)."
+  },
+  {
+    "file": "home-benefits.jpg",
+    "width": 1440,
+    "height": 1081,
+    "aspectRatio": 1.332,
+    "alt": "Parent and child training together on the mats at United Black Belt Academy",
+    "source": "facebook.com/ubbamp 2025 Father\u2019s Day / class albums",
+    "era": "2024\u20132026 United Black Belt Academy (Sanghyun Lee ownership)",
+    "note": "Dedicated home benefits slot \u2014 distinct from hero slides."
   }
 ]
